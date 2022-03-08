@@ -22,13 +22,14 @@ from a0001_admin import retrieve_list
 from a0001_admin import retrieve_path
 from a0001_admin import write_paths
 from query_patents import query_patents
-from scrape_gscholar import scrape_html
-from scrape_gscholar import scrape_json
-from scrape_gscholar import json_to_dataframe
-from scrape_gscholar import article_html
-from scrape_gscholar import article_json
-from scrape_gscholar import article_df
-from scrape_gscholar import html_to_df
+from scrape_gscholar import scrape_gscholar
+#from scrape_gscholar import scrape_html
+#from scrape_gscholar import scrape_json
+#from scrape_gscholar import json_to_dataframe
+#from scrape_gscholar import article_html
+#from scrape_gscholar import article_json
+#from scrape_gscholar import article_df
+#from scrape_gscholar import html_to_df
 
 
 def acquire_info():
