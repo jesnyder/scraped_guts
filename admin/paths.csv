@@ -4,11 +4,13 @@ name,path
 format,scraped_guts admin format.csv
 write_paths,program_generated admin paths.csv
 type_article,scraped_guts admin type_article.csv
-term_search,scraped_guts term_search search.csv
-term_compare,scraped_guts term_compare
 stop_words,scraped_guts admin stop_words.csv
 colors,scraped_guts admin colors.csv
 filter_terms,scraped_guts term_search filter.csv
+
+search_terms,user_provided search_terms search.csv
+filter_terms,user_provided search_terms filter.csv
+keyword_categories,user_provided keyword_categories
 
 #, acquire info
 nih_awards_downloaded,user_provided nih_awards

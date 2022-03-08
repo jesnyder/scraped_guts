@@ -96,7 +96,7 @@ def acquire_patents():
     save to program_generated
     """
 
-    f = os.path.join(retrieve_path('term_search'))
+    f = os.path.join(retrieve_path('search_terms'))
     print('f = ' + str(f))
     df_search_terms = pd.read_csv(f)
     search_terms = list(df_search_terms['term'])
