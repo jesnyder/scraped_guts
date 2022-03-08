@@ -192,7 +192,7 @@ def retrieve_path(name):
 
         try:
             f = os.path.join(file_source, 'admin', 'paths' + '.csv')
-            #print('file = ' + str(f))
+            print('file = ' + str(f))
             df = pd.read_csv(f)
 
             # find the path from the name
