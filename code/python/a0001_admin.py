@@ -238,7 +238,7 @@ def write_paths():
     """
 
     name, path = [], []
-    df_article = pd.read_csv(retrieve_path('type_article'))
+    df_article = pd.read_csv(retrieve_path('name_dataset'))
     for name_dataset in list(df_article['name']):
 
         name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
