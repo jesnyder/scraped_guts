@@ -19,7 +19,7 @@ import urllib.parse
 
 from a0001_admin import clean_dataframe
 from a0001_admin import name_paths
-from a0001_admin import retreive_categories
+from a0001_admin import retrieve_categories
 from a0001_admin import retrieve_format
 from a0001_admin import retrieve_list
 from a0001_admin import retrieve_path
@@ -54,7 +54,7 @@ def data_for_js_map():
 
         # list compare term files
         compare_terms = os.path.join(retrieve_path('term_compare'))
-        for category in retreive_categories():
+        for category in retrieve_categories():
 
             # retrieve search terms
             f = os.path.join(retrieve_path('term_compare'), category + '.csv')
@@ -117,7 +117,7 @@ def yearly_map_bar():
 
         # list compare term files
         compare_terms = os.path.join(retrieve_path('term_compare'))
-        for category in retreive_categories():
+        for category in retrieve_categories():
 
             # retrieve search terms
             f = os.path.join(retrieve_path('term_compare'), category + '.csv')
@@ -272,7 +272,7 @@ def build_gif():
 
             # list compare term files
             compare_terms = os.path.join(retrieve_path('term_compare'))
-            for category in retreive_categories():
+            for category in retrieve_categories():
 
                 png_list = []
                 for file in os.listdir(df_src):
@@ -345,7 +345,7 @@ def yearly_map():
 
         # list compare term files
         compare_terms = os.path.join(retrieve_path('term_compare'))
-        for category in retreive_categories():
+        for category in retrieve_categories():
 
             # retrieve search terms
             f = os.path.join(retrieve_path('term_compare'), category + '.csv')
