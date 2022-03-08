@@ -1,0 +1,35 @@
+name,path
+
+#, admin
+format,user_provided admin format.csv
+write_paths,program_generated admin paths.csv
+type_article,user_provided admin type_article.csv
+term_search,user_provided term_search search.csv
+term_compare,user_provided term_compare
+stop_words,user_provided admin stop_words.csv
+colors,user_provided admin colors.csv
+filter_terms,user_provided term_search filter.csv
+
+#, acquire info
+nih_awards_downloaded,user_provided nih_awards
+nsf_awards_downloaded,user_provided nsf_awards
+clinical_trials_downloaded,user_provided clinical_trials
+patent_user_provided,user_provided patents scraped
+
+$, geolocate address
+address_not_found,program_generated admin map address_not_found.csv
+lookup_address,user_provided admin lookup_address.csv
+
+#, gscholar
+json_archival,user_provided gscholar json_archival
+article_url_scraped,user_provided gscholar article scraped_url.csv
+
+#, map
+all_institutions,program_generated map all_institutions.csv
+count_institutions,program_generated map count_institutions.csv
+blank_map,user_provided blank_map blankMap17.png
+
+#, website
+html_index,docs index.html
+web_media,docs media
+web_media_for_index,media

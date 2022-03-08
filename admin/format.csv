@@ -1,0 +1,14 @@
+name,value
+patent_result_limits,5 50 100 500 1000 5000 6000 10000
+plot_dpi,600
+plot_font_size,14
+map_font_size,4
+plot_marker_size,10
+fig_wid,14
+fig_hei,6
+word_count_break_per,95
+min_year,1980
+scatter_size_min,10
+scatter_size_max,350
+colorTransparency,0.7
+markeredgewidth,0.2
