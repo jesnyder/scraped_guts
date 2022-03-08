@@ -41,17 +41,17 @@ def clean_dataframe(df):
     return(df)
 
 
-def name_paths(name_article):
+def name_paths(name_dataset):
     """
     provide article type
     make the needed files
     """
 
-    name_src = str(name_article + '_src_query')
-    name_dst = str(name_article + '_dst_query')
-    name_summary = str(name_article + '_sum')
-    name_unique = str(name_article + '_unique_df')
-    plot_unique = str(name_article + '_unique_plot')
+    name_src = str(name_dataset + '_src_query')
+    name_dst = str(name_dataset + '_dst_query')
+    name_summary = str(name_dataset + '_sum')
+    name_unique = str(name_dataset + '_unique_df')
+    plot_unique = str(name_dataset + '_unique_plot')
 
     return name_src, name_dst, name_summary, name_unique, plot_unique
 
@@ -238,33 +238,33 @@ def write_paths():
 
     name, path = [], []
     df_article = pd.read_csv(retrieve_path('type_article'))
-    for name_article in list(df_article['name']):
+    for name_dataset in list(df_article['name']):
 
-        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_article)
-        name_list =  name_paths(name_article)
+        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
+        name_list =  name_paths(name_dataset)
         name_list = list(name_list)
 
-        name_list.append(str(name_article + '_query_html'))
-        name_list.append(str(name_article + '_query_xml'))
-        name_list.append(str(name_article + '_query_json'))
-        name_list.append(str(name_article + '_query_df'))
-        name_list.append(str(name_article + '_article_html'))
-        name_list.append(str(name_article + '_article_xml'))
-        name_list.append(str(name_article + '_article_json'))
-        name_list.append(str(name_article + '_article_df'))
-        name_list.append(str(name_article + '_aggregate_df'))
-        name_list.append(str(name_article + '_annual_df'))
-        name_list.append(str(name_article + '_annual_plot'))
-        name_list.append(str(name_article + '_count_all_words_df'))
-        name_list.append(str(name_article + '_compare_terms_df'))
-        name_list.append(str(name_article + '_compare_terms_annual_count_df'))
-        name_list.append(str(name_article + '_compare_terms_plot'))
-        name_list.append(str(name_article + '_compare_terms_plot_bar'))
-        name_list.append(str(name_article + '_map_png'))
-        name_list.append(str(name_article + '_map_gif'))
-        name_list.append(str(name_article + '_map_bar_png'))
-        name_list.append(str(name_article + '_map__bar_gif'))
-        name_list.append(str(name_article + '_js_data'))
+        name_list.append(str(name_dataset + '_query_html'))
+        name_list.append(str(name_dataset + '_query_xml'))
+        name_list.append(str(name_dataset + '_query_json'))
+        name_list.append(str(name_dataset + '_query_df'))
+        name_list.append(str(name_dataset + '_article_html'))
+        name_list.append(str(name_dataset + '_article_xml'))
+        name_list.append(str(name_dataset + '_article_json'))
+        name_list.append(str(name_dataset + '_article_df'))
+        name_list.append(str(name_dataset + '_aggregate_df'))
+        name_list.append(str(name_dataset + '_annual_df'))
+        name_list.append(str(name_dataset + '_annual_plot'))
+        name_list.append(str(name_dataset + '_count_all_words_df'))
+        name_list.append(str(name_dataset + '_compare_terms_df'))
+        name_list.append(str(name_dataset + '_compare_terms_annual_count_df'))
+        name_list.append(str(name_dataset + '_compare_terms_plot'))
+        name_list.append(str(name_dataset + '_compare_terms_plot_bar'))
+        name_list.append(str(name_dataset + '_map_png'))
+        name_list.append(str(name_dataset + '_map_gif'))
+        name_list.append(str(name_dataset + '_map_bar_png'))
+        name_list.append(str(name_dataset + '_map__bar_gif'))
+        name_list.append(str(name_dataset + '_js_data'))
 
 
 
@@ -272,82 +272,82 @@ def write_paths():
             name.append(item)
 
             if 'src' in item:
-                item_path = str('program_generated ' + name_article + ' query src')
+                item_path = str('program_generated ' + name_dataset + ' query src')
 
             elif 'dst' in item:
-                item_path = str('program_generated ' + name_article + ' query agg')
+                item_path = str('program_generated ' + name_dataset + ' query agg')
 
             elif 'sum' in item:
-                item_path = str('program_generated ' + name_article + ' sum')
+                item_path = str('program_generated ' + name_dataset + ' sum')
 
             elif 'unique_df' in item:
-                item_path = str('program_generated ' + name_article + ' unique df')
+                item_path = str('program_generated ' + name_dataset + ' unique df')
 
             elif '_unique_plot' in item:
-                item_path = str('program_generated ' + name_article + ' unique plot')
+                item_path = str('program_generated ' + name_dataset + ' unique plot')
 
             elif '_query_html' in item:
-                item_path = str('program_generated ' + name_article + ' query html')
+                item_path = str('program_generated ' + name_dataset + ' query html')
 
             elif '_query_xml' in item:
-                item_path = str('program_generated ' + name_article + ' query xml')
+                item_path = str('program_generated ' + name_dataset + ' query xml')
 
             elif '_query_json' in item:
-                item_path = str('program_generated ' + name_article + ' query json')
+                item_path = str('program_generated ' + name_dataset + ' query json')
 
             elif '_query_df' in item:
-                item_path = str('program_generated ' + name_article + ' query df')
+                item_path = str('program_generated ' + name_dataset + ' query df')
 
             elif '_article_html' in item:
-                item_path = str('program_generated ' + name_article + ' article html')
+                item_path = str('program_generated ' + name_dataset + ' article html')
 
             elif '_article_xml' in item:
-                item_path = str('program_generated ' + name_article + ' article xml')
+                item_path = str('program_generated ' + name_dataset + ' article xml')
 
             elif '_article_json' in item:
-                item_path = str('program_generated ' + name_article + ' article json')
+                item_path = str('program_generated ' + name_dataset + ' article json')
 
             elif '_article_df' in item:
-                item_path = str('program_generated ' + name_article + ' article df')
+                item_path = str('program_generated ' + name_dataset + ' article df')
 
             elif '_aggregate_df' in item:
-                item_path = str('program_generated ' + name_article + ' aggregate df')
+                item_path = str('program_generated ' + name_dataset + ' aggregate df')
 
             elif '_annual_df' in item:
-                item_path = str('program_generated ' + name_article + ' annual df')
+                item_path = str('program_generated ' + name_dataset + ' annual df')
 
             elif '_annual_plot' in item:
-                item_path = str('program_generated ' + name_article + ' annual plot')
+                item_path = str('program_generated ' + name_dataset + ' annual plot')
 
             elif '_count_all_words_df' in item:
-                item_path = str('program_generated ' + name_article + ' count_words df')
+                item_path = str('program_generated ' + name_dataset + ' count_words df')
 
             elif '_compare_terms_df' in item:
-                item_path = str('program_generated ' + name_article + ' compare_terms df')
+                item_path = str('program_generated ' + name_dataset + ' compare_terms df')
 
             elif '_compare_terms_annual_count_df' in item:
-                item_path = str('program_generated ' + name_article + ' compare_terms df_annual')
+                item_path = str('program_generated ' + name_dataset + ' compare_terms df_annual')
 
             elif '_compare_terms_plot' in item:
-                item_path = str('program_generated ' + name_article + ' compare_terms plot')
+                item_path = str('program_generated ' + name_dataset + ' compare_terms plot')
 
             elif '_map_png' in item:
-                item_path = str('program_generated ' + name_article + ' map png')
+                item_path = str('program_generated ' + name_dataset + ' map png')
 
             elif '_map_gif' in item:
-                item_path = str('program_generated ' + name_article + ' map gif')
+                item_path = str('program_generated ' + name_dataset + ' map gif')
 
             elif '_map_bar_png' in item:
-                item_path = str('program_generated ' + name_article + ' map_bar png')
+                item_path = str('program_generated ' + name_dataset + ' map_bar png')
 
             elif '_map_bar_gif' in item:
-                item_path = str('program_generated ' + name_article + ' map_bar gif')
+                item_path = str('program_generated ' + name_dataset + ' map_bar gif')
 
             elif '_js_data' in item:
-                item_path = str('program_generated ' + name_article + ' js_data')
+                item_path = str('program_generated ' + name_dataset + ' js_data')
 
             elif '_compare_terms_plot_bar' in item:
-                item_path = str('program_generated ' + name_article + ' compare_terms bar_chart')
+                item_path = str('program_generated ' + name_dataset + ' compare_terms bar_chart')
 
 
 

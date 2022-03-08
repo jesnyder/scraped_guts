@@ -61,7 +61,7 @@ def introduction_html():
     f.write('</style>' + '\n' )
 
     media_num = 0
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
         # list compare term files
         compare_terms = os.path.join(retrieve_path('term_compare'))
@@ -70,7 +70,7 @@ def introduction_html():
 
             media_name = 'media_' + str(media_num)
             media_num = media_num + 1
-            gif_dst = str(name_article + '_map_gif')
+            gif_dst = str(name_dataset + '_map_gif')
             gif_file = os.path.join(retrieve_path(gif_dst) , category + '.gif')
             file_src = gif_file
             file_dst = os.path.join(retrieve_path('web_media'), media_name + '.gif')
@@ -91,7 +91,7 @@ def introduction_html():
 
             media_name = 'media_' + str(media_num)
             media_num = media_num + 1
-            plot_count_annual = str(name_article + '_compare_terms_plot')
+            plot_count_annual = str(name_dataset + '_compare_terms_plot')
             plot_dst = os.path.join(retrieve_path(plot_count_annual), category + '_percent' + '.png')
             file_src = plot_dst
             file_dst = os.path.join(retrieve_path('web_media'), media_name + '.png')

@@ -49,9 +49,9 @@ def plot_annual_count_2():
 
     """
     # for each article type
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
-        #if name_article != 'nih_awards': continue
+        #if name_dataset != 'nih_awards': continue
 
         for file in os.listdir(retrieve_path('term_compare')):
 
@@ -61,7 +61,7 @@ def plot_annual_count_2():
             print(term_list)
 
             # save dataframe with percent
-            file_src = str(name_article + '_compare_terms_annual_count_df')
+            file_src = str(name_dataset + '_compare_terms_annual_count_df')
             compare_file_term = file.split('.')
             compare_file_term = compare_file_term[0]
             compare_file_term = str(compare_file_term + '_percent')
@@ -93,7 +93,7 @@ def plot_annual_count_2():
                 #plt.scatter(xx,yy, color=colorMarker, edgecolor=colorEdge, alpha=colorTransparency, label=label_term)
                 plt.plot(xx, yy, color=colorMarker, linestyle='dashed', marker = 'o', ms =retrieve_format('plot_marker_size'), mec = colorEdge, mfc = colorMarker, alpha=colorTransparency, label = label_term)
 
-            plt.title(name_article + ' Cumulative Counts ')
+            plt.title(name_dataset + ' Cumulative Counts ')
             plt.xlabel('year')
             plt.ylabel('count')
             plt.yscale('log')
@@ -140,14 +140,14 @@ def plot_annual_count_2():
                 plt.bar(xx, yy, width=1.0, bottom=offsets, align='center', color=colorMarker,label = label_term)
 
 
-            #plt.title(name_article + ' Percent ' + str(int(sum(list(df['annual_total'])))))
+            #plt.title(name_dataset + ' Percent ' + str(int(sum(list(df['annual_total'])))))
             plt.xlabel('year')
             plt.ylabel('percent')
             # plt.yscale('log')
             #plt.legend(bbox_to_anchor=(0.2, -0.2), loc='upper left')
             plt.legend(bbox_to_anchor=(0.2, -0.2), loc='upper left')
 
-            plot_count_annual = str(name_article + '_compare_terms_plot')
+            plot_count_annual = str(name_dataset + '_compare_terms_plot')
             plot_dst = os.path.join(retrieve_path(plot_count_annual), compare_file_term + '_02' + '.png')
             plt.savefig(plot_dst, dpi = retrieve_format('plot_dpi'), edgecolor = 'w', bbox_inches="tight")
             print('saved plot: ' + plot_dst)
@@ -159,9 +159,9 @@ def bar_annual_count():
 
     """
     # for each article type
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
-        #if name_article != 'nih_awards': continue
+        #if name_dataset != 'nih_awards': continue
 
         for file in os.listdir(retrieve_path('term_compare')):
 
@@ -171,7 +171,7 @@ def bar_annual_count():
             print(term_list)
 
             # save dataframe with percent
-            file_src = str(name_article + '_compare_terms_annual_count_df')
+            file_src = str(name_dataset + '_compare_terms_annual_count_df')
             compare_file_term = file.split('.')
             compare_file_term = compare_file_term[0]
             compare_file_term = str(compare_file_term + '_percent')
@@ -224,14 +224,14 @@ def bar_annual_count():
 
 
 
-            plt.title(name_article + ' Percent ' + str(int(sum(list(df['annual_total'])))))
+            plt.title(name_dataset + ' Percent ' + str(int(sum(list(df['annual_total'])))))
             plt.xlabel('year')
             plt.ylabel(term_per)
             # plt.yscale('log')
             #plt.legend(bbox_to_anchor=(0.2, -0.2), loc='upper left')
             plt.legend(bbox_to_anchor=(0.2, -0.15), loc ="upper left")
 
-            plot_count_annual = str(name_article + '_compare_terms_plot_bar')
+            plot_count_annual = str(name_dataset + '_compare_terms_plot_bar')
             plot_dst = os.path.join(retrieve_path(plot_count_annual), compare_file_term + '.png')
             plt.savefig(plot_dst, dpi = retrieve_format('plot_dpi'), edgecolor = 'w', bbox_inches=None)
             print('saved plot: ' + plot_dst)
@@ -246,9 +246,9 @@ def plot_annual_count():
 
     """
     # for each article type
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
-        #if name_article != 'nih_awards': continue
+        #if name_dataset != 'nih_awards': continue
 
         for file in os.listdir(retrieve_path('term_compare')):
 
@@ -258,7 +258,7 @@ def plot_annual_count():
             print(term_list)
 
             # save dataframe with percent
-            file_src = str(name_article + '_compare_terms_annual_count_df')
+            file_src = str(name_dataset + '_compare_terms_annual_count_df')
             compare_file_term = file.split('.')
             compare_file_term = compare_file_term[0]
             compare_file_term = str(compare_file_term + '_percent')
@@ -290,7 +290,7 @@ def plot_annual_count():
                 #plt.scatter(xx,yy, color=colorMarker, edgecolor=colorEdge, alpha=colorTransparency, label=label_term)
                 plt.plot(xx, yy, color=colorMarker, linestyle='dashed', marker = 'o', ms =retrieve_format('plot_marker_size'), mec = colorEdge, mfc = colorMarker, alpha=colorTransparency, label = label_term)
 
-            plt.title(name_article + ' Annual ' + str(int(sum(list(df['annual_total'])))))
+            plt.title(name_dataset + ' Annual ' + str(int(sum(list(df['annual_total'])))))
             plt.xlabel('year')
             plt.ylabel('count')
             plt.yscale('log')
@@ -314,7 +314,7 @@ def plot_annual_count():
                 #plt.scatter(xx,yy, color=colorMarker, edgecolor=colorEdge, alpha=colorTransparency, label=label_term)
                 plt.plot(xx, yy, color=colorMarker, linestyle='dashed', marker = 'o', ms =retrieve_format('plot_marker_size'), mec = colorEdge, mfc = colorMarker, alpha=colorTransparency, label = label_term)
 
-            plt.title(name_article + ' Cumulative ' + str(int(sum(list(df['annual_total'])))))
+            plt.title(name_dataset + ' Cumulative ' + str(int(sum(list(df['annual_total'])))))
             plt.xlabel('year')
             plt.ylabel(term_cdf)
             plt.yscale('log')
@@ -352,14 +352,14 @@ def plot_annual_count():
 
 
 
-            plt.title(name_article + ' Percent ' + str(int(sum(list(df['annual_total'])))))
+            plt.title(name_dataset + ' Percent ' + str(int(sum(list(df['annual_total'])))))
             plt.xlabel('year')
             plt.ylabel(term_per)
             # plt.yscale('log')
             #plt.legend(bbox_to_anchor=(0.2, -0.2), loc='upper left')
             plt.legend(bbox_to_anchor=(0.2, 0), loc='upper left')
 
-            plot_count_annual = str(name_article + '_compare_terms_plot')
+            plot_count_annual = str(name_dataset + '_compare_terms_plot')
             plot_dst = os.path.join(retrieve_path(plot_count_annual), compare_file_term + '.png')
             plt.savefig(plot_dst, dpi = retrieve_format('plot_dpi'), edgecolor = 'w')
             print('saved plot: ' + plot_dst)
@@ -372,10 +372,10 @@ def per_annual_count_targeted():
     """
 
     # for each article type
-    for name_article in retrieve_list('type_article'):
-        print('article = ' + str(name_article))
+    for name_dataset in retrieve_list('type_article'):
+        print('article = ' + str(name_dataset))
 
-        #if name_article != 'nih_awards': continue
+        #if name_dataset != 'nih_awards': continue
 
         # all search terms together
         # for each term to compare
@@ -389,7 +389,7 @@ def per_annual_count_targeted():
             # retrieve dataframe with counts
             compare_file_term = file.split('.')
             compare_file_term = compare_file_term[0]
-            file_src = str(name_article + '_compare_terms_annual_count_df')
+            file_src = str(name_dataset + '_compare_terms_annual_count_df')
             path_src = os.path.join(retrieve_path(file_src), compare_file_term  + '.csv')
             df = clean_dataframe(pd.read_csv(path_src))
 
@@ -443,7 +443,7 @@ def per_annual_count_targeted():
             #print(df)
 
             # save dataframe with percent
-            file_src = str(name_article + '_compare_terms_annual_count_df')
+            file_src = str(name_dataset + '_compare_terms_annual_count_df')
             compare_file_term = str(compare_file_term + '_percent')
             path_src = os.path.join(retrieve_path(file_src), compare_file_term  + '.csv')
             df.to_csv(path_src)
@@ -467,13 +467,13 @@ def annual_count_targeted():
         print('term_list = ')
         print(term_list)
 
-        for name_article in retrieve_list('type_article'):
+        for name_dataset in retrieve_list('type_article'):
 
-            print('article = ' + str(name_article))
+            print('article = ' + str(name_dataset))
 
-            #if name_article != 'nih_awards': continue
+            #if name_dataset != 'nih_awards': continue
 
-            file_dst = str(name_article + '_compare_terms_df')
+            file_dst = str(name_dataset + '_compare_terms_df')
             compare_file_term = file.split('.')
             compare_file_term = str(compare_file_term[0])
             path_dst = os.path.join(retrieve_path(file_dst), compare_file_term  + '.csv')
@@ -486,7 +486,7 @@ def annual_count_targeted():
             #print(df.columns)
 
             if 'ref_year' not in df.columns:
-                df = add_ref_year(df, name_article)
+                df = add_ref_year(df, name_dataset)
 
             year_min = int((min(list(df['ref_year']))))
             year_max = int((max(list(df['ref_year']))))
@@ -525,7 +525,7 @@ def annual_count_targeted():
 
             compare_file_term = file.split('.')
             compare_file_term = compare_file_term[0]
-            file_dst = str(name_article + '_compare_terms_annual_count_df')
+            file_dst = str(name_dataset + '_compare_terms_annual_count_df')
             path_dst = retrieve_path(file_dst)
             #print('path_dst = ' + str(path_dst))
             path_dst = os.path.join(path_dst, compare_file_term  + '.csv')
@@ -550,19 +550,19 @@ def count_targeted_words():
         print(term_list)
 
         # search each article type
-        for name_article in retrieve_list('type_article'):
+        for name_dataset in retrieve_list('type_article'):
 
-            #if name_article != 'nih_awards': continue
+            #if name_dataset != 'nih_awards': continue
 
             try:
-                print('article = ' + str(name_article))
-                f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '_with_address' + '.csv' )
+                print('article = ' + str(name_dataset))
+                f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '_with_address' + '.csv' )
                 print('f = ' + str(f))
                 df = clean_dataframe(pd.read_csv(f))
 
             except:
-                print('article = ' + str(name_article))
-                f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '.csv' )
+                print('article = ' + str(name_dataset))
+                f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
                 print('f = ' + str(f))
                 df = clean_dataframe(pd.read_csv(f))
 
@@ -584,7 +584,7 @@ def count_targeted_words():
                 str_all = ''
                 for name in col_name:
 
-                    if name_article == 'clinical_trials':
+                    if name_dataset == 'clinical_trials':
                         if 'allo_both' in file:
                             if str(name) != 'Interventions' and str(name) != 'Title':
                                 continue
@@ -620,7 +620,7 @@ def count_targeted_words():
 
             compare_file_term = file.split('.')
             compare_file_term = str(compare_file_term[0])
-            file_dst = str(name_article + '_compare_terms_df')
+            file_dst = str(name_dataset + '_compare_terms_df')
             path_dst = os.path.join(retrieve_path(file_dst), compare_file_term  + '.csv')
             df.to_csv(path_dst)
 

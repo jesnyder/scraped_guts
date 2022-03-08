@@ -15,7 +15,7 @@ from a0001_admin import retrieve_datetime
 from a0001_admin import retrieve_list
 from a0001_admin import name_paths
 
-def query_patents(name_article, term, result_limits):
+def query_patents(name_dataset, term, result_limits):
   """
 
   """
@@ -66,7 +66,7 @@ def query_patents(name_article, term, result_limits):
               print('column names = ')
               print(df.columns.values.tolist())
 
-              name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_article)
+              name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
               df_patent = os.path.join(retrieve_path(name_src), term + '-' + str(result_limit) + ' ' + str(retrieve_datetime()) + '.csv')
               print('file saved to df_patent = ' + str(df_patent))
               df.to_csv(df_patent)

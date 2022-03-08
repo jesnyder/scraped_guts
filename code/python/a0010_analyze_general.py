@@ -11,7 +11,7 @@ from a0001_retrieve_meta import retrieve_path
 from a0001_retrieve_meta import clean_dataframe
 from find_color import find_color
 
-def analyze_general(name_article):
+def analyze_general(name_dataset):
     """
     Objective: compare cell sources in the database
 
@@ -28,8 +28,8 @@ def analyze_general(name_article):
     tasks = [0]
 
     # name paths to files using article name
-    # name_article = 'nih_awards'
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_article)
+    # name_dataset = 'nih_awards'
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
 
     # tasks to complete for program
     if 0 in tasks: tasks = np.arange(1, 100, 1)
@@ -37,12 +37,12 @@ def analyze_general(name_article):
     if 2 in tasks: add_year(name_dst, name_summary)
     if 3 in tasks: unique_values(name_dst, name_unique)
     if 4 in tasks: unique_plot(name_unique, plot_unique)
-    if 5 in tasks: articles_per_year(name_article, name_dst)
-    if 6 in tasks: articles_per_year(name_article, name_dst)
-    if 7 in tasks: plot_articles_per_year(name_article)
+    if 5 in tasks: articles_per_year(name_dataset, name_dst)
+    if 6 in tasks: articles_per_year(name_dataset, name_dst)
+    if 7 in tasks: plot_articles_per_year(name_dataset)
     print('completed analyze_general')
 
-def articles_per_year(name_article, name_src):
+def articles_per_year(name_dataset, name_src):
     """
     count number of articles per year
     save as dataframe
@@ -69,17 +69,17 @@ def articles_per_year(name_article, name_src):
 
     print(df_annual)
 
-    total_articles_annual = str('df_' + name_article + '_total_annual_counts')
+    total_articles_annual = str('df_' + name_dataset + '_total_annual_counts')
     df_annual = clean_dataframe(df_annual)
     df_annual.to_csv(os.path.join(retrieve_path(total_articles_annual), total_articles_annual + '.csv'))
     print(df.columns)
 
 
-def plot_articles_per_year(name_article):
+def plot_articles_per_year(name_dataset):
     """
     plot annual counts
     """
-    total_articles_annual = str('df_' + name_article + '_total_annual_counts')
+    total_articles_annual = str('df_' + name_dataset + '_total_annual_counts')
     file = os.path.join(retrieve_path(total_articles_annual), total_articles_annual + '.csv')
     df = clean_dataframe(pd.read_csv(file))
     print(df.columns)
@@ -104,16 +104,16 @@ def plot_articles_per_year(name_article):
 
         if yy_lists.index(yy) == 0:
             plt.ylabel('Annual Number of Articles (mean = ' + str(round(statistics.mean(yy),2)) + ')')
-            plt.title(str(sum(yy)) + ' ' + name_article + ' included in plot.')
+            plt.title(str(sum(yy)) + ' ' + name_dataset + ' included in plot.')
 
         elif yy_lists.index(yy) == 1:
             plt.ylabel('Cumulative Number of Articles (mean = ' + str(round(statistics.mean(yy),2)) + ')')
-            plt.title(str(yy[-1]) + ' ' + name_article + ' included in plot.')
+            plt.title(str(yy[-1]) + ' ' + name_dataset + ' included in plot.')
 
 
 
     # save plot
-    plot_total_articles_annual = str('plot_' + name_article + '_total_annual_counts')
+    plot_total_articles_annual = str('plot_' + name_dataset + '_total_annual_counts')
     plot_dst = os.path.join(retrieve_path(plot_total_articles_annual), plot_total_articles_annual + '.png')
     plt.savefig(plot_dst, dpi = 600, edgecolor = 'w')
     plt.close('all')
@@ -161,8 +161,8 @@ def unique_plot(name_src, name_dst):
             plt.xlabel(file_name)
             plt.ylabel('counts')
             name_src_split = name_src.split('_')
-            name_article = str(name_src_split[0] + ' ' + name_src_split[1])
-            plt.title(str(sum(yy)) + ' ' + name_article + ' included in plot.')
+            name_dataset = str(name_src_split[0] + ' ' + name_src_split[1])
+            plt.title(str(sum(yy)) + ' ' + name_dataset + ' included in plot.')
 
             # change to log scale
             if file_name == 'Support Year':
@@ -392,17 +392,17 @@ def summarize(name_src, name_summary):
     df_summary.to_csv(os.path.join(retrieve_path(name_summary)))
 
 
-def name_paths(name_article):
+def name_paths(name_dataset):
     """
     provide article type
     make the needed files
     """
 
-    name_src = str(name_article + '_search')
-    name_dst = str('df_' + name_article + '_search')
-    name_summary = str('sum_' + name_article)
-    name_unique = str(name_article + '_unique')
-    plot_unique = str(name_article + '_unique_plot')
+    name_src = str(name_dataset + '_search')
+    name_dst = str('df_' + name_dataset + '_search')
+    name_summary = str('sum_' + name_dataset)
+    name_unique = str(name_dataset + '_unique')
+    plot_unique = str(name_dataset + '_unique_plot')
 
 
     return name_src, name_dst, name_summary, name_unique, plot_unique

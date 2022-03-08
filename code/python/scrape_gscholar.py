@@ -88,8 +88,8 @@ def article_df(term):
     """
     df = pd.DataFrame()
 
-    name_article = 'gscholar'
-    src_path_name = name_article + '_article_json'
+    name_dataset = 'gscholar'
+    src_path_name = name_dataset + '_article_json'
     src_path = retrieve_path(src_path_name)
     #print('src_path = ')
     #print(src_path)
@@ -116,8 +116,8 @@ def article_df(term):
     del df['index']
     #print(df)
 
-    name_article = 'gscholar'
-    dst_path_name = name_article + '_article_df'
+    name_dataset = 'gscholar'
+    dst_path_name = name_dataset + '_article_df'
     dst_path = retrieve_path(dst_path_name)
     df_file = os.path.join(dst_path, term + '.csv')
     df.to_csv(df_file)
@@ -127,8 +127,8 @@ def url_lookup(search_term):
     """
 
     """
-    name_article = 'gscholar'
-    src_path_name = name_article + '_article_json'
+    name_dataset = 'gscholar'
+    src_path_name = name_dataset + '_article_json'
     src_path = retrieve_path(src_path_name)
     shutil.rmtree(src_path)
     #print('src_path = ')
@@ -162,8 +162,8 @@ def url_lookup(search_term):
     # print(df['citations'])
 
 
-    name_article = 'gscholar'
-    dst_path_name = name_article + '_article_df'
+    name_dataset = 'gscholar'
+    dst_path_name = name_dataset + '_article_df'
     dst_path = retrieve_path(dst_path_name)
     df_file = os.path.join(dst_path, term + '.csv')
     df.to_csv(df_file)
@@ -312,13 +312,13 @@ def article_json(term):
     """
     parse html into json
     """
-    name_article = 'gscholar'
-    dst_path_name = name_article + '_article_json'
+    name_dataset = 'gscholar'
+    dst_path_name = name_dataset + '_article_json'
     dst_path = retrieve_path(dst_path_name)
     shutil.rmtree(dst_path)
 
-    name_article = 'gscholar'
-    src_path_name = name_article + '_article_html'
+    name_dataset = 'gscholar'
+    src_path_name = name_dataset + '_article_html'
     src_path = retrieve_path(src_path_name)
 
 
@@ -386,8 +386,8 @@ def article_json(term):
 
         #print(json.dumps(data, indent = 2, ensure_ascii = False))
 
-        name_article = 'gscholar'
-        dst_path_name = name_article + '_article_json'
+        name_dataset = 'gscholar'
+        dst_path_name = name_dataset + '_article_json'
         dst_path = retrieve_path(dst_path_name)
 
 
@@ -404,8 +404,8 @@ def article_html(term):
     """
     save html from article
     """
-    name_article = 'gscholar'
-    dst_path_name = name_article + '_query_df'
+    name_dataset = 'gscholar'
+    dst_path_name = name_dataset + '_query_df'
     dst_path = retrieve_path(dst_path_name)
     df_file = os.path.join(dst_path, term + '.csv')
     df = pd.read_csv(df_file)
@@ -423,8 +423,8 @@ def article_html(term):
         url_name = url_name[:25]
 
         # was this article already scraped?
-        name_article = 'gscholar'
-        dst_path_name = name_article + '_article_html'
+        name_dataset = 'gscholar'
+        dst_path_name = name_dataset + '_article_html'
         dst_path = retrieve_path(dst_path_name)
         if str(url_name + '.html') in os.listdir(dst_path):
             continue
@@ -496,9 +496,9 @@ def json_to_dataframe(term):
 
 
     # retrieve scrape json
-    name_article = 'gscholar'
-    src_path_name = name_article + '_query_json'
-    src_path = retrieve_path(name_article + '_query_json')
+    name_dataset = 'gscholar'
+    src_path_name = name_dataset + '_query_json'
+    src_path = retrieve_path(name_dataset + '_query_json')
     #print('src_path = ')
     #print(src_path)
 
@@ -526,8 +526,8 @@ def json_to_dataframe(term):
     #print(df)
 
 
-    name_article = 'gscholar'
-    dst_path_name = name_article + '_query_df'
+    name_dataset = 'gscholar'
+    dst_path_name = name_dataset + '_query_df'
     dst_path = retrieve_path(dst_path_name)
     df_file = os.path.join(dst_path, term + '.csv')
     df.to_csv(df_file)
@@ -538,12 +538,12 @@ def scrape_json(term):
     read in saved html
     convert to json
     """
-    name_article = 'gscholar'
-    dst_path = retrieve_path(name_article + '_query_json')
+    name_dataset = 'gscholar'
+    dst_path = retrieve_path(name_dataset + '_query_json')
     shutil.rmtree(dst_path)
 
-    name_article = 'gscholar'
-    src_path_name = name_article + '_query_html'
+    name_dataset = 'gscholar'
+    src_path_name = name_dataset + '_query_html'
     src_path = retrieve_path(src_path_name)
     #print('src_path = ')
     #print(src_path)
@@ -624,8 +624,8 @@ def scrape_json(term):
             #print(json.dumps(data, indent = 2, ensure_ascii = False))
 
             # build the file to save json
-            name_article = 'gscholar'
-            dst_path = retrieve_path(name_article + '_query_json')
+            name_dataset = 'gscholar'
+            dst_path = retrieve_path(name_dataset + '_query_json')
             file_split = file.split(' ')
             file_num = file_split[1]
             f = os.path.join(dst_path, term + '_' + str(file_num) + '_' + retrieve_datetime() + '.json')
@@ -700,8 +700,8 @@ def scrape_html(term,num):
 
 
     # compose dst file name
-    name_article = 'gscholar'
-    dst_path_name = name_article + '_query_html'
+    name_dataset = 'gscholar'
+    dst_path_name = name_dataset + '_query_html'
     print(dst_path_name)
     print('dst_path = ')
     dst_path = retrieve_path(dst_path_name)

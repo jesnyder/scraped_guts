@@ -7,7 +7,7 @@ from a0001_retrieve_meta import retrieve_path
 from a0001_retrieve_meta import clean_dataframe
 from a0001_retrieve_meta import retrieve_term_list
 
-def bar_chart_percentage(name_article, terms_to_compare):
+def bar_chart_percentage(name_dataset, terms_to_compare):
     """
     retrieve dataframe
     plot barchart
@@ -19,9 +19,9 @@ def bar_chart_percentage(name_article, terms_to_compare):
     print('term_list = ' + str(term_list))
     return(term_list)
 
-    term_count_annual = str('count_term_annual_' + name_article)
+    term_count_annual = str('count_term_annual_' + name_dataset)
     file_name = os.path.join(retrieve_path(term_count_annual), 'term_annual_count' + '.csv')
-    print('name_article = ' + str(name_article))
+    print('name_dataset = ' + str(name_dataset))
     print('term_count_annual = ' + str(term_count_annual))
     print('file_name = ' + str(file_name))
     df = pd.read_csv(file_name)
@@ -63,11 +63,11 @@ def bar_chart_percentage(name_article, terms_to_compare):
 
 
     plt.xlabel('Years')
-    plt.ylabel('Percentage of ' + name_article)
-    plt.title(name_article)
+    plt.ylabel('Percentage of ' + name_dataset)
+    plt.title(name_dataset)
     plt.legend(bbox_to_anchor=(1, 0.9), loc ="upper left")
 
-    plot_count_annual = str('plot_term_annual_' + name_article)
+    plot_count_annual = str('plot_term_annual_' + name_dataset)
     plot_dst = os.path.join(retrieve_path(plot_count_annual), terms_to_compare +  ' bar_term_annual' + '.png')
     plt.savefig(plot_dst, dpi = 600, edgecolor = 'w')
     print('saved plot: ' + plot_dst)

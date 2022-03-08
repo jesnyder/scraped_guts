@@ -73,7 +73,7 @@ def acquire_gscholar():
     search_terms = list(df_search_terms['term'])
     """
 
-    name_article = 'gscholar'
+    name_dataset = 'gscholar'
     for term in retrieve_list('search_terms'):
 
         # specify the range of number
@@ -102,44 +102,44 @@ def acquire_patents():
     search_terms = list(df_search_terms['term'])
 
     for term in search_terms:
-        name_article = 'patents'
+        name_dataset = 'patents'
         #result_limits = [5, 10, 7000, 8000, 9000, 10000, 15000, 20000]
         result_limits = retrieve_format('patent_result_limits')
-        query_patents(name_article, term, result_limits)
+        query_patents(name_dataset, term, result_limits)
 
 
 def acquire_nih_awards():
     """
     aggregate and save in program generated
     """
-    name_article = 'nih_awards'
-    format_src(name_article)
+    name_dataset = 'nih_awards'
+    format_src(name_dataset)
 
 
 def acquire_clinical_trials():
     """
     aggregate and save in program generated
     """
-    name_article = 'clinical_trials'
-    format_src(name_article)
+    name_dataset = 'clinical_trials'
+    format_src(name_dataset)
 
 
 def acquire_nsf_awards():
     """
     aggregate and save in program generated
     """
-    name_article = 'nsf_awards'
-    format_src(name_article)
+    name_dataset = 'nsf_awards'
+    format_src(name_dataset)
 
 
-def format_src(name_article):
+def format_src(name_dataset):
     """
     dataframe downloaded are not readable
     """
 
     df_agg = pd.DataFrame()
 
-    folder_name = str(name_article + '_downloaded')
+    folder_name = str(name_dataset + '_downloaded')
     download_src = retrieve_path(folder_name)
     print('download_src = ' + str(download_src))
 
@@ -163,7 +163,7 @@ def format_src(name_article):
         df_agg = df_agg.append(df)
 
 
-        if name_article == 'clinical_trials':
+        if name_dataset == 'clinical_trials':
             name = 'NCT Number'
 
         df_agg = clean_dataframe(df_agg)
@@ -180,9 +180,9 @@ def format_src(name_article):
     print('df_agg.columns')
     print(df_agg.columns)
 
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_article)
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     print('name_src = ' + str(name_src))
-    file_save = os.path.join(retrieve_path(name_src),  name_article + '.csv' )
+    file_save = os.path.join(retrieve_path(name_src),  name_dataset + '.csv' )
     df_agg.to_csv(file_save)
 
 

@@ -45,10 +45,10 @@ def clean_count():
     save as a shortened df
     """
 
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
-        print('article = ' + str(name_article))
-        file_dst = str(name_article + '_count_all_words_df')
+        print('article = ' + str(name_dataset))
+        file_dst = str(name_dataset + '_count_all_words_df')
 
         # read in the saved dataframe, either complete or in progress
         try:
@@ -107,7 +107,7 @@ def clean_count():
         df_short = df_short.drop(rows_to_drop)
 
         df_short = clean_dataframe(df_short)
-        file_dst = str(name_article + '_count_all_words_df')
+        file_dst = str(name_dataset + '_count_all_words_df')
         path_dst = os.path.join(retrieve_path(file_dst), 'short_word_count'  + '.csv')
         print('path_dst = ' + str(path_dst))
 
@@ -144,14 +144,14 @@ def count_all_words():
         df_compare_terms = pd.read_csv(path)
         compare_term_list = list(df_compare_terms['terms'])
 
-        for name_article in article_names:
+        for name_dataset in article_names:
 
-            print('article = ' + str(name_article))
+            print('article = ' + str(name_dataset))
 
             for term in search_terms:
                 print('term = ' + str(term))
 
-                f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '.csv' )
+                f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
                 print('f = ' + str(f))
                 df = clean_dataframe(pd.read_csv(f))
 
@@ -215,7 +215,7 @@ def count_all_words():
                         df_counts['percents'] = percents
 
                         df_counts = df_counts.sort_values('counts', ascending=False)
-                        file_dst = str(name_article + '_count_all_words_df')
+                        file_dst = str(name_dataset + '_count_all_words_df')
                         #print('file_dst = ' + str(file_dst))
                         path_dst = os.path.join(retrieve_path(file_dst), 'all_word_count'  + '.csv')
                         df_counts = clean_dataframe(df_counts)
@@ -223,11 +223,11 @@ def count_all_words():
 
                         #print('df_counts = ')
                         #print(df_counts)
-                        print(name_article + ' words found = ' + str(len(words)) + '  % complete = ' + str(round(100*sum(counts)/len(str_list),5)))
+                        print(name_dataset + ' words found = ' + str(len(words)) + '  % complete = ' + str(round(100*sum(counts)/len(str_list),5)))
 
                         percent_found = 100*sum(counts)/len(str_list)
                         if percent_found > int(retrieve_format('word_count_break_per')):
-                            file_dst = str(name_article + '_count_all_words_df')
+                            file_dst = str(name_dataset + '_count_all_words_df')
                             #print('file_dst = ' + str(file_dst))
                             path_dst = os.path.join(retrieve_path(file_dst), 'all_word_count_' + str(retrieve_format('word_count_break_per'))  + '.csv')
                             df_counts.to_csv(path_dst)

@@ -313,7 +313,7 @@ def build_clinical_address(df):
     lat, lon = lookup_address(address_complete, address)
     if lat != None: return(address_complete, address, lat, lon)
 
-    missing_address(name_article, address_complete, addresses)
+    missing_address(name_dataset, address_complete, addresses)
     return(address_complete, address, 0, 0)
 
 
@@ -570,7 +570,7 @@ def build_patent_address(df):
     except:
         hello = 'hello'
 
-    missing_address(name_article, address_complete, address)
+    missing_address(name_dataset, address_complete, address)
     return(address_complete, address, 0, 0)
 
 
@@ -580,14 +580,14 @@ def find_address():
     list unique institutions
     """
 
-    #for name_article in ['clinical_trials', 'nih_awards', 'nsf_awards', 'patents']:
-    for name_article in retrieve_list('type_article'):
+    #for name_dataset in ['clinical_trials', 'nih_awards', 'nsf_awards', 'patents']:
+    for name_dataset in retrieve_list('type_article'):
 
-        print('name_article = ' + name_article)
+        print('name_dataset = ' + name_dataset)
 
-        #if name_article != 'nih_awards': continue
+        #if name_dataset != 'nih_awards': continue
 
-        f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '.csv' )
+        f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
         df_ref = clean_dataframe(pd.read_csv(f))
 
         df_ref['ref_complete_address'] = [None] * len(list(df_ref.iloc[:,0]))
@@ -600,22 +600,22 @@ def find_address():
             i= i-1
 
             complete_num = round(100*i/len(list(df_ref.iloc[:,0])),2)
-            print(name_article + ' % complete: ' + str(complete_num) + '    i = ' + str(i))
+            print(name_dataset + ' % complete: ' + str(complete_num) + '    i = ' + str(i))
             df_ref_row = df_ref.iloc[i,:]
 
-            if 'nih_awards' in name_article:
+            if 'nih_awards' in name_dataset:
                 address_complete, address, lat, lon = build_nih_address(df_ref_row)
 
-            if 'nsf_award' in name_article:
+            if 'nsf_award' in name_dataset:
                 address_complete, address, lat, lon = build_nsf_address(df_ref_row)
 
-            if 'clinical' in name_article:
+            if 'clinical' in name_dataset:
                 address_complete, address, lat, lon = build_clinical_address(df_ref_row)
 
-            if 'patent' in name_article:
+            if 'patent' in name_dataset:
                 address_complete, address, lat, lon = build_patent_address(df_ref_row)
 
-            if 'gscholar' in name_article:
+            if 'gscholar' in name_dataset:
                 address_complete, address, lat, lon = build_gscholar_address(df_ref_row)
 
             print('lat/lon = ' + str(lat) + ' /  ' + str(lon))
@@ -625,13 +625,13 @@ def find_address():
             df_ref.loc[i, 'ref_lat'] = float(lat)
             df_ref.loc[i, 'ref_lon'] = float(lon)
 
-        f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '_with_address' + '.csv' )
+        f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '_with_address' + '.csv' )
         df_ref = clean_dataframe(df_ref)
         df_ref.to_csv(f)
 
-        list_unique_values(name_article, df_ref)
-        plot_unique_values(name_article)
-        cross_plot_unique(name_article, df_ref)
+        list_unique_values(name_dataset, df_ref)
+        plot_unique_values(name_dataset)
+        cross_plot_unique(name_dataset, df_ref)
 
 
 def findLatLong(address):
@@ -686,12 +686,12 @@ def lookup_address(address_complete, addresses):
     return(None, None)
 
 
-def missing_address(name_article, address_complete, address):
+def missing_address(name_dataset, address_complete, address):
     """
     save address if not found
     """
     df_temp = pd.DataFrame()
-    df_temp['name_article'] = [name_article]
+    df_temp['name_dataset'] = [name_dataset]
     df_temp['address_complete'] = [address_complete]
     df_temp['address'] = [address]
     df_temp['date_time'] = [retrieve_datetime()]

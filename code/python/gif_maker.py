@@ -18,7 +18,7 @@ def build_gif():
     """
 
     """
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
 
 

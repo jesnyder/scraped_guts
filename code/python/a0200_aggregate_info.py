@@ -52,21 +52,21 @@ def annual_count():
 
     """
 
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
-        print('name_article = ' + name_article)
+        print('name_dataset = ' + name_dataset)
 
         for term in retrieve_list(''):
 
             try:
-                print('article = ' + str(name_article))
-                f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '_with_address' + '.csv' )
+                print('article = ' + str(name_dataset))
+                f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '_with_address' + '.csv' )
                 print('f = ' + str(f))
                 df = clean_dataframe(pd.read_csv(f))
 
             except:
-                print('article = ' + str(name_article))
-                f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '.csv' )
+                print('article = ' + str(name_dataset))
+                f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
                 print('f = ' + str(f))
                 df = clean_dataframe(pd.read_csv(f))
 
@@ -97,14 +97,14 @@ def annual_count():
             df_annual['pdf'] = pdfs
             df_annual['cdf'] = cdfs
 
-            annual_df = str(name_article + '_annual_df')
+            annual_df = str(name_dataset + '_annual_df')
             f = os.path.join(retrieve_path(annual_df), term + '.csv')
             df_annual.to_csv(f)
 
-            annual_plot(name_article, df_annual, term)
+            annual_plot(name_dataset, df_annual, term)
 
 
-def annual_plot(name_article, df_annual, term):
+def annual_plot(name_dataset, df_annual, term):
     """
 
     """
@@ -123,7 +123,7 @@ def annual_plot(name_article, df_annual, term):
     colorMarker, colorEdge, colorTransparency = find_color(6)
     plt.scatter(xx,yy, color=colorMarker, edgecolor=colorEdge, alpha=colorTransparency)
 
-    plt.title(name_article)
+    plt.title(name_dataset)
     plt.xlabel('year')
     plt.ylabel('count (total = ' + str(int(sum(yy))) + ')')
 
@@ -134,17 +134,17 @@ def annual_plot(name_article, df_annual, term):
     colorMarker, colorEdge, colorTransparency = find_color(6)
     plt.scatter(xx,yy, color=colorMarker, edgecolor=colorEdge, alpha=colorTransparency)
 
-    plt.title(name_article)
+    plt.title(name_dataset)
     plt.xlabel('year')
     plt.ylabel('count (total = ' + str(int(yy[-1])) + ')')
 
-    annual_plot = str(name_article + '_annual_plot')
+    annual_plot = str(name_dataset + '_annual_plot')
     f = os.path.join(retrieve_path(annual_plot), term + '.png')
     plt.savefig(f, dpi = 600, edgecolor = 'w')
     plt.close('all')
 
 
-def aggregate_gscholar(name_article):
+def aggregate_gscholar(name_dataset):
     """
 
     """
@@ -162,14 +162,14 @@ def aggregate_gscholar(name_article):
 
     for term in retrieve_list(''):
 
-        dst_path_name = name_article + '_query_df'
+        dst_path_name = name_dataset + '_query_df'
         dst_path = retrieve_path(dst_path_name)
         df_file = os.path.join(dst_path, term + '.csv')
         df_query = pd.read_csv(df_file)
         df_query = clean_dataframe(df_query)
         print(df_query.columns)
 
-        dst_path_name = name_article + '_article_df'
+        dst_path_name = name_dataset + '_article_df'
         dst_path = retrieve_path(dst_path_name)
         df_file = os.path.join(dst_path, term + '.csv')
         df_article = pd.read_csv(df_file)
@@ -207,7 +207,7 @@ def aggregate_gscholar(name_article):
 
 
         df_query = clean_dataframe(df_query)
-        f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '.csv' )
+        f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
         df_query.to_csv(f)
 
         df = df_query
@@ -216,17 +216,17 @@ def aggregate_gscholar(name_article):
         print('df = ')
         print(df)
 
-        df = add_ref_year(df, name_article)
-        list_unique_values(name_article, df)
-        plot_unique_values(name_article)
-        cross_plot_unique(name_article, df)
+        df = add_ref_year(df, name_dataset)
+        list_unique_values(name_dataset, df)
+        plot_unique_values(name_dataset)
+        cross_plot_unique(name_dataset, df)
 
         df = clean_dataframe(df)
-        f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '.csv' )
+        f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
         df.to_csv(f)
 
 
-def aggregate_patents(name_article):
+def aggregate_patents(name_dataset):
     """
 
     """
@@ -251,7 +251,7 @@ def aggregate_patents(name_article):
 
     for term in search_terms:
 
-        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_article)
+        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
         download_src = os.path.join(retrieve_path(name_src))
 
         for file in os.listdir(download_src):
@@ -265,26 +265,26 @@ def aggregate_patents(name_article):
             df = df.append(df_src)
 
     df = clean_dataframe(df)
-    df = filter_articles(df, name_article)
-    df = add_ref_year(df, name_article)
-    list_unique_values(name_article, df)
-    plot_unique_values(name_article)
-    cross_plot_unique(name_article, df)
+    df = filter_articles(df, name_dataset)
+    df = add_ref_year(df, name_dataset)
+    list_unique_values(name_dataset, df)
+    plot_unique_values(name_dataset)
+    cross_plot_unique(name_dataset, df)
 
-    f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '.csv' )
+    f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
     df.to_csv(f)
 
 
-def aggregate_downloaded(name_article):
+def aggregate_downloaded(name_dataset):
     """
 
     """
     # retrieve acquired info
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_article)
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     print('name_src = ' + str(name_src))
 
 
-    f = os.path.join(retrieve_path(name_src),  name_article + '.csv' )
+    f = os.path.join(retrieve_path(name_src),  name_dataset + '.csv' )
     print('f = ' + str(f))
     df = pd.read_csv(f)
     print('df = ')
@@ -294,21 +294,21 @@ def aggregate_downloaded(name_article):
     print('df.columns')
     print(df.columns)
 
-    if 'nsf' not in name_article and 'clinical_trials' not in name_article:
-        df = filter_articles(df, name_article)
+    if 'nsf' not in name_dataset and 'clinical_trials' not in name_dataset:
+        df = filter_articles(df, name_dataset)
 
-    df = add_ref_year(df, name_article)
-    df = add_ref_value(df, name_article)
-    list_unique_values(name_article, df)
-    plot_unique_values(name_article)
-    cross_plot_unique(name_article, df)
+    df = add_ref_year(df, name_dataset)
+    df = add_ref_value(df, name_dataset)
+    list_unique_values(name_dataset, df)
+    plot_unique_values(name_dataset)
+    cross_plot_unique(name_dataset, df)
 
     df = clean_dataframe(df)
-    f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '.csv' )
+    f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
     df.to_csv(f)
 
 
-def filter_articles(df, name_article):
+def filter_articles(df, name_dataset):
     """
 
     """
@@ -316,7 +316,7 @@ def filter_articles(df, name_article):
 
     for i in range(len(list(df.iloc[:,0]))):
 
-        print('filtering ' + name_article + ' % complete = ' + str(round(100*i/len(list(df.iloc[:,0])),2)))
+        print('filtering ' + name_dataset + ' % complete = ' + str(round(100*i/len(list(df.iloc[:,0])),2)))
 
         str_article = ''
         for col_name in df.columns:
@@ -338,7 +338,7 @@ def filter_articles(df, name_article):
 
     assert sum(df['filter_term_count']) > 0
 
-    f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '_no_filter' + '.csv' )
+    f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '_no_filter' + '.csv' )
     df = clean_dataframe(df)
     df.to_csv(f)
 
@@ -351,13 +351,13 @@ def filter_articles(df, name_article):
         time.sleep(10)
 
     df = clean_dataframe(df)
-    f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '.csv' )
+    f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
     df.to_csv(f)
 
     return(df)
 
 
-def list_unique_values(name_article, df):
+def list_unique_values(name_dataset, df):
     """
 
     """
@@ -392,17 +392,17 @@ def list_unique_values(name_article, df):
             col_name_split = col_name.split('/')
             col_name = col_name_split[0]
 
-        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_article)
+        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
         print('name_src = ' + str(name_src))
         f = os.path.join(retrieve_path(name_unique),  col_name + '.csv' )
         df_count.to_csv(f)
 
 
-def plot_unique_values(name_article):
+def plot_unique_values(name_dataset):
     """
 
     """
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_article)
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
 
     for file in os.listdir(retrieve_path(name_unique)):
 
@@ -428,7 +428,7 @@ def plot_unique_values(name_article):
 
             file_split = file.split('.')
             filename = file_split[0]
-            plt.title(name_article + ' ' + filename)
+            plt.title(name_dataset + ' ' + filename)
             plt.xlabel(filename)
             plt.ylabel('count (total = ' + str(int(sum(yy))) + ')')
 
@@ -441,11 +441,11 @@ def plot_unique_values(name_article):
             hello = 'hello'
 
 
-def cross_plot_unique(name_article, df):
+def cross_plot_unique(name_dataset, df):
     """
 
     """
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_article)
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     col_names = list(df.columns)
 
     for name_1 in col_names:
@@ -476,7 +476,7 @@ def cross_plot_unique(name_article, df):
                 print('names: ' + str(name_1) + ' ' + str(name_2))
 
                 filename = str(name_1 + '_' + name_2)
-                plt.title(name_article + ' (n=' + str(len(xx)) + ')')
+                plt.title(name_dataset + ' (n=' + str(len(xx)) + ')')
                 plt.xlabel(name_1)
                 plt.ylabel(name_2)
 
@@ -530,7 +530,7 @@ def remove_dollar_sign(xx):
     return(xx)
 
 
-def add_ref_year(df, name_article):
+def add_ref_year(df, name_dataset):
     """
     add ref year
     """
@@ -539,14 +539,14 @@ def add_ref_year(df, name_article):
 
     # add ref_year
     years = []
-    if name_article == 'nsf_awards':
+    if name_dataset == 'nsf_awards':
         for date in list(df['StartDate']):
             print('date = ' + str(date))
             date_split = date.split('/')
             year = date_split[-1]
             years.append(year)
 
-    if name_article == 'nih_awards':
+    if name_dataset == 'nih_awards':
 
         for date in list(df['Project Start Date']):
 
@@ -562,7 +562,7 @@ def add_ref_year(df, name_article):
                 date = 1900
             years.append(date)
 
-    if name_article == 'clinical_trials':
+    if name_dataset == 'clinical_trials':
         for date in list(df['Start Date']):
             #print('date = ' + str(date))
             try:
@@ -575,7 +575,7 @@ def add_ref_year(df, name_article):
             years.append(year)
 
 
-    if name_article == 'patents':
+    if name_dataset == 'patents':
         print(df.columns)
         for date in list(df['file_date']):
             print(date)
@@ -585,7 +585,7 @@ def add_ref_year(df, name_article):
             years.append(year)
 
 
-    if name_article == 'gscholar':
+    if name_dataset == 'gscholar':
         for date in list(df['publication_info']):
 
             try:
@@ -614,7 +614,7 @@ def add_ref_year(df, name_article):
     return(df)
 
 
-def add_ref_value(df, name_article):
+def add_ref_value(df, name_dataset):
     """
     add ref year
     """
@@ -623,12 +623,12 @@ def add_ref_value(df, name_article):
 
     # add ref_year
     values = []
-    if name_article == 'nsf_awards':
+    if name_dataset == 'nsf_awards':
         for value in list(df['AwardedAmountToDate']):
             value = remove_dollar_sign([value])
             values.append(value[0])
 
-    if name_article == 'nih_awards':
+    if name_dataset == 'nih_awards':
         for value in list(df['Direct Cost IC']):
             try:
                 value = float(value)
@@ -638,7 +638,7 @@ def add_ref_value(df, name_article):
                 value = [0]
             values.append(value[0])
 
-    if name_article == 'clinical_trials':
+    if name_dataset == 'clinical_trials':
         for value in list(df['Enrollment']):
             try:
                 value = int(value)
@@ -647,7 +647,7 @@ def add_ref_value(df, name_article):
             values.append(value)
 
 
-    if name_article == 'patents':
+    if name_dataset == 'patents':
         for value in list(df['family_id']):
             try:
                 value = int(value)
@@ -656,7 +656,7 @@ def add_ref_value(df, name_article):
             values.append(value)
 
 
-    if name_article == 'gscholar':
+    if name_dataset == 'gscholar':
         for value in list(df['citations']):
             try:
                 value = int(value)

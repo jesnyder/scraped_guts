@@ -50,7 +50,7 @@ def data_for_js_map():
     """
 
     """
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
         # list compare term files
         compare_terms = os.path.join(retrieve_path('term_compare'))
@@ -61,7 +61,7 @@ def data_for_js_map():
             search_terms = retrieve_list(f)
 
             # retrieve list of al articles
-            file_src = str(name_article + '_compare_terms_df')
+            file_src = str(name_dataset + '_compare_terms_df')
             f = os.path.join(retrieve_path(file_src), category  + '.csv')
             print('f = ' + str(f))
             df = clean_dataframe(pd.read_csv(f))
@@ -78,7 +78,7 @@ def data_for_js_map():
             df_js =  df_js[(df_js['1'] <= 47)]
 
 
-            js_data = str(name_article + '_js_data')
+            js_data = str(name_dataset + '_js_data')
             f = os.path.join(retrieve_path(js_data), category + '.tsv')
             df_js.to_csv(f, sep="\t", index=False)
 
@@ -102,7 +102,7 @@ def data_for_js_map():
                     term_label = term.split('|')[0]
                 except:
                     term_label = term
-                js_data = str(name_article + '_js_data')
+                js_data = str(name_dataset + '_js_data')
                 f = os.path.join(retrieve_path(js_data), category + '_' + term_label + '.tsv')
                 df_js.to_csv(f, sep="\t", index=False)
 
@@ -113,7 +113,7 @@ def yearly_map_bar():
     """
 
     # list articles
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
         # list compare term files
         compare_terms = os.path.join(retrieve_path('term_compare'))
@@ -124,7 +124,7 @@ def yearly_map_bar():
             search_terms = retrieve_list(f)
 
             # retrieve list of al articles
-            file_src = str(name_article + '_compare_terms_df')
+            file_src = str(name_dataset + '_compare_terms_df')
             f = os.path.join(retrieve_path(file_src), category  + '.csv')
             print('f = ' + str(f))
             df = clean_dataframe(pd.read_csv(f))
@@ -132,7 +132,7 @@ def yearly_map_bar():
 
             print('df.columns = ')
             print(df.columns)
-            print('name_article = ' + name_article)
+            print('name_dataset = ' + name_dataset)
 
 
             years = np.arange(int(min(list(df['ref_year']))), int(max(list(df['ref_year']))), 1)
@@ -187,14 +187,14 @@ def yearly_map_bar():
                     plt.scatter(lons, lats, s=sizes, color=colorMarker, edgecolors=colorEdge, linewidth=float(retrieve_format('markeredgewidth')), alpha=float(colorTransparency),label=label_str)
 
                 axes.axis('off')
-                plt.title(name_article + ' ' + str(int(min(list(df['ref_year'])))) + '-' + str(year))
+                plt.title(name_dataset + ' ' + str(int(min(list(df['ref_year'])))) + '-' + str(year))
                 plt.legend(bbox_to_anchor=(0.2, -0.2), loc ="upper left")
 
 
                 plot_num = plot_num +1
                 plt.subplot(plot_row, plot_col, plot_num)
 
-                file_src = str(name_article + '_compare_terms_annual_count_df')
+                file_src = str(name_dataset + '_compare_terms_annual_count_df')
                 compare_file_term = str(category + '_percent')
                 path_src = os.path.join(retrieve_path(file_src), compare_file_term  + '.csv')
                 df_bar = clean_dataframe(pd.read_csv(path_src))
@@ -239,7 +239,7 @@ def yearly_map_bar():
                     plt.bar(xx, yy, width=1.0, bottom=offsets, align='center', color=colorMarker,label = label_term)
 
 
-                plt.title(name_article + ' Percent ' + str(int(sum(list(df_bar['annual_total'])))))
+                plt.title(name_dataset + ' Percent ' + str(int(sum(list(df_bar['annual_total'])))))
                 plt.xlabel('year')
                 plt.xlim([min(years), max(years)])
                 plt.ylabel(term_per)
@@ -247,7 +247,7 @@ def yearly_map_bar():
                 plt.legend(bbox_to_anchor=(0.2, -0.2), loc='upper left')
                 #plt.legend(bbox_to_anchor=(1, 0.8), loc='upper left')
 
-                file_dst_name = str(name_article + '_map_bar_png')
+                file_dst_name = str(name_dataset + '_map_bar_png')
                 df_file = os.path.join(retrieve_path(file_dst_name), category + '_' + str(year) + '.png')
                 plt.savefig(df_file, bbox_inches='tight', dpi=150, edgecolor = 'w')
                 plt.close('all')
@@ -263,11 +263,11 @@ def build_gif():
     print('building gif')
 
     # list articles
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
         for map_type in ['_map_png', '_map_bar_png']:
 
-            file_dst_name = str(name_article + map_type)
+            file_dst_name = str(name_dataset + map_type)
             df_src = os.path.join(retrieve_path(file_dst_name))
 
             # list compare term files
@@ -287,7 +287,7 @@ def build_gif():
 
                 frames = []
                 #png_file = os.path.join(path, "*.png")
-                gif_dst = str(name_article + '_map_gif')
+                gif_dst = str(name_dataset + '_map_gif')
                 save_file = os.path.join(retrieve_path(gif_dst) , category + '.gif')
                 print('save_file = ' + str(save_file))
 
@@ -295,7 +295,7 @@ def build_gif():
                 for i in png_list:
 
                     per_complete = round(100*png_list.index(i)/len(png_list),2)
-                    print(name_article + ' ' + category + ' % complete = ' + str(per_complete) )
+                    print(name_dataset + ' ' + category + ' % complete = ' + str(per_complete) )
 
                     new_frame = Image.open(i)
                     frames.append(new_frame)
@@ -341,7 +341,7 @@ def yearly_map():
     """
 
     # list articles
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
         # list compare term files
         compare_terms = os.path.join(retrieve_path('term_compare'))
@@ -352,7 +352,7 @@ def yearly_map():
             search_terms = retrieve_list(f)
 
             # retrieve list of al articles
-            file_src = str(name_article + '_compare_terms_df')
+            file_src = str(name_dataset + '_compare_terms_df')
             f = os.path.join(retrieve_path(file_src), category  + '.csv')
             print('f = ' + str(f))
             df = clean_dataframe(pd.read_csv(f))
@@ -365,7 +365,7 @@ def yearly_map():
 
             print('df.columns = ')
             print(df.columns)
-            #print('name_article = ' + name_article)
+            #print('name_dataset = ' + name_dataset)
 
             #print('df[\'ref_lat\'] = ')
             #print(df['ref_lat'])
@@ -413,11 +413,11 @@ def yearly_map():
 
                 total_ref_value = sum(list(df_temp['ref_value']))
 
-                if 'award' in str(name_article):
+                if 'award' in str(name_dataset):
                     total_ref_value_millions = round(total_ref_value/1000000,2)
                     label_str = str(len(list(df_temp['ref_year']))) + ' $' + str(total_ref_value_millions) + 'million invested in ' + 'all'
 
-                elif 'clincial_trials' == str(name_article):
+                elif 'clincial_trials' == str(name_dataset):
                     total_ref_value = int(total_ref_value)
                     label_str = str(len(list(df_temp['ref_year']))) + ' ' + str(total_ref_value) + 'patients enrolled in ' + 'all'
 
@@ -438,11 +438,11 @@ def yearly_map():
                     lons = list(df_term['ref_lon'])
                     total_ref_value = sum(list(df_term['ref_value']))
 
-                    if 'award' in str(name_article):
+                    if 'award' in str(name_dataset):
                         total_ref_value_millions = round(total_ref_value/1000000,2)
                         label_str = str(len(list(df_term['ref_year']))) + ' $' + str(total_ref_value_millions) + ' million invested in ' + term
 
-                    elif 'clincial_trials' == str(name_article):
+                    elif 'clincial_trials' == str(name_dataset):
                         total_ref_value = int(total_ref_value)
                         label_str = str(len(list(df_term['ref_year']))) + ' ' + str(total_ref_value) + ' patients enrolled in ' + term
 
@@ -466,10 +466,10 @@ def yearly_map():
                     plt.scatter(lons, lats, s=sizes, color=colorMarker, edgecolors=colorMarker, linewidth=float(retrieve_format('markeredgewidth')), alpha=float(colorTransparency),label=label_str)
 
                 axes.axis('off')
-                plt.title(category + ' ' + name_article + ' ' + str(int(min(list(df['ref_year'])))) + '-' + str(year))
+                plt.title(category + ' ' + name_dataset + ' ' + str(int(min(list(df['ref_year'])))) + '-' + str(year))
                 plt.legend(bbox_to_anchor=(0.3, 0.10), loc ="upper left")
 
-                file_dst_name = str(name_article + '_map_png')
+                file_dst_name = str(name_dataset + '_map_png')
                 #print('file_dst_name = ')
                 #print(file_dst_name)
                 df_file = os.path.join(retrieve_path(file_dst_name), category + '_' + str(year) + '.png')

@@ -46,18 +46,18 @@ def copy_media():
     # copy images and gif used to build the website to a folder within docs
 
     # copy comparison chart
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
         for term in retrieve_categories():
 
-            plot_count_annual = str(name_article + '_compare_terms_plot')
+            plot_count_annual = str(name_dataset + '_compare_terms_plot')
             src = os.path.join(retrieve_path(plot_count_annual), term +  '_percent' + '_02' + '.png')
             dst_name = str(src)
             dst_name = dst_name.replace('/','_')
             dst = os.path.join(retrieve_path('web_media'), dst_name)
             shutil.copy(src,dst)
 
-            gif_dst = str(name_article + '_map_gif')
+            gif_dst = str(name_dataset + '_map_gif')
             for file in os.path.join(retrieve_path(gif_dst)):
 
                 src = os.path.join(os.path.join(retrieve_path(gif_dst)), file)
@@ -69,7 +69,7 @@ def copy_media():
                 except:
                     print(dst + ' not found')
 
-            file_dst_name = str(name_article + '_map_png')
+            file_dst_name = str(name_dataset + '_map_png')
             try:
                 df_file = os.path.join(retrieve_path(file_dst_name), term + '_' + str('2022') + '.png')
             except:
@@ -186,17 +186,17 @@ def introduction_html():
 
     f.write('<h2>' + str('The History of Heavy Metals in NSF Awards') + '</h2>' + '\n')
 
-    for name_article in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('type_article'):
 
         try:
-            print('article = ' + str(name_article))
-            ff = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '_with_address' + '.csv' )
+            print('article = ' + str(name_dataset))
+            ff = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '_with_address' + '.csv' )
             print('f = ' + str(ff))
             df = clean_dataframe(pd.read_csv(ff))
 
         except:
-            print('article = ' + str(name_article))
-            ff = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '.csv' )
+            print('article = ' + str(name_dataset))
+            ff = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
             print('f = ' + str(ff))
             df = clean_dataframe(pd.read_csv(ff))
 
@@ -219,7 +219,7 @@ def introduction_html():
 
             f.write('<img alt="My Image" src="' + '')
 
-            plot_count_annual = str(name_article + '_compare_terms_plot')
+            plot_count_annual = str(name_dataset + '_compare_terms_plot')
             src = os.path.join(retrieve_path(plot_count_annual), term +  '_percent' + '_02' + '.png')
             dst_name = str(src)
             dst_name = dst_name.replace('/','_')
@@ -240,7 +240,7 @@ def introduction_html():
 
             # Insert map gif
             f.write('<img alt="My Image" src="' + '')
-            gif_dst = str(name_article + '_map_gif')
+            gif_dst = str(name_dataset + '_map_gif')
             for file in os.path.join(retrieve_path(gif_dst)):
 
                 src = os.path.join(os.path.join(retrieve_path(gif_dst)), file)
@@ -253,7 +253,7 @@ def introduction_html():
                 f.write('" />')
 
             f.write('<img alt="My Image" src="' + '')
-            file_dst_name = str(name_article + '_map_png')
+            file_dst_name = str(name_dataset + '_map_png')
 
             try:
                 df_file = os.path.join(retrieve_path(file_dst_name), term + '_' + str('2021') + '.png')
@@ -276,7 +276,7 @@ def introduction_html():
 
         for col_name in df.columns:
 
-            name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_article)
+            name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
             file_path = os.path.join(retrieve_path(name_unique),  col_name + '.csv' )
             write_table_count(file_path)
 
