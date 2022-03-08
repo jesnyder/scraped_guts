@@ -105,8 +105,8 @@ def json_scraped():
             'all_article_versions': f'https://scholar.google.com{all_article_versions}',
         })
 
-          data_json = json.dumps(data, indent = 2, ensure_ascii = False)
-          print(data_json)
+        data_json = json.dumps(data, indent = 2, ensure_ascii = False)
+        print(data_json)
 
 
 
