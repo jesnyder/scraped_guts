@@ -1,14 +1,14 @@
 name,path
 
 #, admin
-format,user_provided admin format.csv
+format,scraped_guts admin format.csv
 write_paths,program_generated admin paths.csv
-type_article,user_provided admin type_article.csv
-term_search,user_provided term_search search.csv
-term_compare,user_provided term_compare
-stop_words,user_provided admin stop_words.csv
-colors,user_provided admin colors.csv
-filter_terms,user_provided term_search filter.csv
+type_article,scraped_guts admin type_article.csv
+term_search,scraped_guts term_search search.csv
+term_compare,scraped_guts term_compare
+stop_words,scraped_guts admin stop_words.csv
+colors,scraped_guts admin colors.csv
+filter_terms,scraped_guts term_search filter.csv
 
 #, acquire info
 nih_awards_downloaded,user_provided nih_awards
