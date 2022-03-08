@@ -14,13 +14,15 @@ def main():
     """
     print('beginning main')
 
+    name_dataset = ['gscholar']
+
     # List task numbers to complete
-    tasks = [99]
+    tasks = [0]
     if  0 in tasks: tasks = np.arange(1, 101, 1)
     if  1 in tasks: acquire_info()
     if  2 in tasks: aggregate_info()
     if  3 in tasks: geolocate_articles()
-    #if  4 in tasks: untargeted_word_count()
+    if  4 in tasks: untargeted_word_count()
     if  5 in tasks: targeted_word_count()
     if  6 in tasks: map_maker()
     if 99 in tasks: build_webpage()

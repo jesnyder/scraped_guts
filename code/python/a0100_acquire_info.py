@@ -38,7 +38,7 @@ def acquire_info():
     print('began acquire_info')
 
     # List task numbers to complete
-    tasks = [1]
+    tasks = [0]
     write_paths()
     if  0 in tasks: tasks = np.arange(1, 101, 1)
     if  1 in tasks: acquire_nsf_awards()

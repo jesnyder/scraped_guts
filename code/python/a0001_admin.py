@@ -56,22 +56,6 @@ def name_paths(name_article):
     return name_src, name_dst, name_summary, name_unique, plot_unique
 
 
-def retreive_categories():
-    """
-    return file names in compare term folder
-    """
-    list_categories = []
-
-    compare_terms = os.path.join(retrieve_path('term_compare'))
-    for file in os.listdir(compare_terms):
-
-        file_split = file.split('.')
-        file_name = file_split[0]
-        list_categories.append(file_name)
-
-    return(list_categories)
-
-
 def retrieve_categories():
     """
     return file names in compare term folder
@@ -120,22 +104,6 @@ def retrieve_color(color_num):
     assert len(color_values) == 3
 
     return(color_values)
-
-
-def retrieve_compare_term_file_names():
-    """
-    list the names of files in compare terms folder
-    """
-    compare_term_file_names = []
-
-    for file in os.listdir(retrieve_path('term_compare')):
-
-        # save dataframe with percent
-        compare_file_term = file.split('.')
-        compare_file_term = compare_file_term[0]
-        compare_term_file_names.append(compare_file_term)
-
-    return(compare_term_file_names)
 
 
 def retrieve_datetime():
@@ -220,7 +188,7 @@ def retrieve_path(name):
     #print('began retrieve_path')
 
 
-    for file_source in ['user_provided', 'program_generated']:
+    for file_source in ['scraped_guts', 'user_provided', 'program_generated']:
 
         try:
             f = os.path.join(file_source, 'admin', 'paths' + '.csv')
