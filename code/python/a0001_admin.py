@@ -188,7 +188,7 @@ def retrieve_path(name):
     #print('began retrieve_path')
 
 
-    for file_source in ['scraped_guts', 'user_provided', 'program_generated']:
+    for file_source in ['doNotEdit', 'user_provided', 'program_generated']:
 
         try:
             f = os.path.join(file_source, 'admin', 'paths' + '.csv')

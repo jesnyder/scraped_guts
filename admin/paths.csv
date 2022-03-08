@@ -1,12 +1,12 @@
 name,path
 
 #, admin
-format,scraped_guts admin format.csv
+format,doNotEdit admin format.csv
 write_paths,program_generated admin paths.csv
-type_article,scraped_guts admin type_article.csv
-stop_words,scraped_guts admin stop_words.csv
-colors,scraped_guts admin colors.csv
-filter_terms,scraped_guts term_search filter.csv
+type_article,doNotEdit admin type_article.csv
+stop_words,doNotEdit admin stop_words.csv
+colors,doNotEdit admin colors.csv
+filter_terms,doNotEdit term_search filter.csv
 
 search_terms,user_provided search_terms search.csv
 filter_terms,user_provided search_terms filter.csv
