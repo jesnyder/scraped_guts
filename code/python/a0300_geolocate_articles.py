@@ -15,7 +15,7 @@ import urllib.parse
 
 from a0001_admin import clean_dataframe
 from a0001_admin import name_paths
-from a0001_admin import retreive_categories
+from a0001_admin import retrieve_categories
 from a0001_admin import retrieve_datetime
 from a0001_admin import retrieve_format
 from a0001_admin import retrieve_list
@@ -43,47 +43,7 @@ def geolocate_articles():
 
     print('completed geolocate_articles')
 
-"""
-def list_address():
 
-    #consolidate all addresses to reference later
-
-    df = pd.DataFrame()
-
-    #for name_article in retrieve_list('type_article'):
-    for name_article in ['patents', 'clinical_trials', 'nih_awards', 'nsf_awards']:
-
-        print('name_article = ' + name_article)
-
-        f = os.path.join(retrieve_path(name_article + '_aggregate_df'),  name_article + '_with_address' + '.csv' )
-        df_ref = pd.read_csv(f)
-        df_ref = clean_dataframe(df)
-
-        df_temp = pd.DataFrame()
-        df_temp['ref_complete_address'] = list(df_ref['ref_complete_address'])
-        df_temp[i, 'ref_address'] = list(df_ref['ref_address'])
-        df_temp[i, 'ref_lat'] = list(df_ref['lat'])
-        df_temp[i, 'ref_lon'] = list(df_ref['lon'])
-        df.append(df_temp)
-
-    df = df.clean_dataframe(df)
-    df.to_csv(retrieve_path(all_institutions))
-
-    unique_ref_address, counts = [], []
-    for i in range(len(list(df_ref['ref_address']))):
-        i = i-1
-        address = df_ref.loc[i,'ref_address']
-        if address not in unique_ref_address:
-            unique_ref_address.append(address)
-            count =  list(df_ref['ref_address']).count(address)
-            counts = counts.append(count)
-
-    df = pd.DataFrame()
-    df['ref_address'] = unique_ref_address
-    df['counts'] = counts
-    df = df.clean_dataframe(df)
-    df.to_csv(retrieve_path(count_institutions))
-"""
 
 # completed programs
 
