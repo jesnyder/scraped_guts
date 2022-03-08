@@ -68,13 +68,13 @@ def acquire_gscholar():
 
     """
     # specify the search
-    f = os.path.join(retrieve_path('term_search'))
+    f = os.path.join(retrieve_path('search_terms'))
     df_search_terms = pd.read_csv(f)
     search_terms = list(df_search_terms['term'])
     """
 
     name_article = 'gscholar'
-    for term in retrieve_list('term_search'):
+    for term in retrieve_list('search_terms'):
 
         # specify the range of number
         num_list = np.arange(10, 2000, 1, dtype=int)
