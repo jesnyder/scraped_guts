@@ -188,6 +188,7 @@ def retrieve_path(name):
     #print('began retrieve_path')
 
 
+    print('name = ' + name)
     for file_source in ['doNotEdit', 'user_provided', 'program_generated']:
 
         try:
