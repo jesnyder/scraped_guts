@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup
+search_termsfrom bs4 import BeautifulSoup
 import datetime
 import json
 import lxml
@@ -129,7 +129,7 @@ def count_all_words():
     article_names = list(df['name'])
 
     # list search terms
-    article_path = os.path.join(retrieve_path('term_search'))
+    article_path = os.path.join(retrieve_path('search_terms'))
     df = pd.read_csv(article_path)
     search_terms = list(df['term'])
 
