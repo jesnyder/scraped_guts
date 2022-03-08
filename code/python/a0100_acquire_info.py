@@ -65,28 +65,8 @@ def acquire_gscholar():
     """
 
     """
+    scrape_gscholar()
 
-    """
-    # specify the search
-    f = os.path.join(retrieve_path('search_terms'))
-    df_search_terms = pd.read_csv(f)
-    search_terms = list(df_search_terms['term'])
-    """
-
-    name_dataset = 'gscholar'
-    for term in retrieve_list('search_terms'):
-
-        # specify the range of number
-        num_list = np.arange(10, 2000, 1, dtype=int)
-        for num in num_list:
-
-            print('num = ' + str(num))
-            error_found = scrape_html(term,num)
-            if error_found == True: break
-
-            # collect article html and parse
-            error_found = article_html(term)
-            if error_found == True: break
 
 
 def acquire_patents():
