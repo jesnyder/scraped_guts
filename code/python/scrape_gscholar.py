@@ -93,7 +93,9 @@ def json_scraped():
             all_article_versions = result.select_one('a~ a+ .gs_nph')['href']
 
           except:
-            all_article_versions = None  data.append({
+            all_article_versions = None
+
+        data.append({
             'title': title,
             'title_link': title_link,
             'publication_info': publication_info,
@@ -101,7 +103,7 @@ def json_scraped():
             'cited_by': f'https://scholar.google.com{cited_by}',
             'related_articles': f'https://scholar.google.com{related_articles}',
             'all_article_versions': f'https://scholar.google.com{all_article_versions}',
-          })
+        })
 
           data_json = json.dumps(data, indent = 2, ensure_ascii = False)
           print(data_json)
