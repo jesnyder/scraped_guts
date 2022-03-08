@@ -3,7 +3,7 @@ name,path
 #, admin
 format,doNotEdit admin format.csv
 write_paths,program_generated admin paths.csv
-type_article,doNotEdit admin type_article.csv
+name_dataset,doNotEdit admin name_dataset.csv
 stop_words,doNotEdit admin stop_words.csv
 colors,doNotEdit admin colors.csv
 filter_terms,doNotEdit term_search filter.csv
