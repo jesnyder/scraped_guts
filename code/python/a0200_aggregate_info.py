@@ -20,10 +20,10 @@ from a0001_admin import retrieve_list
 from a0001_admin import retrieve_path
 from a0001_admin import write_paths
 from find_color import find_color
-from scrape_gscholar import scrape_json
-from scrape_gscholar import json_to_dataframe
-from scrape_gscholar import article_json
-from scrape_gscholar import article_df
+#from scrape_gscholar import scrape_json
+#from scrape_gscholar import json_to_dataframe
+#from scrape_gscholar import article_json
+#from scrape_gscholar import article_df
 
 
 def aggregate_info():
