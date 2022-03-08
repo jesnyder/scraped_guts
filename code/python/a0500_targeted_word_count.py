@@ -455,7 +455,7 @@ def annual_count_targeted():
     """
 
     # list search terms
-    search_terms = retrieve_list('term_search')
+    search_terms = retrieve_list('search_terms')
 
     # list compare terms
     compare_terms = os.path.join(retrieve_path('term_compare'))

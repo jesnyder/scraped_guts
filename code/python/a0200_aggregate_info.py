@@ -56,7 +56,7 @@ def annual_count():
 
         print('name_article = ' + name_article)
 
-        for term in retrieve_list('term_search'):
+        for term in retrieve_list(''):
 
             try:
                 print('article = ' + str(name_article))
@@ -149,18 +149,18 @@ def aggregate_gscholar(name_article):
 
     """
     # specify the search
-    f = os.path.join(retrieve_path('term_search'))
+    f = os.path.join(retrieve_path(''))
     df_search_terms = pd.read_csv(f)
-    search_terms = retrieve_list('term_search')
+    search_terms = retrieve_list('')
 
-    for term in retrieve_list('term_search'):
+    for term in retrieve_list(''):
 
         scrape_json(term)
         json_to_dataframe(term)
         article_json(term)
         article_df(term)
 
-    for term in retrieve_list('term_search'):
+    for term in retrieve_list(''):
 
         dst_path_name = name_article + '_query_df'
         dst_path = retrieve_path(dst_path_name)
@@ -230,7 +230,7 @@ def aggregate_patents(name_article):
     """
 
     """
-    f = os.path.join(retrieve_path('term_search'))
+    f = os.path.join(retrieve_path(''))
     df_search_terms = pd.read_csv(f)
     search_terms = list(df_search_terms['term'])
 

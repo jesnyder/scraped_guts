@@ -30,7 +30,7 @@ def query_patents(name_article, term, result_limits):
   #conn = pypatent.WebConnection(use_selenium=True, selenium_driver=driver)
 
 
-  for term in retrieve_list('term_search'):
+  for term in retrieve_list('search_terms'):
 
       for year in np.arange(1980, 1982, 1):
 
