@@ -76,7 +76,7 @@ def json_scraped():
 
             url = 'https://scholar.google.com/scholar?'
             url = url + 'start=' + str(int(num*10))
-            url = url + '&q=' + search_term
+            url = url + '&q=' + term
             url = url + '&hl=en&as_sdt=0,5'
             print('url = ')
             print(url)
@@ -130,6 +130,13 @@ def json_scraped():
             data_json = json.dumps(data, indent = 2, ensure_ascii = False)
             print(data_json)
 
+            f = os.path.join(retrieve_path('gscholar_json'), term + ' ' + str(num) + ' ' + str(retrieve_datetime())  + '.json' )
+            file = open(json_file, 'w')
+            f.write(data_json)
+            f.close()
+
+
+ 
 
 
 if __name__ == "__main__":
