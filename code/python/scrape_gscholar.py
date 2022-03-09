@@ -130,13 +130,13 @@ def json_scraped():
             data_json = json.dumps(data, indent = 2, ensure_ascii = False)
             print(data_json)
 
-            f = os.path.join(retrieve_path('gscholar_json'), term + ' ' + str(num) + ' ' + str(retrieve_datetime())  + '.json' )
-            file = open(json_file, 'w')
-            f.write(data_json)
-            f.close()
+            json_file = os.path.join(retrieve_path('gscholar_json'), term + ' ' + str(num) + ' ' + str(retrieve_datetime())  + '.json' )
+            json_file = open(json_file, 'w')
+            json_file.write(data_json)
+            json_file.close()
 
 
- 
+
 
 
 if __name__ == "__main__":
