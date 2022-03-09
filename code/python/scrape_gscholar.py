@@ -255,9 +255,16 @@ def check_scraped(term, year, num):
         if str(file_split[2]) != str(num): continue
 
         date = (file_split[3])
+        print('date = ' + str(date))
+
         a = date.split('-')
+        print('a = ' + str(a))
+
         a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
+
         b = datetime.datetime.today()
+        print('b = ' + str(b))
+        
         v = b-a
         v.days
         print('v = ' + str(v))
