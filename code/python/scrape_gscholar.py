@@ -260,7 +260,8 @@ def check_scraped(term, year, num):
         b = datetime.datetime.today()
         v = b-a
         v.days
-        if v > 2:
+        print('v = ' + str(v))
+        if int(v) > 2:
             return(True)
 
     else:
