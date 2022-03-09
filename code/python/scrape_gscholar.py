@@ -256,7 +256,7 @@ def check_scraped(term, year, num):
 
         date = (file_split[3])
         a = date.split('-')
-        a = datetime.datetime(a[0], a[1], a[2], 0, 0)
+        a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
         b = datetime.datetime.today()
         v = b-a
         v.days
