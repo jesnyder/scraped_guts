@@ -192,7 +192,7 @@ def retrieve_path(name):
 
 
     print('name = ' + name)
-    for file_source in ['doNotEdit', 'user_provided', 'program_generated']:
+    for file_source in ['core_code', 'user_provided', 'program_generated']:
 
         try:
             f = os.path.join(file_source, 'admin', 'paths' + '.csv')

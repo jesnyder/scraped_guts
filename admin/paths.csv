@@ -1,12 +1,12 @@
 name,path
 
 #, admin
-format,doNotEdit admin format.csv
+format,core_code admin format.csv
 write_paths,program_generated admin paths.csv
-name_dataset,doNotEdit admin name_dataset.csv
-stop_words,doNotEdit admin stop_words.csv
-colors,doNotEdit admin colors.csv
-filter_terms,doNotEdit term_search filter.csv
+name_dataset,core_code admin name_dataset.csv
+stop_words,core_code admin stop_words.csv
+colors,core_code admin colors.csv
+filter_terms,core_code term_search filter.csv
 
 search_terms,user_provided search_terms search.csv
 filter_terms,user_provided search_terms filter.csv
@@ -27,7 +27,7 @@ lookup_address,user_provided admin lookup_address.csv
 json_archival,user_provided gscholar json_archival
 article_url_scraped,user_provided gscholar article scraped_url.csv
 gscholar_json,program_generated gscholar query json
-gscholar_error,doNotEdit admin gscholar_error.csv
+gscholar_error,core_code admin gscholar_error.csv
 gscholar_missing,user_provided gscholar missing_pubs.csv
 
 #, map

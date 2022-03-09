@@ -76,26 +76,21 @@ def json_scraped():
         currentDateTime = datetime.datetime.now()
         date = currentDateTime.date()
 
-        for year in range(int(date.strftime("%Y")), 2012, -1):
+        #for year in range(int(date.strftime("%Y")), 2012, -1):
+        for year in range(2013, int(date.strftime("%Y")), 1):
 
-
-            num_list = np.arange(0, 10, 1, dtype=int)
+            num_list = np.arange(0, 20, 1, dtype=int)
             for num in num_list:
 
                 print('num = ' + str(num))
-                if num == 0:
-                    url = 'https://scholar.google.com/scholar?'
-                    url = url + 'as_ylo=' + str(year)
-                    url = url + '&q=' + term
-                    #url = url + 'start=' + str(int(num*10))
-                    url = url + '&hl=en&as_sdt=0,5'
 
-                else:
-                    url = 'https://scholar.google.com/scholar?'
-                    url = url + 'start=' + str(int(num*10))
-                    url = url + '&q=' + term
-                    url = url + '&hl=en&as_sdt=0,5'
-                    url = url + '&as_ylo=' + str(year)
+                url = 'https://scholar.google.com/scholar?'
+                url = url + 'start=' + str(int(num*10))
+                url = url + '&q=' + term
+                #url = url + '&hl=en&as_sdt=0,5'
+                url = url + '&hl=en&as_sdt=0,5'
+                url = url + '&as_ylo=' + str(year)
+                url = url + '&as_yhi=' + str(year)
 
                 print('url = ')
                 print(url)
@@ -423,8 +418,6 @@ def missing_json_scraped():
         json_file = open(json_file, 'w')
         json_file.write(data_json)
         json_file.close()
-
-
 
 
 if __name__ == "__main__":
