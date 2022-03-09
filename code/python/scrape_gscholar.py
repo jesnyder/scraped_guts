@@ -50,6 +50,30 @@ def scrape_gscholar():
     # add article metadata to df
 
 
+def check_scraped(term, year, num):
+    """
+
+    """
+    src_path = retrieve_path('gscholar_json')
+
+    for file in os.listdir(src_path):
+
+        file_split = file.split(' ')
+
+        if file_split[0] != term: continue
+
+        if str(file_split[1]) != str(year): continue
+
+        if str(file_split[2]) != str(num): continue
+
+        time_string = retrieve_datetime()
+        time_string_split = time_string.split(' ')
+        if str(file_split[3]) == str(time_string_split[0])
+            return(True)
+
+    else:
+        return(False)
+
 
 def error_check(soup):
     """
@@ -112,6 +136,9 @@ def json_scraped():
                 print('url = ')
                 print(url)
 
+                # check if recently scraped
+                if check_scraped(term, year, num) == True: continue
+
                 time_string = retrieve_datetime()
                 wait_time = random.random()*60 + 30
                 print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
@@ -151,7 +178,7 @@ def json_scraped():
                       txt_year = result.find("div", class_="gs_a").text
                       ref_year = re.findall('[0-9]{4}', txt_year)
                       ref_year = ref_year[0]
-                 else:
+                 except:
                     ref_year = 0
 
                   # get number of citations for each paper
