@@ -178,7 +178,7 @@ def json_scraped():
                       txt_year = result.find("div", class_="gs_a").text
                       ref_year = re.findall('[0-9]{4}', txt_year)
                       ref_year = ref_year[0]
-                 except:
+                  except:
                     ref_year = 0
 
                   # get number of citations for each paper
