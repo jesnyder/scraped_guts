@@ -61,7 +61,9 @@ def json_scraped():
         'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
         }
 
-
+    f = os.path.join(retrieve_path('search_terms'))
+    print('f = ' + str(f))
+    df_search_terms = pd.read_csv(f)
     for term in list(df_search_terms['term']):
 
         print('term = ' + term)
