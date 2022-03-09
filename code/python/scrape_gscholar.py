@@ -31,11 +31,12 @@ def scrape_gscholar():
     Check for redundency
     """
 
+    # scrape json of specific publications by their title
+    missing_json_scraped()
+
     # scrape json from gscholar
     json_scraped()
 
-    # scrape json of specific publications by their title
-    missing_json_scraped()
 
     # scrape html from gscholar and save
 
@@ -254,10 +255,12 @@ def check_scraped(term, year, num):
         if str(file_split[2]) != str(num): continue
 
         date = (file_split[3])
-        days_lapsed = (datetime.today() - date).days
-        #time_string = retrieve_datetime()
-        #time_string_split = time_string.split(' ')
-        if float(days_lapsed) > 2:
+        a = date.split('-')
+        a = datetime.datetime(a[0], a[1], a[2], 0, 0)
+        b = datetime.datetime.today()
+        v = b-a
+        v.days
+        if v > 2:
             return(True)
 
     else:
