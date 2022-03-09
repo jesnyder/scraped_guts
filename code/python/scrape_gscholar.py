@@ -32,6 +32,7 @@ def scrape_gscholar():
     """
 
     # scrape json from gscholar
+    json_scraped()
 
     # scrape html from gscholar and save
 
