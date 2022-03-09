@@ -249,6 +249,10 @@ def check_scraped(term, year, num):
 
         file_split = file.split(' ')
 
+        # check for specific searches
+        if file_split[0] == term and year == 0 and num == 0: return(True)
+
+        # check general queries
         if file_split[0] != term: continue
 
         if str(file_split[1]) != str(year): continue
@@ -256,27 +260,27 @@ def check_scraped(term, year, num):
         if str(file_split[2]) != str(num): continue
 
         date = (file_split[3])
-        print('date = ' + str(date))
+        #print('date = ' + str(date))
 
         a = date.split('-')
-        print('a = ' + str(a))
+        #print('a = ' + str(a))
 
         a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
-        print('a = ' + str(a))
+        #print('a = ' + str(a))
 
         b = datetime.datetime.today()
-        print('b = ' + str(b))
+        #print('b = ' + str(b))
 
         v = b-a
-        print('v = ' + str(v))
+        #print('v = ' + str(v))
 
         v = int(v.days)
-        print('v = ' + str(v))
-        if int(v) > 2:
+        #print('v = ' + str(v))
+        if v.days > 2:
+            print('too many days lapsed since last query.')
             return(True)
 
-    else:
-        return(False)
+    return(False)
 
 
 def error_check(soup):
