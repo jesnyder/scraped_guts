@@ -37,7 +37,6 @@ def scrape_gscholar():
     # scrape json from gscholar
     json_scraped()
 
-
     # scrape html from gscholar and save
 
     # parse json from scraped html
@@ -102,7 +101,9 @@ def json_scraped():
                 print(url)
 
                 # check if recently scraped
-                if check_scraped(term, year, num) == True: continue
+                if check_scraped(term, year, num) == True:
+                    print('json found.')
+                    continue
 
                 time_string = retrieve_datetime()
                 wait_time = random.random()*60 + 30
@@ -327,7 +328,9 @@ def missing_json_scraped():
         print(url)
 
         title_short = str(title[:15])
-        if check_scraped(title_short, 0, 0) == True: continue
+        if check_scraped(title_short, 0, 0) == True:
+            print('json found.')
+            continue
 
 
         time_string = retrieve_datetime()
