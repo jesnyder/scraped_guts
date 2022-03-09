@@ -30,11 +30,12 @@ def scrape_gscholar():
     Minimal scrapes
     Check for redundency
     """
-    # scrape json of specific publications by their title
-    missing_json_scraped()
 
     # scrape json from gscholar
     json_scraped()
+
+    # scrape json of specific publications by their title
+    missing_json_scraped()
 
     # scrape html from gscholar and save
 
@@ -291,7 +292,7 @@ def missing_json_scraped():
     except:
         titles = []
 
-    for title in list(df['title']):
+    for title in titles:
 
         print('title = ' + title)
 
