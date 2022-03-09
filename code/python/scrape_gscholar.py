@@ -77,8 +77,6 @@ def json_scraped():
             num_list = np.arange(0, 10, 1, dtype=int)
             for num in num_list:
 
-                https://scholar.google.com/scholar?start=10&q=RoosterBio&hl=en&as_sdt=0,5&as_ylo=2022
-
                 print('num = ' + str(num))
                 if num == 0:
                     url = 'https://scholar.google.com/scholar?'
