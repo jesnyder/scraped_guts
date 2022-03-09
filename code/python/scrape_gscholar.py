@@ -138,7 +138,7 @@ def json_scraped():
                     all_article_versions = None
 
                 data.append({
-                    'year': year
+                    'year': year,
                     'title': title,
                     'title_link': title_link,
                     'publication_info': publication_info,
@@ -158,7 +158,7 @@ def json_scraped():
                 json_file.close()
 
 
- 
+
 
 
 if __name__ == "__main__":
