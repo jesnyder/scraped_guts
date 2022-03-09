@@ -315,11 +315,11 @@ def missing_json_scraped():
         'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
         }
 
-    try:
-        df = pd.read_csv(os.path.join(retrieve_path('gscholar_missing')))
-        titles = list(df['title'])
-    except:
-        titles = []
+    #try:
+    df = pd.read_csv(os.path.join(retrieve_path('gscholar_missing')))
+    titles = list(df['title'])
+    #except:
+    #titles = []
 
     for title in titles:
 
