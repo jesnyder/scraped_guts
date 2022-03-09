@@ -279,8 +279,8 @@ def check_scraped(term, year, num):
         #print('v = ' + str(v))
 
         v = int(v.days)
-        #print('v = ' + str(v))
-        if v > 2:
+        print('v = ' + str(v))
+        if v < 3:
             print('date match: ' + str(v))
             print('too many days lapsed since last query.')
             return(True)
