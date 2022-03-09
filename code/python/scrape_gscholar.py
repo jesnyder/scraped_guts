@@ -268,8 +268,8 @@ def check_scraped(term, year, num):
 
         v = b-a
         print('v = ' + str(v))
-        
-        v.days
+
+        v = int(v.days)
         print('v = ' + str(v))
         if int(v) > 2:
             return(True)
