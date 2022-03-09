@@ -181,6 +181,9 @@ def json_scraped():
                     'all_article_versions': f'https://scholar.google.com{all_article_versions}',
                     })
 
+                #json_to_dataframe()
+                if data == []: break
+
                 data_json = json.dumps(data, indent = 2, ensure_ascii = False)
                 print(data_json)
 
@@ -188,9 +191,7 @@ def json_scraped():
                 json_file = open(json_file, 'w')
                 json_file.write(data_json)
                 json_file.close()
-
                 json_to_dataframe()
-                if data == []: break
 
 
 def json_to_dataframe():
@@ -255,7 +256,7 @@ def check_scraped(term, year, num):
         file_split = file.split(' ')
 
         # check for specific searches
-        if file_split[0] == term and year == 0 and num == 0: return(True)
+        if str(term) in str(file_split[0]) and year == 0 and num == 0: return(True)
         #print('num match: ' + str(num))
 
         # check general queries
@@ -412,6 +413,9 @@ def missing_json_scraped():
                 'all_article_versions': f'https://scholar.google.com{all_article_versions}',
                 })
 
+        #json_to_dataframe()
+        if data == []: break
+
         data_json = json.dumps(data, indent = 2, ensure_ascii = False)
         print(data_json)
 
@@ -420,8 +424,7 @@ def missing_json_scraped():
         json_file.write(data_json)
         json_file.close()
 
-        #json_to_dataframe()
-        if data == []: break
+
 
 
 if __name__ == "__main__":
