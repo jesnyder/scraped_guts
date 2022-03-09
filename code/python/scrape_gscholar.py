@@ -79,7 +79,7 @@ def json_scraped():
         for year in range(int(date.strftime("%Y")), 2012, -1):
 
 
-            num_list = np.arange(0, 10, 1, dtype=int)
+            num_list = np.arange(0, 3, 1, dtype=int)
             for num in num_list:
 
                 print('num = ' + str(num))
@@ -182,7 +182,7 @@ def json_scraped():
                 json_file.write(data_json)
                 json_file.close()
 
-                #json_to_dataframe()
+                json_to_dataframe()
                 if data == []: break
 
 
@@ -220,10 +220,8 @@ def json_to_dataframe():
             df = df.drop_duplicates(subset = 'title_link')
 
     # sort
-    df = df.sort_values('citations', ascending=False)
+    #df = df.sort_values('citations', ascending=False)
     df = df.drop_duplicates(subset = 'title_link')
-    df = df.reset_index()
-    del df['index']
     df = clean_dataframe(df)
     #print(df)
 
@@ -251,17 +249,17 @@ def check_scraped(term, year, num):
 
         # check for specific searches
         if file_split[0] == term and year == 0 and num == 0: return(True)
-        print('num match: ' + str(num))
+        #print('num match: ' + str(num))
 
         # check general queries
         if file_split[0] != term: continue
-        print('term match: ' + term)
+        #print('term match: ' + term)
 
         if str(file_split[1]) != str(year): continue
-        print('year match: ' + str(year))
+        #print('year match: ' + str(year))
 
         if str(file_split[2]) != str(num): continue
-        print('num match: ' + str(num))
+        #print('num match: ' + str(num))
 
         date = (file_split[3])
         #print('date = ' + str(date))
@@ -281,8 +279,8 @@ def check_scraped(term, year, num):
         v = int(v.days)
         print('v = ' + str(v))
         if v < 3:
-            print('date match: ' + str(v))
-            print('too many days lapsed since last query.')
+            #print('date match: ' + str(v))
+            #print('too many days lapsed since last query.')
             return(True)
 
     return(False)
@@ -315,11 +313,11 @@ def missing_json_scraped():
         'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
         }
 
-    #try:
-    df = pd.read_csv(os.path.join(retrieve_path('gscholar_missing')))
-    titles = list(df['title'])
-    #except:
-    #titles = []
+    try:
+        df = pd.read_csv(os.path.join(retrieve_path('gscholar_missing')))
+        titles = list(df['title'])
+    except:
+        titles = []
 
     for title in titles:
 
@@ -336,7 +334,7 @@ def missing_json_scraped():
         print('url = ')
         print(url)
 
-        title_short = str(title[:15])
+        title_short = str(title[:35])
         if check_scraped(title_short, 0, 0) == True:
             print('json found.')
             continue
