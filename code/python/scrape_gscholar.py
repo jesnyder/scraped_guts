@@ -68,7 +68,7 @@ def check_scraped(term, year, num):
 
         time_string = retrieve_datetime()
         time_string_split = time_string.split(' ')
-        if str(file_split[3]) == str(time_string_split[0])
+        if str(file_split[3]) == str(time_string_split[0]):
             return(True)
 
     else:
