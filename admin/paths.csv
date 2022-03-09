@@ -22,6 +22,8 @@ $, geolocate address
 address_not_found,program_generated admin map address_not_found.csv
 lookup_address,user_provided admin lookup_address.csv
 
+#, patent
+patent_df,program_generated patents query df src
 
 #, gscholar
 json_archival,user_provided gscholar json_archival
