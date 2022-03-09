@@ -57,57 +57,76 @@ def json_scraped():
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
         }
 
-    f = os.path.join(retrieve_path('search_terms'))
-    print('f = ' + str(f))
-    df_search_terms = pd.read_csv(f)
+    proxies = {
+        'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
+        }
+
 
     for term in list(df_search_terms['term']):
 
         print('term = ' + term)
 
-        params = {
-          "q": term,
-          "hl": "en",
-          }
+        num_list = np.arange(0, 3, 1, dtype=int)
 
-        html = requests.get('https://scholar.google.com/scholar', headers=headers, params=params).text
-        soup = BeautifulSoup(html, 'lxml')
+        for num in num_list:
 
-        # Scrape just PDF links
-        for pdf_link in soup.select('.gs_or_ggsm a'):
-          pdf_file_link = pdf_link['href']
-          print(pdf_file_link)
+            print('num = ' + str(num))
 
-         # JSON data will be collected here
-        data = []
+            url = 'https://scholar.google.com/scholar?'
+            url = url + 'start=' + str(int(num*10))
+            url = url + '&q=' + search_term
+            url = url + '&hl=en&as_sdt=0,5'
+            print('url = ')
+            print(url)
 
-        # Container where all needed data is located
-        for result in soup.select('.gs_ri'):
-          title = result.select_one('.gs_rt').text
-          title_link = result.select_one('.gs_rt a')['href']
-          publication_info = result.select_one('.gs_a').text
-          snippet = result.select_one('.gs_rs').text
-          cited_by = result.select_one('#gs_res_ccl_mid .gs_nph+ a')['href']
-          related_articles = result.select_one('a:nth-child(4)')['href']
+            time_string = retrieve_datetime()
+            print('Wait: ' + time_string)
+            time.sleep(30)
 
-          try:
-            all_article_versions = result.select_one('a~ a+ .gs_nph')['href']
+            html = requests.get(url, headers=headers, proxies=proxies).text
 
-          except:
-            all_article_versions = None
+            # Delay scraping to circumvent CAPCHA
+            time.sleep(30)
+            time_string = retrieve_datetime()
+            print('Wait: ' + time_string)
 
-        data.append({
-            'title': title,
-            'title_link': title_link,
-            'publication_info': publication_info,
-            'snippet': snippet,
-            'cited_by': f'https://scholar.google.com{cited_by}',
-            'related_articles': f'https://scholar.google.com{related_articles}',
-            'all_article_versions': f'https://scholar.google.com{all_article_versions}',
-        })
+            soup = BeautifulSoup(html, 'lxml')
 
-        data_json = json.dumps(data, indent = 2, ensure_ascii = False)
-        print(data_json)
+            # Scrape just PDF links
+            for pdf_link in soup.select('.gs_or_ggsm a'):
+              pdf_file_link = pdf_link['href']
+              print(pdf_file_link)
+
+             # JSON data will be collected here
+            data = []
+
+            # Container where all needed data is located
+            for result in soup.select('.gs_ri'):
+              title = result.select_one('.gs_rt').text
+              title_link = result.select_one('.gs_rt a')['href']
+              publication_info = result.select_one('.gs_a').text
+              snippet = result.select_one('.gs_rs').text
+              cited_by = result.select_one('#gs_res_ccl_mid .gs_nph+ a')['href']
+              related_articles = result.select_one('a:nth-child(4)')['href']
+
+              try:
+                all_article_versions = result.select_one('a~ a+ .gs_nph')['href']
+
+              except:
+                all_article_versions = None
+
+            data.append({
+                'title': title,
+                'title_link': title_link,
+                'publication_info': publication_info,
+                'snippet': snippet,
+                'cited_by': f'https://scholar.google.com{cited_by}',
+                'related_articles': f'https://scholar.google.com{related_articles}',
+                'all_article_versions': f'https://scholar.google.com{all_article_versions}',
+            })
+
+            data_json = json.dumps(data, indent = 2, ensure_ascii = False)
+            print(data_json)
 
 
 
