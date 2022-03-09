@@ -251,13 +251,17 @@ def check_scraped(term, year, num):
 
         # check for specific searches
         if file_split[0] == term and year == 0 and num == 0: return(True)
+        print('num match: ' + str(num))
 
         # check general queries
         if file_split[0] != term: continue
+        print('term match: ' + term)
 
         if str(file_split[1]) != str(year): continue
+        print('year match: ' + str(year))
 
         if str(file_split[2]) != str(num): continue
+        print('num match: ' + str(num))
 
         date = (file_split[3])
         #print('date = ' + str(date))
@@ -277,6 +281,7 @@ def check_scraped(term, year, num):
         v = int(v.days)
         #print('v = ' + str(v))
         if v > 2:
+            print('date match: ' + str(v))
             print('too many days lapsed since last query.')
             return(True)
 
