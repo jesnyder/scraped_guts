@@ -92,7 +92,10 @@ def check_scraped(term, num):
     """
 
     """
-    src_path = retrieve_path('patent_df')
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
+    #df_patent = os.path.join(retrieve_path(name_src), term + ' ' + str(result_limit) + ' ' + str(retrieve_datetime()) + '.csv')
+
+    src_path = retrieve_path(name_src)
 
     for file in os.listdir(src_path):
 
