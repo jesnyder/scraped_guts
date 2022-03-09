@@ -68,92 +68,97 @@ def json_scraped():
 
         print('term = ' + term)
 
-        num_list = np.arange(0, 4, 1, dtype=int)
+        currentDateTime = datetime.datetime.now()
+        date = currentDateTime.date()
 
-        for num in num_list:
-
-            print('num = ' + str(num))
-
-            url = 'https://scholar.google.com/scholar?'
-            url = url + 'start=' + str(int(num*10))
-            url = url + '&q=' + term
-            url = url + 'as_ylo=2022'
-            url = url + '&hl=en&as_sdt=0,5'
-            print('url = ')
-            print(url)
-
-            time_string = retrieve_datetime()
-            wait_time = random.random()*60 + 30
-            print('Wait: ' + str(round(wait_time,2)) + ' from ' time_string)
-            time.sleep(wait_time)
-
-            html = requests.get(url, headers=headers, proxies=proxies).text
-
-            # Delay scraping to circumvent CAPCHA
-            time.sleep(wait_time)
-            time_string = retrieve_datetime()
-            print('Wait: ' + time_string)
-
-            soup = BeautifulSoup(html, 'lxml')
-
-            # Scrape just PDF links
-            for pdf_link in soup.select('.gs_or_ggsm a'):
-              pdf_file_link = pdf_link['href']
-              print(pdf_file_link)
-
-             # JSON data will be collected here
-            data = []
-
-            # Container where all needed data is located
-            for result in soup.select('.gs_ri'):
-              title = result.select_one('.gs_rt').text
-              title_link = result.select_one('.gs_rt a')['href']
-              publication_info = result.select_one('.gs_a').text
-              snippet = result.select_one('.gs_rs').text
-              cited_by = result.select_one('#gs_res_ccl_mid .gs_nph+ a')['href']
-              related_articles = result.select_one('a:nth-child(4)')['href']
-
-              # get the year of publication of each paper
-              txt_year = result.find("div", class_="gs_a").text
-              year = re.findall('[0-9]{4}', txt_year)
-
-              # get number of citations for each paper
-              try:
-                  txt_cite = result.find("div", class_="gs_fl").find_all("a")[2].string
-                  citations = txt_cite.split(' ')
-                  citations = (citations[-1])
-                  citations = int(citations)
-              except:
-                  citations = 0
-
-              try:
-                all_article_versions = result.select_one('a~ a+ .gs_nph')['href']
-
-              except:
-                all_article_versions = None
-
-            data.append({
-                'year': year
-                'title': title,
-                'title_link': title_link,
-                'publication_info': publication_info,
-                'snippet': snippet,
-                'citations': citations,
-                'cited_by': f'https://scholar.google.com{cited_by}',
-                'related_articles': f'https://scholar.google.com{related_articles}',
-                'all_article_versions': f'https://scholar.google.com{all_article_versions}',
-            })
-
-            data_json = json.dumps(data, indent = 2, ensure_ascii = False)
-            print(data_json)
-
-            json_file = os.path.join(retrieve_path('gscholar_json'), term + ' ' + str(num) + ' ' + str(retrieve_datetime())  + '.json' )
-            json_file = open(json_file, 'w')
-            json_file.write(data_json)
-            json_file.close()
+        for year in range(int(date.strftime("%Y")), 2012, -1):
 
 
+            num_list = np.arange(0, 4, 1, dtype=int)
+            for num in num_list:
 
+                print('num = ' + str(num))
+
+                url = 'https://scholar.google.com/scholar?'
+                url = url + 'start=' + str(int(num*10))
+                url = url + '&q=' + term
+                url = url + 'as_ylo=' + str(year)
+                url = url + '&hl=en&as_sdt=0,5'
+                print('url = ')
+                print(url)
+
+                time_string = retrieve_datetime()
+                wait_time = random.random()*60 + 30
+                print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+                time.sleep(wait_time)
+
+                html = requests.get(url, headers=headers, proxies=proxies).text
+
+                # Delay scraping to circumvent CAPCHA
+                time.sleep(wait_time)
+                time_string = retrieve_datetime()
+                print('Wait: ' + time_string)
+
+                soup = BeautifulSoup(html, 'lxml')
+
+                # Scrape just PDF links
+                for pdf_link in soup.select('.gs_or_ggsm a'):
+                  pdf_file_link = pdf_link['href']
+                  print(pdf_file_link)
+
+                 # JSON data will be collected here
+                data = []
+
+                # Container where all needed data is located
+                for result in soup.select('.gs_ri'):
+                  title = result.select_one('.gs_rt').text
+                  title_link = result.select_one('.gs_rt a')['href']
+                  publication_info = result.select_one('.gs_a').text
+                  snippet = result.select_one('.gs_rs').text
+                  cited_by = result.select_one('#gs_res_ccl_mid .gs_nph+ a')['href']
+                  related_articles = result.select_one('a:nth-child(4)')['href']
+
+                  # get the year of publication of each paper
+                  txt_year = result.find("div", class_="gs_a").text
+                  year = re.findall('[0-9]{4}', txt_year)
+
+                  # get number of citations for each paper
+                  try:
+                      txt_cite = result.find("div", class_="gs_fl").find_all("a")[2].string
+                      citations = txt_cite.split(' ')
+                      citations = (citations[-1])
+                      citations = int(citations)
+                  except:
+                      citations = 0
+
+                  try:
+                    all_article_versions = result.select_one('a~ a+ .gs_nph')['href']
+
+                  except:
+                    all_article_versions = None
+
+                data.append({
+                    'year': year
+                    'title': title,
+                    'title_link': title_link,
+                    'publication_info': publication_info,
+                    'snippet': snippet,
+                    'citations': citations,
+                    'cited_by': f'https://scholar.google.com{cited_by}',
+                    'related_articles': f'https://scholar.google.com{related_articles}',
+                    'all_article_versions': f'https://scholar.google.com{all_article_versions}',
+                })
+
+                data_json = json.dumps(data, indent = 2, ensure_ascii = False)
+                print(data_json)
+
+                json_file = os.path.join(retrieve_path('gscholar_json'), term + ' ' + str(year) + ' ' + str(num) + ' ' + str(retrieve_datetime())  + '.json' )
+                json_file = open(json_file, 'w')
+                json_file.write(data_json)
+                json_file.close()
+
+
+ 
 
 
 if __name__ == "__main__":
