@@ -82,13 +82,14 @@ def json_scraped():
             print(url)
 
             time_string = retrieve_datetime()
-            print('Wait: ' + time_string)
-            time.sleep(30)
+            wait_time = random.random()*60 + 30
+            print('Wait: ' + str(round(wait_time,2)) + ' from ' time_string)
+            time.sleep(wait_time)
 
             html = requests.get(url, headers=headers, proxies=proxies).text
 
             # Delay scraping to circumvent CAPCHA
-            time.sleep(30)
+            time.sleep(wait_time)
             time_string = retrieve_datetime()
             print('Wait: ' + time_string)
 
