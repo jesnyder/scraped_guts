@@ -48,6 +48,20 @@ def scrape_gscholar():
     # add article metadata to df
 
 
+
+def error_check(soup):
+    """
+    check if automated search is detected
+    """
+    df = pd.read_csv(os.path.join(retrieve_path('gscholar_error')))
+    for error in list(df['errors']):
+
+        if str(error) in str(soup):
+            return(True)
+
+    return(False)
+
+
 def json_scraped():
     """
 
@@ -110,6 +124,9 @@ def json_scraped():
 
                 soup = BeautifulSoup(html, 'lxml')
 
+                # check for errors
+                if error_check(soup) == True: break
+
                 # Scrape just PDF links
                 for pdf_link in soup.select('.gs_or_ggsm a'):
                   pdf_file_link = pdf_link['href']
@@ -170,6 +187,7 @@ def json_scraped():
                 json_to_dataframe()
                 if data == []: break
 
+
 def json_to_dataframe():
     """
 
@@ -196,7 +214,11 @@ def json_to_dataframe():
             #print('src_file = ' + str(src_file))
             df_file = pd.read_json(src_file)
             df = pd.DataFrame.append(df, df_file)
-            df = df.sort_values('citations', ascending=False)
+            try:
+                df = df.sort_values('citations', ascending=False)
+            except:
+                df = df
+
             df = df.drop_duplicates(subset = 'title_link')
 
     # sort
@@ -204,13 +226,14 @@ def json_to_dataframe():
     df = df.drop_duplicates(subset = 'title_link')
     df = df.reset_index()
     del df['index']
+    df = clean_dataframe(df)
     #print(df)
 
     name_dataset = 'gscholar'
     dst_path_name = name_dataset + '_query_df'
     dst_path = retrieve_path(dst_path_name)
     df_file = os.path.join(dst_path, term + '.csv')
-    df = clean_dataframe(df)
+
     df.to_csv(df_file)
     print('df = ')
     print(df)

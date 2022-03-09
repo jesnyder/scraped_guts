@@ -24,6 +24,9 @@ def clean_dataframe(df):
         if 'Unnamed:' in str(name):
             del df[name]
 
+        if 'index' in str(name):
+            del df[name]
+
     col_names_sort = ['patent_num', 'AwardNumber', 'citations']
     for name in col_names_sort:
         try:
