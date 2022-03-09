@@ -80,9 +80,9 @@ def json_scraped():
                 print('num = ' + str(num))
 
                 url = 'https://scholar.google.com/scholar?'
-                url = url + 'start=' + str(int(num*10))
-                url = url + '&q=' + term
                 url = url + 'as_ylo=' + str(year)
+                url = url + '&q=' + term
+                #url = url + 'start=' + str(int(num*10))
                 url = url + '&hl=en&as_sdt=0,5'
                 print('url = ')
                 print(url)
