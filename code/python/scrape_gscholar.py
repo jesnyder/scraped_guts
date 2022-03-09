@@ -242,6 +242,7 @@ def check_scraped(term, year, num):
     """
 
     """
+    #name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
     src_path = retrieve_path('gscholar_json')
 
     for file in os.listdir(src_path):
