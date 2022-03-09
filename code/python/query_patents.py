@@ -34,6 +34,7 @@ def query_patents(name_dataset, term, result_limits):
 
       for result_limit in list(retrieve_format('patent_result_limits')):
 
+              print('term = ' + term)
               print('result_limit = ' + str(result_limit))
               result_limit = int(result_limit)
 
@@ -54,7 +55,7 @@ def query_patents(name_dataset, term, result_limits):
                   continue
 
               df = pd.DataFrame()
-              df = pypatent.Search(term , get_patent_details=True , web_connection=conn).as_dataframe()
+              df = pypatent.Search(term, results_limit=result_limit, get_patent_details=True , web_connection=conn).as_dataframe()
               # df = pypatent.Search((query_term), web_connection=conn).as_dataframe()
               # *** [Makefile:6: pythonanalysis] Error 1 df = pypatent.Search(query_term).as_dataframe()
               # df = pypatent.Search(query_term, web_connection=conn).as_dataframe()
