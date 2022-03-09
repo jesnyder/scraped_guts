@@ -184,7 +184,7 @@ def json_scraped():
                 json_file.write(data_json)
                 json_file.close()
 
-                json_to_dataframe()
+                #json_to_dataframe()
                 if data == []: break
 
 
