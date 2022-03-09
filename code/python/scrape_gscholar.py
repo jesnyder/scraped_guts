@@ -74,16 +74,26 @@ def json_scraped():
         for year in range(int(date.strftime("%Y")), 2012, -1):
 
 
-            num_list = np.arange(0, 4, 1, dtype=int)
+            num_list = np.arange(0, 10, 1, dtype=int)
             for num in num_list:
 
-                print('num = ' + str(num))
+                https://scholar.google.com/scholar?start=10&q=RoosterBio&hl=en&as_sdt=0,5&as_ylo=2022
 
-                url = 'https://scholar.google.com/scholar?'
-                url = url + 'as_ylo=' + str(year)
-                url = url + '&q=' + term
-                #url = url + 'start=' + str(int(num*10))
-                url = url + '&hl=en&as_sdt=0,5'
+                print('num = ' + str(num))
+                if num == 0:
+                    url = 'https://scholar.google.com/scholar?'
+                    url = url + 'as_ylo=' + str(year)
+                    url = url + '&q=' + term
+                    #url = url + 'start=' + str(int(num*10))
+                    url = url + '&hl=en&as_sdt=0,5'
+
+                else:
+                    url = 'https://scholar.google.com/scholar?'
+                    url = url + 'start=' + str(int(num*10))
+                    url = url + '&q=' + term
+                    url = url + '&hl=en&as_sdt=0,5'
+                    url = url + '&as_ylo=' + str(year)
+
                 print('url = ')
                 print(url)
 
@@ -156,6 +166,9 @@ def json_scraped():
                 json_file = open(json_file, 'w')
                 json_file.write(data_json)
                 json_file.close()
+
+                if data == []:
+                    break
 
 
 
