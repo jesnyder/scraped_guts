@@ -50,44 +50,7 @@ def scrape_gscholar():
 
     # add article metadata to df
 
-
-def check_scraped(term, year, num):
-    """
-
-    """
-    src_path = retrieve_path('gscholar_json')
-
-    for file in os.listdir(src_path):
-
-        file_split = file.split(' ')
-
-        if file_split[0] != term: continue
-
-        if str(file_split[1]) != str(year): continue
-
-        if str(file_split[2]) != str(num): continue
-
-        time_string = retrieve_datetime()
-        time_string_split = time_string.split(' ')
-        if str(file_split[3]) == str(time_string_split[0]):
-            return(True)
-
-    else:
-        return(False)
-
-
-def error_check(soup):
-    """
-    check if automated search is detected
-    """
-    df = pd.read_csv(os.path.join(retrieve_path('gscholar_error')))
-    for error in list(df['errors']):
-
-        if str(error) in str(soup):
-            return(True)
-
-    return(False)
-
+# main programs
 
 def json_scraped():
     """
@@ -272,6 +235,48 @@ def json_to_dataframe():
     print(df)
 
 
+# support programs
+
+def check_scraped(term, year, num):
+    """
+
+    """
+    src_path = retrieve_path('gscholar_json')
+
+    for file in os.listdir(src_path):
+
+        file_split = file.split(' ')
+
+        if file_split[0] != term: continue
+
+        if str(file_split[1]) != str(year): continue
+
+        if str(file_split[2]) != str(num): continue
+
+        date = (file_split[3])
+        days_lapsed = (datetime.today() - date).days
+        #time_string = retrieve_datetime()
+        #time_string_split = time_string.split(' ')
+        if float(days_lapsed) > 2:
+            return(True)
+
+    else:
+        return(False)
+
+
+def error_check(soup):
+    """
+    check if automated search is detected
+    """
+    df = pd.read_csv(os.path.join(retrieve_path('gscholar_error')))
+    for error in list(df['errors']):
+
+        if str(error) in str(soup):
+            return(True)
+
+    return(False)
+
+
 def missing_json_scraped():
     """
 
@@ -306,6 +311,10 @@ def missing_json_scraped():
 
         print('url = ')
         print(url)
+
+        title_short = str(title[:15])
+        if check_scraped(title_short, 0, 0) == True: continue
+
 
         time_string = retrieve_datetime()
         wait_time = random.random()*60 + 30
@@ -375,7 +384,7 @@ def missing_json_scraped():
         data_json = json.dumps(data, indent = 2, ensure_ascii = False)
         print(data_json)
 
-        json_file = os.path.join(retrieve_path('gscholar_json'), str(title[:15]) + '.json' )
+        json_file = os.path.join(retrieve_path('gscholar_json'), title_short + '.json' )
         json_file = open(json_file, 'w')
         json_file.write(data_json)
         json_file.close()
