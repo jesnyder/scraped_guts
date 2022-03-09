@@ -79,7 +79,7 @@ def json_scraped():
         for year in range(int(date.strftime("%Y")), 2012, -1):
 
 
-            num_list = np.arange(0, 3, 1, dtype=int)
+            num_list = np.arange(0, 10, 1, dtype=int)
             for num in num_list:
 
                 print('num = ' + str(num))
@@ -104,6 +104,8 @@ def json_scraped():
                 if check_scraped(term, year, num) == True:
                     print('json found.')
                     continue
+
+                if year == 2022 and num > 3: continue
 
                 time_string = retrieve_datetime()
                 wait_time = random.random()*60 + 30
@@ -133,7 +135,12 @@ def json_scraped():
                 # Container where all needed data is located
                 for result in soup.select('.gs_ri'):
                   title = result.select_one('.gs_rt').text
-                  title_link = result.select_one('.gs_rt a')['href']
+
+                  try:
+                      title_link = result.select_one('.gs_rt a')['href']
+                  except:
+                      title_link = ''
+
                   publication_info = result.select_one('.gs_a').text
                   snippet = result.select_one('.gs_rs').text
                   cited_by = result.select_one('#gs_res_ccl_mid .gs_nph+ a')['href']
