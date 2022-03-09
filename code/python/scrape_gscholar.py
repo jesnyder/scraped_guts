@@ -253,11 +253,11 @@ def check_scraped(term, year, num):
 
     for file in os.listdir(src_path):
 
-        file_split = file.split(' ')
+        file_split = file.split('.')
+        if file_split[0] == term and str(year) == str(0): return(True)
 
-        # check for specific searches
-        if str(term) in str(file_split[0]) and year == 0 and num == 0: return(True)
-        #print('num match: ' + str(num))
+
+        file_split = file.split(' ')
 
         # check general queries
         if file_split[0] != term: continue
