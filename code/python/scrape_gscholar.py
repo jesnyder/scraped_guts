@@ -68,7 +68,7 @@ def json_scraped():
 
         print('term = ' + term)
 
-        num_list = np.arange(0, 3, 1, dtype=int)
+        num_list = np.arange(0, 4, 1, dtype=int)
 
         for num in num_list:
 
@@ -77,6 +77,7 @@ def json_scraped():
             url = 'https://scholar.google.com/scholar?'
             url = url + 'start=' + str(int(num*10))
             url = url + '&q=' + term
+            url = url + 'as_ylo=2022'
             url = url + '&hl=en&as_sdt=0,5'
             print('url = ')
             print(url)
@@ -112,6 +113,19 @@ def json_scraped():
               cited_by = result.select_one('#gs_res_ccl_mid .gs_nph+ a')['href']
               related_articles = result.select_one('a:nth-child(4)')['href']
 
+              # get the year of publication of each paper
+              txt_year = result.find("div", class_="gs_a").text
+              year = re.findall('[0-9]{4}', txt_year)
+
+              # get number of citations for each paper
+              try:
+                  txt_cite = result.find("div", class_="gs_fl").find_all("a")[2].string
+                  citations = txt_cite.split(' ')
+                  citations = (citations[-1])
+                  citations = int(citations)
+              except:
+                  citations = 0
+
               try:
                 all_article_versions = result.select_one('a~ a+ .gs_nph')['href']
 
@@ -119,10 +133,12 @@ def json_scraped():
                 all_article_versions = None
 
             data.append({
+                'year': year
                 'title': title,
                 'title_link': title_link,
                 'publication_info': publication_info,
                 'snippet': snippet,
+                'citations': citations,
                 'cited_by': f'https://scholar.google.com{cited_by}',
                 'related_articles': f'https://scholar.google.com{related_articles}',
                 'all_article_versions': f'https://scholar.google.com{all_article_versions}',
