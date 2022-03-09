@@ -39,6 +39,7 @@ def scrape_gscholar():
     # parse json from scraped html
 
     # convert json to df
+    json_to_dataframe()
 
     # scrape metadata for each article as html
 
@@ -128,7 +129,8 @@ def json_scraped():
 
                   # get the year of publication of each paper
                   txt_year = result.find("div", class_="gs_a").text
-                  year = re.findall('[0-9]{4}', txt_year)
+                  ref_year = re.findall('[0-9]{4}', txt_year)
+                  ref_year = ref_year[0]
 
                   # get number of citations for each paper
                   try:
@@ -145,8 +147,8 @@ def json_scraped():
                   except:
                     all_article_versions = None
 
-                data.append({
-                    'year': year,
+                  data.append({
+                    'year': ref_year,
                     'title': title,
                     'title_link': title_link,
                     'publication_info': publication_info,
@@ -155,7 +157,7 @@ def json_scraped():
                     'cited_by': f'https://scholar.google.com{cited_by}',
                     'related_articles': f'https://scholar.google.com{related_articles}',
                     'all_article_versions': f'https://scholar.google.com{all_article_versions}',
-                })
+                    })
 
                 data_json = json.dumps(data, indent = 2, ensure_ascii = False)
                 print(data_json)
@@ -165,11 +167,53 @@ def json_scraped():
                 json_file.write(data_json)
                 json_file.close()
 
-                if data == []:
-                    break
+                json_to_dataframe()
+                if data == []: break
 
+def json_to_dataframe():
+    """
 
+    """
+    df = pd.DataFrame()
 
+    # retrieve archival json
+    src_path = retrieve_path('gscholar_json')
+
+    for file in os.listdir(src_path):
+
+        src_file = os.path.join(src_path, file)
+
+        if not file.endswith('.json'): continue
+
+        f = os.path.join(retrieve_path('search_terms'))
+        print('f = ' + str(f))
+        df_search_terms = pd.read_csv(f)
+
+        for term in list(df_search_terms['term']):
+
+            if term not in str(file): continue
+
+            #print('src_file = ' + str(src_file))
+            df_file = pd.read_json(src_file)
+            df = pd.DataFrame.append(df, df_file)
+            df = df.sort_values('citations', ascending=False)
+            df = df.drop_duplicates(subset = 'title_link')
+
+    # sort
+    df = df.sort_values('citations', ascending=False)
+    df = df.drop_duplicates(subset = 'title_link')
+    df = df.reset_index()
+    del df['index']
+    #print(df)
+
+    name_dataset = 'gscholar'
+    dst_path_name = name_dataset + '_query_df'
+    dst_path = retrieve_path(dst_path_name)
+    df_file = os.path.join(dst_path, term + '.csv')
+    df = clean_dataframe(df)
+    df.to_csv(df_file)
+    print('df = ')
+    print(df)
 
 
 if __name__ == "__main__":
