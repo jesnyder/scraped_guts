@@ -21,12 +21,14 @@ patent_user_provided,user_provided patents scraped
 $, geolocate address
 address_not_found,program_generated admin map address_not_found.csv
 lookup_address,user_provided admin lookup_address.csv
-gscholar_error,doNotEdit admin gscholar_error.csv
+
 
 #, gscholar
 json_archival,user_provided gscholar json_archival
 article_url_scraped,user_provided gscholar article scraped_url.csv
 gscholar_json,program_generated gscholar query json
+gscholar_error,doNotEdit admin gscholar_error.csv
+gscholar_missing,user_provided gscholar missing_pubs.csv
 
 #, map
 all_institutions,program_generated map all_institutions.csv
