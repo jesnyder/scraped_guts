@@ -35,11 +35,8 @@ def clean_dataframe(df):
         except:
             hello = 'hello'
 
-    try:
-        df = df.reset_index()
-        del df['index']
-    except:
-        hello = 'hello'
+    df = df.reset_index()
+    del df['index']
 
     return(df)
 
