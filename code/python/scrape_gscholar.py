@@ -257,10 +257,10 @@ def check_scraped(name_dataset, term, year, num):
 
         print('term = ' + term)
         print('file = ' + file)
-        print('os.listdir(src_path) = ')
-        print(os.listdir(src_path))
-        print('src_path = ')
-        print(src_path)
+        #print('os.listdir(src_path) = ')
+        #print(os.listdir(src_path))
+        #print('src_path = ')
+        #print(src_path)
 
         # check specific gscholar search
         file_split = file.split('.')
