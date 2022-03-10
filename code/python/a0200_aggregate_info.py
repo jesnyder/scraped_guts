@@ -266,7 +266,7 @@ def aggregate_downloaded(name_dataset):
         df = pd.DataFrame()
 
 
-    f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
+    f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
     df.to_csv(f)
 
     work_completed('aggregate_info' + '_' + name_dataset, 1)
