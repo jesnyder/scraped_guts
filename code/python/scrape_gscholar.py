@@ -279,7 +279,7 @@ def check_scraped(name_dataset, term, year, num):
         file_term = re.findall(pattern, file, flags)
         file_term = file_term[0]
         if file_term != term: continue
-        print('file_term = ' + file_term + ' term = ' + term)
+        #print('file_term = ' + file_term + ' term = ' + term)
 
 
         # find and compare file year to year passed into the function
