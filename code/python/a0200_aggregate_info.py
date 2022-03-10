@@ -188,14 +188,15 @@ def aggregate_patents(name_dataset):
     for term in retrieve_list('search_terms'):
 
         name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
-        
+        download_src = os.path.join(retrieve_path(name_src))
+
         df = pd.DataFrame()
 
         for file in os.listdir(download_src):
 
             if term not in file: continue
 
-            df_src = os.path.join(retrieve_path(name_src), file)
+            df_src = os.path.join(download_src, file)
             df_src = pd.read_csv(df_src)
             df_src = clean_dataframe(df_src)
 
