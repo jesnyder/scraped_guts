@@ -370,7 +370,7 @@ def work_completed(task_name, complete):
 
     file = retrieve_path('work_plan')
 
-    print('task number = ' + str(task_number) + ' task name = ' + task_name)
+    print('task name = ' + task_name)
 
     df_new = pd.DataFrame()
     df_new['active'] = [task_number*complete]
