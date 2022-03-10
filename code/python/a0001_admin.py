@@ -396,7 +396,7 @@ def work_completed(task_name, task_number, complete):
     df.drop_duplicates()
     df = df.sort_values('complete', ascending=False)
     df.drop_duplicates(subset='task')
-    df = df.sort_values('task', ascending=False)
+    df = df.sort_values(['task'], ascending=False)
     df = clean_dataframe(df)
     df.to_csv(file)
 
