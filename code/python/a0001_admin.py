@@ -394,7 +394,7 @@ def work_completed(task_name, task_number, complete):
     df = df.sort_values('number', ascending=False)
     #df.drop_duplicates(subset='complete', keep='first')
     df = clean_dataframe(df)
-    df.to_csv(pd.read_csv(os.path.join(retrieve_path('work_plan'))))
+    df.to_csv(os.path.join(retrieve_path('work_plan')))
 
 
 def work_plan():
