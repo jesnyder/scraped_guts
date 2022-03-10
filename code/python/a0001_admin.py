@@ -381,25 +381,12 @@ def work_completed(task_name, task_number, complete):
     try:
         df = pd.read_csv(file)
         df = clean_dataframe(df_ref)
-
-        if task_name in list(df['name']):
-
-            print('df.name==task_name = ')
-            print(df.name==task_name)
-
-            number = df.loc[df.name==task_name, 'number']
-            df['number'] = [number[0]]
-            df_new['active'] = [task_number*complete]
-
-        else:
-            number = max(list(df['number'])) + 1
-            df_new['number'] = [number]
-            df_new['active'] = [task_number*complete]
-
         df = df.append(df_new)
 
     except:
-        df_new['number'] = [0]
+        task_number = 0
+        df_new['number'] = [task_number]
+        df_new['active'] = [task_number*complete]
         df = df_new
 
     print('df = ')
