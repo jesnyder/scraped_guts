@@ -33,7 +33,7 @@ def aggregate_info():
 
     """
     tasks = work_to_do()
-    work_completed('aggregate_info' + '_' + name_dataset, 0)
+    work_completed('aggregate_info', 0)
     if  18 in tasks: aggregate_downloaded('nsf_awards')
     if  19 in tasks: aggregate_downloaded('nih_awards')
     if  20 in tasks: aggregate_downloaded('clinical_trials')
@@ -41,7 +41,7 @@ def aggregate_info():
     if  22 in tasks: aggregate_gscholar('gscholar')
     if  23 in tasks: print('aggregate wikipedia')
     if  24 in tasks: annual_count()
-    work_completed('aggregate_info' + '_' + name_dataset, 1)
+    work_completed('aggregate_info', 1)
 
 
 def annual_count():
