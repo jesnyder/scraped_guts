@@ -259,7 +259,8 @@ def check_scraped(name_dataset, term, year, num):
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     src_path = retrieve_path(name_src)
 
-    src_path = os.path.join(src_path, 'json')
+    if name_dataset == 'gscholar': src_path = os.path.join(src_path, 'json')
+
     for file in os.listdir(src_path):
 
         #print('term = ' + term)
