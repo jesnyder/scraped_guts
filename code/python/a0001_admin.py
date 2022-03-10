@@ -408,6 +408,7 @@ def work_completed(name, complete):
     df = df.sort_values('number', ascending=True)
     df = clean_dataframe(df)
     df.to_csv(file)
+    
     print('df = ')
     print(df)
 
