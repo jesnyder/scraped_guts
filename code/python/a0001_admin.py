@@ -383,12 +383,18 @@ def work_completed(task_name, task_number, complete):
         df = clean_dataframe(df_ref)
 
         if task_name not in list(df['name']):
+
+            print('df.name==task_name = ')
+            print(df.name==task_name)
+
             number = df.loc[df.name==task_name, 'number']
             df['number'] = [number[0]]
+            df_new['active'] = [task_number*complete]
 
         else:
             number = max(list(df['number'])) + 1
             df_new['number'] = [number]
+            df_new['active'] = [task_number*complete]
 
         df = df.append(df_new)
 
