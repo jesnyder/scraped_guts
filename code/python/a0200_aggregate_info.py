@@ -289,27 +289,32 @@ def aggregate_downloaded(name_dataset):
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     print('name_src = ' + str(name_src))
 
+    try:
+        f = os.path.join(retrieve_path(name_src),  name_dataset + '.csv' )
+        print('f = ' + str(f))
+        df = pd.read_csv(f)
+        print('df = ')
+        print(df)
+        df = clean_dataframe(df)
 
-    f = os.path.join(retrieve_path(name_src),  name_dataset + '.csv' )
-    print('f = ' + str(f))
-    df = pd.read_csv(f)
-    print('df = ')
-    print(df)
-    df = clean_dataframe(df)
+        print('df.columns')
+        print(df.columns)
 
-    print('df.columns')
-    print(df.columns)
+        if 'nsf' not in name_dataset and 'clinical_trials' not in name_dataset:
+            df = filter_articles(df, name_dataset)
 
-    if 'nsf' not in name_dataset and 'clinical_trials' not in name_dataset:
-        df = filter_articles(df, name_dataset)
+        df = add_ref_year(df, name_dataset)
+        df = add_ref_value(df, name_dataset)
+        list_unique_values(name_dataset, df)
+        plot_unique_values(name_dataset)
+        cross_plot_unique(name_dataset, df)
 
-    df = add_ref_year(df, name_dataset)
-    df = add_ref_value(df, name_dataset)
-    list_unique_values(name_dataset, df)
-    plot_unique_values(name_dataset)
-    cross_plot_unique(name_dataset, df)
+        df = clean_dataframe(df)
 
-    df = clean_dataframe(df)
+    except:
+        df = pd.DataFrame()
+
+
     f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
     df.to_csv(f)
 
