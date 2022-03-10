@@ -178,7 +178,7 @@ def json_scraped():
                 print(data_json)
 
                 name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
-                json_file = os.path.join(retrieve_path(name_src), term + ' ' + str(year) + ' ' + str(num) + ' ' + str(retrieve_datetime())  + '.json' )
+                json_file = os.path.join(retrieve_path(name_src), 'json', term + ' ' + str(year) + ' ' + str(num) + ' ' + str(retrieve_datetime())  + '.json' )
                 json_file = open(json_file, 'w')
                 json_file.write(data_json)
                 json_file.close()
@@ -195,6 +195,7 @@ def json_to_dataframe():
     # retrieve archival json
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
     src_path = retrieve_path(name_src)
+    src_path = os.path.join(src_path, 'json')
 
     for file in os.listdir(src_path):
 
@@ -226,11 +227,9 @@ def json_to_dataframe():
     df = clean_dataframe(df)
     #print(df)
 
-    name_dataset = 'gscholar'
-    dst_path_name = name_dataset + '_query_df'
-    dst_path = retrieve_path(dst_path_name)
-    df_file = os.path.join(dst_path, term + '.csv')
-
+    src_path = retrieve_path(name_src)
+    src_path = os.path.join(src_path, 'df')
+    df_file = os.path.join(src_path, term + '.csv')
     df.to_csv(df_file)
     print('df = ')
     print(df)
@@ -416,7 +415,7 @@ def missing_json_scraped():
         print(data_json)
 
         name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
-        json_file = os.path.join(retrieve_path(name_src), title_short + '.json' )
+        json_file = os.path.join(retrieve_path(name_src), 'json', title_short + '.json' )
         json_file = open(json_file, 'w')
         json_file.write(data_json)
         json_file.close()
