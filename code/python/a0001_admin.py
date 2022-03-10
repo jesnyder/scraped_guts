@@ -378,6 +378,7 @@ def work_completed(task_name, task_number, complete):
     df['number'] = [task_number]
     df['complete'] = [complete]
     df['active'] = [task_number*complete]
+    df['date'] = [str(retrieve_datetime())]
 
     try:
         df_ref = clean_dataframe(pd.read_csv(os.path.join(retrieve_path('work_plan'))))
@@ -391,7 +392,7 @@ def work_completed(task_name, task_number, complete):
 
     df.drop_duplicates()
     df = df.sort_values('number', ascending=False)
-    df.drop_duplicates(subset=complete, keep='first')
+    #df.drop_duplicates(subset='complete', keep='first')
     df = clean_dataframe(df)
     df.to_csv(pd.read_csv(os.path.join(retrieve_path('work_plan'))))
 
