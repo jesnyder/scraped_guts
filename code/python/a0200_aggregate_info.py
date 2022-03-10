@@ -141,72 +141,42 @@ def aggregate_gscholar(name_dataset):
     """
     work_completed('aggregate_gscholar', 0)
 
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+    src_path = retrieve_path(name_src)
+    src_path = os.path.join(src_path, 'df')
+
     for term in retrieve_list('search_terms'):
 
-        dst_path_name = name_dataset + '_query_df'
-        dst_path = retrieve_path(dst_path_name)
-        df_file = os.path.join(dst_path, term + '.csv')
-        df_query = pd.read_csv(df_file)
-        df_query = clean_dataframe(df_query)
-        print(df_query.columns)
+        df = pd.DataFrame()
 
-        dst_path_name = name_dataset + '_article_df'
-        dst_path = retrieve_path(dst_path_name)
-        df_file = os.path.join(dst_path, term + '.csv')
-        df_article = pd.read_csv(df_file)
-        df_article = clean_dataframe(df_article)
-        print(df_article.columns)
+        for file in os.listdir(src_path):
 
-        for name in df_article.columns:
+            if term not in file: continue
 
-            print('name = ' + str(name))
-            len_col = len(list(df_query.iloc[:,0]))
-            print('len_col = ' + str(len_col))
-            df_query[name] = [None] * len_col
+            df_file = os.path.join(src_path, file)
+            df_query = pd.read_csv(df_file)
+            df_query = clean_dataframe(df_query)
 
-        print('df_query = ')
-        print(df_query)
-
-        for i in range(len(df_article['url'])):
-            article_url = str(df_article.loc[i,'url'])
-
-            for j in range(len(df_query['title_link'])):
-                query_url = str(df_query.loc[j,'title_link'])
-
-                if article_url == query_url:
-
-                    print('article_url = ' + str(article_url))
-                    print('query_url = ' + str(query_url))
-
-                    for name in df_article.columns:
-
-                        print('name = ' + name)
-                        print('df_query.loc[j,name] = ' + str(df_query.loc[j,name]))
-                        print('df_article.loc[i,name] = ' + str(df_article.loc[i,name]))
-
-                        df_query.loc[j,name] = df_article.loc[i,name]
+            df = df.append(df_query)
+            df = clean_dataframe(df)
+            f = os.path.join(name_dst,  term + '.csv' )
+            df_query.to_csv(f)
 
 
-        df_query = clean_dataframe(df_query)
-        f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
-        df_query.to_csv(f)
+    df_query = clean_dataframe(df)
+    f = os.path.join(name_dst,  name_dataset + '.csv' )
+    df_query.to_csv(f)
 
-        df = df_query
-        print('df.columns')
-        print(df.columns)
-        print('df = ')
-        print(df)
+    df = add_ref_year(df, name_dataset)
+    list_unique_values(name_dataset, df)
+    plot_unique_values(name_dataset)
+    cross_plot_unique(name_dataset, df)
 
-        df = add_ref_year(df, name_dataset)
-        list_unique_values(name_dataset, df)
-        plot_unique_values(name_dataset)
-        cross_plot_unique(name_dataset, df)
+    df = clean_dataframe(df)
+    f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
+    df.to_csv(f)
 
-        df = clean_dataframe(df)
-        f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
-        df.to_csv(f)
-
-        work_completed('aggregate_gscholar', 1)
+    work_completed('aggregate_gscholar', 1)
 
 
 def aggregate_patents(name_dataset):
