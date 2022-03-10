@@ -101,18 +101,21 @@ def json_scraped():
                 if year == 2022 and num > 3: continue
 
                 time_string = retrieve_datetime()
-                wait_time = random.random()*60 + 30
+                wait_time = random.random()*60 + 60
                 print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
                 time.sleep(wait_time)
 
                 html = requests.get(url, headers=headers, proxies=proxies).text
 
+                soup = BeautifulSoup(html, 'lxml')
+                print(soup)
+
                 # Delay scraping to circumvent CAPCHA
-                time.sleep(wait_time)
+                time.sleep(wait_time/10)
                 time_string = retrieve_datetime()
                 print('Wait: ' + time_string)
 
-                soup = BeautifulSoup(html, 'lxml')
+
 
                 # check for errors
                 if error_check(soup) == True: return('error')
