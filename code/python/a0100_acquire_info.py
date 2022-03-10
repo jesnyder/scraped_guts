@@ -21,6 +21,9 @@ from a0001_admin import retrieve_format
 from a0001_admin import retrieve_list
 from a0001_admin import retrieve_path
 from a0001_admin import write_paths
+from a0001_admin import work_completed
+from a0001_admin import work_to_do
+
 from query_patents import query_patents
 from scrape_gscholar import scrape_gscholar
 #from scrape_gscholar import scrape_html
@@ -36,10 +39,11 @@ def acquire_info():
     """
 
     """
-    print('began acquire_info')
 
-    # List task numbers to complete
-    tasks = [0]
+
+    work_completed('begin_acquire_info', 1, 0)
+    tasks = work_to_do()
+
     write_paths()
     if  0 in tasks: tasks = np.arange(1, 101, 1)
     if  1 in tasks: acquire_nsf_awards()
@@ -49,7 +53,7 @@ def acquire_info():
     if  5 in tasks: acquire_patents()
     if  6 in tasks: acquire_wikipedia()
 
-    print('completed acquire_info')
+    work_completed('begin_acquire_info', 1, 1)
 
 
 
@@ -101,16 +105,20 @@ def acquire_clinical_trials():
     """
     aggregate and save in program generated
     """
+    work_completed('begin_acquire_clinical_trials', 3, 0)
     name_dataset = 'clinical_trials'
     format_src(name_dataset)
+    work_completed('begin_acquire_clinical_trials', 3, 1)
 
 
 def acquire_nsf_awards():
     """
     aggregate and save in program generated
     """
+    work_completed('begin_acquire_nsf_awards', 2, 0)
     name_dataset = 'nsf_awards'
     format_src(name_dataset)
+    work_completed('begin_acquire_nsf_awards', 2, 1)
 
 
 def format_src(name_dataset):
