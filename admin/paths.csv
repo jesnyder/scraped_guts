@@ -25,7 +25,6 @@ lookup_address,user_provided admin lookup_address.csv
 #, gscholar
 json_archival,user_provided gscholar json_archival
 article_url_scraped,user_provided gscholar article scraped_url.csv
-gscholar_json,program_generated gscholar query json
 gscholar_error,core_code admin gscholar_error.csv
 gscholar_missing,user_provided gscholar missing_pubs.csv
 

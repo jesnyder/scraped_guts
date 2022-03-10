@@ -107,11 +107,12 @@ def json_scraped():
 
                 html = requests.get(url, headers=headers, proxies=proxies).text
 
-                #soup = BeautifulSoup(html, 'lxml')
+                soup = BeautifulSoup(html, 'lxml')
                 #print(soup)
 
                 # check for errors
-                if error_check(soup) == True: return('error')
+                if error_check(soup) == True:
+                    return('error')
 
                 # Scrape just PDF links
                 for pdf_link in soup.select('.gs_or_ggsm a'):
@@ -176,7 +177,8 @@ def json_scraped():
                 data_json = json.dumps(data, indent = 2, ensure_ascii = False)
                 print(data_json)
 
-                json_file = os.path.join(retrieve_path('gscholar_json'), term + ' ' + str(year) + ' ' + str(num) + ' ' + str(retrieve_datetime())  + '.json' )
+                name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+                json_file = os.path.join(retrieve_path(name_src), term + ' ' + str(year) + ' ' + str(num) + ' ' + str(retrieve_datetime())  + '.json' )
                 json_file = open(json_file, 'w')
                 json_file.write(data_json)
                 json_file.close()
@@ -191,7 +193,8 @@ def json_to_dataframe():
     df = pd.DataFrame()
 
     # retrieve archival json
-    src_path = retrieve_path('gscholar_json')
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+    src_path = retrieve_path(name_src)
 
     for file in os.listdir(src_path):
 
@@ -239,8 +242,8 @@ def check_scraped(term, year, num):
     """
 
     """
-    #name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
-    src_path = retrieve_path('gscholar_json')
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+    src_path = retrieve_path(name_src)
 
     for file in os.listdir(src_path):
 
@@ -412,7 +415,8 @@ def missing_json_scraped():
         data_json = json.dumps(data, indent = 2, ensure_ascii = False)
         print(data_json)
 
-        json_file = os.path.join(retrieve_path('gscholar_json'), title_short + '.json' )
+        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+        json_file = os.path.join(retrieve_path(name_src), title_short + '.json' )
         json_file = open(json_file, 'w')
         json_file.write(data_json)
         json_file.close()
