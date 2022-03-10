@@ -371,6 +371,8 @@ def work_completed(task_name, task_number, complete):
 
     """
 
+    file = retrieve_path('work_plan')
+
     print('task number = ' + str(task_number) + ' task name = ' + task_name)
 
     df = pd.DataFrame()
@@ -381,7 +383,7 @@ def work_completed(task_name, task_number, complete):
     df['date'] = [str(retrieve_datetime())]
 
     try:
-        df_ref = clean_dataframe(pd.read_csv(os.path.join(retrieve_path('work_plan'))))
+        df_ref = clean_dataframe(file)
         df_ref = df_ref.append(df)
         df = df_ref
     except:
@@ -394,7 +396,7 @@ def work_completed(task_name, task_number, complete):
     df = df.sort_values('number', ascending=False)
     #df.drop_duplicates(subset='complete', keep='first')
     df = clean_dataframe(df)
-    df.to_csv(os.path.join(retrieve_path('work_plan')))
+    df.to_csv(file)
 
 
 def work_plan():
