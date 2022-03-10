@@ -15,6 +15,7 @@ from a0001_admin import retrieve_path
 from a0001_admin import retrieve_datetime
 from a0001_admin import retrieve_list
 from a0001_admin import name_paths
+from scrape_gscholar import check_scraped
 
 def query_patents(name_dataset, term, result_limits):
   """
@@ -51,7 +52,7 @@ def query_patents(name_dataset, term, result_limits):
               # did not work query_term  = str('aclm=' + term)
               print('query_term = ' + str(query_term))
 
-              if check_scraped(term, result_limit) == True:
+              if check_scraped('patents', term, 0, result_limit) == True:
                   print('json found.')
                   continue
 
@@ -85,50 +86,3 @@ def query_patents(name_dataset, term, result_limits):
               df = pd.DataFrame()
 
   print('completed query_patents')
-
-
-
-
-def check_scraped(term, num):
-    """
-
-    """
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('patents')
-    #df_patent = os.path.join(retrieve_path(name_src), term + ' ' + str(result_limit) + ' ' + str(retrieve_datetime()) + '.csv')
-
-    src_path = retrieve_path(name_src)
-
-    for file in os.listdir(src_path):
-
-        file_split = file.split(' ')
-
-        # check general queries
-        if file_split[0] != term: continue
-        #print('term match: ' + term)
-
-        if str(file_split[1]) != str(num): continue
-        #print('num match: ' + str(num))
-
-        date = (file_split[2])
-        #print('date = ' + str(date))
-
-        a = date.split('-')
-        #print('a = ' + str(a))
-
-        a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
-        #print('a = ' + str(a))
-
-        b = datetime.datetime.today()
-        #print('b = ' + str(b))
-
-        v = b-a
-        #print('v = ' + str(v))
-
-        v = int(v.days)
-        print('v = ' + str(v))
-        if v < 3:
-            #print('date match: ' + str(v))
-            #print('too many days lapsed since last query.')
-            return(True)
-
-    return(False)

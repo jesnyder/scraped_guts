@@ -94,7 +94,7 @@ def json_scraped():
                 print(url)
 
                 # check if recently scraped
-                if check_scraped(term, year, num) == True:
+                if check_scraped('gscholar', term, year, num) == True:
                     print('json found.')
                     continue
 
@@ -237,19 +237,53 @@ def json_to_dataframe():
 
 # support programs
 
-def check_scraped(term, year, num):
+def check_scraped(name_dataset, term, year, num):
     """
 
     """
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     src_path = retrieve_path(name_src)
 
     for file in os.listdir(src_path):
 
+        # check specific gscholar search
         file_split = file.split('.')
         if file_split[0] == term and str(year) == str(0): return(True)
 
+        # find and compare file term to term passed into the function
+        pattern = '[a-z]+'
+        flags = re.IGNORECASE
+        file_term = re.findall(pattern, file, flags)
+        file_term = file_term[0]
+        if file_term != term: continue
 
+        # find and compare file year to year passed into the function
+        pattern = '[0-9]{4}'
+        file_year = re.findall(pattern, file)
+        file_year = file_year[0]
+        if file_year != year: continue
+
+        # find and compare file saved date to current date
+        pattern = '[0-9]{4}' + '-' + '[0-9]{2}' + '-' +  '[0-9]{2}'
+        file_date_saved = re.findall(pattern, file)
+        file_date_saved = file_date_saved[0]
+
+        a = file_date_saved.split('-')
+        a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
+        #print('a = ' + str(a))
+        b = datetime.datetime.today()
+        #print('b = ' + str(b))
+        v = b-a
+        #print('v = ' + str(v))
+        v = int(v.days)
+        #print('v = ' + str(v))
+        if v < 3:
+            #print('date match: ' + str(v))
+            #print('too many days lapsed since last query.')
+            return(True)
+
+        """
+        # check search term gscholar search
         file_split = file.split(' ')
 
         # check general queries
@@ -283,6 +317,7 @@ def check_scraped(term, year, num):
             #print('date match: ' + str(v))
             #print('too many days lapsed since last query.')
             return(True)
+        """
 
     return(False)
 
@@ -338,7 +373,7 @@ def missing_json_scraped():
         print(url)
 
         title_short = str(title[:35])
-        if check_scraped(title_short, 0, 0) == True:
+        if check_scraped('gscholar', title_short, 0, 0) == True:
             print('json found.')
             continue
 
