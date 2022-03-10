@@ -381,6 +381,15 @@ def work_completed(task_name, task_number, complete):
     try:
         df = pd.read_csv(file)
         df = clean_dataframe(df)
+
+        if task_name in list(df['name']):
+            number = df.loc[df.name==task_name, 'number']
+            df_new['number'] = [number]
+
+        else:
+            number = max(list(df['number'])) + 1
+            df_new['number'] = [int(number)]
+
         df = df.append(df_new)
 
     except:
@@ -389,14 +398,15 @@ def work_completed(task_name, task_number, complete):
         df_new['active'] = [task_number*complete]
         df = df_new
 
-    print('df = ')
-    print(df)
-
     df.drop_duplicates()
     df = df.sort_values('complete', ascending=False)
     df = df.drop_duplicates(subset=['name'])
     df = df.sort_values('number', ascending=True)
     df = clean_dataframe(df)
+
+    print('df = ')
+    print(df)
+    
     df.to_csv(file)
 
 
