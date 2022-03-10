@@ -363,7 +363,7 @@ def write_paths():
     df.to_csv(f)
 
 
-def work_completed(task_name, task_number, complete):
+def work_completed(task_name, complete):
     """
 
     """

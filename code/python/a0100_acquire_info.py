@@ -41,7 +41,7 @@ def acquire_info():
     """
 
 
-    work_completed('begin_acquire_info', 1, 0)
+    work_completed('begin_acquire_info', 0)
     tasks = work_to_do()
 
     write_paths()
@@ -53,7 +53,7 @@ def acquire_info():
     if  5 in tasks: acquire_patents()
     if  6 in tasks: acquire_wikipedia()
 
-    work_completed('begin_acquire_info', 1, 1)
+    work_completed('begin_acquire_info', 1)
 
 
 
@@ -70,9 +70,9 @@ def acquire_gscholar():
     """
 
     """
-    work_completed('begin_acquire_gscholar', 5, 0)
+    work_completed('begin_acquire_gscholar', 0)
     scrape_gscholar()
-    work_completed('begin_acquire_gscholar', 5, 1)
+    work_completed('begin_acquire_gscholar', 1)
 
 
 
@@ -83,7 +83,7 @@ def acquire_patents():
     save to program_generated
     """
 
-    work_completed('begin_acquire_patents', 9, 0)
+    work_completed('begin_acquire_patents', 0)
 
     f = os.path.join(retrieve_path('search_terms'))
     print('f = ' + str(f))
@@ -96,37 +96,37 @@ def acquire_patents():
         result_limits = retrieve_format('patent_result_limits')
         query_patents(name_dataset, term, result_limits)
 
-    work_completed('begin_acquire_patents', 9, 1)
+    work_completed('begin_acquire_patents', 1)
 
 
 def acquire_nih_awards():
     """
     aggregate and save in program generated
     """
-    work_completed('begin_acquire_nih_awards', 4, 0)
+    work_completed('begin_acquire_nih_awards', 0)
     name_dataset = 'nih_awards'
     format_src(name_dataset)
-    work_completed('begin_acquire_nih_awards', 4, 1)
+    work_completed('begin_acquire_nih_awards', 1)
 
 
 def acquire_clinical_trials():
     """
     aggregate and save in program generated
     """
-    work_completed('begin_acquire_clinical_trials', 3, 0)
+    work_completed('begin_acquire_clinical_trials', 0)
     name_dataset = 'clinical_trials'
     format_src(name_dataset)
-    work_completed('begin_acquire_clinical_trials', 3, 1)
+    work_completed('begin_acquire_clinical_trials', 1)
 
 
 def acquire_nsf_awards():
     """
     aggregate and save in program generated
     """
-    work_completed('begin_acquire_nsf_awards', 2, 0)
+    work_completed('begin_acquire_nsf_awards', 0)
     name_dataset = 'nsf_awards'
     format_src(name_dataset)
-    work_completed('begin_acquire_nsf_awards', 2, 1)
+    work_completed('begin_acquire_nsf_awards', 1)
 
 
 def format_src(name_dataset):

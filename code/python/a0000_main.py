@@ -16,7 +16,7 @@ def main():
     """
 
     # List task numbers to complete
-    work_completed('begin_main', 0, 0)
+    work_completed('begin_main', 0)
     tasks = work_to_do()
 
     #if  0 in tasks: tasks = np.arange(1, 101, 1)
