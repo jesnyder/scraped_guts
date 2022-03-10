@@ -58,13 +58,14 @@ def annual_count():
 
             try:
                 print('article = ' + str(name_dataset))
-                f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '_with_address' + '.csv' )
+                name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+                f = os.path.join(retrieve_path(name_dst),  name_dataset + '_with_address' + '.csv' )
                 print('f = ' + str(f))
                 df = clean_dataframe(pd.read_csv(f))
 
             except:
                 print('article = ' + str(name_dataset))
-                f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
+                f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
                 print('f = ' + str(f))
                 df = clean_dataframe(pd.read_csv(f))
 
