@@ -61,7 +61,7 @@ def introduction_html():
     f.write('</style>' + '\n' )
 
     media_num = 0
-    for name_dataset in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('name_dataset'):
 
         # list compare term files
         compare_terms = os.path.join(retrieve_path('term_compare'))

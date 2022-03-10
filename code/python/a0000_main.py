@@ -20,7 +20,7 @@ def main():
     tasks = work_to_do()
 
     #if  0 in tasks: tasks = np.arange(1, 101, 1)
-    if  1 in tasks: acquire_info()
+    if  2 in tasks: acquire_info()
     if  99 in tasks: aggregate_info()
     if  99 in tasks: geolocate_articles()
     if  99 in tasks: untargeted_word_count()
