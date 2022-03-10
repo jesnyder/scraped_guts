@@ -115,7 +115,7 @@ def json_scraped():
                 soup = BeautifulSoup(html, 'lxml')
 
                 # check for errors
-                if error_check(soup) == True: break
+                if error_check(soup) == True: return('error')
 
                 # Scrape just PDF links
                 for pdf_link in soup.select('.gs_or_ggsm a'):
@@ -185,6 +185,8 @@ def json_scraped():
                 json_file.write(data_json)
                 json_file.close()
                 json_to_dataframe()
+
+    return('completed json scrape')
 
 
 def json_to_dataframe():
@@ -292,10 +294,11 @@ def error_check(soup):
     """
     check if automated search is detected
     """
-    df = pd.read_csv(os.path.join(retrieve_path('gscholar_error')))
-    for error in list(df['errors']):
 
-        if str(error) in str(soup):
+    #df = pd.read_csv(os.path.join(retrieve_list('gscholar_error')))
+    for error in retrieve_list('gscholar_error'):
+
+        if str(error).lower in str(soup).lower:
             return(True)
 
     return(False)
