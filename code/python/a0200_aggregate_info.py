@@ -53,6 +53,7 @@ def annual_count():
     for name_dataset in retrieve_list('name_dataset'):
 
         work_completed('aggregate_annual_count' + '_' + name_dataset, 0)
+
         name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
         print('name_dataset = ' + name_dataset)
 
@@ -99,7 +100,7 @@ def annual_count():
             annual_plot(name_dataset, df_annual, term)
 
         work_completed('aggregate_annual_count' + '_' + name_dataset, 1)
- 
+
     work_completed('aggregate_annual_count', 1)
 
 

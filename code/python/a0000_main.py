@@ -1,5 +1,6 @@
 import numpy as np
 
+from a0001_admin import write_paths
 from a0001_admin import work_completed
 from a0001_admin import work_to_do
 from a0100_acquire_info import acquire_info

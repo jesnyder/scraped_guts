@@ -239,6 +239,7 @@ def write_paths():
 
     name, path = [], []
     df_article = pd.read_csv(retrieve_path('name_dataset'))
+
     for name_dataset in list(df_article['name']):
 
         name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
@@ -266,7 +267,6 @@ def write_paths():
         name_list.append(str(name_dataset + '_map_bar_png'))
         name_list.append(str(name_dataset + '_map__bar_gif'))
         name_list.append(str(name_dataset + '_js_data'))
-
 
 
         for item in name_list:
@@ -408,7 +408,7 @@ def work_completed(name, complete):
     df = df.sort_values('number', ascending=True)
     df = clean_dataframe(df)
     df.to_csv(file)
-    
+
     print('df = ')
     print(df)
 
