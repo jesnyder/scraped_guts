@@ -185,6 +185,9 @@ def aggregate_patents(name_dataset):
     """
     work_completed('aggregate_patents', 0)
 
+
+    df_all = pd.DataFrame()
+
     for term in retrieve_list('search_terms'):
 
         name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
