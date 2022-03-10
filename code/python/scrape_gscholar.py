@@ -186,7 +186,6 @@ def json_scraped():
                 json_file.close()
                 json_to_dataframe()
 
-    return('completed json scrape')
 
 
 def json_to_dataframe():
@@ -298,7 +297,7 @@ def error_check(soup):
     #df = pd.read_csv(os.path.join(retrieve_list('gscholar_error')))
     for error in retrieve_list('gscholar_error'):
 
-        if str(error).lower in str(soup).lower:
+        if str(error) in str(soup):
             return(True)
 
     return(False)
