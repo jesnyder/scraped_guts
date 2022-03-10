@@ -82,8 +82,12 @@ def json_scraped():
         currentDateTime = datetime.datetime.now()
         date = currentDateTime.date()
 
-        #for year in range(int(date.strftime("%Y")), 2012, -1):
-        for year in range(2013, int(date.strftime("%Y")), 1):
+        #for year in range(2013, int(date.strftime("%Y")), 1):
+        for year in range(int(date.strftime("%Y")), 2013, -1):
+
+            if year != int(date.strftime("%Y")):
+                work_completed('begin_acquire_gscholar_json_scraped_' + str(year), 8, 0)
+
 
             num_list = np.arange(0, 20, 1, dtype=int)
             for num in num_list:
@@ -179,8 +183,12 @@ def json_scraped():
                     'all_article_versions': f'https://scholar.google.com{all_article_versions}',
                     })
 
+
                 #json_to_dataframe()
                 if data == []: break
+
+                if len(data) < 10 and year != int(date.strftime("%Y")):
+                    work_completed('begin_acquire_gscholar_json_scraped_' + str(year), 8, 1)
 
                 data_json = json.dumps(data, indent = 2, ensure_ascii = False)
                 print(data_json)

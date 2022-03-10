@@ -375,17 +375,25 @@ def work_completed(task_name, task_number, complete):
     df = pd.DataFrame()
     df['active'] = [task_number*complete]
     df['name'] = [task_name]
-    df['number'] = [task_number]
     df['complete'] = [complete]
     df['date'] = [str(retrieve_datetime())]
 
     try:
         df_ref = pd.read_csv(file)
         df_ref = clean_dataframe(df_ref)
+
+        if task_name not in list(df['name']):
+            number = df.loc[df.name==task_name, 'number']
+            df['number'] = [number[0]]
+
+        else:
+            number = max(list(df['number'])) + 1
+            df['number'] = [number]
+
         df_ref = df_ref.append(df)
         df = df_ref
     except:
-        df = df
+        df['number'] = [0]
 
     print('df = ')
     print(df)
