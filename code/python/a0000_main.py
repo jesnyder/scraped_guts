@@ -28,7 +28,8 @@ def main():
     if  6 in tasks: map_maker()
     if 99 in tasks: build_webpage()
 
-    print('completed main')
+
+    work_completed('begin_main', 0, 1)
 
 
 if __name__ == "__main__":
