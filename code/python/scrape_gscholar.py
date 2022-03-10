@@ -111,11 +111,9 @@ def json_scraped():
                 print(soup)
 
                 # Delay scraping to circumvent CAPCHA
-                time.sleep(wait_time/10)
+                time.sleep(wait_time)
                 time_string = retrieve_datetime()
                 print('Wait: ' + time_string)
-
-
 
                 # check for errors
                 if error_check(soup) == True: return('error')
