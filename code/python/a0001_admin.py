@@ -363,57 +363,53 @@ def write_paths():
     df.to_csv(f)
 
 
-def work_completed(task_name, complete):
+def work_completed(name, complete):
     """
 
     """
+    print('task name = ' + name)
 
+    # try to recover existing work plan
     file = retrieve_path('work_plan')
-
-    print('task name = ' + task_name)
-
-    df_new = pd.DataFrame()
-    df_new['name'] = [task_name]
-    df_new['complete'] = [complete]
-    df_new['date'] = [str(retrieve_datetime())]
-
     try:
         df = pd.read_csv(file)
         df = clean_dataframe(df)
-
-        if task_name in list(df['name']):
-            number = df.loc[df.name==task_name, 'number']
-            number = number[0]
-            number = int(number)
-
-        else:
-            number = max(list(df['number'])) + 1
-            number = int(number)
-
-            
-        df_new['number'] = [number]
-        df_new['active'] = [task_number*complete]
-        df = df.append(df_new)
-
     except:
-        task_number = 0
-        df_new['number'] = [task_number]
-        df_new['active'] = [task_number*complete]
-        df = df_new
+        df = pd.DataFrame()
 
-    print('df = ')
-    print(df)
 
-    #df.drop_duplicates()
+    # find the task number
+    if df.empty is True:
+        print('no existing work plan.')
+
+    elif name not in list(df['name']):
+        number = max(list(df['number'])) + 1
+        number = int(number)
+
+    elif name in list(df['name']):
+        df_temp =  df[(df['name'] == name)]
+        number = list(df_temp['number'])
+        number = number[0]
+        number = int(number)
+
+    # create dataframe for this task
+    df_new = pd.DataFrame()
+    df_new['active'] = [number*complete]
+    df_new['name'] = [name]
+    df_new['number'] = [number]
+    df_new['complete'] = [complete]
+    df_new['date'] = [str(retrieve_datetime())]
+
+
+    # combine, clean, and safe the df
+    df = df.append(df_new)
     df = df.sort_values('complete', ascending=False)
     df = df.drop_duplicates(subset=['name'])
     df = df.sort_values('number', ascending=True)
     df = clean_dataframe(df)
-
+    df.to_csv(file)
     print('df = ')
     print(df)
-
-    df.to_csv(file)
 
 
 def work_to_do():
