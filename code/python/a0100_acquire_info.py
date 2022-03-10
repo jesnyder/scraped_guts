@@ -45,13 +45,13 @@ def acquire_info():
     tasks = work_to_do()
 
     write_paths()
-    if  0 in tasks: tasks = np.arange(1, 101, 1)
-    if  1 in tasks: acquire_nsf_awards()
-    if  2 in tasks: acquire_nih_awards()
-    if  3 in tasks: acquire_clinical_trials()
-    if  4 in tasks: acquire_gscholar()
-    if  5 in tasks: acquire_patents()
-    if  6 in tasks: acquire_wikipedia()
+    #if  0 in tasks: tasks = np.arange(1, 101, 1)
+    if  3 in tasks: acquire_nsf_awards()
+    if  4 in tasks: acquire_nih_awards()
+    if  5 in tasks: acquire_clinical_trials()
+    if  6 in tasks: acquire_gscholar()
+    if  17 in tasks: acquire_patents()
+    if  18 in tasks: acquire_wikipedia()
 
     work_completed('begin_acquire_info', 1)
 
