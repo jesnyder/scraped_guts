@@ -285,7 +285,7 @@ def check_scraped(name_dataset, term, year, num):
         pattern = '[0-9]{4}'
         file_year = re.findall(pattern, file)
         file_year = file_year[0]
-        print('file_year = ' + file_year + ' year = ' + year)
+        print('file_year = ' + file_year + ' year = ' + str(year))
         if file_year != year: continue
 
         # find and compare file saved date to current date
