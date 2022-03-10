@@ -373,7 +373,6 @@ def work_completed(task_name, complete):
     print('task name = ' + task_name)
 
     df_new = pd.DataFrame()
-    df_new['active'] = [task_number*complete]
     df_new['name'] = [task_name]
     df_new['complete'] = [complete]
     df_new['date'] = [str(retrieve_datetime())]
@@ -385,12 +384,15 @@ def work_completed(task_name, complete):
         if task_name in list(df['name']):
             number = df.loc[df.name==task_name, 'number']
             number = number[0]
-            df_new['number'] = [number]
+            number = int(number)
 
         else:
             number = max(list(df['number'])) + 1
-            df_new['number'] = [int(number)]
+            number = int(number)
 
+            
+        df_new['number'] = [number]
+        df_new['active'] = [task_number*complete]
         df = df.append(df_new)
 
     except:
