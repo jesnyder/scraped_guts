@@ -33,13 +33,13 @@ def aggregate_info():
 
     """
     tasks = work_to_do()
-    if  1 in tasks: aggregate_downloaded('nsf_awards')
-    if  2 in tasks: aggregate_downloaded('nih_awards')
-    if  3 in tasks: aggregate_downloaded('clinical_trials')
-    if  4 in tasks: aggregate_patents('patents')
-    if  5 in tasks: aggregate_gscholar('gscholar')
-    if  6 in tasks: print('aggregate wikipedia')
-    if  7 in tasks: annual_count()
+    if  18 in tasks: aggregate_downloaded('nsf_awards')
+    if  19 in tasks: aggregate_downloaded('nih_awards')
+    if  20 in tasks: aggregate_downloaded('clinical_trials')
+    if  21 in tasks: aggregate_patents('patents')
+    if  22 in tasks: aggregate_gscholar('gscholar')
+    if  23 in tasks: print('aggregate wikipedia')
+    if  24 in tasks: annual_count()
     work_completed('aggregate_info', 1)
 
 
