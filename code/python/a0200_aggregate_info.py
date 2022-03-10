@@ -71,6 +71,8 @@ def annual_count():
                 df = pd.read_csv(f)
                 df = clean_dataframe(df)
 
+            if df.empty == True: continue
+
             df_annual = pd.DataFrame()
             years = np.arange(min(list(df['ref_year'])), max(list(df['ref_year'])), 1)
             df_annual['years'] = years
