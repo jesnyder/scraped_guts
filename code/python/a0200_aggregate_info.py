@@ -48,6 +48,7 @@ def annual_count():
     """
 
     """
+    work_completed('aggregate_annual_count', 0)
 
     for name_dataset in retrieve_list('name_dataset'):
 
@@ -66,15 +67,6 @@ def annual_count():
                 f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
                 print('f = ' + str(f))
                 df = clean_dataframe(pd.read_csv(f))
-
-            #print('df = ')
-            #print(df)
-
-            #print('df.columns = ')
-            #print(df.columns)
-
-            #print('df[ref_year] = ')
-            #print(df['ref_year'])
 
             df_annual = pd.DataFrame()
             years = np.arange(min(list(df['ref_year'])), max(list(df['ref_year'])), 1)
@@ -99,6 +91,8 @@ def annual_count():
             df_annual.to_csv(f)
 
             annual_plot(name_dataset, df_annual, term)
+
+    work_completed('aggregate_annual_count', 1)
 
 
 def annual_plot(name_dataset, df_annual, term):
@@ -147,16 +141,7 @@ def aggregate_gscholar(name_dataset):
     """
     work_completed('aggregate_gscholar', 0)
 
-    search_terms = retrieve_list('search_terms')
-
-    for term in retrieve_list(''):
-
-        scrape_json(term)
-        json_to_dataframe(term)
-        article_json(term)
-        article_df(term)
-
-    for term in retrieve_list(''):
+    for term in retrieve_list('search_terms'):
 
         dst_path_name = name_dataset + '_query_df'
         dst_path = retrieve_path(dst_path_name)
