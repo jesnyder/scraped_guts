@@ -70,9 +70,9 @@ def acquire_gscholar():
     """
 
     """
-    work_completed('begin_acquire_patents', 5, 0)
+    work_completed('begin_acquire_gscholar', 5, 0)
     scrape_gscholar()
-    work_completed('begin_acquire_patents', 5, 1)
+    work_completed('begin_acquire_gscholar', 5, 1)
 
 
 
