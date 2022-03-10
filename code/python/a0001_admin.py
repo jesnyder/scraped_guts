@@ -63,6 +63,8 @@ def retrieve_categories():
     list_categories = []
 
     compare_terms = os.path.join(retrieve_path('term_compare'))
+    print('compare_terms = ')
+    print(compare_terms)
     for file in os.listdir(compare_terms):
 
         file_split = file.split('.')
