@@ -83,7 +83,7 @@ def acquire_patents():
     save to program_generated
     """
 
-    work_completed('begin_acquire_patents', 6, 0)
+    work_completed('begin_acquire_patents', 9, 0)
 
     f = os.path.join(retrieve_path('search_terms'))
     print('f = ' + str(f))
@@ -96,7 +96,7 @@ def acquire_patents():
         result_limits = retrieve_format('patent_result_limits')
         query_patents(name_dataset, term, result_limits)
 
-    work_completed('begin_acquire_patents', 6, 1)
+    work_completed('begin_acquire_patents', 9, 1)
 
 
 def acquire_nih_awards():

@@ -407,6 +407,9 @@ def work_to_do():
     df = clean_dataframe(df)
 
     df =  df[(df['active'] != 0)]
+
+    print('df to do = ')
+    print(df)
     tasks = list(df['number'])
 
     tasks_to_do = []
