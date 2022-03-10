@@ -107,13 +107,8 @@ def json_scraped():
 
                 html = requests.get(url, headers=headers, proxies=proxies).text
 
-                soup = BeautifulSoup(html, 'lxml')
-                print(soup)
-
-                # Delay scraping to circumvent CAPCHA
-                time.sleep(wait_time)
-                time_string = retrieve_datetime()
-                print('Wait: ' + time_string)
+                #soup = BeautifulSoup(html, 'lxml')
+                #print(soup)
 
                 # check for errors
                 if error_check(soup) == True: return('error')
