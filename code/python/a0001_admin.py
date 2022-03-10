@@ -380,7 +380,7 @@ def work_completed(name, complete):
 
     # find the task number
     if df.empty is True:
-        print('no existing work plan.')
+        number = 1
 
     elif name not in list(df['name']):
         number = max(list(df['number'])) + 1
