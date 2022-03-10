@@ -205,12 +205,14 @@ def aggregate_patents(name_dataset):
 
             df = df.append(df_src)
             f = os.path.join(name_dst,  term + '.csv' )
-            df.to_csv(clean_dataframe(df))
+            df = clean_dataframe(df)
+            df.to_csv(f)
 
 
         df_all = df_all.append(df)
         f = os.path.join(name_dst, name_dataset + '.csv' )
-        df_all.to_csv(clean_dataframe(df_all))
+        df_all = clean_dataframe(df_all)
+        df_all.to_csv(f)
 
 
     df = clean_dataframe(df)
