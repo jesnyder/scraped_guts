@@ -159,12 +159,12 @@ def aggregate_gscholar(name_dataset):
 
             df = df.append(df_query)
             df = clean_dataframe(df)
-            f = os.path.join(name_dst,  term + '.csv' )
+            f = os.path.join(retrieve_path(name_dst),  term + '.csv' )
             df_query.to_csv(f)
 
 
     df_query = clean_dataframe(df)
-    f = os.path.join(name_dst,  name_dataset + '.csv' )
+    f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
     df_query.to_csv(f)
 
     df = add_ref_year(df, name_dataset)
@@ -173,7 +173,7 @@ def aggregate_gscholar(name_dataset):
     cross_plot_unique(name_dataset, df)
 
     df = clean_dataframe(df)
-    f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
+    f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
     df.to_csv(f)
 
     work_completed('aggregate_gscholar', 1)
