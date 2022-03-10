@@ -185,37 +185,29 @@ def aggregate_patents(name_dataset):
     """
     work_completed('aggregate_patents', 0)
 
-
-    search_terms = retrieve_list('search_terms')
-
-    df = pd.DataFrame()
-
-    downloaded_path = retrieve_path('patent_user_provided')
-    for file in os.listdir(downloaded_path):
-        download_file = os.path.join(downloaded_path, file)
-        df_src = pd.read_csv(download_file)
-
-        df = df.append(df_src)
-        df = clean_dataframe(df)
-
-        print('df = ')
-        print(df)
-
-
-    for term in search_terms:
+    for term in retrieve_list('search_terms'):
 
         name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
-        download_src = os.path.join(retrieve_path(name_src))
+        
+        df = pd.DataFrame()
 
         for file in os.listdir(download_src):
 
-            #if term not in file: continue
+            if term not in file: continue
 
-            df_src = os.path.join(download_src, file)
+            df_src = os.path.join(retrieve_path(name_src), file)
             df_src = pd.read_csv(df_src)
             df_src = clean_dataframe(df_src)
 
             df = df.append(df_src)
+            f = os.path.join(name_dst,  term + '.csv' )
+            df_all.to_csv(clean_dataframe(df))
+
+
+        df_all = df_all.append(df)
+        f = os.path.join(name_dst, name_dataset + '.csv' )
+        df_all.to_csv(clean_dataframe(df_all))
+
 
     df = clean_dataframe(df)
     df = filter_articles(df, name_dataset)
@@ -224,8 +216,8 @@ def aggregate_patents(name_dataset):
     plot_unique_values(name_dataset)
     cross_plot_unique(name_dataset, df)
 
-    f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
-    df.to_csv(f)
+    f = os.path.join(name_dst,  name_dataset + '.csv' )
+    df_all.to_csv(f)
 
     work_completed('aggregate_patents', 1)
 
