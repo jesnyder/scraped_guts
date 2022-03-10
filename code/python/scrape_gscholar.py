@@ -256,7 +256,7 @@ def check_scraped(name_dataset, term, year, num):
 
         # check specific gscholar search
         file_split = file.split('.')
-        if file_split[0] == term and str(year) == str(0): return(True)
+        if file_split[0] == term: return(True)
 
         # find and compare file term to term passed into the function
         pattern = '[a-z]+'
