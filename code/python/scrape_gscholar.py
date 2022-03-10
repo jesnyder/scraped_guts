@@ -255,8 +255,8 @@ def check_scraped(name_dataset, term, year, num):
     src_path = os.path.join(src_path, 'json')
     for file in os.listdir(src_path):
 
-        print('term = ' + term)
-        print('file = ' + file)
+        #print('term = ' + term)
+        #print('file = ' + file)
         #print('os.listdir(src_path) = ')
         #print(os.listdir(src_path))
         #print('src_path = ')
