@@ -7,6 +7,7 @@ name_dataset,core_code admin name_dataset.csv
 stop_words,core_code admin stop_words.csv
 colors,core_code admin colors.csv
 filter_terms,core_code term_search filter.csv
+work_plan, work_plan.csv
 
 search_terms,user_provided search_terms search.csv
 filter_terms,user_provided search_terms filter.csv

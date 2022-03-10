@@ -366,5 +366,38 @@ def write_paths():
     df.to_csv(f)
 
 
+def work_completed(task_name, task_number, complete):
+    """
+
+    """
+
+    print('task number = ' + str(task_number) + ' task name = ' + task_name)
+
+    df = pd.DataFrame()
+    df['name'] = [task_name]
+    df['number'] = [task_number]
+    df['complete'] = [complete]
+    df['active'] = [task_number*complete]
+
+    try:
+        df_ref = clean_dataframe(pd.read_csv(os.path.join(retrieve_path('work_plan'))))
+        df_ref = df_ref.append(df)
+        df = df_ref
+    except:
+        df = df
+
+    df = df.drop_duplicates()
+    df = df.sort_values(number, ascending=False)
+    df = df.drop_duplicates(subset=complete, keep='first')
+    df = clean_dataframe(df)
+    df.to_csv(pd.read_csv(os.path.join(retrieve_path('work_plan'))))
+
+
+def work_plan():
+    """
+
+    """
+
+
 if __name__ == "__main__":
     main()

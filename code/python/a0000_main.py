@@ -1,5 +1,6 @@
 import numpy as np
 
+from a0001_admin import work_completed
 from a0100_acquire_info import acquire_info
 from a0200_aggregate_info import aggregate_info
 from a0300_geolocate_articles import geolocate_articles
@@ -14,9 +15,9 @@ def main():
     """
     print('beginning main')
 
-    name_dataset = ['gscholar']
-
     # List task numbers to complete
+    work_completed('begin_main', 0, 0)
+
     tasks = [0]
     if  0 in tasks: tasks = np.arange(1, 101, 1)
     if  1 in tasks: acquire_info()
