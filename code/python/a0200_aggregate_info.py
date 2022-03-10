@@ -48,7 +48,7 @@ def annual_count():
 
     """
 
-    for name_dataset in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('name_dataset'):
 
         print('name_dataset = ' + name_dataset)
 
