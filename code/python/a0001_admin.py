@@ -384,6 +384,7 @@ def work_completed(task_name, task_number, complete):
 
         if task_name in list(df['name']):
             number = df.loc[df.name==task_name, 'number']
+            number = number[0]
             df_new['number'] = [number]
 
         else:
