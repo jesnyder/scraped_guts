@@ -408,7 +408,13 @@ def work_to_do():
 
     df =  df[(df['active'] != 0)]
     tasks = list(df['number'])
-    return(tasks)
+
+    tasks_to_do = []
+    for i in range(100):
+        if i not in tasks:
+            tasks_to_do.append(i)
+
+    return(tasks_to_do)
 
 
 if __name__ == "__main__":
