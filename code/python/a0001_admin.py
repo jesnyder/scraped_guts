@@ -380,7 +380,7 @@ def work_completed(task_name, task_number, complete):
 
     try:
         df = pd.read_csv(file)
-        df = clean_dataframe(df_ref)
+        df = clean_dataframe(df)
         df = df.append(df_new)
 
     except:
