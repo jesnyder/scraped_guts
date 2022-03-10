@@ -19,6 +19,8 @@ from a0001_admin import retrieve_format
 from a0001_admin import retrieve_list
 from a0001_admin import retrieve_path
 from a0001_admin import write_paths
+from a0001_admin import work_completed
+from a0001_admin import work_to_do
 from find_color import find_color
 #from scrape_gscholar import scrape_json
 #from scrape_gscholar import json_to_dataframe
@@ -30,12 +32,7 @@ def aggregate_info():
     """
 
     """
-    print('began aggregate_info')
-
-    # List task numbers to complete
-    tasks = [1]
-    write_paths()
-    if  0 in tasks: tasks = np.arange(1, 101, 1)
+    tasks = work_to_do()
     if  1 in tasks: aggregate_downloaded('nsf_awards')
     if  2 in tasks: aggregate_downloaded('nih_awards')
     if  3 in tasks: aggregate_downloaded('clinical_trials')
@@ -43,8 +40,7 @@ def aggregate_info():
     if  5 in tasks: aggregate_gscholar('gscholar')
     if  6 in tasks: print('aggregate wikipedia')
     if  7 in tasks: annual_count()
-
-    print('completed aggregate_info')
+    work_completed('aggregate_info', 1)
 
 
 def annual_count():
@@ -279,6 +275,7 @@ def aggregate_downloaded(name_dataset):
     """
 
     """
+    work_completed('aggregate_info' + '_' + name_dataset, 0)
     # retrieve acquired info
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     print('name_src = ' + str(name_src))
@@ -306,6 +303,8 @@ def aggregate_downloaded(name_dataset):
     df = clean_dataframe(df)
     f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
     df.to_csv(f)
+
+    work_completed('aggregate_info' + '_' + name_dataset, 1)
 
 
 def filter_articles(df, name_dataset):

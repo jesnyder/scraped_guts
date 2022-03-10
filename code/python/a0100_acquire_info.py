@@ -39,12 +39,9 @@ def acquire_info():
     """
 
     """
-
-
-    work_completed('begin_acquire_info', 0)
     tasks = work_to_do()
+    work_completed('begin_acquire_info', 0)
 
-    write_paths()
     #if  0 in tasks: tasks = np.arange(1, 101, 1)
     if  3 in tasks: acquire_nsf_awards()
     if  4 in tasks: acquire_nih_awards()
