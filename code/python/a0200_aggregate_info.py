@@ -147,10 +147,7 @@ def aggregate_gscholar(name_dataset):
     """
     work_completed('aggregate_gscholar', 0)
 
-    # specify the search
-    f = os.path.join(retrieve_path(''))
-    df_search_terms = pd.read_csv(f)
-    search_terms = retrieve_list('')
+    search_terms = retrieve_list('search_terms')
 
     for term in retrieve_list(''):
 
@@ -233,12 +230,10 @@ def aggregate_patents(name_dataset):
     """
     work_completed('aggregate_patents', 0)
 
-    f = os.path.join(retrieve_path(''))
-    df_search_terms = pd.read_csv(f)
-    search_terms = list(df_search_terms['term'])
+
+    search_terms = retrieve_list('search_terms')
 
     df = pd.DataFrame()
-
 
     downloaded_path = retrieve_path('patent_user_provided')
     for file in os.listdir(downloaded_path):
