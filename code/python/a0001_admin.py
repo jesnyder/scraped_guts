@@ -383,7 +383,8 @@ def work_completed(task_name, task_number, complete):
     df['date'] = [str(retrieve_datetime())]
 
     try:
-        df_ref = clean_dataframe(file)
+        df_ref = pd.read_csv(file)
+        df_ref = clean_dataframe(df_ref)
         df_ref = df_ref.append(df)
         df = df_ref
     except:
@@ -399,12 +400,17 @@ def work_completed(task_name, task_number, complete):
     df.to_csv(file)
 
 
-def work_plan():
+def work_to_do():
     """
 
     """
+    file = retrieve_path('work_plan')
+    df = pd.read_csv(file)
+    df = clean_dataframe(df)
 
-    df_ref = clean_dataframe(pd.read_csv(os.path.join(retrieve_path('work_plan'))))
+    df =  df[(df['active'] != 0)]
+    tasks = list(df['number'])
+    return(tasks)
 
 
 if __name__ == "__main__":
