@@ -86,7 +86,7 @@ def json_scraped():
         for year in range(int(date.strftime("%Y")), 2013, -1):
 
             if year != int(date.strftime("%Y")):
-                work_completed('begin_acquire_gscholar_json_scraped_' + str(year), 8, 0)
+                work_completed('begin_acquire_gscholar_json_scraped_' + str(year), 0)
 
 
             num_list = np.arange(0, 20, 1, dtype=int)
@@ -188,7 +188,7 @@ def json_scraped():
                 if data == []: break
 
                 if len(data) < 10 and year != int(date.strftime("%Y")):
-                    work_completed('begin_acquire_gscholar_json_scraped_' + str(year), 8, 1)
+                    work_completed('begin_acquire_gscholar_json_scraped_' + str(year), 1)
 
                 data_json = json.dumps(data, indent = 2, ensure_ascii = False)
                 print(data_json)
