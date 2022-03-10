@@ -60,14 +60,12 @@ def annual_count():
         for term in retrieve_list('search_terms'):
 
             try:
-                print('article = ' + str(name_dataset))
                 f = os.path.join(retrieve_path(name_dst),  name_dataset + '_with_address' + '.csv' )
                 print('f = ' + str(f))
                 df = pd.read_csv(f)
                 df = clean_dataframe(df)
 
             except:
-                print('article = ' + str(name_dataset))
                 f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
                 print('f = ' + str(f))
                 df = pd.read_csv(f)
