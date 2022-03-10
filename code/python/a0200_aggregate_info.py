@@ -61,13 +61,15 @@ def annual_count():
                 name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
                 f = os.path.join(retrieve_path(name_dst),  name_dataset + '_with_address' + '.csv' )
                 print('f = ' + str(f))
-                df = clean_dataframe(pd.read_csv(f))
+                df = pd.read_csv(f)
+                df = clean_dataframe(df)
 
             except:
                 print('article = ' + str(name_dataset))
                 f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
                 print('f = ' + str(f))
-                df = clean_dataframe(pd.read_csv(f))
+                df = pd.read_csv(f)
+                df = clean_dataframe(df)
 
             df_annual = pd.DataFrame()
             years = np.arange(min(list(df['ref_year'])), max(list(df['ref_year'])), 1)
