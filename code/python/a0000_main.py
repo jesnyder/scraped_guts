@@ -13,13 +13,12 @@ def main():
     """
 
     """
-    print('beginning main')
 
     # List task numbers to complete
     work_completed('begin_main', 0, 0)
+    tasks = work_to_do()
 
-    tasks = [0]
-    if  0 in tasks: tasks = np.arange(1, 101, 1)
+    #if  0 in tasks: tasks = np.arange(1, 101, 1)
     if  1 in tasks: acquire_info()
     if  2 in tasks: aggregate_info()
     if  3 in tasks: geolocate_articles()

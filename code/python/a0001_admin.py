@@ -386,7 +386,10 @@ def work_completed(task_name, task_number, complete):
     except:
         df = df
 
-    df = df.drop_duplicates()
+    print('df = ')
+    print(df)
+
+    df.drop_duplicates()
     df = df.sort_values('number', ascending=False)
     df = df.drop_duplicates(subset=complete, keep='first')
     df = clean_dataframe(df)
@@ -397,6 +400,8 @@ def work_plan():
     """
 
     """
+
+    df_ref = clean_dataframe(pd.read_csv(os.path.join(retrieve_path('work_plan'))))
 
 
 if __name__ == "__main__":
