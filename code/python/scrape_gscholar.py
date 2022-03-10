@@ -250,9 +250,9 @@ def check_scraped(name_dataset, term, year, num):
 
     """
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
-    src_path = retrieve_path(name_src, 'json')
+    src_path = retrieve_path(name_src)
 
-    for file in os.listdir(src_path):
+    for file in os.listdir(src_path, 'json'):
 
         print('term = ' + term)
         print('file = ' + file)
