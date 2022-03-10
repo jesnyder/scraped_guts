@@ -70,7 +70,9 @@ def acquire_gscholar():
     """
 
     """
+    work_completed('begin_acquire_patents', 5, 0)
     scrape_gscholar()
+    work_completed('begin_acquire_patents', 5, 1)
 
 
 
@@ -80,6 +82,8 @@ def acquire_patents():
     get search results as a dataframe
     save to program_generated
     """
+
+    work_completed('begin_acquire_patents', 6, 0)
 
     f = os.path.join(retrieve_path('search_terms'))
     print('f = ' + str(f))
@@ -92,13 +96,17 @@ def acquire_patents():
         result_limits = retrieve_format('patent_result_limits')
         query_patents(name_dataset, term, result_limits)
 
+    work_completed('begin_acquire_patents', 6, 1)
+
 
 def acquire_nih_awards():
     """
     aggregate and save in program generated
     """
+    work_completed('begin_acquire_nih_awards', 4, 0)
     name_dataset = 'nih_awards'
     format_src(name_dataset)
+    work_completed('begin_acquire_nih_awards', 4, 1)
 
 
 def acquire_clinical_trials():
