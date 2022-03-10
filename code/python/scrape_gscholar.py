@@ -201,7 +201,6 @@ def json_scraped():
                 json_to_dataframe()
 
 
-
 def json_to_dataframe():
     """
 
@@ -279,18 +278,21 @@ def check_scraped(name_dataset, term, year, num):
         flags = re.IGNORECASE
         file_term = re.findall(pattern, file, flags)
         file_term = file_term[0]
+        print('file_term = ' + file_term + ' term = ' + term)
         if file_term != term: continue
 
         # find and compare file year to year passed into the function
         pattern = '[0-9]{4}'
         file_year = re.findall(pattern, file)
         file_year = file_year[0]
+        print('file_year = ' + file_year + ' year = ' + year)
         if file_year != year: continue
 
         # find and compare file saved date to current date
         pattern = '[0-9]{4}' + '-' + '[0-9]{2}' + '-' +  '[0-9]{2}'
         file_date_saved = re.findall(pattern, file)
         file_date_saved = file_date_saved[0]
+        print('file_date_saved = ' + file_date_saved)
 
         a = file_date_saved.split('-')
         a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
