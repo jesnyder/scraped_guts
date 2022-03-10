@@ -210,7 +210,7 @@ def aggregate_patents(name_dataset):
 
 
         df_all = df_all.append(df)
-        f = os.path.join(name_dst, name_dataset + '.csv' )
+        f = os.path.join(retrieve_path(name_dst), name_dataset + '.csv' )
         df_all = clean_dataframe(df_all)
         df_all.to_csv(f)
 
@@ -222,7 +222,7 @@ def aggregate_patents(name_dataset):
     plot_unique_values(name_dataset)
     cross_plot_unique(name_dataset, df)
 
-    f = os.path.join(name_dst,  name_dataset + '.csv' )
+    f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
     df_all.to_csv(f)
 
     work_completed('aggregate_patents', 1)
