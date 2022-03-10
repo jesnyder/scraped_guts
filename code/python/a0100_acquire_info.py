@@ -75,7 +75,6 @@ def acquire_gscholar():
     work_completed('begin_acquire_gscholar', 1)
 
 
-
 def acquire_patents():
     """
     from search terms

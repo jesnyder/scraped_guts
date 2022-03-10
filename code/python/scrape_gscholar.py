@@ -34,23 +34,23 @@ def scrape_gscholar():
     """
 
     # scrape json of specific publications by their title
-    work_completed('begin_acquire_gscholar_missing_json_scraped', 6, 0)
+    work_completed('begin_acquire_gscholar_missing_json_scraped', 0)
     missing_json_scraped()
-    work_completed('begin_acquire_gscholar_missing_json_scraped', 6, 1)
+    work_completed('begin_acquire_gscholar_missing_json_scraped', 1)
 
     # scrape json from gscholar
-    work_completed('begin_acquire_gscholar_json_scraped', 7, 0)
+    work_completed('begin_acquire_gscholar_json_scraped', 0)
     json_scraped()
-    work_completed('begin_acquire_gscholar_json_scraped', 7, 1)
+    work_completed('begin_acquire_gscholar_json_scraped', 1)
 
     # scrape html from gscholar and save
 
     # parse json from scraped html
 
     # convert json to df
-    work_completed('begin_acquire_gscholar_json_to_dataframe', 8, 0)
+    work_completed('begin_acquire_gscholar_json_to_dataframe', 0)
     json_to_dataframe()
-    work_completed('begin_acquire_gscholar_json_to_dataframe', 8, 1)
+    work_completed('begin_acquire_gscholar_json_to_dataframe', 1)
 
     # scrape metadata for each article as html
 
