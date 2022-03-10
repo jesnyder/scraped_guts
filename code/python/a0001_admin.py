@@ -373,10 +373,10 @@ def work_completed(task_name, task_number, complete):
     print('task number = ' + str(task_number) + ' task name = ' + task_name)
 
     df = pd.DataFrame()
+    df['active'] = [task_number*complete]
     df['name'] = [task_name]
     df['number'] = [task_number]
     df['complete'] = [complete]
-    df['active'] = [task_number*complete]
     df['date'] = [str(retrieve_datetime())]
 
     try:
