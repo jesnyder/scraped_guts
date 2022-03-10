@@ -388,12 +388,13 @@ def work_completed(task_name, task_number, complete):
 
         else:
             number = max(list(df['number'])) + 1
-            df['number'] = [number]
+            df_new['number'] = [number]
 
         df = df.append(df_new)
 
     except:
-        df['number'] = [0]
+        df_new['number'] = [0]
+        df = df_new
 
     print('df = ')
     print(df)
