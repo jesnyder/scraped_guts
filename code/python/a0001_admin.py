@@ -382,7 +382,7 @@ def work_completed(task_name, task_number, complete):
         df = pd.read_csv(file)
         df = clean_dataframe(df_ref)
 
-        if task_name not in list(df['name']):
+        if task_name in list(df['name']):
 
             print('df.name==task_name = ')
             print(df.name==task_name)
