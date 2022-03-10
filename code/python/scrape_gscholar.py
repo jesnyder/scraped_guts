@@ -254,7 +254,7 @@ def check_scraped(name_dataset, term, year, num):
 
     for file in os.listdir(src_path):
 
-        print('name = ' + name)
+        print('term = ' + term)
         print('file = ' + file)
 
         # check specific gscholar search
