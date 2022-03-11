@@ -82,6 +82,8 @@ def scrape_gscholar_article():
 
     for url in list(df['title_link']):
 
+        df = pd.DataFrame()
+
         print(url)
 
         time_string = retrieve_datetime()
@@ -102,12 +104,13 @@ def scrape_gscholar_article():
             tags.append(tag)
 
         content = soup.find('meta', {'name':'description'}).get('content')
-        print(content)
+        df['desc'] = content
 
         x = soup.select('meta[name="description"]')
         print(x[0].attrs["content"])
 
-        #print(tags)
+        print('df = ')
+        print(df)
 
 
 
