@@ -130,9 +130,20 @@ def scrape_gscholar_article():
             # springer
             # https://www.liebertpub.com/doi/full/10.1089/gen.39.S4.03
             tags.append('citation_journal_title')
-            tags.append('DC.Description')
-            tags.append('article:published_time')
-            tags.append('citation_journal_title')
+
+
+            # TERMIS
+            # https://repositorium.sdum.uminho.pt/handle/1822/38622
+            tags.append('citation_keywords')
+            tags.append('citation_title')
+            tags.append('citation_publisher')
+            tags.append('citation_keywords')
+            tags.append('DC.creator')
+            tags.append('DCTERMS.bibliographicCitation')
+            tags.append('DCTERMS.abstract')
+            tags.append('DC.rights')
+            tags.append('DCTERMS.issued')
+            tags.append('citation_issn')
 
 
             for tag in tags:
