@@ -93,6 +93,21 @@ def scrape_gscholar_article():
 
         soup = BeautifulSoup(html, 'lxml')
 
+        type = soup.find("meta", property="DC.type")
+        print('type = ')
+        print(type)
+
+        title = soup.find("meta", property="DC.title")
+        print('title = ')
+        print(title)
+
+        date = soup.find("meta", property="DC.date")
+        print('date = ')
+        print(date)
+
+        desc = soup.find("meta", property="DC.description")
+        print('desc = ')
+        print(desc)
 
         print(dsoup)
 
