@@ -58,6 +58,21 @@ def scrape_gscholar():
 
     # add article metadata to df
 
+
+def scrape_gscholar_article():
+    """
+
+    """
+
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+    src_path = retrieve_path(name_src)
+    src_path = os.path.join(src_path, 'df')
+    df_file = os.path.join(src_path, 'gscholar' + '.csv')
+    df.to_csv(df_file)
+
+    print(df.columns)
+
+
 # main programs
 
 def json_scraped():

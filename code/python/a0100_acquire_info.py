@@ -26,6 +26,7 @@ from a0001_admin import work_to_do
 
 from query_patents import query_patents
 from scrape_gscholar import scrape_gscholar
+from scrape_gscholar import scrape_gscholar_article
 #from scrape_gscholar import scrape_html
 #from scrape_gscholar import scrape_json
 #from scrape_gscholar import json_to_dataframe
@@ -67,9 +68,13 @@ def acquire_gscholar():
     """
 
     """
-    work_completed('begin_acquire_gscholar', 0)
+    work_completed('acquire_gscholar', 0)
     scrape_gscholar()
-    work_completed('begin_acquire_gscholar', 1)
+    work_completed('acquire_gscholar', 1)
+
+    work_completed('acquire_gscholar_article', 0)
+    scrape_gscholar_article()
+    work_completed('acquire_gscholar_article', 1)
 
 
 def acquire_patents():
