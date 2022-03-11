@@ -97,7 +97,7 @@ def scrape_gscholar_article():
 
             print('tag = ')
             print(tag)
-            
+
             if tag.get("property", None) == "og:title":
                 print tag.get("content", None)
 
