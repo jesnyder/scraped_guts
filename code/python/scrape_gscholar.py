@@ -136,13 +136,14 @@ def scrape_gscholar_article():
         print('df = ')
         print(df)
 
+        char_remove = ['/', '.']
+        url_name = url
+        for char in char_remove:
+            url_name = url_name.replace('char, '')
 
-
-
-
-        print(dsoup)
-
-
+        url_name = url_name[:40]
+        df_path = os.path.join(retrieve_path(name_src), 'df_articles', url_name + '.csv')
+        df.to_csv(df_path)
 
 
 # main programs
