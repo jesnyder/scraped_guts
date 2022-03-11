@@ -42,7 +42,7 @@ def acquire_info():
 
     """
     tasks = work_to_do()
-    work_completed('begin_acquire_info', 0)
+    work_completed('acquire_info', 0)
 
     #if  0 in tasks: tasks = np.arange(1, 101, 1)
     if  3 in tasks: acquire_nsf_awards()
@@ -52,7 +52,7 @@ def acquire_info():
     if 17 in tasks: acquire_patents()
     if 18 in tasks: acquire_wikipedia()
 
-    work_completed('begin_acquire_info', 1)
+    work_completed('acquire_info', 1)
 
 
 
@@ -98,7 +98,7 @@ def acquire_patents():
     save to program_generated
     """
 
-    work_completed('begin_acquire_patents', 0)
+    work_completed('acquire_patents', 0)
 
     f = os.path.join(retrieve_path('search_terms'))
     print('f = ' + str(f))
@@ -111,37 +111,37 @@ def acquire_patents():
         result_limits = retrieve_format('patent_result_limits')
         query_patents(name_dataset, term, result_limits)
 
-    work_completed('begin_acquire_patents', 1)
+    work_completed('acquire_patents', 1)
 
 
 def acquire_nih_awards():
     """
     aggregate and save in program generated
     """
-    work_completed('begin_acquire_nih_awards', 0)
+    work_completed('acquire_nih_awards', 0)
     name_dataset = 'nih_awards'
     format_src(name_dataset)
-    work_completed('begin_acquire_nih_awards', 1)
+    work_completed('acquire_nih_awards', 1)
 
 
 def acquire_clinical_trials():
     """
     aggregate and save in program generated
     """
-    work_completed('begin_acquire_clinical_trials', 0)
+    work_completed('acquire_clinical_trials', 0)
     name_dataset = 'clinical_trials'
     format_src(name_dataset)
-    work_completed('begin_acquire_clinical_trials', 1)
+    work_completed('acquire_clinical_trials', 1)
 
 
 def acquire_nsf_awards():
     """
     aggregate and save in program generated
     """
-    work_completed('begin_acquire_nsf_awards', 0)
+    work_completed('acquire_nsf_awards', 0)
     name_dataset = 'nsf_awards'
     format_src(name_dataset)
-    work_completed('begin_acquire_nsf_awards', 1)
+    work_completed('acquire_nsf_awards', 1)
 
 
 def format_src(name_dataset):
