@@ -581,11 +581,10 @@ def find_address():
     #for name_dataset in ['clinical_trials', 'nih_awards', 'nsf_awards', 'patents']:
     for name_dataset in retrieve_list('name_dataset'):
 
+        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
         print('name_dataset = ' + name_dataset)
 
-        #if name_dataset != 'nih_awards': continue
-
-        f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
+        f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
         df_ref = clean_dataframe(pd.read_csv(f))
 
         df_ref['ref_complete_address'] = [None] * len(list(df_ref.iloc[:,0]))
