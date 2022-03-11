@@ -72,7 +72,7 @@ def scrape_gscholar_article():
 
     for url in list(df['title_link']):
 
-        print(title_link)
+        print(url)
 
         h
 
