@@ -142,7 +142,8 @@ def scrape_gscholar_article():
             url_name = url_name.replace(char, '')
 
         url_name = url_name[:40]
-        df_path = os.path.join(retrieve_path(name_src), 'df_articles', url_name + '.csv')
+ 
+        df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')), url_name + '.csv')
         df.to_csv(df_path)
 
 
