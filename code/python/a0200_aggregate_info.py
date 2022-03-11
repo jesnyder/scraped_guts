@@ -54,11 +54,11 @@ def annual_count():
 
         work_completed('aggregate_annual_count' + '_' + name_dataset, 0)
 
-        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
         print('name_dataset = ' + name_dataset)
 
         for term in retrieve_list('search_terms'):
-
+ 
             try:
                 f = os.path.join(retrieve_path(name_dst),  name_dataset + '_with_address' + '.csv' )
                 print('f = ' + str(f))
