@@ -64,21 +64,20 @@ def acquire_gscholar():
     """
 
     """
-    tasks = work_to_do()
 
     work_completed('acquire_gscholar', 0)
 
-    if  7 in tasks:
+    if work_to_do('scrape_gscholar') == True:
         work_completed('scrape_gscholar', 0)
         scrape_gscholar()
         work_completed('scrape_gscholar', 1)
 
-    if  10 in tasks:
+    if work_to_do('acquire_gscholar_json_to_dataframe') == True:
         work_completed('acquire_gscholar_json_to_dataframe', 0)
         json_to_dataframe()
         work_completed('acquire_gscholar_json_to_dataframe', 1)
 
-    if  11 in tasks:
+    if work_to_do('acquire_gscholar_article') == True:
         work_completed('acquire_gscholar_article', 0)
         scrape_gscholar_article()
         work_completed('acquire_gscholar_article', 1)
