@@ -173,6 +173,7 @@ def aggregate_articles():
 
     """
     name_dataset = 'gscholar'
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     df_all = pd.DataFrame()
     df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
 
