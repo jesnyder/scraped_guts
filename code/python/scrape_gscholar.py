@@ -188,7 +188,7 @@ def aggregate_articles():
         df_all = df_all.drop_duplicates()
 
         df_path_save = os.path.join(retrieve_path(name_dst)
-        df_dst = os.path.join(df_path_save, name_dataset + '_meta' + '.csv')
+        df_dst = os.path.join(retrieve_path(name_dst), name_dataset + '_meta' + '.csv')
 
         df_all.to_csv()
         print('df_dst = ' + str(df_dst))
