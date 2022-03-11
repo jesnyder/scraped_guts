@@ -95,6 +95,9 @@ def scrape_gscholar_article():
 
         for tag in soup.find_all("meta"):
 
+            print('tag = ')
+            print(tag)
+            
             if tag.get("property", None) == "og:title":
                 print tag.get("content", None)
 
