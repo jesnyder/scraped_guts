@@ -95,8 +95,11 @@ def scrape_gscholar_article():
             print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
             time.sleep(wait_time)
 
-            #html = requests.get(url, headers=headers, proxies=proxies).text
-            html = requests.get(url).text
+            try:
+                #html = requests.get(url, headers=headers, proxies=proxies).text
+                html = requests.get(url).text
+            except:
+                html = ''
 
             soup = BeautifulSoup(html, 'html.parser')
 
