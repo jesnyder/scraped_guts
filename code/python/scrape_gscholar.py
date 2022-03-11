@@ -107,10 +107,10 @@ def scrape_gscholar_article():
         df['url'] = [url]
         print(url)
 
-        time_string = retrieve_datetime()
-        wait_time = random.random()*5 + 2
-        print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
-        time.sleep(wait_time)
+        #time_string = retrieve_datetime()
+        #wait_time = random.random()*5 + 2
+        #print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+        #time.sleep(wait_time)
 
         try:
             #html = requests.get(url, headers=headers, proxies=proxies).text
