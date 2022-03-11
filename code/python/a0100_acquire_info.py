@@ -41,20 +41,15 @@ def acquire_info():
     """
 
     """
-    tasks = work_to_do()
+
     work_completed('acquire_info', 0)
-
-    #if  0 in tasks: tasks = np.arange(1, 101, 1)
-    if  3 in tasks: acquire_nsf_awards()
-    if  4 in tasks: acquire_nih_awards()
-    if  5 in tasks: acquire_clinical_trials()
-    if 90 in tasks: acquire_gscholar()
-    if 17 in tasks: acquire_patents()
-    if 18 in tasks: acquire_wikipedia()
-
+    if work_to_do('acquire_nsf_awards') == True: acquire_nsf_awards()
+    if work_to_do('acquire_nih_awards') == True: acquire_nih_awards()
+    if work_to_do('acquire_clinical_trials') == True: acquire_clinical_trials()
+    if work_to_do('acquire_gscholar') == True: acquire_gscholar()
+    if work_to_do('acquire_patents') in tasks: acquire_patents()
+    if work_to_do('acquire_wikipedia') in tasks: acquire_wikipedia()
     work_completed('acquire_info', 1)
-
-
 
 def acquire_wikipedia():
     """

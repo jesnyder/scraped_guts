@@ -366,6 +366,23 @@ def write_paths():
     df.to_csv(f)
 
 
+def work_to_do(name):
+    """
+
+    """
+    file = retrieve_path('work_plan')
+    df = pd.read_csv(file)
+    df = clean_dataframe(df)
+
+    df =  df[(df['active'] != 0)]
+    for task_name in list(df['name']):
+
+        if name == task_name:
+            return(False)
+
+    return(True)
+
+
 def work_completed(name, complete):
     """
 
@@ -414,28 +431,6 @@ def work_completed(name, complete):
 
     print('df = ')
     print(df)
-
-
-def work_to_do():
-    """
-
-    """
-    file = retrieve_path('work_plan')
-    df = pd.read_csv(file)
-    df = clean_dataframe(df)
-
-    df =  df[(df['active'] != 0)]
-
-    print('df to do = ')
-    print(df)
-    tasks = list(df['number'])
-
-    tasks_to_do = []
-    for i in range(100):
-        if i not in tasks:
-            tasks_to_do.append(i)
-
-    return(tasks_to_do)
 
 
 if __name__ == "__main__":
