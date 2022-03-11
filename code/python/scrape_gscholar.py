@@ -137,8 +137,8 @@ def scrape_gscholar_article():
                 print('hello')
 
 
-        x = soup.select('meta[name="description"]')
-        print(x[0].attrs["content"])
+        #x = soup.select('meta[name="description"]')
+        #print(x[0].attrs["content"])
 
         print('df = ')
         print(df)
