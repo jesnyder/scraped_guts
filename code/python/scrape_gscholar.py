@@ -99,25 +99,9 @@ def scrape_gscholar_article():
             tags.append(tag)
 
 
-        title = soup.find('meta', name='title')
+        title = soup.find('meta', name='DC.title')
         print('title = ')
         print(title['content'])
-
-        type = soup.find("meta", name="DC.type")
-        print('type = ')
-        print(type)
-
-        title = soup.find("meta", property="DC.title")
-        print('title = ')
-        print(title)
-
-        date = soup.find("meta", property="DC.date")
-        print('date = ')
-        print(date)
-
-        desc = soup.find("meta", property="DC.description")
-        print('desc = ')
-        print(desc)
 
         print(dsoup)
 
