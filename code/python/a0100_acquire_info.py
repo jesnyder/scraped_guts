@@ -71,7 +71,7 @@ def acquire_gscholar():
     """
     tasks = work_to_do()
 
-    if  50 in tasks:
+    if  6 in tasks:
         work_completed('acquire_gscholar', 0)
         scrape_gscholar()
         work_completed('acquire_gscholar', 1)
