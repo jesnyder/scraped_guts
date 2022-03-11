@@ -594,7 +594,7 @@ def find_address():
 
         for i in range(len(list(df_ref.iloc[:,0]))):
 
-            i= i-1
+            i= i
 
             complete_num = round(100*i/len(list(df_ref.iloc[:,0])),2)
             print(name_dataset + ' % complete: ' + str(complete_num) + '    i = ' + str(i))
