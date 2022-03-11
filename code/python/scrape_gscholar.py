@@ -115,19 +115,26 @@ def scrape_gscholar_article():
 
         for tag in tags:
 
-            content = soup.find('meta', {'name':tag}).get('content')
-            print(tag + ' = ')
-            print(content)
-            df[str(tag)] = [content]
+            try:
+                content = soup.find('meta', {'name':tag}).get('content')
+                print(tag + ' = ')
+                print(content)
+                df[str(tag)] = [content]
 
-            #content = soup.find_all('meta', {'name':tag})
-            res = []
-            for i in soup.find_all('meta', {'name':tag}):
-                res.append(i['content'])
+            except:
+                print('hello')
 
-            print(tag + ' = ')
-            print(content)
-            df[str(tag) + '-all'] = [res]
+            try:
+                #content = soup.find_all('meta', {'name':tag})
+                res = []
+                for i in soup.find_all('meta', {'name':tag}):
+                    res.append(i['content'])
+
+                print(tag + ' = ')
+                print(content)
+                df[str(tag) + '-all'] = [res]
+            except:
+                print('hello')
 
 
         x = soup.select('meta[name="description"]')
@@ -142,7 +149,7 @@ def scrape_gscholar_article():
             url_name = url_name.replace(char, '')
 
         url_name = url_name[:40]
- 
+
         df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')), url_name + '.csv')
         df.to_csv(df_path)
 
