@@ -48,6 +48,7 @@ def acquire_info():
     if  4 in tasks: acquire_nih_awards()
     if  5 in tasks: acquire_clinical_trials()
     if  6 in tasks: acquire_gscholar()
+    if  50 in tasks: acquire_gscholar_article()
     if  17 in tasks: acquire_patents()
     if  18 in tasks: acquire_wikipedia()
 
@@ -72,6 +73,11 @@ def acquire_gscholar():
     scrape_gscholar()
     work_completed('acquire_gscholar', 1)
 
+
+def acquire_gscholar_article():
+    """
+
+    """
     work_completed('acquire_gscholar_article', 0)
     scrape_gscholar_article()
     work_completed('acquire_gscholar_article', 1)
