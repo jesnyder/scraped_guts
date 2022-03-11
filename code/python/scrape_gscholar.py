@@ -105,26 +105,23 @@ def scrape_gscholar_article():
 
 
 
-        title = soup.find('meta', name='DC.description')
-        print('title = ')
-        print(title)
 
-    html = requests.get(url).text
-    soup = BeautifulSoup(html.scrape_result["content"])
-    collected = []
-    for item in soup.find_all(class_="item"):
-        collected.append(
-            {
-                "title": item.find("h3").text,
-                "url": urljoin(response.scrape_result['url'], item.find("h3").a["href"]),
-                "company": item.find("h5").find("span", class_="color-black").text,
-                "location": item.find("h5").find("span", class_="color-white-mute").text,
-                "posted_on": item.find("span", class_="color-white-mute", text=re.compile("Posted:")).text,
-            }
-        )
-    print(json.dumps(collected, indent=2))
+        html = requests.get(url).text
+        soup = BeautifulSoup(html.scrape_result["content"])
+        collected = []
+        for item in soup.find_all(class_="item"):
+            collected.append(
+                {
+                    "title": item.find("h3").text,
+                    "url": urljoin(response.scrape_result['url'], item.find("h3").a["href"]),
+                    "company": item.find("h5").find("span", class_="color-black").text,
+                    "location": item.find("h5").find("span", class_="color-white-mute").text,
+                    "posted_on": item.find("span", class_="color-white-mute", text=re.compile("Posted:")).text,
+                }
+            )
+        print(json.dumps(collected, indent=2))
 
-    print(dsoup)
+        print(dsoup)
 
 
 
