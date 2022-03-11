@@ -103,7 +103,7 @@ def scrape_gscholar_article():
 
         title = soup.find('meta', name='DC.description')
         print('title = ')
-        print(title['content'])
+        print(title)
 
         print(dsoup)
 
