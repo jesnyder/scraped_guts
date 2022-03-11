@@ -87,70 +87,6 @@ def scrape_gscholar_article():
 
     for url in list(df_original['title_link']):
 
-        #df = pd.DataFrame()
-        df = df_original[(df_original['title_link'] == url)]
-        print('df = ')
-        print(df)
-
-        df['time_retrieved'] = [retrieve_datetime()]
-        df['url'] = [url]
-
-        print(url)
-
-        if '.pdf' not in str(url):
-
-            time_string = retrieve_datetime()
-            wait_time = random.random()*10 + 5
-            print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
-            time.sleep(wait_time)
-
-            try:
-                #html = requests.get(url, headers=headers, proxies=proxies).text
-                html = requests.get(url).text
-            except:
-                html = ''
-
-            soup = BeautifulSoup(html, 'html.parser')
-
-            #print(soup.head.title)
-            #print(soup.head.title.text)
-
-            """
-            tags = []
-            for tag in soup.find_all("meta"):
-                tags.append(tag)
-            """
-
-            for tag in retrieve_list('html_meta_tags'):
-
-                try:
-                    content = soup.find('meta', {'name':tag}).get('content')
-                    print(tag + ' = ')
-                    print(content)
-                    df[str(tag)] = [content]
-
-                except:
-                    print('hello')
-
-                try:
-                    #content = soup.find_all('meta', {'name':tag})
-                    res = []
-                    for i in soup.find_all('meta', {'name':tag}):
-                        res.append(i['content'])
-
-                    print(tag + ' = ')
-                    print(content)
-                    df[str(tag) + '-all'] = [res]
-                except:
-                    print('hello')
-
-
-        #x = soup.select('meta[name="description"]')
-        #print(x[0].attrs["content"])
-        df = df.T
-        print('df = ')
-        print(df)
-
         try:
             char_remove = ['/', '.', ':', 'httpswww']
             url_name = url
@@ -159,6 +95,63 @@ def scrape_gscholar_article():
             url_name = url_name[:40]
         except:
             url_name = 'none_found'
+
+
+        if check_scraped(url_name, 0, 0, 0) ==  True: continue
+
+        #df = pd.DataFrame()
+        df = df_original[(df_original['title_link'] == url)]
+        print('df = ')
+        print(df)
+
+        df['time_retrieved'] = [retrieve_datetime()]
+        df['url'] = [url]
+        print(url)
+
+        time_string = retrieve_datetime()
+        wait_time = random.random()*10 + 5
+        print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+        time.sleep(wait_time)
+
+        try:
+            #html = requests.get(url, headers=headers, proxies=proxies).text
+            html = requests.get(url).text
+            soup = BeautifulSoup(html, 'html.parser')
+        except:
+            soup = ''
+
+        try:
+            content = soup.head.title.text
+            df['head_title'] = [content]
+        except:
+            df['head_title'] = [None]
+
+
+        for tag in retrieve_list('html_meta_tags'):
+
+            try:
+                content = soup.find('meta', {'name':tag}).get('content')
+                print(tag + ' = ')
+                print(content)
+                df[str(tag)] = [content]
+            except:
+                df[str(tag)] = [None]
+
+            try:
+                #content = soup.find_all('meta', {'name':tag})
+                res = []
+                for i in soup.find_all('meta', {'name':tag}):
+                    res.append(i['content'])
+                print(tag + ' = ')
+                print(content)
+                df[str(tag) + '-all'] = [res]
+            except:
+                df[str(tag)] = [None]
+
+
+        df = df.T
+        print('df = ')
+        print(df)
 
         df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
         df_dst = os.path.join(df_path, url_name + '.csv')
@@ -174,6 +167,7 @@ def aggregate_articles():
     """
     name_dataset = 'gscholar'
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
+
     df_all = pd.DataFrame()
     df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
 
@@ -389,62 +383,63 @@ def check_scraped(name_dataset, term, year, num):
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     src_path = retrieve_path(name_src)
 
-    if name_dataset == 'gscholar': src_path = os.path.join(src_path, 'json')
+    paths_to_check = [src_path]
 
-    for file in os.listdir(src_path):
+    if name_dataset == 'gscholar':
+        src_path_json = os.path.join(src_path, 'json')
+        paths_to_check.append(src_path_json)
+        df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
+        paths_to_check.append(df_path)
 
-        #print('term = ' + term)
-        #print('file = ' + file)
-        #print('os.listdir(src_path) = ')
-        #print(os.listdir(src_path))
-        #print('src_path = ')
-        #print(src_path)
+    for scr_path in paths_to_check:
 
-        # check specific gscholar search
-        file_split = file.split('.')
-        if file_split[0] == term: return(True)
+        for file in os.listdir(src_path):
 
-        # find and compare file term to term passed into the function
-        pattern = '[a-z]+'
-        flags = re.IGNORECASE
-        file_term = re.findall(pattern, file, flags)
-        file_term = file_term[0]
-        if file_term != term: continue
-        #print('file_term = ' + file_term + ' term = ' + term)
+            # check specific gscholar search
+            file_split = file.split('.')
+            if file_split[0] == term: return(True)
 
-        # find and compare file year to year passed into the function
-        pattern = '[0-9]{4}'
-        file_year = re.findall(pattern, file)
-        file_year = file_year[0]
-        if file_year != year: continue
-        print('file_year = ' + file_year + ' year = ' + str(year))
+            # find and compare file term to term passed into the function
+            pattern = '[a-z]+'
+            flags = re.IGNORECASE
+            file_term = re.findall(pattern, file, flags)
+            file_term = file_term[0]
+            if file_term != term: continue
+            #print('file_term = ' + file_term + ' term = ' + term)
 
-        # find and compare file year to year passed into the function
-        pattern = '[0-9]{2}'
-        file_num = re.findall(pattern, file)
-        file_num = file_num[0]
-        if file_num != num: continue
-        print('file_num = ' + file_num + ' num = ' + str(num))
+            # find and compare file year to year passed into the function
+            pattern = '[0-9]{4}'
+            file_year = re.findall(pattern, file)
+            file_year = file_year[0]
+            if file_year != year: continue
+            print('file_year = ' + file_year + ' year = ' + str(year))
 
-        # find and compare file saved date to current date
-        pattern = '[0-9]{4}' + '-' + '[0-9]{2}' + '-' +  '[0-9]{2}'
-        file_date_saved = re.findall(pattern, file)
-        file_date_saved = file_date_saved[0]
-        print('file_date_saved = ' + file_date_saved)
+            # find and compare file year to year passed into the function
+            pattern = '[0-9]{2}'
+            file_num = re.findall(pattern, file)
+            file_num = file_num[0]
+            if file_num != num: continue
+            print('file_num = ' + file_num + ' num = ' + str(num))
 
-        a = file_date_saved.split('-')
-        a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
-        #print('a = ' + str(a))
-        b = datetime.datetime.today()
-        #print('b = ' + str(b))
-        v = b-a
-        #print('v = ' + str(v))
-        v = int(v.days)
-        #print('v = ' + str(v))
-        if v < 3:
-            #print('date match: ' + str(v))
-            #print('too many days lapsed since last query.')
-            return(True)
+            # find and compare file saved date to current date
+            pattern = '[0-9]{4}' + '-' + '[0-9]{2}' + '-' +  '[0-9]{2}'
+            file_date_saved = re.findall(pattern, file)
+            file_date_saved = file_date_saved[0]
+            print('file_date_saved = ' + file_date_saved)
+
+            a = file_date_saved.split('-')
+            a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
+            #print('a = ' + str(a))
+            b = datetime.datetime.today()
+            #print('b = ' + str(b))
+            v = b-a
+            #print('v = ' + str(v))
+            v = int(v.days)
+            #print('v = ' + str(v))
+            if v < 3:
+                #print('date match: ' + str(v))
+                #print('too many days lapsed since last query.')
+                return(True)
 
     return(False)
 
