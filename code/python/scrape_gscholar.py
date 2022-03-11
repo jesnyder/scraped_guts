@@ -120,6 +120,11 @@ def scrape_gscholar_article():
             print(content)
             df[str(tag)] = [content]
 
+            content = soup.find_all('meta', {'name':tag}).get('content')
+            print(tag + ' = ')
+            print(content)
+            df[str(tag) + '-all'] = [content]
+
 
         x = soup.select('meta[name="description"]')
         print(x[0].attrs["content"])
