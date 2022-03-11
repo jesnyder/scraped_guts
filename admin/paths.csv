@@ -27,6 +27,7 @@ json_archival,user_provided gscholar json_archival
 article_url_scraped,user_provided gscholar article scraped_url.csv
 gscholar_error,core_code admin gscholar_error.csv
 gscholar_missing,user_provided gscholar missing_pubs.csv
+html_meta_tags,core_code admin html_meta_tags.csv
 
 #, map
 all_institutions,program_generated map all_institutions.csv

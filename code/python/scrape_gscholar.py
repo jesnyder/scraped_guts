@@ -88,7 +88,7 @@ def scrape_gscholar_article():
 
         print(url)
 
-        if '.pdf' not in str(url):    
+        if '.pdf' not in str(url):
 
             time_string = retrieve_datetime()
             wait_time = random.random()*10 + 5
@@ -149,7 +149,7 @@ def scrape_gscholar_article():
             tags.append('citation_issn')
 
 
-            for tag in tags:
+            for tag in retrieve_list('html_meta_tags'):
 
                 try:
                     content = soup.find('meta', {'name':tag}).get('content')
