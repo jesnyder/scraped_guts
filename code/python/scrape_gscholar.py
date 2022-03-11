@@ -34,9 +34,9 @@ def scrape_gscholar():
     """
 
     # scrape json of specific publications by their title
-    work_completed('begin_acquire_gscholar_missing_json_scraped', 0)
+    work_completed('acquire_gscholar_missing_json_scraped', 0)
     missing_json_scraped()
-    work_completed('begin_acquire_gscholar_missing_json_scraped', 1)
+    work_completed('acquire_gscholar_missing_json_scraped', 1)
 
     # scrape json from gscholar
     work_completed('gscholar_json_scraped', 0)
@@ -96,8 +96,7 @@ def scrape_gscholar_article():
         except:
             url_name = 'none_found'
 
-
-        #if check_scraped(url_name, 0, 0, 0) ==  True: continue
+        if check_scraped(url_name, 0, 0, 0) ==  True: continue
 
         #df = pd.DataFrame()
         df = df_original[(df_original['title_link'] == url)]
