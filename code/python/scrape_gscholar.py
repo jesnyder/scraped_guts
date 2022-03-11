@@ -172,6 +172,7 @@ def aggregate_articles():
     """
 
     """
+    name_dataset = 'gscholar'
     df_all = pd.DataFrame()
     df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
 
