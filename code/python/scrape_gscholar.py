@@ -101,25 +101,14 @@ def scrape_gscholar_article():
         for tag in soup.find_all("meta"):
             tags.append(tag)
 
+        x = soup.select('meta[name="description"]')
+        print(x[0].attrs["content"])
+
         #print(tags)
 
 
 
 
-        html = requests.get(url).text
-        soup = BeautifulSoup(html.scrape_result["content"])
-        collected = []
-        for item in soup.find_all(class_="item"):
-            collected.append(
-                {
-                    "title": item.find("h3").text,
-                    "url": urljoin(response.scrape_result['url'], item.find("h3").a["href"]),
-                    "company": item.find("h5").find("span", class_="color-black").text,
-                    "location": item.find("h5").find("span", class_="color-white-mute").text,
-                    "posted_on": item.find("span", class_="color-white-mute", text=re.compile("Posted:")).text,
-                }
-            )
-        print(json.dumps(collected, indent=2))
 
         print(dsoup)
 
