@@ -142,8 +142,8 @@ def scrape_gscholar_article():
                 res = []
                 for i in soup.find_all('meta', {'name':tag}):
                     res.append(i['content'])
-                print(tag + ' = ')
-                print(content)
+                #print(tag + ' = ')
+                #print(content)
                 df[str(tag) + '-all'] = [res]
             except:
                 df[str(tag)] = [None]
@@ -156,7 +156,7 @@ def scrape_gscholar_article():
         df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
         df_dst = os.path.join(df_path, url_name + '.csv')
         df.to_csv(df_dst)
-        print('df_dst = ' + str(df_dst))
+        #print('df_dst = ' + str(df_dst))
 
         aggregate_articles()
 
@@ -186,7 +186,7 @@ def aggregate_articles():
         df_dst_name = os.path.join(retrieve_path(name_dst), name_dataset + '_meta' + '.csv')
 
         df_all.to_csv(df_dst_name)
-        print('df_dst_name = ' + str(df_dst_name))
+        #print('df_dst_name = ' + str(df_dst_name))
 
 
 # main programs
