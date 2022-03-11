@@ -39,18 +39,22 @@ def scrape_gscholar():
     work_completed('begin_acquire_gscholar_missing_json_scraped', 1)
 
     # scrape json from gscholar
-    work_completed('begin_acquire_gscholar_json_scraped', 0)
+    work_completed('gscholar_json_scraped', 0)
     json_scraped()
-    work_completed('begin_acquire_gscholar_json_scraped', 1)
+    work_completed('gscholar_json_scraped', 1)
 
     # scrape html from gscholar and save
 
     # parse json from scraped html
 
     # convert json to df
-    work_completed('begin_acquire_gscholar_json_to_dataframe', 0)
+    work_completed('gscholar_json_to_dataframe', 0)
     json_to_dataframe()
-    work_completed('begin_acquire_gscholar_json_to_dataframe', 1)
+    work_completed('gscholar_json_to_dataframe', 1)
+
+    work_completed('gscholar_aggregate_articles', 0)
+    aggregate_articles()
+    work_completed('gscholar_aggregate_articles', 1)
 
     # scrape metadata for each article as html
 
@@ -159,21 +163,34 @@ def scrape_gscholar_article():
         df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
         df_dst = os.path.join(df_path, url_name + '.csv')
         df.to_csv(df_dst)
+        print('df_dst = ' + str(df_dst))
 
-        df_all = pd.DataFrame()
-        for article_file in os.listdir(df_path):
+        aggregate_articles()
 
-            df_ref = os.path.join(df_path, article_file)
-            df_article = pd.read_csv(df_ref)
-            df_article = df_article.T
-            df_article = clean_dataframe(df_article)
 
-            df_all = df_all.append(df_article)
-            df_all = clean_dataframe(df_all)
-            df_all = df_all.drop_duplicates()
-            df_dst = os.path.join(df_path, name_dataset + '.csv')
-            df_all.to_csv()
-            print('df_dst = ' + str(df_dst))
+def aggregate_articles():
+    """
+
+    """
+    df_all = pd.DataFrame()
+    df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
+
+    for article_file in os.listdir(df_path):
+
+        df_ref = os.path.join(df_path, article_file)
+        df_article = pd.read_csv(df_ref)
+        df_article = df_article.T
+        df_article = clean_dataframe(df_article)
+
+        df_all = df_all.append(df_article)
+        df_all = clean_dataframe(df_all)
+        df_all = df_all.drop_duplicates()
+
+        df_path_save = os.path.join(retrieve_path(name_dst)
+        df_dst = os.path.join(df_path_save, name_dataset + '_meta' + '.csv')
+
+        df_all.to_csv()
+        print('df_dst = ' + str(df_dst))
 
 
 # main programs
@@ -393,7 +410,6 @@ def check_scraped(name_dataset, term, year, num):
         if file_term != term: continue
         #print('file_term = ' + file_term + ' term = ' + term)
 
-
         # find and compare file year to year passed into the function
         pattern = '[0-9]{4}'
         file_year = re.findall(pattern, file)
@@ -401,14 +417,12 @@ def check_scraped(name_dataset, term, year, num):
         if file_year != year: continue
         print('file_year = ' + file_year + ' year = ' + str(year))
 
-
         # find and compare file year to year passed into the function
         pattern = '[0-9]{2}'
         file_num = re.findall(pattern, file)
         file_num = file_num[0]
         if file_num != num: continue
         print('file_num = ' + file_num + ' num = ' + str(num))
-
 
         # find and compare file saved date to current date
         pattern = '[0-9]{4}' + '-' + '[0-9]{2}' + '-' +  '[0-9]{2}'
@@ -429,43 +443,6 @@ def check_scraped(name_dataset, term, year, num):
             #print('date match: ' + str(v))
             #print('too many days lapsed since last query.')
             return(True)
-
-        """
-        # check search term gscholar search
-        file_split = file.split(' ')
-
-        # check general queries
-        if file_split[0] != term: continue
-        #print('term match: ' + term)
-
-        if str(file_split[1]) != str(year): continue
-        #print('year match: ' + str(year))
-
-        if str(file_split[2]) != str(num): continue
-        #print('num match: ' + str(num))
-
-        date = (file_split[3])
-        #print('date = ' + str(date))
-
-        a = date.split('-')
-        #print('a = ' + str(a))
-
-        a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
-        #print('a = ' + str(a))
-
-        b = datetime.datetime.today()
-        #print('b = ' + str(b))
-
-        v = b-a
-        #print('v = ' + str(v))
-
-        v = int(v.days)
-        print('v = ' + str(v))
-        if v < 3:
-            #print('date match: ' + str(v))
-            #print('too many days lapsed since last query.')
-            return(True)
-        """
 
     return(False)
 
