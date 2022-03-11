@@ -73,7 +73,7 @@ def acquire_gscholar():
 
     work_completed('acquire_gscholar', 0)
 
-    if  6 in tasks:
+    if  7 in tasks:
         work_completed('scrape_gscholar', 0)
         scrape_gscholar()
         work_completed('scrape_gscholar', 1)
