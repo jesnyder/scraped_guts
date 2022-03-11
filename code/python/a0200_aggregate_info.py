@@ -33,15 +33,17 @@ def aggregate_info():
     """
 
     """
-    tasks = work_to_do()
+
     work_completed('aggregate_info', 0)
-    if  18 in tasks: aggregate_downloaded('nsf_awards')
-    if  19 in tasks: aggregate_downloaded('nih_awards')
-    if  20 in tasks: aggregate_downloaded('clinical_trials')
-    if  21 in tasks: aggregate_patents('patents')
-    if  22 in tasks: aggregate_gscholar('gscholar')
-    if  23 in tasks: print('aggregate wikipedia')
-    if  24 in tasks: annual_count()
+
+    if  work_to_do('aggregate_info_nsf_awards'): aggregate_downloaded('nsf_awards')
+    if  work_to_do('aggregate_info_nih_awards'):aggregate_downloaded('nih_awards')
+    if  work_to_do('aggregate_info_clinical_trials'):aggregate_downloaded('clinical_trials')
+    if  work_to_do('aggregate_patents'):aggregate_patents('patents')
+    if  work_to_do('aggregate_gscholar'):aggregate_gscholar('gscholar')
+    if  work_to_do('aggregate_wikipedia'):print('aggregate wikipedia')
+    if  work_to_do('aggregate_annual_count'):annual_count()
+
     work_completed('aggregate_info', 1)
 
 
