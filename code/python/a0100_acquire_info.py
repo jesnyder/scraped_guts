@@ -78,12 +78,12 @@ def acquire_gscholar():
         scrape_gscholar()
         work_completed('scrape_gscholar', 1)
 
-    if  50 in tasks:
+    if  10 in tasks:
         work_completed('acquire_gscholar_json_to_dataframe', 0)
         json_to_dataframe()
         work_completed('acquire_gscholar_json_to_dataframe', 1)
 
-    if  50 in tasks:
+    if  11 in tasks:
         work_completed('acquire_gscholar_article', 0)
         scrape_gscholar_article()
         work_completed('acquire_gscholar_article', 1)
