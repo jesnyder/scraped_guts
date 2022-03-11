@@ -186,9 +186,23 @@ def scrape_gscholar_article():
 
         url_name = url_name[:40]
 
-        df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')), url_name + '.csv')
+        df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
+        df_dst = os.path.join(df_path, url_name + '.csv')
+        df.to_csv(df_dst)
 
-        df.to_csv(df_path)
+        df_all = pd.DataFrame()
+        for article_file in df_path:
+
+            df_ref = os.path.join(df_path, article_file)
+            df_article = pd.read_csv(df_ref)
+            df_article = df.T
+            df_article = clean_dataframe(df_article)
+
+            df_all = df.append(df_article)
+            df_all = clean_dataframe(df_all)
+            df_all = df_all.drop_duplicates()
+            df_dst = os.path.join(df_path, name_dataset + '.csv')
+            df_all.to_csv()
 
 
 # main programs
