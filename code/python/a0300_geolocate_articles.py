@@ -582,7 +582,7 @@ def find_address():
     for name_dataset in retrieve_list('name_dataset'):
 
         name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
-        print('name_dataset = ' + name_dataset)
+        work_completed('find_address_' + name_dataset, 0)
 
         f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
         df_ref = clean_dataframe(pd.read_csv(f))
@@ -599,6 +599,7 @@ def find_address():
             complete_num = round(100*i/len(list(df_ref.iloc[:,0])),2)
             print(name_dataset + ' % complete: ' + str(complete_num) + '    i = ' + str(i))
             df_ref_row = df_ref.iloc[i,:]
+
 
             if 'nih_awards' in name_dataset:
                 address_complete, address, lat, lon = build_nih_address(df_ref_row)
@@ -629,6 +630,8 @@ def find_address():
         list_unique_values(name_dataset, df_ref)
         plot_unique_values(name_dataset)
         cross_plot_unique(name_dataset, df_ref)
+
+        work_completed('find_address_' + name_dataset, 1)
 
 
 def findLatLong(address):
