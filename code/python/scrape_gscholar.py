@@ -101,6 +101,9 @@ def scrape_gscholar_article():
         for tag in soup.find_all("meta"):
             tags.append(tag)
 
+        content = soup.find('meta', {'name':'description'}).get('content')
+        print(content)
+
         x = soup.select('meta[name="description"]')
         print(x[0].attrs["content"])
 
