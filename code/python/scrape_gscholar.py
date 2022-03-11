@@ -93,12 +93,12 @@ def scrape_gscholar_article():
 
         soup = BeautifulSoup(html, 'lxml')
 
+        tags = []
         for tag in soup.find_all("meta"):
+            tags.append(tag)
 
-            print('tag = ')
-            print(tag)
+        print(tag[:10])
 
-        
 
         type = soup.find("meta", property="DC.type")
         print('type = ')
