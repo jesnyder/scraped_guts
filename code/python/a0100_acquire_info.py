@@ -47,8 +47,8 @@ def acquire_info():
     if work_to_do('acquire_nih_awards') == True: acquire_nih_awards()
     if work_to_do('acquire_clinical_trials') == True: acquire_clinical_trials()
     if work_to_do('acquire_gscholar') == True: acquire_gscholar()
-    if work_to_do('acquire_patents') in tasks: acquire_patents()
-    if work_to_do('acquire_wikipedia') in tasks: acquire_wikipedia()
+    if work_to_do('acquire_patents') == True: acquire_patents()
+    if work_to_do('acquire_wikipedia') == True: acquire_wikipedia()
     work_completed('acquire_info', 1)
 
 def acquire_wikipedia():
