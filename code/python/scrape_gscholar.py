@@ -63,6 +63,19 @@ def scrape_gscholar_article():
     """
 
     """
+    name_dataset = 'gscholar'
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
+    df_path = os.path.join(retrieve_path(name_src), 'df')
+    df_file = os.path.join(df_path, name_dataset + '.csv')
+    df = pd.read_csv(df_file)
+    df_all = clean_dataframe(df_all)
+
+    for url in list(df['title_link']):
+
+        print(title_link)
+
+        h
+
 
 
 
