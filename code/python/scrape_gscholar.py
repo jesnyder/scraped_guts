@@ -106,7 +106,7 @@ def scrape_gscholar_article():
         content = soup.find('meta', {'name':'description'}).get('content')
         print('content = ')
         print(content)
-        df['desc'] = content
+        df['desc'] = [content]
 
         x = soup.select('meta[name="description"]')
         print(x[0].attrs["content"])
