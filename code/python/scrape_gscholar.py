@@ -94,6 +94,8 @@ def scrape_gscholar_article():
 
         soup = BeautifulSoup(html, 'html.parser')
 
+        print(soup.head.title)
+
         tags = []
         for tag in soup.find_all("meta"):
             tags.append(tag)
