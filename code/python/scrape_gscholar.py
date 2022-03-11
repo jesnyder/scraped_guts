@@ -122,9 +122,9 @@ def scrape_gscholar_article():
                 "posted_on": item.find("span", class_="color-white-mute", text=re.compile("Posted:")).text,
             }
         )
-print(json.dumps(collected, indent=2))
+    print(json.dumps(collected, indent=2))
 
-        print(dsoup)
+    print(dsoup)
 
 
 
