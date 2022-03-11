@@ -105,6 +105,9 @@ def scrape_gscholar_article():
 
         tags = []
         tags.append('description')
+        tags.append('DC.type') 
+        tags.append('DC.title')
+        tags.append('DC.date')
 
         for tag in tags:
 
