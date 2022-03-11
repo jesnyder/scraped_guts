@@ -5,6 +5,7 @@ import lxml
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import os.path
 import pandas as pd
 from serpapi import GoogleSearch
 import shutil
@@ -66,6 +67,7 @@ def annual_count():
             except:
                 f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
                 print('f = ' + str(f))
+                if os.path.exists(f) == False: continue
                 df = pd.read_csv(f)
                 df = clean_dataframe(df)
 
