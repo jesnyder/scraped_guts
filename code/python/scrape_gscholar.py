@@ -81,10 +81,13 @@ def scrape_gscholar_article():
     df = clean_dataframe(df)
     df_ref = df
 
-    for url in list(df['title_link']):
+    for url in list(df_ref['title_link']):
 
         #df = pd.DataFrame()
         df = df_ref[(df_ref['title_link'] == url)]
+        print('df = ')
+        print(df)
+        
         df['time_retrieved'] = [retrieve_datetime()]
         df['url'] = [url]
 
