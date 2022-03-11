@@ -79,15 +79,15 @@ def scrape_gscholar_article():
     df_file = os.path.join(df_path, name_dataset + '.csv')
     df = pd.read_csv(df_file)
     df = clean_dataframe(df)
-    df_ref = df
+    df_original = df
 
-    for url in list(df_ref['title_link']):
+    for url in list(df_original['title_link']):
 
         #df = pd.DataFrame()
-        df = df_ref[(df_ref['title_link'] == url)]
+        df = df_original[(df_original['title_link'] == url)]
         print('df = ')
         print(df)
-        
+
         df['time_retrieved'] = [retrieve_datetime()]
         df['url'] = [url]
 
