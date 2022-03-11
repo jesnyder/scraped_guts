@@ -240,27 +240,14 @@ def json_to_dataframe():
             if not file.endswith('.json'): continue
             if term not in str(file): continue
 
-            df = df.drop_duplicates(subset = 'title_link')
+            json_src = os.path.join(src_path, file)
+            df = pd.read_json(json_src)
 
-            name_dst = retrieve_path(name_dst)
+            df = df.drop_duplicates(subset = 'title_link')
+            df = clean_dataframe(df)
+            df_path = os.path.join(retrieve_path(name_src), 'df')
             df_file = os.path.join(name_dst, term + '.csv')
-            df_term = df_term.append(df)
-            df = df.drop_duplicates(subset = 'title_link')
-            df_term = clean_dataframe(df_term)
-            df_term.to_csv(df_file)
-
-    # sort
-    #df = df.sort_values('citations', ascending=False)
-    df = df.drop_duplicates(subset = 'title_link')
-    df = clean_dataframe(df)
-    #print(df)
-
-    src_path = retrieve_path(name_src)
-    src_path = os.path.join(src_path, 'df')
-    df_file = os.path.join(src_path, term + '.csv')
-    df.to_csv(df_file)
-    print('df = ')
-    print(df)
+            df.to_csv(df_file)
 
 
 # support programs
