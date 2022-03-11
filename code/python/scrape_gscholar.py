@@ -86,9 +86,9 @@ def scrape_gscholar_article():
         df['time_retrieved'] = [retrieve_datetime()]
         df['url'] = [url]
 
-        if '.pdf' not in url:
+        print(url)
 
-            print(url)
+        if '.pdf' not in str(url):    
 
             time_string = retrieve_datetime()
             wait_time = random.random()*10 + 5
