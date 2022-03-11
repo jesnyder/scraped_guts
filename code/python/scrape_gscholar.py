@@ -127,7 +127,7 @@ def scrape_gscholar_article():
 
             print(tag + ' = ')
             print(content)
-            df[str(tag) + '-all'] = [content]
+            df[str(tag) + '-all'] = [res]
 
 
         x = soup.select('meta[name="description"]')
