@@ -96,7 +96,7 @@ def scrape_gscholar_article():
         except:
             url_name = 'none_found'
 
-        if check_scraped(name_dataset, url_name, 0, 0, 0) ==  True: continue
+        if check_scraped(name_dataset, url_name, 0, 0) ==  True: continue
 
         #df = pd.DataFrame()
         df = df_original[(df_original['title_link'] == url)]
