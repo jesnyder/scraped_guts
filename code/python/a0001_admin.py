@@ -190,12 +190,12 @@ def retrieve_path(name):
     #print('began retrieve_path')
 
 
-    print('name = ' + name)
+    #print('name = ' + name)
     for file_source in ['core_code', 'user_provided', 'program_generated']:
 
         try:
             f = os.path.join(file_source, 'admin', 'paths' + '.csv')
-            print('file = ' + str(f))
+            #print('file = ' + str(f))
             df = pd.read_csv(f)
 
             # find the path from the name
