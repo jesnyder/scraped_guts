@@ -173,6 +173,7 @@ def scrape_gscholar_article():
             df_all = df_all.drop_duplicates()
             df_dst = os.path.join(df_path, name_dataset + '.csv')
             df_all.to_csv()
+            print('df_dst = ' + str(df_dst))
 
 
 # main programs
