@@ -231,7 +231,7 @@ def json_to_dataframe():
 
     df_all = pd.DataFrame()
 
-    for term in list(df_search_terms['term']):
+    for term in retrieve_list('search_terms'):
 
         df_term = pd.DataFrame()
 
