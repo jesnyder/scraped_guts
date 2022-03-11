@@ -89,9 +89,10 @@ def scrape_gscholar_article():
         print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
         time.sleep(wait_time)
 
-        html = requests.get(url, headers=headers, proxies=proxies).text
+        #html = requests.get(url, headers=headers, proxies=proxies).text
+        html = requests.get(url).text
 
-        soup = BeautifulSoup(html, features = 'html.parser')
+        soup = BeautifulSoup(html, 'html.parser')
 
         tags = []
         for tag in soup.find_all("meta"):
@@ -100,7 +101,7 @@ def scrape_gscholar_article():
 
         title = soup.find('meta', name='title')
         print('title = ')
-        print(title)
+        print(title['content'])
 
         type = soup.find("meta", name="DC.type")
         print('type = ')
