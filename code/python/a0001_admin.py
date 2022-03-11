@@ -244,10 +244,12 @@ def write_paths():
 
     for name_dataset in list(df_article['name']):
 
-        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
-        name_list =  name_paths(name_dataset)
-        name_list = list(name_list)
-
+        name_list = []
+        name_list.append(str(name_dataset + '_src_query'))
+        name_list.append(str(name_dataset + '_dst_query'))
+        name_list.append(str(name_dataset + '_sum'))
+        name_list.append(str(name_dataset + '_unique_df'))
+        name_list.append(str(name_dataset + '_unique_plot'))
         name_list.append(str(name_dataset + '_query_html'))
         name_list.append(str(name_dataset + '_query_xml'))
         name_list.append(str(name_dataset + '_query_json'))
@@ -271,23 +273,25 @@ def write_paths():
         name_list.append(str(name_dataset + '_js_data'))
 
 
+
+
         for item in name_list:
             name.append(item)
 
-            if 'src' in item:
+            if '_src_query' in item:
                 item_path = str('program_generated ' + name_dataset + ' query src')
 
-            elif 'dst' in item:
-                item_path = str('program_generated ' + name_dataset + ' query agg')
+            elif '_dst_query' in item:
+                item_path = str('program_generated ' + name_dataset + ' agg')
 
-            elif 'sum' in item:
-                item_path = str('program_generated ' + name_dataset + ' sum')
+            elif '_sum' in item:
+                item_path = str('program_generated ' + name_dataset + ' agg sum')
 
-            elif 'unique_df' in item:
-                item_path = str('program_generated ' + name_dataset + ' unique df')
+            elif '_unique_df' in item:
+                item_path = str('program_generated ' + name_dataset + ' agg unique df')
 
             elif '_unique_plot' in item:
-                item_path = str('program_generated ' + name_dataset + ' unique plot')
+                item_path = str('program_generated ' + name_dataset + ' agg unique plot')
 
             elif '_query_html' in item:
                 item_path = str('program_generated ' + name_dataset + ' query html')
