@@ -48,9 +48,9 @@ def acquire_info():
     if  3 in tasks: acquire_nsf_awards()
     if  4 in tasks: acquire_nih_awards()
     if  5 in tasks: acquire_clinical_trials()
-    if  6 in tasks: acquire_gscholar()
-    if  17 in tasks: acquire_patents()
-    if  18 in tasks: acquire_wikipedia()
+    if 90 in tasks: acquire_gscholar()
+    if 17 in tasks: acquire_patents()
+    if 18 in tasks: acquire_wikipedia()
 
     work_completed('begin_acquire_info', 1)
 
