@@ -71,10 +71,12 @@ def acquire_gscholar():
     """
     tasks = work_to_do()
 
+    work_completed('acquire_gscholar', 0)
+
     if  6 in tasks:
-        work_completed('acquire_gscholar', 0)
+        work_completed('scrape_gscholar', 0)
         scrape_gscholar()
-        work_completed('acquire_gscholar', 1)
+        work_completed('scrape_gscholar', 1)
 
     if  50 in tasks:
         work_completed('acquire_gscholar_json_to_dataframe', 0)
@@ -85,6 +87,8 @@ def acquire_gscholar():
         work_completed('acquire_gscholar_article', 0)
         scrape_gscholar_article()
         work_completed('acquire_gscholar_article', 1)
+
+    work_completed('acquire_gscholar', 1)
 
 
 def acquire_patents():
