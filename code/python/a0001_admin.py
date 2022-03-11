@@ -276,7 +276,7 @@ def write_paths():
             name.append(item)
 
             if '_src_query' in item:
-                item_path = str('program_generated ' + name_dataset + ' query src')
+                item_path = str('program_generated ' + name_dataset + ' query')
 
             elif '_dst_query' in item:
                 item_path = str('program_generated ' + name_dataset + ' agg')
