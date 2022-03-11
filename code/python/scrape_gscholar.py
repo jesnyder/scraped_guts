@@ -74,7 +74,17 @@ def scrape_gscholar_article():
 
         print(url)
 
-        h
+        time_string = retrieve_datetime()
+        wait_time = random.random()*10 + 5
+        print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+        time.sleep(wait_time)
+
+        html = requests.get(url, headers=headers, proxies=proxies).text
+
+        soup = BeautifulSoup(html, 'lxml')
+
+
+        print(dsoup)
 
 
 
@@ -262,7 +272,6 @@ def json_to_dataframe():
             df_term = df_term.drop_duplicates(subset = 'title_link')
             df_term = clean_dataframe(df_term)
             df_term.to_csv(df_file)
-
 
 
 # support programs
