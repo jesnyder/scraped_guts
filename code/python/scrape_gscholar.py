@@ -106,49 +106,12 @@ def scrape_gscholar_article():
             #print(soup.head.title)
             #print(soup.head.title.text)
 
+            """
             tags = []
             for tag in soup.find_all("meta"):
                 tags.append(tag)
-
-            tags = []
-            tags.append('description')
-            tags.append('DC.type')
-            tags.append('DC.title')
-            tags.append('DC.date')
-            tags.append('DC.description')
-            tags.append('DC.contributor')
-
-            tags.append('DC.Contributor')
-            tags.append('DC.Description')
-            tags.append('article:published_time')
-            tags.append('citation_journal_title')
-            tags.append('article:published_time')
-            tags.append('citation_publisher')
-            tags.append('citation_author')
-            tags.append('citation_author_institution')
-            tags.append('og-title')
-            tags.append('og-description')
-            tags.append('og-type')
-
-            # springer
-            # https://www.liebertpub.com/doi/full/10.1089/gen.39.S4.03
-            tags.append('citation_journal_title')
-
-
-            # TERMIS
-            # https://repositorium.sdum.uminho.pt/handle/1822/38622
-            tags.append('citation_keywords')
-            tags.append('citation_title')
-            tags.append('citation_publisher')
-            tags.append('citation_keywords')
-            tags.append('DC.creator')
-            tags.append('DCTERMS.bibliographicCitation')
-            tags.append('DCTERMS.abstract')
-            tags.append('DC.rights')
-            tags.append('DCTERMS.issued')
-            tags.append('citation_issn')
-
-
+            """
+            
             for tag in retrieve_list('html_meta_tags'):
 
                 try:
