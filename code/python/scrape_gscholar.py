@@ -68,6 +68,7 @@ def scrape_gscholar_article():
     src_path = retrieve_path(name_src)
     src_path = os.path.join(src_path, 'df')
     df_file = os.path.join(src_path, 'gscholar' + '.csv')
+    print('df_file = ' + df_file)
     df = pd.read_csv(df_file)
 
     print(df.columns)
