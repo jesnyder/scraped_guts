@@ -272,9 +272,6 @@ def write_paths():
         name_list.append(str(name_dataset + '_map__bar_gif'))
         name_list.append(str(name_dataset + '_js_data'))
 
-
-
-
         for item in name_list:
             name.append(item)
 

@@ -422,7 +422,7 @@ def build_nsf_address(df):
         return(address_complete, address, lat, lon)
 
 
-def build_gscholar(df):
+def build_gscholar_address(df):
     """
 
     """
