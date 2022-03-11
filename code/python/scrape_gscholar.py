@@ -83,6 +83,7 @@ def scrape_gscholar_article():
     for url in list(df['title_link']):
 
         df = pd.DataFrame()
+        df['time_retrieved'] = [retrieve_datetime()]
         df['url'] = [url]
 
         print(url)
