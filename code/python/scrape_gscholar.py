@@ -139,7 +139,7 @@ def scrape_gscholar_article():
         char_remove = ['/', '.']
         url_name = url
         for char in char_remove:
-            url_name = url_name.replace('char, '')
+            url_name = url_name.replace(char, '')
 
         url_name = url_name[:40]
         df_path = os.path.join(retrieve_path(name_src), 'df_articles', url_name + '.csv')
