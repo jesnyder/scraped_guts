@@ -139,7 +139,7 @@ def scrape_gscholar_article():
 
         #x = soup.select('meta[name="description"]')
         #print(x[0].attrs["content"])
-
+        df = df.T
         print('df = ')
         print(df)
 
@@ -151,6 +151,7 @@ def scrape_gscholar_article():
         url_name = url_name[:40]
 
         df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')), url_name + '.csv')
+
         df.to_csv(df_path)
 
 
