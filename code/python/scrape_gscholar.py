@@ -191,7 +191,7 @@ def scrape_gscholar_article():
         df.to_csv(df_dst)
 
         df_all = pd.DataFrame()
-        for article_file in df_path:
+        for article_file in os.listdir(df_path):
 
             df_ref = os.path.join(df_path, article_file)
             df_article = pd.read_csv(df_ref)
