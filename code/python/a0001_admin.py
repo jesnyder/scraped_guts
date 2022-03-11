@@ -312,7 +312,7 @@ def write_paths():
                 item_path = str('program_generated ' + name_dataset + ' article json')
 
             elif '_article_df' in item:
-                item_path = str('program_generated ' + name_dataset + ' article df')
+                item_path = str('program_generated ' + name_dataset + ' query df_article')
 
             elif '_aggregate_df' in item:
                 item_path = str('program_generated ' + name_dataset + ' aggregate df')
