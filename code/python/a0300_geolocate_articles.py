@@ -35,10 +35,10 @@ def geolocate_articles():
     """
 
     """
-    tasks = work_to_do()
+    
     work_completed('geolocate_articles', 0)
-    if  80 in tasks: find_address()
-    if  80 in tasks: list_address()
+    if  work_to_do('find_address'): find_address()
+    if  work_to_do('list_address'): list_address()
     work_completed('geolocate_articles', 1)
 
 

@@ -18,13 +18,13 @@ def main():
 
     write_paths()
     work_completed('begin_main', 0)
-    if work_to_do('acquire_info') == True: acquire_info()
-    if work_to_do('aggregate_info') == True: aggregate_info()
-    if work_to_do('geolocate_articles') == True: geolocate_articles()
-    if work_to_do('untargeted_word_count') == True: untargeted_word_count()
-    if work_to_do('targeted_word_count') == True: targeted_word_count()
-    if work_to_do('map_maker') == True: map_maker()
-    if work_to_do('build_webpage') == True: build_webpage()
+    if work_to_do('acquire_info'): acquire_info()
+    if work_to_do('aggregate_info'): aggregate_info()
+    if work_to_do('geolocate_articles'): geolocate_articles()
+    if work_to_do('untargeted_word_count'): untargeted_word_count()
+    if work_to_do('targeted_word_count'): targeted_word_count()
+    if work_to_do('map_maker'): map_maker()
+    if work_to_do('build_webpage'): build_webpage()
     work_completed('begin_main', 0, 1)
 
 
