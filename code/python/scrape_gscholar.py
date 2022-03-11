@@ -86,68 +86,77 @@ def scrape_gscholar_article():
         df['time_retrieved'] = [retrieve_datetime()]
         df['url'] = [url]
 
-        print(url)
+        if '.pdf' not in url:
 
-        time_string = retrieve_datetime()
-        wait_time = random.random()*10 + 5
-        print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
-        time.sleep(wait_time)
+            print(url)
 
-        #html = requests.get(url, headers=headers, proxies=proxies).text
-        html = requests.get(url).text
+            time_string = retrieve_datetime()
+            wait_time = random.random()*10 + 5
+            print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+            time.sleep(wait_time)
 
-        soup = BeautifulSoup(html, 'html.parser')
+            #html = requests.get(url, headers=headers, proxies=proxies).text
+            html = requests.get(url).text
 
-        #print(soup.head.title)
-        #print(soup.head.title.text)
+            soup = BeautifulSoup(html, 'html.parser')
 
-        tags = []
-        for tag in soup.find_all("meta"):
-            tags.append(tag)
+            #print(soup.head.title)
+            #print(soup.head.title.text)
 
-        tags = []
-        tags.append('description')
-        tags.append('DC.type')
-        tags.append('DC.title')
-        tags.append('DC.date')
-        tags.append('DC.description')
-        tags.append('DC.contributor')
+            tags = []
+            for tag in soup.find_all("meta"):
+                tags.append(tag)
 
-        tags.append('DC.Contributor')
-        tags.append('DC.Description')
-        tags.append('article:published_time')
-        tags.append('citation_journal_title')
-        tags.append('article:published_time')
-        tags.append('citation_publisher')
-        tags.append('citation_author')
-        tags.append('citation_author_institution')
-        tags.append('og-title')
-        tags.append('og-description')
-        tags.append('og-type')
+            tags = []
+            tags.append('description')
+            tags.append('DC.type')
+            tags.append('DC.title')
+            tags.append('DC.date')
+            tags.append('DC.description')
+            tags.append('DC.contributor')
+
+            tags.append('DC.Contributor')
+            tags.append('DC.Description')
+            tags.append('article:published_time')
+            tags.append('citation_journal_title')
+            tags.append('article:published_time')
+            tags.append('citation_publisher')
+            tags.append('citation_author')
+            tags.append('citation_author_institution')
+            tags.append('og-title')
+            tags.append('og-description')
+            tags.append('og-type')
+
+            # springer
+            # https://www.liebertpub.com/doi/full/10.1089/gen.39.S4.03
+            tags.append('citation_journal_title')
+            tags.append('DC.Description')
+            tags.append('article:published_time')
+            tags.append('citation_journal_title')
 
 
-        for tag in tags:
+            for tag in tags:
 
-            try:
-                content = soup.find('meta', {'name':tag}).get('content')
-                print(tag + ' = ')
-                print(content)
-                df[str(tag)] = [content]
+                try:
+                    content = soup.find('meta', {'name':tag}).get('content')
+                    print(tag + ' = ')
+                    print(content)
+                    df[str(tag)] = [content]
 
-            except:
-                print('hello')
+                except:
+                    print('hello')
 
-            try:
-                #content = soup.find_all('meta', {'name':tag})
-                res = []
-                for i in soup.find_all('meta', {'name':tag}):
-                    res.append(i['content'])
+                try:
+                    #content = soup.find_all('meta', {'name':tag})
+                    res = []
+                    for i in soup.find_all('meta', {'name':tag}):
+                        res.append(i['content'])
 
-                print(tag + ' = ')
-                print(content)
-                df[str(tag) + '-all'] = [res]
-            except:
-                print('hello')
+                    print(tag + ' = ')
+                    print(content)
+                    df[str(tag) + '-all'] = [res]
+                except:
+                    print('hello')
 
 
         #x = soup.select('meta[name="description"]')
