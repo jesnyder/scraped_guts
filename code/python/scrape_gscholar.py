@@ -98,6 +98,8 @@ def scrape_gscholar_article():
         for tag in soup.find_all("meta"):
             tags.append(tag)
 
+        print(tags)
+
 
         title = soup.find('meta', name='DC.title')
         print('title = ')
