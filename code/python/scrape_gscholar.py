@@ -195,7 +195,7 @@ def scrape_gscholar_article():
 
             df_ref = os.path.join(df_path, article_file)
             df_article = pd.read_csv(df_ref)
-            df_article = df.T
+            df_article = df_article.T
             df_article = clean_dataframe(df_article)
 
             df_all = df.append(df_article)
