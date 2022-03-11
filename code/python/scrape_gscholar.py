@@ -79,12 +79,15 @@ def scrape_gscholar_article():
     df_file = os.path.join(df_path, name_dataset + '.csv')
     df = pd.read_csv(df_file)
     df = clean_dataframe(df)
+    df_ref = df
 
     for url in list(df['title_link']):
 
-        df = pd.DataFrame()
+        #df = pd.DataFrame()
+        df = df_ref[(df_ref['title_link'] == url)]
         df['time_retrieved'] = [retrieve_datetime()]
         df['url'] = [url]
+
 
         print(url)
 
@@ -111,7 +114,7 @@ def scrape_gscholar_article():
             for tag in soup.find_all("meta"):
                 tags.append(tag)
             """
-            
+
             for tag in retrieve_list('html_meta_tags'):
 
                 try:
