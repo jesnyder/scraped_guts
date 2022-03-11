@@ -428,7 +428,7 @@ def build_gscholar_address(df):
     """
     print('df = ')
     print(df)
-    df = clean_dataframe(df)
+    #df = clean_dataframe(df)
 
     address_complete, address, lat, lon = None, None, None, None
     return(address_complete, address, lat, lon)
