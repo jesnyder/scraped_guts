@@ -16,21 +16,15 @@ def main():
 
     """
 
-    # List task numbers to complete
-    work_completed('begin_main', 0)
-    tasks = work_to_do()
-
-    #if  0 in tasks: tasks = np.arange(1, 101, 1)
     write_paths()
-    if  2 in tasks: acquire_info()
-    if  9 in tasks: aggregate_info()
-    if  99 in tasks: geolocate_articles()
-    if  99 in tasks: untargeted_word_count()
-    if  99 in tasks: targeted_word_count()
-    if  99 in tasks: map_maker()
-    if 99 in tasks: build_webpage()
-
-
+    work_completed('begin_main', 0)
+    if work_to_do('acquire_info') == True: acquire_info()
+    if work_to_do('aggregate_info') == True: aggregate_info()
+    if work_to_do('geolocate_articles') == True: geolocate_articles()
+    if work_to_do('untargeted_word_count') == True: untargeted_word_count()
+    if work_to_do('targeted_word_count') == True: targeted_word_count()
+    if work_to_do('map_maker') == True: map_maker()
+    if work_to_do('build_webpage') == True: build_webpage()
     work_completed('begin_main', 0, 1)
 
 
