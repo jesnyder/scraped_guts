@@ -27,6 +27,7 @@ from a0001_admin import work_to_do
 from query_patents import query_patents
 from scrape_gscholar import scrape_gscholar
 from scrape_gscholar import scrape_gscholar_article
+from scrape_gscholar import json_to_dataframe
 #from scrape_gscholar import scrape_html
 #from scrape_gscholar import scrape_json
 #from scrape_gscholar import json_to_dataframe
@@ -48,7 +49,6 @@ def acquire_info():
     if  4 in tasks: acquire_nih_awards()
     if  5 in tasks: acquire_clinical_trials()
     if  6 in tasks: acquire_gscholar()
-    if  50 in tasks: acquire_gscholar_article()
     if  17 in tasks: acquire_patents()
     if  18 in tasks: acquire_wikipedia()
 
@@ -69,18 +69,22 @@ def acquire_gscholar():
     """
 
     """
-    work_completed('acquire_gscholar', 0)
-    scrape_gscholar()
-    work_completed('acquire_gscholar', 1)
+    tasks = work_to_do()
 
+    if  50 in tasks:
+        work_completed('acquire_gscholar', 0)
+        scrape_gscholar()
+        work_completed('acquire_gscholar', 1)
 
-def acquire_gscholar_article():
-    """
+    if  50 in tasks:
+        work_completed('acquire_gscholar_json_to_dataframe', 0)
+        json_to_dataframe()
+        work_completed('acquire_gscholar_json_to_dataframe', 1)
 
-    """
-    work_completed('acquire_gscholar_article', 0)
-    scrape_gscholar_article()
-    work_completed('acquire_gscholar_article', 1)
+    if  50 in tasks:
+        work_completed('acquire_gscholar_article', 0)
+        scrape_gscholar_article()
+        work_completed('acquire_gscholar_article', 1)
 
 
 def acquire_patents():

@@ -76,6 +76,7 @@ def scrape_gscholar_article():
 
 # main programs
 
+
 def json_scraped():
     """
 
@@ -221,36 +222,32 @@ def json_to_dataframe():
     """
 
     """
-    df = pd.DataFrame()
+    name_dataset = 'gscholar'
 
     # retrieve archival json
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     src_path = retrieve_path(name_src)
     src_path = os.path.join(src_path, 'json')
 
-    for file in os.listdir(src_path):
+    df_all = pd.DataFrame()
 
-        src_file = os.path.join(src_path, file)
+    for term in list(df_search_terms['term']):
 
-        if not file.endswith('.json'): continue
+        df_term = pd.DataFrame()
 
-        f = os.path.join(retrieve_path('search_terms'))
-        print('f = ' + str(f))
-        df_search_terms = pd.read_csv(f)
+        for file in os.listdir(src_path):
 
-        for term in list(df_search_terms['term']):
-
+            if not file.endswith('.json'): continue
             if term not in str(file): continue
 
-            #print('src_file = ' + str(src_file))
-            df_file = pd.read_json(src_file)
-            df = pd.DataFrame.append(df, df_file)
-            try:
-                df = df.sort_values('citations', ascending=False)
-            except:
-                df = df
-
             df = df.drop_duplicates(subset = 'title_link')
+
+            name_dst = retrieve_path(name_dst)
+            df_file = os.path.join(name_dst, term + '.csv')
+            df_term = df_term.append(df)
+            df = df.drop_duplicates(subset = 'title_link')
+            df_term = clean_dataframe(df_term)
+            df_term.to_csv(df_file)
 
     # sort
     #df = df.sort_values('citations', ascending=False)
