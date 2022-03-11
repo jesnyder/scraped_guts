@@ -246,7 +246,7 @@ def json_to_dataframe():
             df = df.drop_duplicates(subset = 'title_link')
             df = clean_dataframe(df)
             df_path = os.path.join(retrieve_path(name_src), 'df')
-            df_file = os.path.join(name_dst, term + '.csv')
+            df_file = os.path.join(df_path, term + '.csv')
             df.to_csv(df_file)
 
 
