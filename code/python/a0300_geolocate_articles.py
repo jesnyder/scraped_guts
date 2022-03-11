@@ -32,16 +32,11 @@ def geolocate_articles():
     """
 
     """
-    print('began geolocate_articles')
-
-    # List task numbers to complete
-    tasks = [0]
-    write_paths()
-    if  0 in tasks: tasks = np.arange(1, 101, 1)
-    if  1 in tasks: find_address()
-    #if  2 in tasks: list_address()
-
-    print('completed geolocate_articles')
+    tasks = work_to_do()
+    work_completed('geolocate_articles', 0)
+    if  101 in tasks: find_address()
+    if  200 in tasks: list_address()
+    work_completed('geolocate_articles', 1)
 
 
 
@@ -581,7 +576,7 @@ def find_address():
     """
 
     #for name_dataset in ['clinical_trials', 'nih_awards', 'nsf_awards', 'patents']:
-    for name_dataset in retrieve_list('type_article'):
+    for name_dataset in retrieve_list('name_dataset'):
 
         print('name_dataset = ' + name_dataset)
 
