@@ -108,7 +108,7 @@ def scrape_gscholar_article():
 
         for tag in tags:
 
-            content = soup.find('meta', {'name':'description'}).get('content')
+            content = soup.find('meta', {'name':tag}).get('content')
             print(tag + ' = ')
             print(content)
             df[str(tag)] = [content]
