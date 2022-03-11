@@ -93,6 +93,14 @@ def scrape_gscholar_article():
 
         soup = BeautifulSoup(html, 'lxml')
 
+        for tag in soup.find_all("meta"):
+
+            if tag.get("property", None) == "og:title":
+                print tag.get("content", None)
+
+            elif tag.get("property", None) == "og:url":
+                print tag.get("content", None)
+
         type = soup.find("meta", property="DC.type")
         print('type = ')
         print(type)
