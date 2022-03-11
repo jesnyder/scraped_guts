@@ -72,8 +72,11 @@ def annual_count():
             if df.empty == True: continue
 
             df_annual = pd.DataFrame()
-            years = np.arange(min(list(df['ref_year'])), max(list(df['ref_year'])), 1)
-            df_annual['years'] = years
+            try:
+                years = np.arange(min(list(df['ref_year'])), max(list(df['ref_year'])), 1)
+                df_annual['years'] = years
+            except:
+                continue
 
             pdfs, cdfs = [], []
             for year in years:
