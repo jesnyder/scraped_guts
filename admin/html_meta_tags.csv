@@ -6,11 +6,15 @@ citation_author_institution
 citation_doi
 citation_id
 citation_issn
+citation_journal
+citation_journal_abbrev
 citation_journal_title
 citation_keywords
 citation_publisher
+citation_reference
 citation_title
 DC.contributor
+DC.Creator
 DC.creator
 DC.date
 DC.description
@@ -26,6 +30,7 @@ DCTERMS.bibliographicCitation
 DCTERMS.issued
 description
 fulltext_pdf
+keywords
 og-description
 og-title
 og-type

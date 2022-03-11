@@ -35,12 +35,65 @@ def geolocate_articles():
     """
 
     """
-    
+
     work_completed('geolocate_articles', 0)
+    if  work_to_do('list_gscholar_addresses'): list_gscholar_addresses()
     if  work_to_do('find_address'): find_address()
     if  work_to_do('list_address'): list_address()
     work_completed('geolocate_articles', 1)
 
+
+
+
+def list_gscholar_addresses():
+    """
+
+    """
+    df_new = pd.DataFrame()
+
+    name_dataset = 'gscholar'
+    names = name_paths(name_dataset)
+    df_dst_name = os.path.join(retrieve_path(names[1]), name_dataset + '_meta' + '.csv')
+    df = pd.read_csv(df_dst_name)
+    df = clean_dataframe(df)
+
+    for url in list(df['url']):
+
+        df_temp = df[(df['title_link'] == url)]
+        address = []
+
+        for name in df_temp.columns:
+
+            name = name.lower()
+            names_of_interest = ['author', 'institution', 'affiliation', 'contributor']
+            for name_of_interest in names_of_interest:
+
+                # check if any column names partially match column names
+                if name_of_interest in name:
+
+                    # add contents to list to check for addresses
+                    contents = list(df_temp[name])
+                    for content in contents:
+                        addresses.append(content)
+
+        address_found, lat_found, lon_found = [], [], []
+        for address in addresses:
+            lat, lon = findLatLong(address)
+            if lat != None:
+                address_found.append(address)
+                lat_found.append(lat)
+                lon_found.append(lon)
+
+        df_temp['address_found'] = [address_found]
+        df_temp['lat_found'] = [address_found]
+        df_temp['lon_found'] = [address_found]
+
+        df_new = df_new.append(df_temp)
+        df_new = clean_dataframe(df_new)
+        df_dst_name = os.path.join(retrieve_path(names[1]), name_dataset + '_meta' + '_geotagged'+ '.csv')
+        df_new.to_csv(df_dst_name)
+        print('df_new = ')
+        print(df_new)
 
 
 # completed programs
@@ -429,6 +482,36 @@ def build_gscholar_address(df):
     print('df = ')
     print(df)
     #df = clean_dataframe(df)
+
+    name_dataset = 'gscholar'
+    names = name_paths(name_dataset)
+    df_dst_name = os.path.join(retrieve_path(names[1]), name_dataset + '_meta' + '.csv')
+    df = pd.read_csv(df_dst_name)
+    df = clean_dataframe(df)
+
+    for url in list(df['url']):
+
+        df_temp = df[(df['title_link'] == url)]
+        address = []
+
+        for name in df.columns:
+
+            name = name.lower()
+            if 'author' in name or 'institution' in name or 'affiliation' in name or 'contributor' in name:
+
+                content = list(df_temp[name])
+
+        for address in addresses:
+            lat, lon = findLatLong(address)
+            if lat != None: return(address_complete, address, lat, lon)
+
+
+
+
+
+
+
+
 
     address_complete, address, lat, lon = None, None, None, None
     return(address_complete, address, lat, lon)
