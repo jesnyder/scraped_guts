@@ -156,7 +156,7 @@ def scrape_gscholar_article():
         print('df = ')
         print(df)
 
-        char_remove = ['/', '.', ':']
+        char_remove = ['/', '.', ':', 'httpswww']
         url_name = url
         for char in char_remove:
             url_name = url_name.replace(char, '')
