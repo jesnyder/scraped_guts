@@ -572,7 +572,9 @@ def missing_json_scraped():
 
         name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
         json_file = os.path.join(retrieve_path(name_src), 'json', title_short + '.json' )
-        json_file = open(json_file, 'w+')
+        if not os.path.exists(json_file):
+            os.makedirs(json_file)
+        json_file = open(json_file, 'w')
         json_file.write(data_json)
         json_file.close()
 
