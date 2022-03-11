@@ -109,9 +109,21 @@ def scrape_gscholar_article():
         tags.append('DC.type')
         tags.append('DC.title')
         tags.append('DC.date')
-        tags.append('DC.date')
         tags.append('DC.description')
         tags.append('DC.contributor')
+
+        tags.append('DC.Contributor')
+        tags.append('DC.Description')
+        tags.append('article:published_time')
+        tags.append('citation_journal_title')
+        tags.append('article:published_time')
+        tags.append('citation_publisher')
+        tags.append('citation_author')
+        tags.append('citation_author_institution')
+        tags.append('og-title')
+        tags.append('og-description')
+        tags.append('og-type')
+
 
         for tag in tags:
 
