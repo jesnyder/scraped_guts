@@ -91,7 +91,6 @@ def scrape_gscholar_article():
         df['time_retrieved'] = [retrieve_datetime()]
         df['url'] = [url]
 
-
         print(url)
 
         if '.pdf' not in str(url):
@@ -148,12 +147,14 @@ def scrape_gscholar_article():
         print('df = ')
         print(df)
 
-        char_remove = ['/', '.', ':', 'httpswww']
-        url_name = url
-        for char in char_remove:
-            url_name = url_name.replace(char, '')
-
-        url_name = url_name[:40]
+        try:
+            char_remove = ['/', '.', ':', 'httpswww']
+            url_name = url
+            for char in char_remove:
+                url_name = url_name.replace(char, '')
+            url_name = url_name[:40]
+        except:
+            url_name = 'none_found'
 
         df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
         df_dst = os.path.join(df_path, url_name + '.csv')
