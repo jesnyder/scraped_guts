@@ -37,11 +37,35 @@ def geolocate_articles():
     """
 
     work_completed('geolocate_articles', 0)
-    if  work_to_do('list_gscholar_addresses'): list_gscholar_addresses()
-    if  work_to_do('find_address'): find_address()
-    if  work_to_do('list_address'): list_address()
+
+    geolocate_gscholar()
+    #if  work_to_do('list_gscholar_addresses'): list_gscholar_addresses()
+    #if  work_to_do('find_address'): find_address()
+    #if  work_to_do('list_address'): list_address()
     work_completed('geolocate_articles', 1)
 
+
+def geolocate_gscholar():
+    """
+
+    """
+
+    for name_dataset in retrieve_list('name_dataset'):
+
+        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
+        work_completed('find_address_' + name_dataset, 0)
+
+        f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
+        df_ref = clean_dataframe(pd.read_csv(f))
+
+        print('df_ref = ')
+        print(df_ref)
+
+        print('df_ref.columns = ')
+        print(df_ref.columns)
+
+
+    wait(5)
 
 
 
