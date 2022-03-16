@@ -55,7 +55,7 @@ def list_gscholar_addresses():
     names = name_paths(name_dataset)
     df_dst_name = os.path.join(retrieve_path(names[1]), name_dataset + '_meta' + '.csv')
     print('df_dst_name = ' + df_dst_name)
-    df = pd.read_csv(df_dst_name)
+    df = pd.read_csv(df_dst_name, header=1)
     df = clean_dataframe(df)
 
     print('df = ')
