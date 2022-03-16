@@ -214,6 +214,7 @@ def json_scraped():
             for num in num_list:
 
                 print('num = ' + str(num))
+                num_str = str(num).zfill(2)
 
                 url = 'https://scholar.google.com/scholar?'
                 url = url + 'start=' + str(int(num*10))
@@ -227,7 +228,7 @@ def json_scraped():
                 print(url)
 
                 # check if recently scraped
-                if check_scraped('gscholar', term, year, num) == True:
+                if check_scraped('gscholar', term, year, num_str) == True:
                     print('json found.')
                     continue
 
@@ -305,7 +306,7 @@ def json_scraped():
                 print(data_json)
 
                 name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
-                json_file = os.path.join(retrieve_path(name_src), 'json', term + ' ' + str(year) + ' ' + str(num) + ' ' + str(retrieve_datetime())  + '.json' )
+                json_file = os.path.join(retrieve_path(name_src), 'json', term + ' ' + str(year) + ' ' + str(num_str) + ' ' + str(retrieve_datetime())  + '.json' )
                 json_file = open(json_file, 'w')
                 json_file.write(data_json)
                 json_file.close()
