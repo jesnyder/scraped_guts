@@ -129,7 +129,7 @@ def list_addresses(address, lat, lon):
     df = clean_dataframe(df)
     df = df.append(df_temp)
 
-    df.to_csv(os.path.join(retrieve_path('list_address'))
+    df.to_csv(os.path.join(retrieve_path('list_address')))
 
 
 # completed programs
