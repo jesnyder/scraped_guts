@@ -125,8 +125,6 @@ def list_addresses(address, lat, lon):
     print('df = ')
     print(df)
 
-
-
     if address in list(df['address']):
         df_temp = df[(df['address'] == address)]
         count = len(list(df_temp['address'])) + 1
@@ -649,7 +647,9 @@ def build_patent_address(df):
         print('address =   ')
         print(address)
         lat, lon = findLatLong(address)
-        if lat != None: return(address_complete, address, lat, lon)
+        if lat != None:
+            list_addresses(address, lat, lon)
+            return(address_complete, address, lat, lon)
 
 
     try:
