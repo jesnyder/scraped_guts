@@ -224,9 +224,6 @@ def json_scraped():
                 url = url + '&as_ylo=' + str(year)
                 url = url + '&as_yhi=' + str(year)
 
-                print('url = ')
-                print(url)
-
                 # check if recently scraped
                 if check_scraped('gscholar', term, year, num_str) == True:
                     print('json found.')
@@ -547,6 +544,9 @@ def retrieve_html(url):
     """
 
     """
+    
+    print('url = ')
+    print(url)
 
     headers = {
         'User-agent':
