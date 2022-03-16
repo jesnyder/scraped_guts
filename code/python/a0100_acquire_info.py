@@ -101,11 +101,10 @@ def acquire_patents():
 
     for term in search_terms:
         name_dataset = 'patents'
-        #result_limits = [5, 10, 7000, 8000, 9000, 10000, 15000, 20000]
-        result_limits = retrieve_format('patent_result_limits')
-        for result_limit in result_limits:
-            query_patents(name_dataset, term, result_limit)
-
+        result_limits = [5, 10, 7000, 8000, 9000, 10000, 15000, 20000]
+        #result_limits = retrieve_format('patent_result_limits')
+        query_patents(name_dataset, term, result_limits)
+ 
     work_completed('acquire_patents', 1)
 
 
