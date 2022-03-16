@@ -337,6 +337,7 @@ def json_to_dataframe():
             df = pd.read_json(json_src)
 
             df_path = os.path.join(retrieve_path(name_src), 'df')
+
             df_file = os.path.join(df_path, name_dataset + '.csv')
             df_all = df_all.append(df)
             df_all = df_all.drop_duplicates(subset = 'title_link')
@@ -346,6 +347,9 @@ def json_to_dataframe():
             if term not in str(file): continue
 
             df_path = os.path.join(retrieve_path(name_src), 'df')
+            if not os.path.exists(df_path):
+                os.makedirs(df_path)
+
             df_file = os.path.join(df_path, term + '.csv')
             df_term = df_term.append(df)
             df_term = df_term.drop_duplicates(subset = 'title_link')
@@ -554,12 +558,13 @@ def retrieve_html(url):
         }
 
     time_string = retrieve_datetime()
-    wait_time = random.random()*60 + 70
+    wait_time = random.random()*60 + 60
     print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
     time.sleep(wait_time)
 
     html = requests.get(url, headers=headers, proxies=proxies).text
     soup = BeautifulSoup(html, 'lxml')
+
     return(soup)
 
 
