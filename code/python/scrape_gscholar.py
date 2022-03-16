@@ -204,11 +204,16 @@ def json_scraped():
         date = currentDateTime.date()
 
         #for year in range(2013, int(date.strftime("%Y")), 1):
-        for year in range(int(date.strftime("%Y")), 2013, -1):
 
-            if year != int(date.strftime("%Y")):
-                work_completed('begin_acquire_gscholar_json_scraped_' + str(year), 0)
+        try:
+            search_year_min = retrieve_format('search_year_min')
+            search_year_min = int(search_year_min)
+        except:
+            search_year_min = 2000
 
+        for year in range(int(date.strftime("%Y")), search_year_min, -1):
+
+            work_completed('begin_acquire_gscholar_json_' + str(year), 0)
 
             num_list = np.arange(0, 20, 1, dtype=int)
             for num in num_list:
@@ -297,7 +302,7 @@ def json_scraped():
                 if data == []: break
 
                 if len(data) < 10 and year != int(date.strftime("%Y")):
-                    work_completed('begin_acquire_gscholar_json_scraped_' + str(year), 1)
+                    work_completed('begin_acquire_gscholar_json_' + str(year), 1)
 
                 data_json = json.dumps(data, indent = 2, ensure_ascii = False)
                 print(data_json)
@@ -544,7 +549,7 @@ def retrieve_html(url):
     """
 
     """
-    
+
     print('url = ')
     print(url)
 

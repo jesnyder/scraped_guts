@@ -132,34 +132,45 @@ def retrieve_format(name):
     user_provided/admin/format.csv
     """
 
-    f = os.path.join(retrieve_path('format'))
-    df = pd.read_csv(f)
+    a = os.path.join('user_provided' 'admin' 'format.csv')
+    b = os.path.join('core_code' 'admin' 'format.csv')
+    c = os.path.join('program_generated' 'admin' 'format.csv')
 
-    # find the value from the name
-    df = df.loc[df['name'] == name]
+    for f in [a, b, c]:
 
-    value = list(df['value'])
-    value = value[0]
-    value = value.split(' ')
+        try:
 
-    if name == 'markeredgewidth': return(float(value[0]))
-    if name == 'plot_font_size': return(int(value[0]))
+            #f = os.path.join(retrieve_path('format'))
+            df = pd.read_csv(f)
 
-    try:
-        value = [int(item) for item in value]
-    except:
-        value = [str(item) for item in value]
+            # find the value from the name
+            df = df.loc[df['name'] == name]
 
-    if name == 'fig_wid': value = int(value[0])
-    if name == 'fig_hei': value = int(value[0])
+            value = list(df['value'])
+            value = value[0]
+            value = value.split(' ')
 
-    try:
-        if len(value) == 1:
-            value = int(value[0])
-    except:
-        hello = 'hello'
+            if name == 'markeredgewidth': return(float(value[0]))
+            if name == 'plot_font_size': return(int(value[0]))
 
-    return(value)
+            try:
+                value = [int(item) for item in value]
+            except:
+                value = [str(item) for item in value]
+
+            if name == 'fig_wid': value = int(value[0])
+            if name == 'fig_hei': value = int(value[0])
+
+            try:
+                if len(value) == 1:
+                    value = int(value[0])
+            except:
+                hello = 'hello'
+
+            return(value)
+
+        except:
+            hello = 'hello'
 
 
 def retrieve_list(name):

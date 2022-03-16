@@ -12,3 +12,4 @@ scatter_size_min,10
 scatter_size_max,350
 colorTransparency,0.7
 markeredgewidth,0.2
+search_year_min,2013
