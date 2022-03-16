@@ -211,7 +211,7 @@ def json_scraped():
         except:
             search_year_min = 2000
 
-        for year in range(int(date.strftime("%Y")), search_year_min, -1):
+        for year in range(int(date.strftime("%Y")), search_year_min-1, -1):
 
             work_completed('begin_acquire_gscholar_json_' + str(year), 0)
 
