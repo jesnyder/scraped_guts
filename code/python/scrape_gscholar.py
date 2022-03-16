@@ -196,16 +196,6 @@ def json_scraped():
 
     """
 
-    headers = {
-        'User-agent':
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
-        }
-
-    proxies = {
-        'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
-        }
-
-
     for term in retrieve_list('search_terms'):
 
         print('term = ' + term)
@@ -241,17 +231,7 @@ def json_scraped():
                     print('json found.')
                     continue
 
-                if year == 2022 and num > 3: continue
-
-                time_string = retrieve_datetime()
-                wait_time = random.random()*60 + 60
-                print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
-                time.sleep(wait_time)
-
-                html = requests.get(url, headers=headers, proxies=proxies).text
-
-                soup = BeautifulSoup(html, 'lxml')
-                #print(soup)
+                soup = retrieve_html(url)
 
                 # check for errors
                 if error_check(soup) == True:
@@ -462,15 +442,6 @@ def missing_json_scraped():
 
     """
 
-    headers = {
-        'User-agent':
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
-        }
-
-    proxies = {
-        'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
-        }
-
     try:
         df = pd.read_csv(os.path.join(retrieve_path('gscholar_missing')))
         titles = list(df['title'])
@@ -498,20 +469,7 @@ def missing_json_scraped():
             print('json found.')
             continue
 
-
-        time_string = retrieve_datetime()
-        wait_time = random.random()*60 + 30
-        print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
-        time.sleep(wait_time)
-
-        html = requests.get(url, headers=headers, proxies=proxies).text
-
-        # Delay scraping to circumvent CAPCHA
-        time.sleep(wait_time)
-        time_string = retrieve_datetime()
-        print('Wait: ' + time_string)
-
-        soup = BeautifulSoup(html, 'lxml')
+        soup = retrieve_html(url)
 
         # check for errors
         if error_check(soup) == True: break
@@ -578,7 +536,30 @@ def missing_json_scraped():
         json_file = open(json_file, 'w+')
         json_file.write(data_json)
         json_file.close()
- 
+
+
+def retrieve_html(url):
+    """
+
+    """
+
+    headers = {
+        'User-agent':
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+        }
+
+    proxies = {
+        'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
+        }
+
+    time_string = retrieve_datetime()
+    wait_time = random.random()*60 + 70
+    print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+    time.sleep(wait_time)
+
+    html = requests.get(url, headers=headers, proxies=proxies).text
+    soup = BeautifulSoup(html, 'lxml')
+    return(soup)
 
 if __name__ == "__main__":
     main()
