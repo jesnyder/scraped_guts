@@ -134,6 +134,9 @@ def list_addresses(address, lat, lon):
     df_temp['count'] = [count]
     df = clean_dataframe(df)
     df = df.append(df_temp)
+    df = df.sort_values('count', ascending=False)
+    df = df.drop_duplicates(subset='address')
+    df = clean_dataframe(df)
     df.to_csv(os.path.join(retrieve_path('list_address')))
 
 
