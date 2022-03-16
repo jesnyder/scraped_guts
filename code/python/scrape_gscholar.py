@@ -387,7 +387,7 @@ def check_scraped(name_dataset, term, year, num):
             file_term = re.findall(pattern, file, flags)
             file_term = file_term[0]
             if file_term != term: continue
-            #print('file_term = ' + file_term + ' term = ' + term)
+            print('file_term = ' + file_term + ' term = ' + term)
 
             # find and compare file year to year passed into the function
             pattern = '[0-9]{4}'
@@ -411,16 +411,16 @@ def check_scraped(name_dataset, term, year, num):
 
             a = file_date_saved.split('-')
             a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
-            #print('a = ' + str(a))
+            print('a = ' + str(a))
             b = datetime.datetime.today()
-            #print('b = ' + str(b))
+            print('b = ' + str(b))
             v = b-a
-            #print('v = ' + str(v))
+            print('v = ' + str(v))
             v = int(v.days)
-            #print('v = ' + str(v))
+            print('v = ' + str(v))
             if v < 3:
-                #print('date match: ' + str(v))
-                #print('too many days lapsed since last query.')
+                print('date match: ' + str(v))
+                print('too many days lapsed since last query.')
                 return(True)
 
     return(False)
