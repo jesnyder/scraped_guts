@@ -67,7 +67,7 @@ def list_gscholar_addresses():
     for url in list(df['url']):
 
         df_temp = df[(df['title_link'] == url)]
-        address = []
+        addresses = []
 
         for name in df_temp.columns:
 
