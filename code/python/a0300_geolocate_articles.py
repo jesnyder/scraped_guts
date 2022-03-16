@@ -80,6 +80,7 @@ def list_gscholar_addresses():
 
                     # add contents to list to check for addresses
                     contents = list(df_temp[name])
+                    if len(contents) == 0: continue
                     for content in contents:
                         addresses.append(content)
 
