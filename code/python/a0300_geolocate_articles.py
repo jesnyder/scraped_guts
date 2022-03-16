@@ -79,11 +79,13 @@ def list_gscholar_addresses():
                 if name_of_interest in name:
 
                     # add contents to list to check for addresses
-                    contents = list(df_temp[name])
-                    if len(contents) == 0: continue
-                    for content in contents:
-                        addresses.append(content)
-
+                    try:
+                        contents = list(df_temp[name])
+                        for content in contents:
+                            addresses.append(content)
+                    except:
+                        print('not found')
+                        
         address_found, lat_found, lon_found = [], [], []
         for address in addresses:
             lat, lon = findLatLong(address)
