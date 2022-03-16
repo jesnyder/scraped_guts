@@ -337,6 +337,8 @@ def json_to_dataframe():
             df = pd.read_json(json_src)
 
             df_path = os.path.join(retrieve_path(name_src), 'df')
+            if not os.path.exists(df_path):
+                os.makedirs(df_path)
 
             df_file = os.path.join(df_path, name_dataset + '.csv')
             df_all = df_all.append(df)
@@ -347,9 +349,6 @@ def json_to_dataframe():
             if term not in str(file): continue
 
             df_path = os.path.join(retrieve_path(name_src), 'df')
-            if not os.path.exists(df_path):
-                os.makedirs(df_path)
-
             df_file = os.path.join(df_path, term + '.csv')
             df_term = df_term.append(df)
             df_term = df_term.drop_duplicates(subset = 'title_link')
