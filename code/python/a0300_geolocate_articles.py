@@ -82,10 +82,12 @@ def list_gscholar_addresses():
                     try:
                         contents = list(df_temp[name])
                         for content in contents:
+                            print('cotents = ')
+                            print(contents)
                             addresses.append(content)
                     except:
                         print('not found')
-                        
+
         address_found, lat_found, lon_found = [], [], []
         for address in addresses:
             lat, lon = findLatLong(address)
