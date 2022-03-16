@@ -533,6 +533,9 @@ def build_gscholar_address(df):
     df = pd.read_csv(df_dst_name)
     df = clean_dataframe(df)
 
+    print('df = ')
+    print(df)
+
     for url in list(df['url']):
 
         df_temp = df[(df['title_link'] == url)]
