@@ -46,8 +46,8 @@ def acquire_info():
     if work_to_do('acquire_nsf_awards'): acquire_nsf_awards()
     if work_to_do('acquire_nih_awards'): acquire_nih_awards()
     if work_to_do('acquire_clinical_trials'): acquire_clinical_trials()
-    if work_to_do('acquire_gscholar'): acquire_gscholar()
     if work_to_do('acquire_patents'): acquire_patents()
+    if work_to_do('acquire_gscholar'): acquire_gscholar()
     if work_to_do('acquire_wikipedia'): acquire_wikipedia()
     work_completed('acquire_info', 1)
 
