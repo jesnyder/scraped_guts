@@ -121,7 +121,7 @@ def list_addresses(address, lat, lon):
     df_temp['lon'] = [lon]
     df_temp['count'] = [1]
 
-    df = pd.read_csv(os.path.join(retrieve_path('list_address'))
+    df = pd.read_csv(os.path.join(retrieve_path('list_address')))
 
     print('df = ')
     print(df)
