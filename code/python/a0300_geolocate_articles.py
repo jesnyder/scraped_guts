@@ -119,16 +119,23 @@ def list_addresses(address, lat, lon):
     df_temp['address'] = [address]
     df_temp['lat'] = [lat]
     df_temp['lon'] = [lon]
-    df_temp['count'] = [1]
 
     df = pd.read_csv(os.path.join(retrieve_path('list_address')))
 
     print('df = ')
     print(df)
 
+
+
+    if address in list(df['address']):
+        df_temp = df[(df['address'] == address)]
+        count = len(list(df_temp['address'])) + 1
+    else:
+        count = 1
+
+    df_temp['count'] = [count]
     df = clean_dataframe(df)
     df = df.append(df_temp)
-
     df.to_csv(os.path.join(retrieve_path('list_address')))
 
 
