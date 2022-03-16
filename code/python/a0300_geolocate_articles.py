@@ -89,12 +89,15 @@ def list_gscholar_addresses():
                         print('not found')
 
         address_found, lat_found, lon_found = [], [], []
-        for address in addresses:
-            lat, lon = findLatLong(address)
-            if lat != None:
-                address_found.append(address)
-                lat_found.append(lat)
-                lon_found.append(lon)
+        try:
+            for address in addresses:
+                lat, lon = findLatLong(address)
+                if lat != None:
+                    address_found.append(address)
+                    lat_found.append(lat)
+                    lon_found.append(lon)
+        except:
+            print('not found')
 
         df_temp['address_found'] = [address_found]
         df_temp['lat_found'] = [address_found]
