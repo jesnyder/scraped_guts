@@ -111,6 +111,23 @@ def list_gscholar_addresses():
         print(df_new)
 
 
+def list_addresses(address, lat, lon):
+    """
+
+    """
+    df_temp = pd.DataFrame()
+    df_temp['address'] = [address]
+    df_temp['lat'] = [lat]
+    df_temp['lon'] = [lon]
+    df_temp['count'] = [1]
+
+    df = pd.read_csv(os.path.join(retrieve_path('list_address'))
+    df = clean_dataframe(df)
+    df = df.append(df_temp)
+
+    df.to_csv(os.path.join(retrieve_path('list_address'))
+
+
 # completed programs
 
 def build_clinical_address(df):
@@ -491,9 +508,7 @@ def build_nsf_address(df):
 
 
 def build_gscholar_address(df):
-    """
 
-    """
     print('df = ')
     print(df)
     #df = clean_dataframe(df)
@@ -518,14 +533,9 @@ def build_gscholar_address(df):
 
         for address in addresses:
             lat, lon = findLatLong(address)
-            if lat != None: return(address_complete, address, lat, lon)
-
-
-
-
-
-
-
+            if lat != None:
+                list_addresses(address, lat, lon)
+                return(address_complete, address, lat, lon)
 
 
     address_complete, address, lat, lon = None, None, None, None
