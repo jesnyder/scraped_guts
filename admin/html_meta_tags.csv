@@ -1,6 +1,5 @@
 tag
 article:published_time
-article:published_time
 citation_author
 citation_author_institution
 citation_doi
@@ -10,6 +9,7 @@ citation_journal
 citation_journal_abbrev
 citation_journal_title
 citation_keywords
+citation_publication_date
 citation_publisher
 citation_reference
 citation_title
@@ -28,12 +28,17 @@ DC.type
 DCTERMS.abstract
 DCTERMS.bibliographicCitation
 DCTERMS.issued
+Description
 description
 fulltext_pdf
 keywords
 og-description
+og:description
+og:site_name
 og-title
+og:title
 og-type
+og:url
 prism.issn
 prism.number
 prism.publicationName
