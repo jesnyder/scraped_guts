@@ -93,6 +93,7 @@ def list_gscholar_addresses():
             for address in addresses:
                 lat, lon = findLatLong(address)
                 if lat != None:
+                    list_addresses(address, lat, lon)
                     address_found.append(address)
                     lat_found.append(lat)
                     lon_found.append(lon)
