@@ -104,7 +104,7 @@ def list_gscholar_addresses():
         df_temp['lon_found'] = [address_found]
 
         df_new = df_new.append(df_temp)
-        df_new = clean_dataframe(df_new)
+        #df_new = clean_dataframe(df_new)
         df_dst_name = os.path.join(retrieve_path(names[1]), name_dataset + '_meta' + '_geotagged'+ '.csv')
         df_new.to_csv(df_dst_name)
         print('df_new = ')
