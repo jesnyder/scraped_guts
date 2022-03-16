@@ -57,6 +57,12 @@ def list_gscholar_addresses():
     df = pd.read_csv(df_dst_name)
     df = clean_dataframe(df)
 
+    print('df = ')
+    print(df)
+
+    print('df.columns')
+    print(df.columns)
+
     for url in list(df['url']):
 
         df_temp = df[(df['title_link'] == url)]
