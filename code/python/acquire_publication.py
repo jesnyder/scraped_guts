@@ -78,14 +78,15 @@ def query_crossref():
             print(keys)
             print(values)
 
+            df_doi = pd.DataFrame()
+
             for i in range(len(keys)):
                 print('key = ')
                 print(keys[i])
 
                 print('value = ')
                 print(values[i])
-
-                df_doi = pd.DataFrame()
+                
                 df_doi[keys[i]] = [values[i]]
 
                 print('df_doi = ')
