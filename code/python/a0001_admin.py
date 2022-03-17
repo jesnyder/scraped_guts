@@ -159,11 +159,13 @@ def retrieve_format(name):
             if name == 'markeredgewidth': return(float(value[0]))
             if name == 'plot_font_size': return(int(value[0]))
 
+            """
             try:
                 value = [int(item) for item in value]
             except:
                 value = [str(item) for item in value]
-
+            """
+            
             if name == 'fig_wid': value = int(value[0])
             if name == 'fig_hei': value = int(value[0])
 
