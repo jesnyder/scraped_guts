@@ -58,8 +58,8 @@ def geolocate_dataset():
         f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
         df = clean_dataframe(pd.read_csv(f))
 
-        print('df.loc[:,0] = ')
-        print(df.loc[:,0])
+        print('df.iloc[:,0] = ')
+        print(df.iloc[:,0])
 
         df['address'] = [None] * len(list(df.loc[:,0]))
         df['lat'] = [None] * len(list(df.loc[:,0]))
