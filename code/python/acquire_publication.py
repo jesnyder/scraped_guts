@@ -480,6 +480,8 @@ def aggregate_df():
     """
 
     """
+
+    name_dataset = 'gscholar'
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
 
 
