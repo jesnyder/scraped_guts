@@ -54,6 +54,7 @@ def search_crossref():
 
         for title in list(df['title']):
             works = Works()
+            print('title = ' + str(title))
             w2 = works.query(title=title)
 
 
