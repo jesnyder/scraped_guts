@@ -152,7 +152,7 @@ def search_gscholar():
 
         search_year_min = retrieve_format('search_year_min')
         search_year_min = int(search_year_min)-1
-        print('search_year_min = ' =str(search_year_min))
+        print('search_year_min = ' + str(search_year_min))
         for year in range(int(date.strftime("%Y")), search_year_min, -1):
 
             work_completed('begin_acquire_gscholar_json_' + str(year), 0)
