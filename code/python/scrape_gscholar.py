@@ -171,7 +171,8 @@ def aggregate_articles():
     df_path_article = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
     df_path_search = os.path.join(retrieve_path(name_src), 'df')
 
-    for df_path in [df_path_article, df_path_search]:
+    #for df_path in [df_path_article, df_path_search]:
+    for df_path in [df_path_article]:
 
         for article_file in os.listdir(df_path):
 
@@ -182,7 +183,7 @@ def aggregate_articles():
 
             df_all = df_all.append(df_article)
             df_all = clean_dataframe(df_all)
-            df_all = df_all.drop_duplicates()
+            df_all = df_all.drop_duplicates(subset='title_link')
 
             #df_path_save = os.path.join(retrieve_path(name_dst)
             df_dst_name = os.path.join(retrieve_path(name_dst), name_dataset + '_meta' + '.csv')
