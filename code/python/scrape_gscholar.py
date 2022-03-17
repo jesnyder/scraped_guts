@@ -90,6 +90,8 @@ def check_scraped(name_dataset, term, year, num):
 
     for file in os.listdir(src_path):
 
+        print('file = ' + file)
+
         # check specific gscholar search
         file_split = file.split('.')
         if file_split[0] == term: return(True)
@@ -101,6 +103,7 @@ def check_scraped(name_dataset, term, year, num):
         file_term = file_term[0]
         if file_term != term: continue
         print('file_term = ' + file_term + ' term = ' + term)
+
 
         # find and compare file year to year passed into the function
         pattern = '[0-9]{4}'
