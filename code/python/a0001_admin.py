@@ -150,11 +150,17 @@ def retrieve_format(name):
             print(df)
 
             value = list(df['value'])
-            value = value[0]
-            value = value.split(' ')
-
             print('value = ')
             print(value)
+
+            value = value[0]
+            print('value = ')
+            print(value)
+
+            value = value.split(' ')
+            print('value = ')
+            print(value)
+
 
             if name == 'markeredgewidth': return(float(value[0]))
             if name == 'plot_font_size': return(int(value[0]))
@@ -165,7 +171,7 @@ def retrieve_format(name):
             except:
                 value = [str(item) for item in value]
             """
-            
+
             if name == 'fig_wid': value = int(value[0])
             if name == 'fig_hei': value = int(value[0])
 
