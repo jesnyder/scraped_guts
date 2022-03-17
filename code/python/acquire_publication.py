@@ -92,6 +92,7 @@ def query_crossref():
                 #print('df_doi = ')
                 #print(df_doi.T)
 
+            data = json.load(w1)
             affiliation = w1['author']['affiliation']['name']
             print('affiliation = ')
             print(affiliation)
