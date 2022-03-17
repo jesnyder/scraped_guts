@@ -140,7 +140,7 @@ def retrieve_format(name):
 
         try:
 
-            #f = os.path.join(retrieve_path('format'))
+            f = os.path.join(retrieve_path('format'))
             df = pd.read_csv(f)
 
             # find the value from the name
