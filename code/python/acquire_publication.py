@@ -53,7 +53,7 @@ def search_crossref():
         df = pd.read_csv(df_file)
 
         for title in list(df['title']):
-
+            works = Works()
             w2 = works.query(title=title)
 
 
