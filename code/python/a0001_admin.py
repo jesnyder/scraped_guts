@@ -147,8 +147,8 @@ def retrieve_format(name):
             # find the value from the name
             df = df.loc[df['name'] == name]
 
-            print('df =')
-            print(df)
+            #print('df =')
+            #print(df)
 
             value = list(df['value'])
             value = value[0]
