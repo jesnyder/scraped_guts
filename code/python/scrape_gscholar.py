@@ -98,12 +98,11 @@ def check_scraped(name_dataset, term, year, num):
             if len(list(df['year'])) < num_int: return(True)
         except:
             hello = 'hello'
-            
+
 
     for file in os.listdir(src_path):
 
         #print('file = ' + file)
-
         # check specific gscholar search
         file_split = file.split('.')
         if file_split[0] == term: return(True)
@@ -276,7 +275,7 @@ def search_gscholar():
         search_year_min = int(retrieve_format('search_year_min'))-1
         for year in range(int(date.strftime("%Y")), search_year_min, -1):
 
-            work_completed('begin_acquire_gscholar_json_' + str(year), 0)
+            #work_completed('begin_acquire_gscholar_json_' + str(year), 0)
             for num in np.arange(0, 100, 1, dtype=int):
 
                 num_str = str(num).zfill(3)
@@ -298,8 +297,8 @@ def search_gscholar():
 
                 data = html_to_json(soup)
                 if data == []: break
-                if len(data) < 10 and year != int(date.strftime("%Y")):
-                    work_completed('begin_acquire_gscholar_json_' + str(year), 1)
+                #if len(data) < 10 and year != int(date.strftime("%Y")):
+                    #work_completed('begin_acquire_gscholar_json_' + str(year), 1)
 
                 data_json = json.dumps(data, indent = 2, ensure_ascii = False)
                 print(data_json)
