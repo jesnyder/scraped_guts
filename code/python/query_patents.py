@@ -34,9 +34,7 @@ def query_patents(name_dataset, term, result_limits):
 
   for term in retrieve_list('search_terms'):
 
-      limits = retrieve_format('patent_result_limits')
-      print('limits = ')
-      print(limits)
+      limits = [50, 100, 200, 500, 1000, 2000, 4000, 6000, 8000, 10000]
       for result_limit in limits:
 
               print('term = ' + term)
