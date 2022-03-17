@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import datetime
+from habanero import Crossref
 import json
 import lxml
 import numpy as np
@@ -26,52 +27,30 @@ from a0001_admin import work_to_do
 Reference: https://python.plainenglish.io/scrape-google-scholar-with-python-fc6898419305
 """
 
-def scrape_publication():
+def acquire_publication():
     """
     Maximum information
     Minimal scrapes
     Check for redundency
     """
 
-    search_gscholar()
-    json_to_dataframe()
-    #aggregate_json()
+    query_crossref()
 
-    search_articles()
-    aggregate_df()
+
+def query_cross_ref():
+    """
 
     """
 
-    # scrape json of specific publications by their title
-    work_completed('acquire_gscholar_missing_json_scraped', 0)
-    missing_json_scraped()
-    work_completed('acquire_gscholar_missing_json_scraped', 1)
+    # CrossRef
+    # https://www.crossref.org/blog/python-and-ruby-libraries-for-accessing-the-crossref-api/
 
-    # scrape json from gscholar
-    work_completed('gscholar_json_scraped', 0)
-    json_scraped()
-    work_completed('gscholar_json_scraped', 1)
+    cr = Crossref()
+    x = cr.works(query = "ecology", limit = 5)
+    #x['message']['total-results']
+    print([ z['DOI'] for z in x['message']['items'] ])
 
-    # scrape html from gscholar and save
 
-    # parse json from scraped html
-
-    # convert json to df
-    work_completed('gscholar_json_to_dataframe', 0)
-    json_to_dataframe()
-    work_completed('gscholar_json_to_dataframe', 1)
-
-    work_completed('gscholar_aggregate_articles', 0)
-    aggregate_articles()
-    work_completed('gscholar_aggregate_articles', 1)
-
-    # scrape metadata for each article as html
-
-    # scrape metaata for each article as json
-
-    # add article metadata to df
-
-    """
 
 
 def check_scraped(name_dataset, term, year, num):
