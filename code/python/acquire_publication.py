@@ -76,7 +76,7 @@ def query_crossref():
                 print('key = ')
                 print(key)
 
-                key_str = json.dumps(key)
+                key_str = json.dumps(w1.key)
                 print('key_str = ')
                 print(key_str)
 
