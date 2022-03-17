@@ -56,7 +56,7 @@ def geolocate_dataset():
 
         try:
             f = os.path.join(retrieve_path(name_dst), name_dataset + '_meta' + '.csv')
-            df = clean_dataframe(pd.read_csv(f))
+            df = clean_dataframe(pd.read_csv(f), header=1)
         except:
             f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
             df = clean_dataframe(pd.read_csv(f))
@@ -96,7 +96,7 @@ def geolocate_gscholar(df):
     """
     print('df = ')
     print(df)
-    
+
     print('df.columns = ')
     print(df.columns)
 
