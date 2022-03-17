@@ -86,7 +86,7 @@ def query_crossref():
                 print(keys[i])
 
                 print('value = ')
-                print(value[i])
+                print(values[i])
 
             for key in keys:
                 print('key = ')
