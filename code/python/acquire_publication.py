@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from crossref.restful import Works
 import datetime
 from habanero import Crossref
 import json
@@ -54,7 +55,12 @@ def query_crossref():
         print(x)
         print([ z['DOI'] for z in x['message']['items'] ])
 
+        works = Works()
+        w1 = works.query(bibliographic='zika', author='johannes', publisher_name='Wiley-Blackwell')
 
+        for item in w1:
+            print(item['title'])
+            
         time.sleep(30)
 
 
