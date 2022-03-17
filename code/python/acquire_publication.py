@@ -86,7 +86,7 @@ def query_crossref():
                         values2 = list(item.values())
 
                         for j in range(len(keys2)):
-                            key_name = str(keys[i] + '_' + str(item_num) + '_' + keys2[j])
+                            key_name = str(key_name + '_' + str(item_num) + '_' + keys2[j])
                             df_doi[key_name] = [values2[j]]
 
                             if keys2[j] == 'affiliation':
@@ -98,7 +98,7 @@ def query_crossref():
                                     values3 = list(item2.values())
 
                                     for k in range(len(keys2)):
-                                        key_name = str(keys[i] + '_' + str(item_num) + '_' + keys2[j] + '_' + str(item_num_2) + '_' + keys3[k])
+                                        key_name = str(key_name + '_' + str(item_num_2) + '_' + keys3[k])
                                         df_doi[key_name] = [values3[k]]
 
 
