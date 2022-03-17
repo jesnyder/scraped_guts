@@ -74,6 +74,9 @@ def query_crossref():
             for key in w1.keys():
                 print(key)
 
+                key_str = json.dumps(key)
+                print(key_str)
+
 
             data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
             #print(data_json)
