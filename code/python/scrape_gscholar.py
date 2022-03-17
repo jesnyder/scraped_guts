@@ -289,7 +289,7 @@ def search_gscholar():
 
                 # check if recently scraped
                 if check_scraped('gscholar', term, year, num_str):
-                    print('found: ' + 'gscholar' + ' ' + term +  ' ' + year + ' ' + num_str)
+                    print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + num_str)
                     continue
 
                 soup = retrieve_html(url)
