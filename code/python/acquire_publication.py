@@ -72,9 +72,12 @@ def query_crossref():
 
             keys = w1.keys()
             for key in w1.keys():
+
+                print('key = ')
                 print(key)
 
                 key_str = json.dumps(key)
+                print('key_str = ')
                 print(key_str)
 
 
