@@ -87,12 +87,24 @@ def query_crossref():
                 print('value = ')
                 print(values[i])
 
-                df_doi[keys[i]] = [values[i]]
+                key_name = str(keys[i])
+                df_doi[key_name] = [values[i]]
+
+                if keys[i] == 'author':
+
+                    w2 = values[i]
+                    keys2 = list(w2.keys())
+                    values2 = list(w2.values())
+
+                    for j in range(len(keys2)):
+
+                        key_name = str(keys[i] + '_' + keys2[j])
+                        df_doi[key_name] = [values2[j]]
+
 
                 #print('df_doi = ')
                 #print(df_doi.T)
 
-            data = json.load(w1)
             affiliation = w1['author']['affiliation']['name']
             print('affiliation = ')
             print(affiliation)
