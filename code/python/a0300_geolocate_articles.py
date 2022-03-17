@@ -64,7 +64,10 @@ def geolocate_dataset():
 
         print('df.columns = ')
         print(df.columns)
-        
+
+        urls = list(df['url'])
+        url = list(df[['title_link']])
+
         for i in list(df['url']):
 
             print(name_dataset + ' ')
