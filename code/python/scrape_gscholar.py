@@ -116,7 +116,7 @@ def check_scraped(name_dataset, term, year, num):
         file_num = re.findall(pattern, file)
         print('file_num = ')
         print(file_num)
-        file_num = file_num[0]
+        file_num = file_num[1]
         if str(file_num) != str(num): continue
         print('file_num = ' + file_num + ' num = ' + str(num))
 
