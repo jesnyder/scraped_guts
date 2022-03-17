@@ -107,14 +107,6 @@ def query_crossref():
                 #print('df_doi = ')
                 #print(df_doi.T)
 
-            affiliation = w1['author']['affiliation']['name']
-            print('affiliation = ')
-            print(affiliation)
-            df_doi['affiliation'] = [affiliation]
-
-            key_str = json.dumps(w1.get(key))
-            print('key_str = ')
-
 
             time.sleep(30)
             df = df.append(df_doi)
