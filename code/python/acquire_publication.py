@@ -55,7 +55,7 @@ def query_crossref():
         print(x)
         print([ z['DOI'] for z in x['message']['items'] ])
 
-        dois = z['DOI'] for z in x['message']['items']
+        dois = [z['DOI'] for z in x['message']['items']
         for doi in dois:
 
             works = Works()
