@@ -61,27 +61,22 @@ def query_crossref():
         for doi in dois:
 
             works = Works()
-            w1 = works.query(bibliographic='zika', author='johannes', publisher_name='Wiley-Blackwell')
 
+            """
+            w1 = works.query(bibliographic='zika', author='johannes', publisher_name='Wiley-Blackwell')
             for item in w1:
                 print(item['title'])
-
             w1 = works.doi('10.1590/0102-311x00133115')
             print(w1)
+            """
 
             w1 = works.doi(doi)
-            print(w1)
+            #print(w1)
 
-
-
-            keys = w1.keys()
-            values = w1.values()
-
-            print(keys)
-            print(values)
-
-            keys = list(keys)
-            values = list(values)
+            keys = list(w1.keys())
+            values = list(w1.values())
+            #print(keys)
+            #print(values)
 
             for i in range(len(keys)):
                 print('key = ')
@@ -93,9 +88,10 @@ def query_crossref():
                 df_doi = pd.DataFrame()
                 df_doi[keys[i]] = [values[i]]
 
-            print('df_doi = ')
-            print(df_doi.T)
+                print('df_doi = ')
+                print(df_doi.T)
 
+            time.sleep(30)
             df = df.append(df_doi)
             print('df = ')
             print(df)
