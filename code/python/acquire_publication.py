@@ -70,9 +70,13 @@ def query_crossref():
             w1 = works.doi(doi)
             print(w1)
 
+
+
             keys = w1.keys()
             values = w1.values()
 
+            print(keys)
+            print(values)
 
             for i in range(len(keys)):
                 print('key = ')
