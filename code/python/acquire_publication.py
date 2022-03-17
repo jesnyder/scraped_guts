@@ -70,7 +70,10 @@ def query_crossref():
             w1 = works.doi(doi)
             print(w1)
 
-            print(w1.keys())
+            keys = w1.keys()
+            for key in w1.keys():
+                print(key)
+
 
             data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
             #print(data_json)
