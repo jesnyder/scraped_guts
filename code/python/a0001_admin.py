@@ -136,7 +136,7 @@ def retrieve_format(name):
     b = os.path.join('core_code' 'admin' 'format.csv')
     c = os.path.join('program_generated' 'admin' 'format.csv')
 
-    for f in [a, b, c]:
+    for f in [b, a, c]:
 
         try:
 
