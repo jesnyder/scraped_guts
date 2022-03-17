@@ -78,9 +78,12 @@ def query_crossref():
                 df_doi[key_name] = [values[i]]
 
                 if keys[i] == 'author' or keys[i] == 'link' or keys[i] == 'reference':
+
                     w2 = values[i]
                     item_num = 0
+
                     for item in w2:
+
                         item_num = item_num + 1
                         keys2 = list(item.keys())
                         values2 = list(item.values())
