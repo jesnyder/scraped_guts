@@ -95,7 +95,9 @@ def check_scraped(name_dataset, term, year, num):
             df = df[(df['year'] == year)]
             num_int = int(num.lstrip())*10
             #print('num_int = ' + str(num_int))
-            if len(list(df['year'])) < num_int: return(True)
+            if len(list(df['year'])) < num_int:
+                print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + str(num))
+                return(True)
         except:
             hello = 'hello'
 
@@ -289,8 +291,8 @@ def search_gscholar():
 
                 # check if recently scraped
                 if check_scraped('gscholar', term, year, num_str):
-                    print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + num_str)
-                    break
+                    #print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + num_str)
+                    continue
 
                 soup = retrieve_html(url)
                 if error_check(soup) == True: return('error')
