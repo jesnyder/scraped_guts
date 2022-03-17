@@ -88,6 +88,13 @@ def check_scraped(name_dataset, term, year, num):
         #df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
         #paths_to_check.append(df_path)
 
+        df_path = os.path.join(retrieve_path(name_src), 'df')
+        df_file = os.path.join(df_path, term + '.csv')
+        df = pd.read_csv(df_file)
+        df = df[(df['year'] == year)]
+        num_int = int(num.lstrip('0'))*10
+        if len(list(df['year'])) < num_int: return(True)
+
     for file in os.listdir(src_path):
 
         print('file = ' + file)
