@@ -79,8 +79,9 @@ def query_crossref():
 
 
                 w2 = values[i]
-                if len(w2) > 0:
-                    
+                keys2 = list(w2.keys())
+                if len(keys2) > 0:
+
                     item_num = 0
                     for item in w2:
                         item_num = item_num + 1
