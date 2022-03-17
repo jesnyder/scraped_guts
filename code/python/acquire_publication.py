@@ -69,8 +69,9 @@ def query_crossref():
 
             w1 = works.doi(doi)
             print(w1)
-            print('w1[0] = ')
-            print(w1[0])
+
+            data_json = json.dumps(w1, indent = 2, ensure_ascii = False)
+            print(data_json)
 
             jdata = json.loads(w1[0])
             df = pd.DataFrame(jdata)
