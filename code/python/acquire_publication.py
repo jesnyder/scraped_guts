@@ -119,32 +119,6 @@ def query_crossref():
         time.sleep(30)
         time.sleep(30)
 
-            """
-            keys = w1.keys()
-            for key in w1.keys():
-
-                print('key = ')
-                print(key)
-
-                key_str = json.dumps(w1.get(key))
-                print('key_str = ')
-                print(key_str)
-
-                try:
-                    for key2 in w1.key.keys():
-
-                        print('key2 = ')
-                        print(key2)
-
-                        #key2_str = json.dumps(w1.key.get(key2))
-                        #print('key2_str = ')
-                        #print(key2_str)
-
-                except:
-                    hello = 'hello'
-            """
-
-
         time.sleep(30)
         hello
 
