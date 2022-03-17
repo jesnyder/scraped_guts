@@ -84,6 +84,7 @@ def geolocate_dataset():
         df.to_csv(f)
     wait(5)
 
+
 def geolocate_gscholar(df):
     """
 
@@ -98,6 +99,8 @@ def geolocate_gscholar(df):
     if lat != None:
         list_addresses(address, lat, lon)
         return(address, lat, lon)
+
+
 
 
 

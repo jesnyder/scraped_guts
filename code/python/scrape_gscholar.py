@@ -94,7 +94,7 @@ def check_scraped(name_dataset, term, year, num):
         df = pd.read_csv(df_file)
         df = df[(df['year'] == year)]
         num_int = int(num.lstrip())*10
-        print('num_int = ' + str(num_int))
+        #print('num_int = ' + str(num_int))
         if len(list(df['year'])) < num_int: return(True)
 
     for file in os.listdir(src_path):
@@ -729,7 +729,7 @@ def retrieve_html(url):
 
     time_string = retrieve_datetime()
     wait_time = random.random()*60 + 60
-    #print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+    print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
     time.sleep(wait_time)
 
     html = requests.get(url, headers=headers, proxies=proxies).text
