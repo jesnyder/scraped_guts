@@ -35,6 +35,7 @@ def acquire_publication():
     Check for redundency
     """
 
+    aggregate_df()
     query_crossref()
     search_crossref()
 
@@ -52,7 +53,7 @@ def search_crossref():
         df_file = os.path.join(df_path, term + '.csv')
         df = pd.read_csv(df_file)
 
-        for title in list(df['title']):
+        for title in list(df['title_link']):
             works = Works()
             print('title = ' + str(title))
             w2 = works.query(title=title)
@@ -475,12 +476,29 @@ def search_articles():
         #print('df_dst = ' + str(df_dst))
 
 
-
-
 def aggregate_df():
     """
 
     """
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
+
+
+    df_all = pd.DataFrame()
+
+    name_dataset = 'gscholar'
+    df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
+    for file in os.listdir(df_path):
+
+        f = os.path.join(retrieve_path(str(name_dataset + '_article_df')), file)
+        df = pd.read_csv(f)
+        df = clean_dataframe(df)
+
+
+
+        df_all = df_all.append(df)
+        df_all = clean_dataframe(df_all)
+        f = os.path.join(retrieve_path(name_dst), 'all_scraped' + '.csv')
+        df_all.to_csv()
 
 
 
