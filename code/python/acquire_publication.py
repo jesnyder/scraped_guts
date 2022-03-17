@@ -86,11 +86,11 @@ def query_crossref():
 
                 print('value = ')
                 print(values[i])
-                
+
                 df_doi[keys[i]] = [values[i]]
 
-                print('df_doi = ')
-                print(df_doi.T)
+                #print('df_doi = ')
+                #print(df_doi.T)
 
             time.sleep(30)
             df = df.append(df_doi)
