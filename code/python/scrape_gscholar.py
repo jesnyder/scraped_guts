@@ -188,8 +188,8 @@ def aggregate_articles():
             df_dst_name = os.path.join(retrieve_path(name_dst), name_dataset + '_meta' + '.csv')
             df_all.to_csv(df_dst_name)
             #print('df_dst_name = ' + str(df_dst_name))
-            print('length of gscholar aggregated = ' + str(len(list(df.iloc[:,0]))))
- 
+            print('length of gscholar aggregated = ' + str(len(list(df_all.iloc[:,0]))))
+
 
 # main programs
 
