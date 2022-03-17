@@ -157,7 +157,7 @@ def retrieve_format(name):
             print('value = ')
             print(value)
 
-            if ' ' in value: value = value.split(' ')
+            if ' ' in str(value): value = value.split(' ')
             print('value = ')
             print(value)
 
