@@ -46,12 +46,15 @@ def search_crossref():
     name_dataset = 'gscholar'
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     df_path = os.path.join(retrieve_path(name_src), 'df')
-    df_file = os.path.join(df_path, term + '.csv')
-    df = pd.read_csv(df_file)
 
-    for title in list(df['title']):
 
-        w2 = works.query(title=title)
+    for term in retrieve_list('search_terms'):
+        df_file = os.path.join(df_path, term + '.csv')
+        df = pd.read_csv(df_file)
+
+        for title in list(df['title']):
+
+            w2 = works.query(title=title)
 
 
 def works_df(w1):
@@ -127,6 +130,7 @@ def query_crossref():
         #df = clean_dataframe(df)
         print(retrieve_path('crossref_df'))
         df.to_csv(os.path.join(retrieve_path('crossref_df'), term + '.csv'))
+
 
 def check_scraped(name_dataset, term, year, num):
     """
