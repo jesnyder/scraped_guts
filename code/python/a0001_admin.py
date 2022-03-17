@@ -153,6 +153,9 @@ def retrieve_format(name):
             value = value[0]
             value = value.split(' ')
 
+            print('value = ')
+            print(value)
+
             if name == 'markeredgewidth': return(float(value[0]))
             if name == 'plot_font_size': return(int(value[0]))
 
