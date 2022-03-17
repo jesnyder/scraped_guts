@@ -140,7 +140,7 @@ def retrieve_format(name):
 
         try:
 
-            f = os.path.join(retrieve_path('format'))
+            #f = os.path.join(retrieve_path('format'))
             df = pd.read_csv(f)
 
             # find the value from the name
@@ -150,17 +150,8 @@ def retrieve_format(name):
             print(df)
 
             value = list(df['value'])
-            print('value = ')
-            print(value)
-
             value = value[0]
-            print('value = ')
-            print(value)
-
             if ' ' in str(value): value = value.split(' ')
-            print('value = ')
-            print(value)
-
 
             if name == 'markeredgewidth': return(float(value[0]))
             if name == 'plot_font_size': return(int(value[0]))
