@@ -36,9 +36,10 @@ def acquire_publication():
     """
 
     query_crossref()
+    search_crossref()
 
 
-def title_search_crossref():
+def search_crossref():
     """
 
     """
