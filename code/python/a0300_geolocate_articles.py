@@ -56,13 +56,15 @@ def geolocate_dataset():
         work_completed('find_address_' + name_dataset, 0)
 
         f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
-        df_ref = clean_dataframe(pd.read_csv(f))
+        df = clean_dataframe(pd.read_csv(f))
 
-        print('df_ref = ')
-        print(df_ref)
+        df['address'] = [None] * len(list(df.loc[:,0]))
+        df['lat'] = [None] * len(list(df.loc[:,0]))
+        df['lon'] = [None] * len(list(df.loc[:,0]))
 
-        print('df_ref.columns = ')
-        print(df_ref.columns)
+
+        f = os.path.join(retrieve_path(name_dst),  name_dataset + '_geolocated' + '.csv' )
+        df.to_csv(f)
 
 
     wait(5)
