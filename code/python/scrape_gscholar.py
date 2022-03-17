@@ -183,7 +183,7 @@ def aggregate_articles():
 
             df_all = df_all.append(df_article)
             df_all = clean_dataframe(df_all)
-            df_all = df_all.drop_duplicates(subset='title_link')
+            df_all = df_all.drop_duplicates()
 
             df_dst_name = os.path.join(retrieve_path(name_dst), name_dataset + '_meta' + '.csv')
             df_all.to_csv(df_dst_name)
