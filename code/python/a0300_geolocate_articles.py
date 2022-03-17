@@ -61,7 +61,7 @@ def geolocate_dataset():
             f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
             df = clean_dataframe(pd.read_csv(f))
 
-        for name in ['address', 'lat', 'lon']: 
+        for name in ['address', 'lat', 'lon']:
             df[name] = [None] * len(list(df.iloc[:,0]))
 
 
@@ -75,7 +75,7 @@ def geolocate_dataset():
             print(df_temp)
 
             if 'gscholar' in name_dataset:
-                address, lat, lon = geolocate_gscholar(df.iloc[i,:])
+                address, lat, lon = geolocate_gscholar(df_temp)
 
             df.loc[i, 'lat'] = [lat]
             df.loc[i, 'lon'] = [lon]
@@ -94,6 +94,8 @@ def geolocate_gscholar(df):
     """
 
     """
+
+    return()
 
 
 
