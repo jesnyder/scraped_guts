@@ -49,7 +49,6 @@ def geolocate_dataset():
     """
 
     """
-
     for name_dataset in retrieve_list('name_dataset'):
 
         name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
@@ -62,13 +61,9 @@ def geolocate_dataset():
             f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
             df = clean_dataframe(pd.read_csv(f))
 
+        for name in ['address', 'lat', 'lon']: 
+            df[name] = [None] * len(list(df.iloc[:,0]))
 
-        df['address'] = [None] * len(list(df.iloc[:,0]))
-        df['lat'] = [None] * len(list(df.iloc[:,0]))
-        df['lon'] = [None] * len(list(df.iloc[:,0]))
-
-        print('df.columns = ')
-        print(df.columns)
 
         for i in range(len(list(df.iloc[:,0]))):
 
@@ -79,12 +74,26 @@ def geolocate_dataset():
             print('df_temp = ')
             print(df_temp)
 
+            if 'gscholar' in name_dataset:
+                address, lat, lon = geolocate_gscholar(df.iloc[i,:])
+
+            df.loc[i, 'lat'] = [lat]
+            df.loc[i, 'lon'] = [lon]
+            df.loc[i, 'address'] = [address]
+
 
         f = os.path.join(retrieve_path(name_dst),  name_dataset + '_geolocated' + '.csv' )
         df.to_csv(f)
 
 
     wait(5)
+
+
+
+def geolocate_gscholar(df):
+    """
+
+    """
 
 
 
