@@ -95,7 +95,13 @@ def geolocate_gscholar(df):
 
     """
 
-    return()
+    print('df.columns = ')
+    print(df.columns)
+
+    lat, lon = findLatLong(address)
+    if lat != None:
+        list_addresses(address, lat, lon)
+        return(address, lat, lon)
 
 
 
