@@ -30,14 +30,67 @@ Reference: https://python.plainenglish.io/scrape-google-scholar-with-python-fc68
 
 def acquire_publication():
     """
-    Maximum information
-    Minimal scrapes
-    Check for redundency
+    List pubs from search result of gscholar using search term
+    Consolidate into a single dataframe
+    gscholar_results.csv
+
+    Add pub details by looking up url and parsing html
+    Consolidate into a single dataframe
+    html_meta.csv
+
+    Add author affiliations by looking up doi through CrossRef
+    Consolidate into a single dataframe
+    crossref_meta.csv
+
     """
 
+    # list pubs from search result of gscholar using search term
+    search_gscholar()
+
+    # consolidate into a single dataframe
+    # save as gscholar_results.csv
     aggregate_df()
+
+    # add pub details by looking up url and parsing html
+    search_articles()
+
+    # consolidate into a single dataframe
+    # save as html_meta.csv
+    aggregate_df()
+
+
+    # add author affiliations by looking up doi through CrossRef
     query_crossref()
+
+    # consolidate into a single dataframe
+    # save to crossref_meta.csv    
     search_crossref()
+
+
+
+
+def aggregate_df():
+    """
+
+    """
+
+    name_dataset = 'gscholar'
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
+
+    df_all = pd.DataFrame()
+
+    df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
+    for file in os.listdir(df_path):
+
+        f = os.path.join(retrieve_path(str(name_dataset + '_article_df')), file)
+        df = pd.read_csv(f)
+        df = clean_dataframe(df)
+
+        df_all = df_all.append(df)
+        df_all = clean_dataframe(df_all)
+        f = os.path.join(retrieve_path(name_dst), 'gscholar_results.csv')
+        df_all.to_csv()
+
 
 
 def search_crossref():
@@ -483,7 +536,6 @@ def aggregate_df():
 
     name_dataset = 'gscholar'
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
-
 
     df_all = pd.DataFrame()
 
