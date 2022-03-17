@@ -136,7 +136,7 @@ def retrieve_format(name):
     b = os.path.join('core_code' 'admin' 'format.csv')
     c = os.path.join('program_generated' 'admin' 'format.csv')
 
-    for f in [b, a, c]:
+    for f in [a, b, c]:
 
         try:
 
@@ -145,6 +145,9 @@ def retrieve_format(name):
 
             # find the value from the name
             df = df.loc[df['name'] == name]
+
+            print('df =')
+            print(df)
 
             value = list(df['value'])
             value = value[0]
