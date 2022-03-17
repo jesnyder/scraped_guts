@@ -38,6 +38,13 @@ def acquire_publication():
     query_crossref()
 
 
+def title_search_crossref():
+    """
+
+    """
+    w2 = works.query(title=title)
+
+
 def query_crossref():
     """
 
@@ -52,45 +59,20 @@ def query_crossref():
     for term in retrieve_list('search_terms'):
 
         df = pd.DataFrame()
-
         cr = Crossref()
         x = cr.works(query = term, limit = 500)
-        #x['message']['total-results']
-        print('x = ')
-        print(x)
-        print([ z['DOI'] for z in x['message']['items'] ])
-
         dois = [z['DOI'] for z in x['message']['items']]
 
         for doi in dois:
 
             works = Works()
-
-            """
-            w1 = works.query(bibliographic='zika', author='johannes', publisher_name='Wiley-Blackwell')
-            for item in w1:
-                print(item['title'])
-            w1 = works.doi('10.1590/0102-311x00133115')
-            print(w1)
-            """
-
             w1 = works.doi(doi)
-            #print(w1)
 
             keys = list(w1.keys())
             values = list(w1.values())
-            print(keys)
-            print(values)
 
             df_doi = pd.DataFrame()
-
             for i in range(len(keys)):
-
-                print('key = ')
-                print(keys[i])
-
-                print('value = ')
-                print(values[i])
 
                 key_name = str(keys[i])
                 df_doi[key_name] = [values[i]]
@@ -98,15 +80,11 @@ def query_crossref():
                 if keys[i] == 'author':
 
                     w2 = values[i]
-                    print('w2 = ')
-                    print(w2)
 
                     item_num = 0
                     for item in w2:
                         item_num = item_num + 1
                         keys2 = list(item.keys())
-                        print('keys2 = ')
-                        print(keys2)
                         values2 = list(item.values())
 
                         for j in range(len(keys2)):
@@ -120,8 +98,8 @@ def query_crossref():
             print('df = ')
             print(df)
 
-        time.sleep(30)
-        time.sleep(30)
+        df = clean_dataframe(df)
+        df.to_csv(retrieve_path(crossref_df), term + '.csv')
         time.sleep(30)
         hello
 

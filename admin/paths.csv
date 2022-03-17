@@ -30,6 +30,9 @@ gscholar_error,core_code admin gscholar_error.csv
 gscholar_missing,user_provided gscholar missing_pubs.csv
 html_meta_tags,core_code admin html_meta_tags.csv
 
+#, publication
+crossref_df,program_generated pubs src crossref df 
+
 #, map
 all_institutions,program_generated map all_institutions.csv
 count_institutions,program_generated map count_institutions.csv
