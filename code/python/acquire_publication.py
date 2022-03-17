@@ -91,10 +91,11 @@ def query_crossref():
                 key_name = str(keys[i])
                 df_doi[key_name] = [values[i]]
 
-                """
                 if keys[i] == 'author':
 
                     w2 = values[i]
+                    print('w2 = ')
+                    print(w2)
                     keys2 = list(w2.keys())
                     values2 = list(w2.values())
 
