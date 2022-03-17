@@ -112,12 +112,12 @@ def query_crossref():
                 print('df_doi = ')
                 print(df_doi.T)
 
-            df = df.append(df_doi)
-            print('df = ')
-            print(df)
+                df = df.append(df_doi)
+                print('df = ')
+                print(df)
 
-            time.sleep(30)
-            time.sleep(30)
+        time.sleep(30)
+        time.sleep(30)
 
             """
             keys = w1.keys()
