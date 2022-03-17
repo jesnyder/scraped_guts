@@ -717,7 +717,7 @@ def retrieve_html(url):
 
     time_string = retrieve_datetime()
     wait_time = random.random()*60 + 60
-    print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+    #print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
     time.sleep(wait_time)
 
     html = requests.get(url, headers=headers, proxies=proxies).text
