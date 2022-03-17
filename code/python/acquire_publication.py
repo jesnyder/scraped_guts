@@ -91,7 +91,7 @@ def query_crossref():
                 print(values[i])
 
                 df_doi = pd.DataFrame()
-                df_doi[keyss[i]] = [values[i]]
+                df_doi[keys[i]] = [values[i]]
 
             print('df_doi = ')
             print(df_doi.T)
