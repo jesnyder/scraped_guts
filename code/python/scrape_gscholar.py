@@ -115,13 +115,12 @@ def check_scraped(name_dataset, term, year, num):
         pattern = '[0-9]{3}'
         file_num = re.findall(pattern, file)
         file_num = file_num[1]
-        print('file_num = ')
-        print(file_num)
-        print('file_num = ' + file_num + ' num = ' + str(num))
         if str(file_num) != str(num): continue
         print('file_num = ' + file_num + ' num = ' + str(num))
 
         # find and compare file saved date to current date
+        file = file.split(' ')
+        file = file[3]
         pattern = '[0-9]{4}' + '-' + '[0-9]{2}' + '-' +  '[0-9]{2}'
         file_date_saved = re.findall(pattern, file)
         file_date_saved = file_date_saved[0]
