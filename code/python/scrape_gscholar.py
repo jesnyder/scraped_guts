@@ -34,7 +34,8 @@ def scrape_gscholar():
     """
 
     search_gscholar()
-    aggregate_json()
+    json_to_dataframe()
+    #aggregate_json()
     search_articles()
     aggregate_df()
 
