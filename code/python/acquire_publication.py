@@ -48,12 +48,14 @@ def query_crossref():
     for term in retrieve_list('search_terms'):
 
         cr = Crossref()
-        x = cr.works(query = term, limit = 5)
+        x = cr.works(query = term, limit = 5000)
         #x['message']['total-results']
+        print('x = ')
+        print(x)
         print([ z['DOI'] for z in x['message']['items'] ])
 
 
-        time.sleep(10)
+        time.sleep(30)
 
 
 
