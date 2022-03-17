@@ -65,13 +65,14 @@ def geolocate_dataset():
         print('df.columns = ')
         print(df.columns)
 
-        urls = list(df['url'])
-        url = list(df[['title_link']])
-
-        for i in list(df['url']):
+        for i in range(len(list(df.iloc[:,0]))):
 
             print(name_dataset + ' ')
-            df_temp = df[(df['url'] == url)]
+            i=i-1
+            df_temp = df.iloc[i,:]
+
+            print('df_temp = ')
+            print(df_temp)
 
 
         f = os.path.join(retrieve_path(name_dst),  name_dataset + '_geolocated' + '.csv' )
