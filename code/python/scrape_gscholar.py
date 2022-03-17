@@ -168,24 +168,27 @@ def aggregate_articles():
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
 
     df_all = pd.DataFrame()
-    df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
+    df_path_article = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
+    df_path_search = os.path.join(retrieve_path(name_src), 'df')
 
-    for article_file in os.listdir(df_path):
+    for df_path in [df_path_article, df_path_search]:
 
-        df_ref = os.path.join(df_path, article_file)
-        df_article = pd.read_csv(df_ref)
-        df_article = df_article.T
-        df_article = clean_dataframe(df_article)
+        for article_file in os.listdir(df_path):
 
-        df_all = df_all.append(df_article)
-        df_all = clean_dataframe(df_all)
-        df_all = df_all.drop_duplicates()
+            df_ref = os.path.join(df_path, article_file)
+            df_article = pd.read_csv(df_ref)
+            df_article = df_article.T
+            df_article = clean_dataframe(df_article)
 
-        #df_path_save = os.path.join(retrieve_path(name_dst)
-        df_dst_name = os.path.join(retrieve_path(name_dst), name_dataset + '_meta' + '.csv')
+            df_all = df_all.append(df_article)
+            df_all = clean_dataframe(df_all)
+            df_all = df_all.drop_duplicates()
 
-        df_all.to_csv(df_dst_name)
-        #print('df_dst_name = ' + str(df_dst_name))
+            #df_path_save = os.path.join(retrieve_path(name_dst)
+            df_dst_name = os.path.join(retrieve_path(name_dst), name_dataset + '_meta' + '.csv')
+
+            df_all.to_csv(df_dst_name)
+            #print('df_dst_name = ' + str(df_dst_name))
 
 
 # main programs

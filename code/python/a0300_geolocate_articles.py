@@ -27,6 +27,7 @@ from a0001_admin import work_to_do
 from a0200_aggregate_info  import list_unique_values
 from a0200_aggregate_info  import plot_unique_values
 from a0200_aggregate_info  import cross_plot_unique
+from scrape_gscholar import aggregate_articles
 from find_color import find_color
 from gif_maker import build_gif
 
@@ -64,17 +65,14 @@ def geolocate_dataset():
         for name in ['address', 'lat', 'lon']:
             df[name] = [None] * len(list(df.iloc[:,0]))
 
-
         for i in range(len(list(df.iloc[:,0]))):
 
             print(name_dataset + ' ')
             i=i-1
             df_temp = df.iloc[i,:]
 
-            print('df_temp = ')
-            print(df_temp)
-
             if 'gscholar' in name_dataset:
+                aggregate_articles()
                 address, lat, lon = geolocate_gscholar(df_temp)
 
             df.loc[i, 'lat'] = [lat]
