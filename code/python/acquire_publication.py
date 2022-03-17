@@ -81,6 +81,7 @@ def query_crossref():
             df_doi = pd.DataFrame()
 
             for i in range(len(keys)):
+
                 print('key = ')
                 print(keys[i])
 
@@ -90,6 +91,7 @@ def query_crossref():
                 key_name = str(keys[i])
                 df_doi[key_name] = [values[i]]
 
+                """
                 if keys[i] == 'author':
 
                     w2 = values[i]
@@ -100,7 +102,7 @@ def query_crossref():
 
                         key_name = str(keys[i] + '_' + keys2[j])
                         df_doi[key_name] = [values2[j]]
-
+                """
 
                 #print('df_doi = ')
                 #print(df_doi.T)
