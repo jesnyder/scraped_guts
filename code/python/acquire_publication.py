@@ -96,6 +96,13 @@ def query_crossref():
                     w2 = values[i]
                     print('w2 = ')
                     print(w2)
+
+                    for item in w2:
+                        keys2 = list(w2.keys())
+                        print('keys2 = ')
+                        print(keys2)
+                        values2 = list(w2.values())
+
                     time.sleep(30)
                     """
                     keys2 = list(w2.keys())
