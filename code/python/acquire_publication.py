@@ -99,6 +99,7 @@ def query_crossref():
             print(df)
 
         #df = clean_dataframe(df)
+        print(retrieve_path('crossref_df'))
         df.to_csv(retrieve_path('crossref_df'), term + '.csv')
         time.sleep(30)
         hello
