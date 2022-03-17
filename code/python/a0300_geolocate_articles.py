@@ -82,11 +82,7 @@ def geolocate_dataset():
 
         f = os.path.join(retrieve_path(name_dst),  name_dataset + '_geolocated' + '.csv' )
         df.to_csv(f)
-
-
     wait(5)
-
-
 
 def geolocate_gscholar(df):
     """

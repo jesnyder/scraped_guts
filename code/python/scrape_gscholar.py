@@ -176,6 +176,8 @@ def aggregate_articles():
 
         for article_file in os.listdir(df_path):
 
+            print('article_file = ' + article_file)
+
             df_ref = os.path.join(df_path, article_file)
             df_article = pd.read_csv(df_ref)
             df_article = df_article.T
