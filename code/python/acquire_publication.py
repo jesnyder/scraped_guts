@@ -265,6 +265,34 @@ def json_to_dataframe():
             df_term.to_csv(df_file)
 
 
+def retrieve_html(url):
+    """
+
+    """
+
+    print('url = ')
+    print(url)
+
+    headers = {
+        'User-agent':
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+        }
+
+    proxies = {
+        'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
+        }
+
+    time_string = retrieve_datetime()
+    wait_time = random.random()*60 + 60
+    print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+    time.sleep(wait_time)
+
+    html = requests.get(url, headers=headers, proxies=proxies).text
+    soup = BeautifulSoup(html, 'lxml')
+
+    return(soup)
+
+
 def search_gscholar():
     """
     Retrieve json year by year
@@ -313,7 +341,6 @@ def search_gscholar():
                 json_file.close()
 
                 json_to_dataframe()
-
 
 
 
