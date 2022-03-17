@@ -55,12 +55,15 @@ def query_crossref():
         print(x)
         print([ z['DOI'] for z in x['message']['items'] ])
 
-        works = Works()
-        w1 = works.query(bibliographic='zika', author='johannes', publisher_name='Wiley-Blackwell')
+        dois = z['DOI'] for z in x['message']['items']
+        for doi in dois:
 
-        for item in w1:
-            print(item['title'])
-            
+            works = Works()
+            w1 = works.query(bibliographic='zika', author='johannes', publisher_name='Wiley-Blackwell')
+
+            for item in w1:
+                print(item['title'])
+
         time.sleep(30)
 
 
