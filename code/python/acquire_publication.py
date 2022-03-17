@@ -51,6 +51,11 @@ def query_crossref():
     print([ z['DOI'] for z in x['message']['items'] ])
 
 
+    time.sleep(10)
+
+
+
+
 
 
 def check_scraped(name_dataset, term, year, num):
