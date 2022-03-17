@@ -75,8 +75,8 @@ def query_crossref():
 
             keys = list(w1.keys())
             values = list(w1.values())
-            #print(keys)
-            #print(values)
+            print(keys)
+            print(values)
 
             for i in range(len(keys)):
                 print('key = ')
@@ -122,20 +122,8 @@ def query_crossref():
             """
 
 
-
-            data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
-            #print(data_json)
-
-            #print(data_json.keys())
-
-            #print(data_json.indexed)
-
-            df = pd.DataFrame(data_json)
-            print('df.T = ')
-            print(df.T)
-
         time.sleep(30)
-
+        hello
 
 
 
