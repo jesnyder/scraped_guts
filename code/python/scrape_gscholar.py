@@ -99,7 +99,6 @@ def check_scraped(name_dataset, term, year, num):
         flags = re.IGNORECASE
         file_term = re.findall(pattern, file, flags)
         file_term = file_term[0]
-        print('file_term = ' + file_term + ' term = ' + term)
         if file_term != term: continue
         print('file_term = ' + file_term + ' term = ' + term)
 
