@@ -193,6 +193,7 @@ def search_gscholar():
     """
     for term in retrieve_list('search_terms'):
 
+        json_to_dataframe()
         currentDateTime = datetime.datetime.now()
         date = currentDateTime.date()
 
