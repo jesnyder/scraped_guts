@@ -114,7 +114,7 @@ def query_crossref():
 
             df = df.append(df_doi)
 
-        df = clean_dataframe(df)
+        #df = clean_dataframe(df)
         print(retrieve_path('crossref_df'))
         df.to_csv(os.path.join(retrieve_path('crossref_df'), term + '.csv'))
 
