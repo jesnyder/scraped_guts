@@ -98,10 +98,10 @@ def query_crossref():
                     print(w2)
 
                     for item in w2:
-                        keys2 = list(w2.keys())
+                        keys2 = list(item.keys())
                         print('keys2 = ')
                         print(keys2)
-                        values2 = list(w2.values())
+                        values2 = list(item.values())
 
                     time.sleep(30)
                     """
