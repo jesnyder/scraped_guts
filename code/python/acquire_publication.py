@@ -77,10 +77,10 @@ def query_crossref():
                 key_name = str(keys[i])
                 df_doi[key_name] = [values[i]]
 
-                if keys[i] == 'author':
 
-                    w2 = values[i]
-
+                w2 = values[i]
+                if len(w2) > 0:
+                    
                     item_num = 0
                     for item in w2:
                         item_num = item_num + 1
