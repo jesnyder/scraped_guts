@@ -117,6 +117,7 @@ def check_scraped(name_dataset, term, year, num):
         file_num = file_num[1]
         print('file_num = ')
         print(file_num)
+        print('file_num = ' + file_num + ' num = ' + str(num))
         if str(file_num) != str(num): continue
         print('file_num = ' + file_num + ' num = ' + str(num))
 
