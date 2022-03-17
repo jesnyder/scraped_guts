@@ -48,6 +48,8 @@ def query_crossref():
 
     for term in retrieve_list('search_terms'):
 
+        df = pd.DataFrame()
+
         cr = Crossref()
         x = cr.works(query = term, limit = 500)
         #x['message']['total-results']
@@ -88,13 +90,15 @@ def query_crossref():
                 print('value = ')
                 print(values[i])
 
-            for key in keys:
-                print('key = ')
-                print(key)
+                df_doi = pd.DataFrame()
+                df_doi[key] = [value]
 
-                i = keys.index(key)
-                print('value = ')
-                print(value)
+            print('df_doi = ')
+            print(df_doi.T)
+
+            df = df.append(df_doi)
+            print('df = ')
+            print(df)
 
             """
             keys = w1.keys()
