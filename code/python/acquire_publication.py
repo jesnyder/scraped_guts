@@ -111,27 +111,11 @@ def query_crossref():
                                         key_name3 = str(key_name2 + '_' + str(item_num_2) + '_' + keys3[k])
                                         df_doi[key_name3] = [values3[k]]
 
-                                        print('key_name3 = ' + str(key_name3))
-                                        print('values3[k] = ' + str(values3[k]))
-
-
-
-
-            print('df_doi = ')
-            print(df_doi.T)
-
             df = df.append(df_doi)
-            print('df = ')
-            print(df)
 
-        #df = clean_dataframe(df)
+        df = clean_dataframe(df)
         print(retrieve_path('crossref_df'))
         df.to_csv(os.path.join(retrieve_path('crossref_df'), term + '.csv'))
-        time.sleep(30)
-        hello
-
-
-
 
 
 def check_scraped(name_dataset, term, year, num):
