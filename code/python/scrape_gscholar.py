@@ -108,14 +108,14 @@ def check_scraped(name_dataset, term, year, num):
         pattern = '[0-9]{4}'
         file_year = re.findall(pattern, file)
         file_year = file_year[0]
-        print('file_year = ' )
-        print(file_year)
         if str(file_year) != str(year): continue
         print('file_year = ' + file_year + ' year = ' + str(year))
 
         # find and compare file year to year passed into the function
         pattern = '[0-9]{3}'
         file_num = re.findall(pattern, file)
+        print('file_num = ')
+        print(file_num)
         file_num = file_num[0]
         if str(file_num) != str(num): continue
         print('file_num = ' + file_num + ' num = ' + str(num))
