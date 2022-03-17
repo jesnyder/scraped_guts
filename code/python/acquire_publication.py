@@ -77,8 +77,8 @@ def query_crossref():
                 key_name = str(keys[i])
                 df_doi[key_name] = [values[i]]
 
-                #keys_of_interest = ['author', 'link', 'reference', 'funder']
-                keys_of_interest = ['author']
+                keys_of_interest = ['author', 'link', 'reference', 'funder']
+                #keys_of_interest = ['author']
                 if keys[i] in keys_of_interest:
 
                     w2 = values[i]
@@ -110,6 +110,10 @@ def query_crossref():
                                     for k in range(len(keys3)):
                                         key_name3 = str(key_name2 + '_' + str(item_num_2) + '_' + keys3[k])
                                         df_doi[key_name3] = [values3[k]]
+
+                                        print('key_name3 = ' + str(key_name3))
+                                        print('values3[k] = ' + str(values3[k]))
+
 
 
 
