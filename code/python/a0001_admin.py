@@ -398,7 +398,7 @@ def work_completed(name, complete):
     """
 
     """
-    print('task name = ' + name)
+    #print('task name = ' + name)
 
     # try to recover existing work plan
     file = retrieve_path('work_plan')
@@ -440,8 +440,8 @@ def work_completed(name, complete):
     df = clean_dataframe(df)
     df.to_csv(file)
 
-    print('df = ')
-    print(df)
+    #print('df = ')
+    #print(df)
 
 
 if __name__ == "__main__":
