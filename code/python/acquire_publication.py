@@ -73,8 +73,7 @@ def query_crossref():
             data_json = json.dumps(w1, indent = 2, ensure_ascii = False)
             print(data_json)
 
-            jdata = json.loads(w1[0])
-            df = pd.DataFrame(jdata)
+            df = pd.DataFrame(data_json)
             print('df.T = ')
             print(df.T)
 
