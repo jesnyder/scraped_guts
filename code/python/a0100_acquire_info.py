@@ -26,9 +26,9 @@ from a0001_admin import work_to_do
 
 from query_patents import query_patents
 from acquire_publication import acquire_publication
-from scrape_gscholar import scrape_gscholar
-from scrape_gscholar import scrape_gscholar_article
-from scrape_gscholar import json_to_dataframe
+#from scrape_gscholar import scrape_gscholar
+#from scrape_gscholar import scrape_gscholar_article
+#from scrape_gscholar import json_to_dataframe
 #from scrape_gscholar import scrape_html
 #from scrape_gscholar import scrape_json
 #from scrape_gscholar import json_to_dataframe
