@@ -80,6 +80,17 @@ def query_crossref():
                 print('key_str = ')
                 print(key_str)
 
+                try:
+                    for key2 in w1.key.keys():
+
+                        print('key2 = ')
+                        print(key2)
+ 
+                        key2_str = json.dumps(w1.key.get(key2))
+                        print('key2_str = ')
+                        print(key2_str)
+
+
 
             data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
             #print(data_json)
