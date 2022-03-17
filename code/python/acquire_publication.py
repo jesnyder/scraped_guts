@@ -48,7 +48,7 @@ def query_crossref():
     for term in retrieve_list('search_terms'):
 
         cr = Crossref()
-        x = cr.works(query = term, limit = 5000)
+        x = cr.works(query = term, limit = 500)
         #x['message']['total-results']
         print('x = ')
         print(x)
