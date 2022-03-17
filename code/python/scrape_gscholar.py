@@ -88,6 +88,9 @@ def check_scraped(name_dataset, term, year, num):
         #df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
         #paths_to_check.append(df_path)
 
+    try:
+
+
     for file in os.listdir(src_path):
 
         print('file = ' + file)
@@ -143,6 +146,50 @@ def check_scraped(name_dataset, term, year, num):
     return(False)
 
 
+def json_to_dataframe():
+    """
+
+    """
+    name_dataset = 'gscholar'
+
+    # retrieve archival json
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
+    src_path = retrieve_path(name_src)
+    src_path = os.path.join(src_path, 'json')
+
+    df_all = pd.DataFrame()
+
+    for term in retrieve_list('search_terms'):
+
+        df_term = pd.DataFrame()
+
+        for file in os.listdir(src_path):
+
+            if not file.endswith('.json'): continue
+
+            json_src = os.path.join(src_path, file)
+            df = pd.read_json(json_src)
+
+            df_path = os.path.join(retrieve_path(name_src), 'df')
+            if not os.path.exists(df_path):
+                os.makedirs(df_path)
+
+            df_file = os.path.join(df_path, name_dataset + '.csv')
+            df_all = df_all.append(df)
+            df_all = df_all.drop_duplicates(subset = 'title_link')
+            df_all = clean_dataframe(df_all)
+            df_all.to_csv(df_file)
+
+            if term not in str(file): continue
+
+            df_path = os.path.join(retrieve_path(name_src), 'df')
+            df_file = os.path.join(df_path, term + '.csv')
+            df_term = df_term.append(df)
+            df_term = df_term.drop_duplicates(subset = 'title_link')
+            df_term = clean_dataframe(df_term)
+            df_term.to_csv(df_file)
+
+
 def search_gscholar():
     """
     Retrieve json year by year
@@ -188,6 +235,8 @@ def search_gscholar():
                 json_file = open(json_file, 'w')
                 json_file.write(data_json)
                 json_file.close()
+
+                json_to_dataframe()
 
 
 def html_to_json(soup):
@@ -534,50 +583,6 @@ def json_scraped():
                 json_file.write(data_json)
                 json_file.close()
                 json_to_dataframe()
-
-
-def json_to_dataframe():
-    """
-
-    """
-    name_dataset = 'gscholar'
-
-    # retrieve archival json
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
-    src_path = retrieve_path(name_src)
-    src_path = os.path.join(src_path, 'json')
-
-    df_all = pd.DataFrame()
-
-    for term in retrieve_list('search_terms'):
-
-        df_term = pd.DataFrame()
-
-        for file in os.listdir(src_path):
-
-            if not file.endswith('.json'): continue
-
-            json_src = os.path.join(src_path, file)
-            df = pd.read_json(json_src)
-
-            df_path = os.path.join(retrieve_path(name_src), 'df')
-            if not os.path.exists(df_path):
-                os.makedirs(df_path)
-
-            df_file = os.path.join(df_path, name_dataset + '.csv')
-            df_all = df_all.append(df)
-            df_all = df_all.drop_duplicates(subset = 'title_link')
-            df_all = clean_dataframe(df_all)
-            df_all.to_csv(df_file)
-
-            if term not in str(file): continue
-
-            df_path = os.path.join(retrieve_path(name_src), 'df')
-            df_file = os.path.join(df_path, term + '.csv')
-            df_term = df_term.append(df)
-            df_term = df_term.drop_duplicates(subset = 'title_link')
-            df_term = clean_dataframe(df_term)
-            df_term.to_csv(df_file)
 
 
 # support programs
