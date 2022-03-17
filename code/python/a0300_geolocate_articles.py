@@ -62,7 +62,10 @@ def geolocate_dataset():
         df['lat'] = [None] * len(list(df.iloc[:,0]))
         df['lon'] = [None] * len(list(df.iloc[:,0]))
 
-        for url in list(df['url']):
+        print('df.columns = ')
+        print(df.columns)
+        
+        for i in list(df['url']):
 
             print(name_dataset + ' ')
             df_temp = df[(df['url'] == url)]
