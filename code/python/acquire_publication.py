@@ -86,9 +86,9 @@ def query_crossref():
                         print('key2 = ')
                         print(key2)
 
-                        key2_str = json.dumps(w1.key.get(key2))
-                        print('key2_str = ')
-                        print(key2_str)
+                        #key2_str = json.dumps(w1.key.get(key2))
+                        #print('key2_str = ')
+                        #print(key2_str)
 
                 except:
                     hello = 'hello'
