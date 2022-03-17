@@ -88,9 +88,6 @@ def check_scraped(name_dataset, term, year, num):
         #df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
         #paths_to_check.append(df_path)
 
-    try:
-
-
     for file in os.listdir(src_path):
 
         print('file = ' + file)
