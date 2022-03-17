@@ -37,7 +37,7 @@ def acquire_publication():
     query_crossref()
 
 
-def query_cross_ref():
+def query_crossref():
     """
 
     """
