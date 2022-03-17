@@ -94,7 +94,9 @@ def geolocate_gscholar(df):
     """
 
     """
-
+    print('df = ')
+    print(df)
+    
     print('df.columns = ')
     print(df.columns)
 
