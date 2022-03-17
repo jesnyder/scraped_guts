@@ -55,8 +55,13 @@ def geolocate_dataset():
         name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
         work_completed('find_address_' + name_dataset, 0)
 
-        f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
-        df = clean_dataframe(pd.read_csv(f))
+        try:
+            f = os.path.join(retrieve_path(name_dst), name_dataset + '_meta' + '.csv')
+            df = clean_dataframe(pd.read_csv(f))
+        except:
+            f = os.path.join(retrieve_path(name_dst),  name_dataset + '.csv' )
+            df = clean_dataframe(pd.read_csv(f))
+
 
         df['address'] = [None] * len(list(df.iloc[:,0]))
         df['lat'] = [None] * len(list(df.iloc[:,0]))
