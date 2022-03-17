@@ -43,6 +43,7 @@ def search_crossref():
     """
 
     """
+    name_dataset = 'gscholar'
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     df_path = os.path.join(retrieve_path(name_src), 'df')
     df_file = os.path.join(df_path, term + '.csv')
@@ -103,14 +104,12 @@ def works_df(w1):
 
 def query_crossref():
     """
+    CrossRef
+    https://www.crossref.org/blog/python-and-ruby-libraries-for-accessing-the-crossref-api/
 
+    CrossRef Works
+    https://github.com/fabiobatalha/crossrefapi/blob/master/README.rst#agency
     """
-
-    # CrossRef
-    # https://www.crossref.org/blog/python-and-ruby-libraries-for-accessing-the-crossref-api/
-
-    # CrossRef Works
-    # https://github.com/fabiobatalha/crossrefapi/blob/master/README.rst#agency
 
     for term in retrieve_list('search_terms'):
 
@@ -120,62 +119,14 @@ def query_crossref():
         dois = [z['DOI'] for z in x['message']['items']]
 
         for doi in dois:
-
             works = Works()
             w1 = works.doi(doi)
-
             df_doi = works_df(w1)
-
-            """
-            keys = list(w1.keys())
-            values = list(w1.values())
-
-            df_doi = pd.DataFrame()
-            for i in range(len(keys)):
-
-                key_name = str(keys[i])
-                df_doi[key_name] = [values[i]]
-
-                keys_of_interest = ['author', 'link', 'reference', 'funder']
-                #keys_of_interest = ['author']
-                if keys[i] in keys_of_interest:
-
-                    w2 = values[i]
-                    item_num = 0
-
-                    for item in w2:
-
-                        item_num = item_num + 1
-                        keys2 = list(item.keys())
-                        values2 = list(item.values())
-
-                        for j in range(len(keys2)):
-                            key_name2 = str(key_name + '_' + str(item_num) + '_' + keys2[j])
-                            df_doi[key_name2] = [values2[j]]
-
-
-                            keys_of_interest_2 = ['affiliation']
-                            if keys2[j] in keys_of_interest_2:
-
-                                w3 = values2[j]
-                                item_num_2 = 0
-
-                                for item_2 in w3:
-
-                                    item_num_2 = item_num_2 + 1
-                                    keys3 = list(item_2.keys())
-                                    values3 = list(item_2.values())
-
-                                    for k in range(len(keys3)):
-                                        key_name3 = str(key_name2 + '_' + str(item_num_2) + '_' + keys3[k])
-                                        df_doi[key_name3] = [values3[k]]
-            """
             df = df.append(df_doi)
 
         #df = clean_dataframe(df)
         print(retrieve_path('crossref_df'))
         df.to_csv(os.path.join(retrieve_path('crossref_df'), term + '.csv'))
-
 
 def check_scraped(name_dataset, term, year, num):
     """
