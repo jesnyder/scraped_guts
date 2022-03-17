@@ -86,10 +86,10 @@ def query_crossref():
                         values2 = list(item.values())
 
                         for j in range(len(keys2)):
-                            key_name = str(key_name + '_' + str(item_num) + '_' + keys2[j])
+                            key_name2 = str(key_name + '_' + str(item_num) + '_' + keys2[j])
                             df_doi[key_name] = [values2[j]]
 
-                        
+
 
             print('df_doi = ')
             print(df_doi.T)
