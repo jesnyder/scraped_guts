@@ -71,6 +71,18 @@ def query_crossref():
             print(w1)
 
             keys = w1.keys()
+            values = w1.values()
+
+            for key in keys:
+                print('key = ')
+                print(key)
+
+                i = keys.index(key)
+                print('value = ')
+                print(value)
+
+            """
+            keys = w1.keys()
             for key in w1.keys():
 
                 print('key = ')
@@ -92,6 +104,7 @@ def query_crossref():
 
                 except:
                     hello = 'hello'
+            """
 
 
 
