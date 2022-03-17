@@ -46,6 +46,9 @@ def query_crossref():
     # CrossRef
     # https://www.crossref.org/blog/python-and-ruby-libraries-for-accessing-the-crossref-api/
 
+    # CrossRef Works
+    # https://github.com/fabiobatalha/crossrefapi/blob/master/README.rst#agency
+
     for term in retrieve_list('search_terms'):
 
         df = pd.DataFrame()
@@ -58,6 +61,7 @@ def query_crossref():
         print([ z['DOI'] for z in x['message']['items'] ])
 
         dois = [z['DOI'] for z in x['message']['items']]
+
         for doi in dois:
 
             works = Works()
@@ -109,16 +113,15 @@ def query_crossref():
                             key_name = str(keys[i] + '_' + str(item_num) + '_' + keys2[j])
                             df_doi[key_name] = [values2[j]]
 
-                print('df_doi = ')
-                print(df_doi.T)
+            print('df_doi = ')
+            print(df_doi.T)
 
-                df = df.append(df_doi)
-                print('df = ')
-                print(df)
+            df = df.append(df_doi)
+            print('df = ')
+            print(df)
 
         time.sleep(30)
         time.sleep(30)
-
         time.sleep(30)
         hello
 
