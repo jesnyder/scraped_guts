@@ -64,6 +64,9 @@ def query_crossref():
             for item in w1:
                 print(item['title'])
 
+            w1 = works.doi('10.1590/0102-311x00133115')
+            print(w1)
+
         time.sleep(30)
 
 
