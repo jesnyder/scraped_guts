@@ -38,14 +38,14 @@ def geolocate_articles():
 
     work_completed('geolocate_articles', 0)
 
-    geolocate_gscholar()
+    geolocate_dataset()
     #if  work_to_do('list_gscholar_addresses'): list_gscholar_addresses()
     #if  work_to_do('find_address'): find_address()
     #if  work_to_do('list_address'): list_address()
     work_completed('geolocate_articles', 1)
 
 
-def geolocate_gscholar():
+def geolocate_dataset():
     """
 
     """
