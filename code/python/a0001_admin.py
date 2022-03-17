@@ -132,15 +132,16 @@ def retrieve_format(name):
     user_provided/admin/format.csv
     """
 
+    f = os.path.join(retrieve_path('format'))
     a = os.path.join('user_provided' 'admin' 'format.csv')
     b = os.path.join('core_code' 'admin' 'format.csv')
     c = os.path.join('program_generated' 'admin' 'format.csv')
 
-    for f in [a, b, c]:
+    for f in [f, a, b, c]:
 
         try:
 
-            f = os.path.join(retrieve_path('format'))
+            #f = os.path.join(retrieve_path('format'))
             df = pd.read_csv(f)
 
             # find the value from the name
