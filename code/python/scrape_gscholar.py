@@ -110,7 +110,7 @@ def check_scraped(name_dataset, term, year, num):
         file_year = file_year[0]
         print('file_year = ' )
         print(file_year)
-        if file_year != year: continue
+        if str(file_year) != str(year): continue
         print('file_year = ' + file_year + ' year = ' + str(year))
 
         # find and compare file year to year passed into the function
