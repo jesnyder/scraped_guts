@@ -80,12 +80,12 @@ def aggregate_df(save_to_file):
     df_all = pd.DataFrame()
 
     if save_to_file = 'gscholar_results':
-        src_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
+        src_path = os.path.join(retrieve_path(name_src), 'df')
     elif save_to_file = 'html_meta':
         src_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
     elif save_to_file = 'crossref_meta':
-        src_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
-
+        src_path = os.path.join(retrieve_path('crossref_df')
+ 
     for file in os.listdir(df_path):
 
         f = os.path.join(src_path, file)
@@ -405,6 +405,103 @@ def retrieve_html(url):
     soup = BeautifulSoup(html, 'lxml')
 
     return(soup)
+
+
+def search_articles():
+    """
+
+    """
+    headers = {
+        'User-agent':
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+        }
+
+    proxies = {
+        'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
+        }
+
+
+    name_dataset = 'gscholar'
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
+    df_path = os.path.join(retrieve_path(name_src), 'df')
+    df_file = os.path.join(df_path, name_dataset + '.csv')
+    df = pd.read_csv(df_file)
+    df = clean_dataframe(df)
+    df_original = df
+
+    for url in list(df_original['title_link']):
+
+        try:
+            char_remove = ['/', '.', ':', 'httpswww']
+            url_name = url
+            for char in char_remove:
+                url_name = url_name.replace(char, '')
+            url_name = url_name[:40]
+        except:
+            url_name = 'none_found'
+
+        aggregate_df('html_meta')
+        if check_scraped(name_dataset, url_name, 0, 0): continue
+
+        #df = pd.DataFrame()
+        df = df_original[(df_original['title_link'] == url)]
+        print('df = ')
+        print(df)
+
+        df['time_retrieved'] = [retrieve_datetime()]
+        df['url'] = [url]
+        print(url)
+
+        #time_string = retrieve_datetime()
+        #wait_time = random.random()*5 + 2
+        #print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+        #time.sleep(wait_time)
+
+        try:
+            #html = requests.get(url, headers=headers, proxies=proxies).text
+            html = requests.get(url).text
+            soup = BeautifulSoup(html, 'html.parser')
+        except:
+            soup = ''
+
+        try:
+            content = soup.head.title.text
+            df['head_title'] = [content]
+        except:
+            df['head_title'] = [None]
+
+
+        for tag in retrieve_list('html_meta_tags'):
+
+            try:
+                content = soup.find('meta', {'name':tag}).get('content')
+                print(tag + ' = ')
+                print(content)
+                df[str(tag)] = [content]
+            except:
+                df[str(tag)] = [None]
+
+            try:
+                #content = soup.find_all('meta', {'name':tag})
+                res = []
+                for i in soup.find_all('meta', {'name':tag}):
+                    res.append(i['content'])
+                #print(tag + ' = ')
+                #print(content)
+                df[str(tag) + '-all'] = [res]
+            except:
+                df[str(tag)] = [None]
+
+
+        df = df.T
+        print('df = ')
+        print(df)
+
+        df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
+        df_dst = os.path.join(df_path, url_name + '.csv')
+        df.to_csv(df_dst)
+        aggregate_df('html_meta')
+        #print('df_dst = ' + str(df_dst))
 
 
 def Asearch_crossref():
