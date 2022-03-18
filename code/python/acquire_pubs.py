@@ -512,22 +512,39 @@ def search_articles():
         #print('df_dst = ' + str(df_dst))
 
 
-def Asearch_crossref():
+def meta_crossref():
     """
 
     """
-    name_dataset = 'gscholar'
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
-    df_path = os.path.join(retrieve_path(name_src), 'df')
 
-    for term in retrieve_list('search_terms'):
-        df_file = os.path.join(df_path, term + '.csv')
-        df = pd.read_csv(df_file)
+    # read in list of files
+    src_path = os.path.join(retrieve_path('pub_web'), 'html_meta' + '.csv')
+    df = pd.read_csv(src_path)
+    df = clean_dataframe(df)
 
-        for title in list(df['title_link']):
-            works = Works()
-            print('title = ' + str(title))
-            w2 = works.query(title=title)
+    col_name_interst = 'title_link'
+    ref_list = list(df[col_name_interst])
+
+    df_all = pd.DataFrame()
+    for item in ref_list:
+
+        works = Works()
+        print('item = ' + str(item))
+        #w2 = works.query(title=item)
+        w1 = works.doi(doi)
+        df_doi = works_df(w1)
+
+        df_temp = df[(df['title_link'] == title)]
+        for col_name in df_doi.columns:
+            df_temp['crossref_' + col_name] = [list(df_doi.loc[0, col_name])]
+
+
+        df_all = df_all.append(df_temp)
+        df_path = os.path.join(retrieve_path('pub_crossref'))
+        df_dst = os.path.join(df_path, 'crossref_meta' + '.csv')
+        df_all = clean_dataframe(df_all)
+        df_all.to_csv(df_dst)
+
 
 
 def search_crossref():
