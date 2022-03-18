@@ -49,27 +49,27 @@ def acquire_publication():
 
     # consolidate into a single dataframe
     # save as gscholar_results.csv
-    aggregate_df()
+    aggregate_df('gscholar_results')
 
     # add pub details by looking up url and parsing html
     search_articles()
 
     # consolidate into a single dataframe
     # save as html_meta.csv
-    aggregate_df()
+    aggregate_df('html_meta')
 
     # add author affiliations by looking up doi through CrossRef
-    query_crossref()
+    search_crossref()
 
     # consolidate into a single dataframe
     # save to crossref_meta.csv
-
+    aggregate_df('crossref_meta')
 
 """
 working programs
 """
 
-def aggregate_df():
+def aggregate_df(save_to_file):
     """
 
     """
@@ -88,7 +88,7 @@ def aggregate_df():
 
         df_all = df_all.append(df)
         df_all = clean_dataframe(df_all)
-        f = os.path.join(retrieve_path(name_dst), 'gscholar_results.csv')
+        f = os.path.join(retrieve_path(name_dst), save_to_file + '.csv')
         df_all.to_csv()
 
 
@@ -401,7 +401,7 @@ def retrieve_html(url):
     return(soup)
 
 
-def search_crossref():
+def Asearch_crossref():
     """
 
     """
@@ -417,6 +417,33 @@ def search_crossref():
             works = Works()
             print('title = ' + str(title))
             w2 = works.query(title=title)
+
+
+def search_crossref():
+    """
+    CrossRef
+    https://www.crossref.org/blog/python-and-ruby-libraries-for-accessing-the-crossref-api/
+
+    CrossRef Works
+    https://github.com/fabiobatalha/crossrefapi/blob/master/README.rst#agency
+    """
+
+    for term in retrieve_list('search_terms'):
+
+        df = pd.DataFrame()
+        cr = Crossref()
+        x = cr.works(query = term, limit = 500)
+        dois = [z['DOI'] for z in x['message']['items']]
+
+        for doi in dois:
+            works = Works()
+            w1 = works.doi(doi)
+            df_doi = works_df(w1)
+            df = df.append(df_doi)
+
+        #df = clean_dataframe(df)
+        print(retrieve_path('crossref_df'))
+        df.to_csv(os.path.join(retrieve_path('crossref_df'), term + '.csv'))
 
 
 def search_gscholar():
