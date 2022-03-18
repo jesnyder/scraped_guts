@@ -150,7 +150,7 @@ def aggregate_dst():
 
         if '.csv' not in file: continue
         if 'pubs_meta' in file: continue
-        df = pd.read_csv(os.path.join(name_dst, file))
+        df = pd.read_csv(os.path.join(retrieve_path(name_dst), file))
 
         df = clean_dataframe(df)
 
@@ -159,7 +159,6 @@ def aggregate_dst():
             if name not in df_all.columns:
 
                 df_all[name] = list(df[name])
-
 
         df_all = clean_dataframe(df_all)
         save_to = os.path.join(retrieve_path('pub_agg'), 'pubs_meta' + '.csv')
