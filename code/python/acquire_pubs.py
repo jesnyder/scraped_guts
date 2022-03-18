@@ -102,7 +102,7 @@ def aggregate_df(save_to_file):
 
     for file in os.listdir(src_path):
 
-        f = os.path.join(retrieve_path(src_path), file)
+        f = os.path.join(src_path, file)
         df = pd.read_csv(f)
         df = clean_dataframe(df)
 
