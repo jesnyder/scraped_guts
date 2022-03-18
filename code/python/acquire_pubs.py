@@ -612,8 +612,10 @@ def search_gscholar():
         search_year_min = int(retrieve_format('search_year_min'))-1
         for year in range(int(date.strftime("%Y")), search_year_min, -1):
 
+            print('year = ' + str(year))
+
             #work_completed('begin_acquire_gscholar_json_' + str(year), 0)
-            for num in np.arange(0, 40, 1, dtype=int):
+            for num in np.arange(0, 100, 1, dtype=int):
 
                 num_str = str(num).zfill(3)
                 url = 'https://scholar.google.com/scholar?'
@@ -626,7 +628,7 @@ def search_gscholar():
 
                 # check if recently scraped
                 if check_scraped('gscholar', term, year, num_str):
-                    print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + num_str)
+                    #print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + num_str)
                     continue
 
                 soup = retrieve_html(url)
