@@ -564,7 +564,7 @@ def search_gscholar():
         for year in range(int(date.strftime("%Y")), search_year_min, -1):
 
             #work_completed('begin_acquire_gscholar_json_' + str(year), 0)
-            for num in np.arange(0, 100, 1, dtype=int):
+            for num in np.arange(0, 40, 1, dtype=int):
 
                 num_str = str(num).zfill(3)
                 url = 'https://scholar.google.com/scholar?'
