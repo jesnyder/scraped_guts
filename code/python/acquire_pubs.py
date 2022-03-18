@@ -456,7 +456,9 @@ def search_articles():
             url_name = 'none_found'
 
         aggregate_df('html_meta')
+        print('url_name = ' + str(url_name))
         if check_scraped(name_dataset, url_name, 0, 0): continue
+        print('NOT FOUND url_name = ' + str(url_name))
 
         #df = pd.DataFrame()
         df = df_original[(df_original['title_link'] == url)]
@@ -508,9 +510,9 @@ def search_articles():
                 df[str(tag)] = [None]
 
 
-        df = df.T
+        df = df
         print('df = ')
-        print(df)
+        print(df.T)
 
         df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
         df_dst = os.path.join(df_path, url_name + '.csv')
