@@ -389,7 +389,7 @@ def query_crossref():
         for doi in dois:
             works = Works()
             w1 = works.doi(doi)
-            df_doi = works_df(w1)
+            df_doi = crossref_df(w1)
             df = df.append(df_doi)
 
         #df = clean_dataframe(df)
@@ -453,7 +453,7 @@ def meta_crossref():
 
             try:
                 w1 = works.doi(doi)
-                df_doi = works_df(w1)
+                df_doi = crossref_df(w1)
 
                 df_all = df_all.append(df_doi)
                 df_path = os.path.join(retrieve_path('pub_crossref'))
