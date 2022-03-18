@@ -103,6 +103,7 @@ def aggregate_df(save_to_file):
 
     for file in os.listdir(src_path):
 
+        if '.csv' not in file: continue
         df = pd.read_csv(os.path.join(src_path, file))
         df = clean_dataframe(df)
         df_all = df_all.append(df)
