@@ -46,10 +46,10 @@ def acquire_pubs():
     work_completed('acquire_pubs', 0)
 
     # list pubs from search result of gscholar using search term
-    task_name = 'search_gscholar'
-    work_completed(task_name, 0)
-    if work_to_do(task_name): search_gscholar()
-    work_completed(task_name, 1)
+    task = 'search_gscholar'
+    work_completed(task, 0)
+    if work_to_do(task): search_gscholar()
+    work_completed(task, 1)
 
 
     # consolidate into a single dataframe
@@ -57,9 +57,10 @@ def acquire_pubs():
     aggregate_df('gscholar_results')
 
     # add pub details by looking up url and parsing html
-    work_completed('search_articles', 0)
-    search_articles()
-    work_completed('search_articles', 1)
+    task = 'search_articles'
+    work_completed(task, 0)
+    if work_to_do(task): search_articles()
+    work_completed(task, 1)
 
     # consolidate into a single dataframe
     # save as html_meta.csv
