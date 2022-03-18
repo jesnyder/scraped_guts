@@ -630,7 +630,7 @@ def search_crossref():
             w1 = works.doi(doi)
 
             data_json = json.dumps(w1, indent = 2, ensure_ascii = False)
-            json_path = os.path.join(retrieve_path('pub_crossref'), 'json', doi + '.json')
+            json_path = os.path.join(retrieve_path('pub_crossref_json'), doi + '.json')
             json_file = open(json_file, 'w')
             json_file.write(data_json)
             json_file.close()
