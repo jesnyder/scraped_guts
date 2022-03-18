@@ -629,7 +629,7 @@ def search_crossref():
             works = Works()
             w1 = works.doi(doi)
 
-            data_json = json.dumps(w1, indent = 2, ensure_ascii = False)
+            data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
             doi_str = str(doi.replace('/', '_'))
             json_path = os.path.join(retrieve_path('pub_crossref_json'), doi_str + '.json')
             json_file = open(json_path, 'w')
