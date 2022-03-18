@@ -100,7 +100,7 @@ def aggregate_df(save_to_file):
     elif save_to_file == 'crossref_meta':
         src_path = os.path.join(retrieve_path('pub_crossref'))
 
-    print('src_path = ' + str(src_path))
+    print('src_path = ' + str(retrieve_path(src_path)))
     for file in os.listdir(retrieve_path(src_path)):
 
         f = os.path.join(retrieve_path(src_path), file)
