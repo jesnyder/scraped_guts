@@ -367,6 +367,11 @@ def json_to_dataframe():
             df_term.to_csv(df_file)
 
 
+            df_path2 = os.path.join(retrieve_path('pub_gscholar'))
+            df_dst2 = os.path.join(df_path2, term + '.csv')
+            df_term.to_csv(df_dst2)
+
+
 def query_crossref():
     """
     CrossRef
@@ -516,6 +521,11 @@ def search_articles():
         df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
         df_dst = os.path.join(df_path, url_name + '.csv')
         df.to_csv(df_dst)
+
+        df_path = os.path.join(retrieve_path('pub_web'))
+        df_dst = os.path.join(df_path, url_name + '.csv')
+        df.to_csv(df_dst)
+
         aggregate_df('html_meta')
         #print('df_dst = ' + str(df_dst))
 
@@ -563,6 +573,10 @@ def search_crossref():
         #df = clean_dataframe(df)
         print(retrieve_path('crossref_df'))
         df.to_csv(os.path.join(retrieve_path('crossref_df'), term + '.csv'))
+
+        df_path = os.path.join(retrieve_path('pub_crossref'))
+        df_dst = os.path.join(df_path, term + '.csv')
+        df.to_csv(df_dst)
 
 
 def search_gscholar():
