@@ -435,6 +435,7 @@ def search_articles():
     df = clean_dataframe(df)
     df_original = df
 
+    aggregate_df('html_meta')
     for url in list(df_original['title_link']):
 
         try:
@@ -446,7 +447,7 @@ def search_articles():
         except:
             url_name = 'none_found'
 
-        aggregate_df('html_meta')
+
         print('url_name = ' + str(url_name))
         if check_scraped(name_dataset, url_name, 0, 0): continue
         print('NOT FOUND url_name = ' + str(url_name))
