@@ -120,10 +120,11 @@ def check_scraped(name_dataset, term, year, num):
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
 
     paths_to_check = []
-    paths_to_check.append(retrieve_path(name_src))
-    paths_to_check.append(retrieve_path('pub_gscholar'))
-    paths_to_check.append(retrieve_path('pub_web'))
-    paths_to_check.append(retrieve_path('pub_crossref'))
+    paths_to_check.append(os.path.join(retrieve_path(name_src)))
+    paths_to_check.append(os.path.join(retrieve_path('pub_gscholar')))
+    paths_to_check.append(os.path.join(retrieve_path('pub_gscholar'), 'json'))
+    paths_to_check.append(os.path.join(retrieve_path('pub_web')))
+    paths_to_check.append(os.path.join(retrieve_path('pub_crossref')))
 
     for path in paths_to_check:
 
