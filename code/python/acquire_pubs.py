@@ -68,9 +68,10 @@ def acquire_pubs():
 
 
     # add author affiliations by looking up doi through CrossRef
-    work_completed('search_crossref', 0)
-    search_crossref()
-    work_completed('search_crossref', 1)
+    task = 'search_crossref'
+    work_completed(task, 1)
+    if work_to_do(task): search_crossref()
+    work_completed(task, 1)
 
     # consolidate into a single dataframe
     # save to crossref_meta.csv
