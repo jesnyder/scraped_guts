@@ -84,7 +84,7 @@ def aggregate_df(save_to_file):
     elif save_to_file == 'html_meta':
         src_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
     elif save_to_file == 'crossref_meta':
-        src_path = os.path.join(retrieve_path('crossref_df')
+        src_path = os.path.join(retrieve_path('crossref_df'))
 
     print('src_path = ' + str(src_path))
     for file in os.listdir(src_path):
