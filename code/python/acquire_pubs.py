@@ -118,81 +118,64 @@ def check_scraped(name_dataset, term, year, num):
 
     """
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
-    src_path = retrieve_path(name_src)
 
-    paths_to_check = [src_path]
+    paths_to_check = []
+    paths_to_check.append(retrieve_path(name_src))
+    paths_to_check.append(retrieve_path('pub_gscholar'))
+    paths_to_check.append(retrieve_path('pub_web'))
+    paths_to_check.append(retrieve_path('pub_crossref'))
 
-    if name_dataset == 'gscholar':
-        src_path_json = os.path.join(src_path, 'json')
-        src_path = src_path_json
-        #paths_to_check.append(src_path_json)
-        #df_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
-        #paths_to_check.append(df_path)
+    for path in paths_to_check:
 
-        try:
-            df_path = os.path.join(retrieve_path(name_src), 'df')
-            df_file = os.path.join(df_path, term + '.csv')
-            df = pd.read_csv(df_file)
-            df = df[(df['year'] == year)]
-            num_int = int(num.lstrip())*10
-            #print('num_int = ' + str(num_int))
-            if len(list(df['year'])) < num_int:
-                #print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + str(num))
+        for file in os.listdir(path):
+
+            # check specific gscholar search
+            file_split = file.split('.')
+            if file_split[0] == term: return(True)
+
+            # find and compare file term to term passed into the function
+            pattern = '[a-z]+'
+            flags = re.IGNORECASE
+            file_term = re.findall(pattern, file, flags)
+            file_term = file_term[0]
+            if file_term != term: continue
+            #print('file_term = ' + file_term + ' term = ' + term)
+
+            # find and compare file year to year passed into the function
+            pattern = '[0-9]{4}'
+            file_year = re.findall(pattern, file)
+            file_year = file_year[0]
+            if str(file_year) != str(year): continue
+            #print('file_year = ' + file_year + ' year = ' + str(year))
+
+            # find and compare file year to year passed into the function
+            pattern = '[0-9]{3}'
+            file_num = re.findall(pattern, file)
+            file_num = file_num[1]
+            if str(file_num) != str(num): continue
+            #print('file_num = ' + file_num + ' num = ' + str(num))
+
+            # find and compare file saved date to current date
+            file = file.split(' ')
+            file = file[3]
+            pattern = '[0-9]{4}' + '-' + '[0-9]{2}' + '-' +  '[0-9]{2}'
+            file_date_saved = re.findall(pattern, file)
+            file_date_saved = file_date_saved[0]
+            #print('file_date_saved = ' + file_date_saved)
+
+            a = file_date_saved.split('-')
+            a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
+            #print('a = ' + str(a))
+            b = datetime.datetime.today()
+            #print('b = ' + str(b))
+            v = b-a
+            #print('v = ' + str(v))
+            v = int(v.days)
+            #print('v = ' + str(v))
+            if v < 3:
+                #print('date match: ' + str(v))
+                #print('too many days lapsed since last query.')
                 return(True)
-        except:
-            hello = 'hello'
-
-
-    for file in os.listdir(src_path):
-
-        #print('file = ' + file)
-        # check specific gscholar search
-        file_split = file.split('.')
-        if file_split[0] == term: return(True)
-
-        # find and compare file term to term passed into the function
-        pattern = '[a-z]+'
-        flags = re.IGNORECASE
-        file_term = re.findall(pattern, file, flags)
-        file_term = file_term[0]
-        if file_term != term: continue
-        #print('file_term = ' + file_term + ' term = ' + term)
-
-        # find and compare file year to year passed into the function
-        pattern = '[0-9]{4}'
-        file_year = re.findall(pattern, file)
-        file_year = file_year[0]
-        if str(file_year) != str(year): continue
-        #print('file_year = ' + file_year + ' year = ' + str(year))
-
-        # find and compare file year to year passed into the function
-        pattern = '[0-9]{3}'
-        file_num = re.findall(pattern, file)
-        file_num = file_num[1]
-        if str(file_num) != str(num): continue
-        #print('file_num = ' + file_num + ' num = ' + str(num))
-
-        # find and compare file saved date to current date
-        file = file.split(' ')
-        file = file[3]
-        pattern = '[0-9]{4}' + '-' + '[0-9]{2}' + '-' +  '[0-9]{2}'
-        file_date_saved = re.findall(pattern, file)
-        file_date_saved = file_date_saved[0]
-        #print('file_date_saved = ' + file_date_saved)
-
-        a = file_date_saved.split('-')
-        a = datetime.datetime(int(a[0]), int(a[1]), int(a[2]), 0, 0)
-        #print('a = ' + str(a))
-        b = datetime.datetime.today()
-        #print('b = ' + str(b))
-        v = b-a
-        #print('v = ' + str(v))
-        v = int(v.days)
-        #print('v = ' + str(v))
-        if v < 3:
-            #print('date match: ' + str(v))
-            #print('too many days lapsed since last query.')
-            return(True)
 
     return(False)
 
