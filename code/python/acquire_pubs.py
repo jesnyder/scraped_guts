@@ -146,7 +146,7 @@ def aggregate_dst():
 
     df_all = pd.DataFrame()
 
-    for file in os.listdir(name_dst):
+    for file in os.listdir(retrieve_path(name_dst)):
 
         if '.csv' not in file: continue
         if 'pubs_meta' in file: continue
