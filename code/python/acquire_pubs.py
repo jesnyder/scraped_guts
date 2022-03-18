@@ -43,6 +43,7 @@ def acquire_pubs():
     crossref_meta.csv
 
     """
+    work_completed('acquire_pubs', 0)
 
     # list pubs from search result of gscholar using search term
     work_completed('search_gscholar', 0)
@@ -55,18 +56,25 @@ def acquire_pubs():
     aggregate_df('gscholar_results')
 
     # add pub details by looking up url and parsing html
+    work_completed('search_articles', 0)
     search_articles()
+    work_completed('search_articles', 1)
 
     # consolidate into a single dataframe
     # save as html_meta.csv
     aggregate_df('html_meta')
 
+
     # add author affiliations by looking up doi through CrossRef
+    work_completed('search_crossref', 0)
     search_crossref()
+    work_completed('search_crossref', 1)
 
     # consolidate into a single dataframe
     # save to crossref_meta.csv
     aggregate_df('crossref_meta')
+
+    work_completed('acquire_pubs', 1)
 
 """
 working programs
