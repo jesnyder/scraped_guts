@@ -52,7 +52,7 @@ def acquire_pubs():
     work_completed(task, 1)
 
     # consolidate into a single dataframe
-    # save to crossref_meta.csv
+    # save to crossref_results.csv
     aggregate_df('crossref_results')
 
 
@@ -68,14 +68,14 @@ def acquire_pubs():
     aggregate_df('gscholar_results')
 
     # add pub details by looking up url and parsing html
-    task = 'meta_articles'
+    task = 'meta_html'
     work_completed(task, 0)
-    if work_to_do(task): meta_articles()
+    if work_to_do(task): meta_html()
     work_completed(task, 1)
 
     # consolidate into a single dataframe
     # save as html_meta.csv
-    aggregate_df('html_meta')
+    aggregate_df('meta_html')
 
     # add author affiliations by looking up doi through CrossRef
     task = 'meta_crossref'
@@ -85,7 +85,7 @@ def acquire_pubs():
 
     # consolidate into a single dataframe
     # save to crossref_meta.csv
-    aggregate_df('crossref_meta')
+    aggregate_df('meta_crossref')
 
 
     work_completed('acquire_pubs', 1)
@@ -425,7 +425,48 @@ def retrieve_html(url):
     return(soup)
 
 
-def meta_articles():
+def meta_crossref():
+    """
+
+    """
+
+    # read in list of files
+    src_path = os.path.join(retrieve_path('pub_web'), 'html_meta' + '.csv')
+    df = pd.read_csv(src_path)
+    df = clean_dataframe(df)
+
+    df_all = pd.DataFrame()
+
+    col_name_interest = 'title_link'
+    titles = list(df[col_name_interest])
+
+    for title in titles:
+
+        df_temp =  df[(df[col_name_interest] == title)]
+
+        for col_name in df.columns:
+
+            works = Works()
+            doi = list(df_temp[col_name])[0]
+            print('doi = ')
+            print(doi)
+
+            try:
+                w1 = works.doi(doi)
+                df_doi = works_df(w1)
+
+                df_all = df_all.append(df_doi)
+                df_path = os.path.join(retrieve_path('pub_crossref'))
+                df_dst = os.path.join(df_path, 'crossref_meta' + '.csv')
+                df_all = clean_dataframe(df_all)
+                df_all.to_csv(df_dst)
+                break
+
+            except:
+                continue
+
+
+def meta_html():
     """
 
     """
@@ -528,47 +569,6 @@ def meta_articles():
 
         aggregate_df('html_meta')
         #print('df_dst = ' + str(df_dst))
-
-
-def meta_crossref():
-    """
-
-    """
-
-    # read in list of files
-    src_path = os.path.join(retrieve_path('pub_web'), 'html_meta' + '.csv')
-    df = pd.read_csv(src_path)
-    df = clean_dataframe(df)
-
-    df_all = pd.DataFrame()
-
-    col_name_interest = 'title_link'
-    titles = list(df[col_name_interest])
-
-    for title in titles:
-
-        df_temp =  df[(df[col_name_interest] == title)]
-
-        for col_name in df.columns:
-
-            works = Works()
-            doi = list(df_temp[col_name])[0]
-            print('doi = ')
-            print(doi)
-
-            try:
-                w1 = works.doi(doi)
-                df_doi = works_df(w1)
-
-                df_all = df_all.append(df_doi)
-                df_path = os.path.join(retrieve_path('pub_crossref'))
-                df_dst = os.path.join(df_path, 'crossref_meta' + '.csv')
-                df_all = clean_dataframe(df_all)
-                df_all.to_csv(df_dst)
-                break
-
-            except:
-                continue
 
 
 def search_crossref():
