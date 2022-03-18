@@ -94,11 +94,11 @@ def aggregate_df(save_to_file):
     df_all = pd.DataFrame()
 
     if save_to_file == 'gscholar_results':
-        src_path = os.path.join(retrieve_path(name_src), 'df')
+        src_path = os.path.join(retrieve_path('pub_gscholar'))
     elif save_to_file == 'html_meta':
-        src_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
+        src_path = os.path.join(retrieve_path('pub_web'))
     elif save_to_file == 'crossref_meta':
-        src_path = os.path.join(retrieve_path('crossref_df'))
+        src_path = os.path.join(retrieve_path('pub_crossref'))
 
     print('src_path = ' + str(src_path))
     for file in os.listdir(src_path):
@@ -455,7 +455,6 @@ def search_articles():
         except:
             url_name = 'none_found'
 
-        aggregate_df('html_meta')
         print('url_name = ' + str(url_name))
         if check_scraped(name_dataset, url_name, 0, 0): continue
         print('NOT FOUND url_name = ' + str(url_name))
