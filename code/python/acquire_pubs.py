@@ -106,7 +106,7 @@ def aggregate_df(save_to_file):
 
         df_all = df_all.append(df)
         df_all = clean_dataframe(df_all)
-        f = os.path.join(retrieve_path(name_dst), save_to_file + '.csv')
+        f = os.path.join(retrieve_path(name_src), save_to_file + '.csv')
         df_all.to_csv()
 
 
