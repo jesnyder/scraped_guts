@@ -50,6 +50,7 @@ def acquire_pubs():
     work_completed(task, 0)
     if work_to_do(task): search_gscholar()
     work_completed(task, 1)
+    json_to_dataframe()
 
 
     # consolidate into a single dataframe
@@ -94,7 +95,7 @@ def aggregate_df(save_to_file):
     df_all = pd.DataFrame()
 
     if save_to_file == 'gscholar_results':
-        src_path = os.path.join(retrieve_path('pub_gscholar'), 'df')
+        src_path = os.path.join(retrieve_path('pub_gscholar'))
     elif save_to_file == 'html_meta':
         src_path = os.path.join(retrieve_path('pub_web'))
     elif save_to_file == 'crossref_meta':
@@ -346,7 +347,6 @@ def json_to_dataframe():
             df_term = df_term.drop_duplicates(subset = 'title_link')
             df_term = clean_dataframe(df_term)
             df_term.to_csv(df_file)
-
 
             df_path2 = os.path.join(retrieve_path('pub_gscholar'))
             df_dst2 = os.path.join(df_path2, term + '.csv')
