@@ -157,7 +157,7 @@ def aggregate_dst():
         for name in df.columns:
 
             if name not in list(df_all.columns):
-
+                print('name = ' + name)
                 df_all[name] = list(df[name])
 
         df_all = clean_dataframe(df_all)
