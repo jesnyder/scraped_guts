@@ -151,15 +151,16 @@ def aggregate_dst():
         if '.csv' not in file: continue
         if 'pubs_meta' in file: continue
         df = pd.read_csv(os.path.join(retrieve_path(name_dst), file))
-
         df = clean_dataframe(df)
 
-        for name in df.columns:
+        for i in range(len(list(df[:,0]))):
 
-            if name not in list(df_all.columns):
-                print('name = ' + name)
-                df_all[name] = list(df[name])
+            for name in df.columns:
+                if name not in list(df_all.columns):
+                    print('name = ' + name)
+                    df_all[name] = list(df[name])
 
+        df_all = df_all.append(df)
         df_all = clean_dataframe(df_all)
         save_to = os.path.join(retrieve_path('pub_agg'), 'pubs_meta' + '.csv')
         df_all.to_csv(save_to)
@@ -627,6 +628,13 @@ def search_crossref():
         for doi in dois:
             works = Works()
             w1 = works.doi(doi)
+
+            data_json = json.dumps(w1, indent = 2, ensure_ascii = False)
+            json_path = os.path.join(retrieve_path('pub_crossref'), 'json', doi + '.json')
+            json_file = open(json_file, 'w')
+            json_file.write(data_json)
+            json_file.close()
+
             df_doi = crossref_df(w1)
             df = df.append(df_doi)
 
