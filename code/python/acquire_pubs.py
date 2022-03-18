@@ -46,9 +46,10 @@ def acquire_pubs():
     work_completed('acquire_pubs', 0)
 
     # list pubs from search result of gscholar using search term
-    work_completed('search_gscholar', 0)
-    search_gscholar()
-    work_completed('search_gscholar', 1)
+    task_name = 'search_gscholar'
+    work_completed(task_name, 0)
+    if work_to_do(task_name): search_gscholar()
+    work_completed(task_name, 1)
 
 
     # consolidate into a single dataframe
