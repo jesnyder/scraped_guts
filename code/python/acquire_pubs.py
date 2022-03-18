@@ -106,6 +106,7 @@ def aggregate_df(save_to_file):
         if '.csv' not in file: continue
         df = pd.read_csv(os.path.join(src_path, file))
         df = clean_dataframe(df)
+
         df_all = df_all.append(df)
         df_all = clean_dataframe(df_all)
         save_to = os.path.join(retrieve_path(name_dst), save_to_file + '.csv')
@@ -445,6 +446,7 @@ def search_articles():
         except:
             url_name = 'none_found'
 
+        aggregate_df('html_meta')
         print('url_name = ' + str(url_name))
         if check_scraped(name_dataset, url_name, 0, 0): continue
         print('NOT FOUND url_name = ' + str(url_name))
@@ -547,7 +549,6 @@ def meta_crossref():
         df_dst = os.path.join(df_path, 'crossref_meta' + '.csv')
         df_all = clean_dataframe(df_all)
         df_all.to_csv(df_dst)
-
 
 
 def search_crossref():
