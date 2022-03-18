@@ -86,7 +86,7 @@ def aggregate_df(save_to_file):
     elif save_to_file == 'crossref_meta':
         src_path = os.path.join(retrieve_path('crossref_df')
 
-    for file in os.listdir(df_path):
+    for file in os.listdir(src_path):
 
         f = os.path.join(src_path, file)
         df = pd.read_csv(f)
