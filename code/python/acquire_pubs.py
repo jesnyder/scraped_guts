@@ -54,6 +54,7 @@ def acquire_pubs():
     # consolidate into a single dataframe
     # save to crossref_results.csv
     aggregate_df('crossref_results')
+    aggregate_dst()
 
 
     # list pubs from search result of gscholar using search term
@@ -66,6 +67,7 @@ def acquire_pubs():
     # consolidate into a single dataframe
     # save as gscholar_results.csv
     aggregate_df('gscholar_results')
+    aggregate_dst()
 
     # add pub details by looking up url and parsing html
     task = 'meta_html'
@@ -76,6 +78,7 @@ def acquire_pubs():
     # consolidate into a single dataframe
     # save as html_meta.csv
     aggregate_df('meta_html')
+    aggregate_dst()
 
     # add author affiliations by looking up doi through CrossRef
     task = 'meta_crossref'
@@ -89,6 +92,7 @@ def acquire_pubs():
     # consolidate into a single dataframe
     # save to crossref_meta.csv
     aggregate_df('meta_crossref')
+    aggregate_dst()
 
 
     work_completed('acquire_pubs', 1)
@@ -129,6 +133,36 @@ def aggregate_df(save_to_file):
         df_all.to_csv(save_to)
 
         save_to = os.path.join(retrieve_path('pub_agg'), save_to_file + '.csv')
+        df_all.to_csv(save_to)
+
+
+def aggregate_dst():
+    """
+
+    """
+
+    name_dataset = 'gscholar'
+    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
+
+    df_all = pd.DataFrame()
+
+    for file in os.listdir(name_dst):
+
+        if '.csv' not in file: continue
+        if 'pubs_meta' in file: continue
+        df = pd.read_csv(os.path.join(name_dst, file))
+
+        df = clean_dataframe(df)
+
+        for name in df.columns:
+
+            if name not in df_all.columns:
+
+                df_all[name] = list(df[name])
+
+
+        df_all = clean_dataframe(df_all)
+        save_to = os.path.join(retrieve_path('pub_agg'), 'pubs_meta' + '.csv')
         df_all.to_csv(save_to)
 
 
