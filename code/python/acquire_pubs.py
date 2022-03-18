@@ -45,13 +45,23 @@ def acquire_pubs():
     """
     work_completed('acquire_pubs', 0)
 
+    # add author affiliations by looking up doi through CrossRef
+    task = 'search_crossref'
+    work_completed(task, 1)
+    if work_to_do(task): search_crossref()
+    work_completed(task, 1)
+
+    # consolidate into a single dataframe
+    # save to crossref_meta.csv
+    aggregate_df('crossref_results')
+
+
     # list pubs from search result of gscholar using search term
     task = 'search_gscholar'
     work_completed(task, 0)
     if work_to_do(task): search_gscholar()
     work_completed(task, 1)
     json_to_dataframe()
-
 
     # consolidate into a single dataframe
     # save as gscholar_results.csv
@@ -67,7 +77,6 @@ def acquire_pubs():
     # save as html_meta.csv
     aggregate_df('html_meta')
 
-
     # add author affiliations by looking up doi through CrossRef
     task = 'search_crossref'
     work_completed(task, 1)
@@ -77,6 +86,8 @@ def acquire_pubs():
     # consolidate into a single dataframe
     # save to crossref_meta.csv
     aggregate_df('crossref_meta')
+
+
 
     work_completed('acquire_pubs', 1)
 
@@ -99,6 +110,8 @@ def aggregate_df(save_to_file):
     elif save_to_file == 'html_meta':
         src_path = os.path.join(retrieve_path('pub_web'))
     elif save_to_file == 'crossref_meta':
+        src_path = os.path.join(retrieve_path('pub_crossref'))
+    elif save_to_file == 'crossref_results':
         src_path = os.path.join(retrieve_path('pub_crossref'))
 
     for file in os.listdir(src_path):
@@ -557,7 +570,6 @@ def meta_crossref():
 
             except:
                 continue
-
 
 
 def search_crossref():
