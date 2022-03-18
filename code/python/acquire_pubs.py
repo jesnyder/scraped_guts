@@ -108,7 +108,7 @@ def aggregate_df(save_to_file):
         src_path = os.path.join(retrieve_path('pub_crossref'))
     elif save_to_file == 'gscholar_results':
         src_path = os.path.join(retrieve_path('pub_gscholar'))
-    elif save_to_file == 'html_meta':
+    elif save_to_file == 'meta_html':
         src_path = os.path.join(retrieve_path('pub_web'))
     elif save_to_file == 'meta_crossref':
         src_path = os.path.join(retrieve_path('pub_crossref'))
