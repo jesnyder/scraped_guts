@@ -111,6 +111,9 @@ def aggregate_df(save_to_file):
         save_to = os.path.join(retrieve_path(name_dst), save_to_file + '.csv')
         df_all.to_csv(save_to)
 
+        save_to = os.path.join(retrieve_path('pub_agg'))
+        df_all.to_csv(save_to)
+ 
 
 def check_scraped(name_dataset, term, year, num):
     """
