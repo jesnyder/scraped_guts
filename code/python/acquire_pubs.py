@@ -590,7 +590,7 @@ def search_crossref():
         for doi in dois:
             works = Works()
             w1 = works.doi(doi)
-            df_doi = works_df(w1)
+            df_doi = crossref_df(w1)
             df = df.append(df_doi)
 
         #df = clean_dataframe(df)
