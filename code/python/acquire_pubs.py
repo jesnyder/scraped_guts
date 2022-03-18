@@ -532,7 +532,7 @@ def meta_crossref():
 
     col_name_interest = 'title_link'
     titles = list(df[col_name_interest])
-    
+
     for title in titles:
 
         df_temp =  df[(df[col_name_interest] == title)]
@@ -541,6 +541,8 @@ def meta_crossref():
 
             works = Works()
             doi = list(df_temp[col_name])[0]
+            print('doi = ')
+            print(doi)
 
             try:
                 w1 = works.doi(doi)
