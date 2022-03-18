@@ -25,7 +25,7 @@ from a0001_admin import work_completed
 from a0001_admin import work_to_do
 
 from query_patents import query_patents
-from acquire_publication import acquire_publication
+from acquire_pubs import acquire_pubs
 #from scrape_gscholar import scrape_gscholar
 #from scrape_gscholar import scrape_gscholar_article
 #from scrape_gscholar import json_to_dataframe
@@ -48,7 +48,7 @@ def acquire_info():
     if work_to_do('acquire_nih_awards'): acquire_nih_awards()
     if work_to_do('acquire_clinical_trials'): acquire_clinical_trials()
     if work_to_do('acquire_patents'): acquire_patents()
-    if work_to_do('acquire_gscholar'): acquire_publication()
+    if work_to_do('acquire_pubs'): acquire_pubs()
     if work_to_do('acquire_wikipedia'): acquire_wikipedia()
     work_completed('acquire_info', 1)
 

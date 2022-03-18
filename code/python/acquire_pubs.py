@@ -28,7 +28,7 @@ from a0001_admin import work_to_do
 Reference: https://python.plainenglish.io/scrape-google-scholar-with-python-fc6898419305
 """
 
-def acquire_publication():
+def acquire_pubs():
     """
     List pubs from search result of gscholar using search term
     Consolidate into a single dataframe
@@ -45,7 +45,10 @@ def acquire_publication():
     """
 
     # list pubs from search result of gscholar using search term
+    work_completed('search_gscholar', 0)
     search_gscholar()
+    work_completed('search_gscholar', 1)
+
 
     # consolidate into a single dataframe
     # save as gscholar_results.csv
