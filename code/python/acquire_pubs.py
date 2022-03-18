@@ -529,28 +529,33 @@ def meta_crossref():
     df = clean_dataframe(df)
 
     df_all = pd.DataFrame()
-    titles = list(df['title_link'])
+
+    col_name_interest = 'title_link'
+    titles = list(df[col_name_interest])
+    
     for title in titles:
+
+        df_temp =  df[(df[col_name_interest] == title)]
 
         for col_name in df.columns:
 
-            if 'doi' not in col_name: continue
-
             works = Works()
-            w1 = works.doi(doi)
-            df_doi = works_df(w1)
+            doi = list(df_temp[col_name])[0]
 
-            """
-            df_temp = df[(df['title_link'] == title)]
-            for col_name in df_doi.columns:
-                df_temp['crossref_' + col_name] = [list(df_doi.loc[0, col_name])]
-            """
+            try:
+                w1 = works.doi(doi)
+                df_doi = works_df(w1)
 
-            df_all = df_all.append(df_doi)
-            df_path = os.path.join(retrieve_path('pub_crossref'))
-            df_dst = os.path.join(df_path, 'crossref_meta' + '.csv')
-            df_all = clean_dataframe(df_all)
-            df_all.to_csv(df_dst)
+                df_all = df_all.append(df_doi)
+                df_path = os.path.join(retrieve_path('pub_crossref'))
+                df_dst = os.path.join(df_path, 'crossref_meta' + '.csv')
+                df_all = clean_dataframe(df_all)
+                df_all.to_csv(df_dst)
+                break
+
+            except:
+                continue
+
 
 
 def search_crossref():
