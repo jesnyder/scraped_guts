@@ -94,7 +94,7 @@ def aggregate_df(save_to_file):
     df_all = pd.DataFrame()
 
     if save_to_file == 'gscholar_results':
-        src_path = os.path.join(retrieve_path('pub_gscholar'), 'json')
+        src_path = os.path.join(retrieve_path('pub_gscholar'), 'df')
     elif save_to_file == 'html_meta':
         src_path = os.path.join(retrieve_path('pub_web'))
     elif save_to_file == 'crossref_meta':
@@ -102,10 +102,8 @@ def aggregate_df(save_to_file):
 
     for file in os.listdir(src_path):
 
-        #f = os.path.join(src_path, file)
         df = pd.read_csv(os.path.join(src_path, file))
         df = clean_dataframe(df)
-
         df_all = df_all.append(df)
         df_all = clean_dataframe(df_all)
         save_to = os.path.join(retrieve_path(name_dst), save_to_file + '.csv')
