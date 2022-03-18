@@ -555,7 +555,6 @@ def search_crossref():
 
         #df = clean_dataframe(df)
         print(retrieve_path('crossref_df'))
-        df.to_csv(os.path.join(retrieve_path('crossref_df'), term + '.csv'))
 
         df_path = os.path.join(retrieve_path('pub_crossref'))
         df_dst = os.path.join(df_path, term + '.csv')
