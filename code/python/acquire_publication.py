@@ -79,13 +79,13 @@ def aggregate_df(save_to_file):
 
     df_all = pd.DataFrame()
 
-    if save_to_file = 'gscholar_results':
+    if save_to_file == 'gscholar_results':
         src_path = os.path.join(retrieve_path(name_src), 'df')
-    elif save_to_file = 'html_meta':
+    elif save_to_file == 'html_meta':
         src_path = os.path.join(retrieve_path(str(name_dataset + '_article_df')))
-    elif save_to_file = 'crossref_meta':
+    elif save_to_file == 'crossref_meta':
         src_path = os.path.join(retrieve_path('crossref_df')
- 
+
     for file in os.listdir(df_path):
 
         f = os.path.join(src_path, file)
