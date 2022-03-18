@@ -83,6 +83,9 @@ def acquire_pubs():
     if work_to_do(task): meta_crossref()
     work_completed(task, 1)
 
+    meta_crossref()
+    wait(10)
+
     # consolidate into a single dataframe
     # save to crossref_meta.csv
     aggregate_df('meta_crossref')
