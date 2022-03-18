@@ -101,7 +101,7 @@ def aggregate_df(save_to_file):
         src_path = os.path.join(retrieve_path('pub_crossref'))
 
     print('src_path = ' + str(src_path))
-    for file in os.listdir(src_path):
+    for file in os.listdir(retrieve_path(src_path)):
 
         f = os.path.join(retrieve_path(src_path), file)
         df = pd.read_csv(f)
