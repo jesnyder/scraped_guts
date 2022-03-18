@@ -47,7 +47,7 @@ def acquire_pubs():
 
     # add author affiliations by looking up doi through CrossRef
     task = 'search_crossref'
-    work_completed(task, 1)
+    work_completed(task, 0)
     if work_to_do(task): search_crossref()
     work_completed(task, 1)
 
@@ -68,9 +68,9 @@ def acquire_pubs():
     aggregate_df('gscholar_results')
 
     # add pub details by looking up url and parsing html
-    task = 'search_articles'
+    task = 'meta_articles'
     work_completed(task, 0)
-    if work_to_do(task): search_articles()
+    if work_to_do(task): meta_articles()
     work_completed(task, 1)
 
     # consolidate into a single dataframe
@@ -78,15 +78,14 @@ def acquire_pubs():
     aggregate_df('html_meta')
 
     # add author affiliations by looking up doi through CrossRef
-    task = 'search_crossref'
+    task = 'meta_crossref'
     work_completed(task, 1)
-    if work_to_do(task): search_crossref()
+    if work_to_do(task): meta_crossref()
     work_completed(task, 1)
 
     # consolidate into a single dataframe
     # save to crossref_meta.csv
     aggregate_df('crossref_meta')
-
 
 
     work_completed('acquire_pubs', 1)
@@ -426,7 +425,7 @@ def retrieve_html(url):
     return(soup)
 
 
-def search_articles():
+def meta_articles():
     """
 
     """
