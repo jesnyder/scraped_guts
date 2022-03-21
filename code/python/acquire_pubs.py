@@ -53,6 +53,21 @@ def acquire_pubs():
     work_completed('acquire_pubs', 1)
 
 
+
+def link_to_filename(link):
+    """
+    return filename from link
+    """
+    chars = ['https://', '/', '.']
+    link = str(link)
+
+    for char in chars:
+        link = link.replace(char, '')
+
+    link_filename = str(link)
+    return(link_filename)
+
+
 def search_crossref():
     """
     save search results from crossref as json
@@ -84,6 +99,7 @@ def search_crossref():
             link = w1['link'][0]['URL']
             print('link = ')
             print(link)
+            link_filename = link_to_filename(link)
 
             data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
             doi_str = str(doi.replace('/', '_'))
