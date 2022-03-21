@@ -9,9 +9,58 @@ def acquire_pubs():
     # set acquire_pubs as a task
     work_completed('acquire_pubs', 0)
 
+    # search term in crossref as json
+    search_crossref()
+
+    # search term in gscholar as json
+
+    # list all urls as dataframe
+
+    # metadata from url as json
+
+    # metadate from crossref as json
+
+    # aggregate in json
+
+    # aggregate in dataframe
 
     hello
 
-
     # completed acquire_pubs
     work_completed('acquire_pubs', 1)
+
+
+def search_crossref():
+    """
+    save search results from crossref as json
+    search term saved with json
+    each result saved as its url
+
+    CrossRef
+    https://www.crossref.org/blog/python-and-ruby-libraries-for-accessing-the-crossref-api/
+
+    CrossRef Works
+    https://github.com/fabiobatalha/crossrefapi/blob/master/README.rst#agency
+    """
+
+    for term in retrieve_list('search_terms'):
+
+        df = pd.DataFrame()
+        cr = Crossref()
+        x = cr.works(query = term, limit = 500)
+        dois = [z['DOI'] for z in x['message']['items']]
+
+        links = [z['URL'] for z in x['message']['items']]
+        print('links = ')
+        print(links)
+
+        for doi in dois:
+            works = Works()
+            w1 = works.doi(doi)
+
+            data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
+            doi_str = str(doi.replace('/', '_'))
+            json_path = os.path.join(retrieve_path('pub_crossref_json'), doi_str + '.json')
+            json_file = open(json_path, 'w')
+            json_file.write(data_json)
+            json_file.close()
