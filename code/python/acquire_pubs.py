@@ -1,4 +1,4 @@
-
+from a0001_admin import work_completed
 
 
 def acquire_pubs():
