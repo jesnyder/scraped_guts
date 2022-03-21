@@ -81,6 +81,10 @@ def search_crossref():
             works = Works()
             w1 = works.doi(doi)
 
+            link = w1['link'][0]['URL']
+            print('link = ')
+            print(link)
+
             data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
             doi_str = str(doi.replace('/', '_'))
             json_path = os.path.join(retrieve_path('pub_crossref_json'), doi_str + '.json')
