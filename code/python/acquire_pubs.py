@@ -13,5 +13,5 @@ def acquire_pubs():
     hello
 
 
-    # completed acquire_pubs 
+    # completed acquire_pubs
     work_completed('acquire_pubs', 1)
