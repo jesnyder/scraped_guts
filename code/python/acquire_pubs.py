@@ -1,4 +1,27 @@
+from bs4 import BeautifulSoup
+from crossref.restful import Works
+import datetime
+from habanero import Crossref
+import json
+import lxml
+import numpy as np
+import os
+import pandas as pd
+import shutil
+import random
+import re
+import requests
+import time
+
+from a0001_admin import clean_dataframe
+from a0001_admin import name_paths
+from a0001_admin import retrieve_datetime
+from a0001_admin import retrieve_format
+from a0001_admin import retrieve_list
+from a0001_admin import retrieve_path
+from a0001_admin import write_paths
 from a0001_admin import work_completed
+from a0001_admin import work_to_do
 
 
 def acquire_pubs():
