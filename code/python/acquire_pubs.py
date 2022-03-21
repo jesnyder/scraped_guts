@@ -32,8 +32,14 @@ def acquire_pubs():
     # set acquire_pubs as a task
     work_completed('acquire_pubs', 0)
 
-    # search term in crossref as json
-    search_crossref()
+    search()
+
+    #list_urls()
+
+    #metadata_json()
+
+    # make a folder of json data on pubs search term in crossref as json
+
 
     # search term in gscholar as json
 
@@ -53,7 +59,6 @@ def acquire_pubs():
     work_completed('acquire_pubs', 1)
 
 
-
 def link_to_filename(link):
     """
     return filename from link
@@ -66,6 +71,16 @@ def link_to_filename(link):
 
     link_filename = str(link)
     return(link_filename)
+
+
+def search():
+    """
+    Make a folder named for search term
+    Save json of each publication found
+    Search CrossRef and GoogleScholar
+    """
+
+    search_crossref()
 
 
 def search_crossref():
