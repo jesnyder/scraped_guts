@@ -38,6 +38,7 @@ pub_crossref,program_generated pubs src crossref
 pub_crossref_json,program_generated pubs src crossref json
 pub_json,program_generated pubs src json
 pub_agg,program_generated pubs agg
+pub_links,program_generated pubs src links.csv
 
 #, map
 all_institutions,program_generated map all_institutions.csv

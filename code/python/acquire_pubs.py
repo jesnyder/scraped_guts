@@ -38,6 +38,8 @@ def acquire_pubs():
     # make json folder
     make_json_folder()
 
+    # find metadata
+
 
 
     hello
@@ -140,6 +142,7 @@ def make_json_folder():
     json_src.append(os.path.join(retrieve_path('pub_crossref_json')))
     json_src.append(os.path.join(retrieve_path('pub_gscholar_json')))
 
+    links = []
     for path in json_src:
 
         for file in os.listdir(path):
@@ -177,6 +180,7 @@ def make_json_folder():
                     test_json = {"searched": ["crossref"],}
                     test_json["crossref"] = pub
 
+                links.append(link)
                 file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
                 json_file = open(file_dst, 'w')
                 #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
@@ -184,6 +188,9 @@ def make_json_folder():
                 json_file.write(test_json)
                 json_file.close()
 
+                df = pd.DataFrame()
+                df['links'] = links
+                df.to_csv(os.path.join(retrieve_path('pub_links')))
 
 def search():
     """
