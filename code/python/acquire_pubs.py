@@ -185,8 +185,8 @@ def make_json_folder():
             for link in links:
 
                 file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
-                json_file = open(json_path, 'w')
-                json_file.write(data_json)
+                json_file = open(file_dst, 'w')
+                json_file.write(obj)
                 json_file.close()
 
 
