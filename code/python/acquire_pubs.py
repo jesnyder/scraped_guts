@@ -166,7 +166,7 @@ def make_json_folder():
                     if link == '':
                         link = pub['title']
 
-                    test_json = {"searched:" ["gscholar"],}
+                    test_json = {"searched": ["gscholar"],}
                     test_json["gscholar"] = pub
 
                 elif 'crossref' in str(path):
