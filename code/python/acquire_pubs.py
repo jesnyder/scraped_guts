@@ -40,11 +40,7 @@ def acquire_pubs():
         work_completed(task_name, 1)
 
     # make json folder
-    task_name = 'make_json_folder'
-    if work_to_do(task_name):
-        work_completed(task_name, 0)
-        make_json_folder()
-        work_completed(task_name, 1)
+    make_json_folder()
 
     # retrieve metadata
     task_name = 'search_web'
@@ -54,6 +50,7 @@ def acquire_pubs():
         search_web()
         web_to_json()
         work_completed(task_name, 1)
+    web_to_json()
 
     # retrieve metadata
     task_name = 'crosssearch_crossref'
