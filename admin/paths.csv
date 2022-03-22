@@ -35,7 +35,7 @@ pub_gscholar,program_generated pubs src gscholar
 pub_web,program_generated pubs src web
 pub_crossref,program_generated pubs src crossref
 pub_crossref_json,program_generated pubs src crossref json
-pub_crossref_json,program_generated pubs src json
+pub_json,program_generated pubs src json
 pub_agg,program_generated pubs agg
 
 #, map
