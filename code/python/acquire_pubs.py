@@ -54,7 +54,9 @@ def acquire_pubs():
         work_completed(task_name, 0)
 
 
-    hello
+    wait_time = random.random()*60 + 60
+    print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+    time.sleep(wait_time)
 
     # completed acquire_pubs
     work_completed('acquire_pubs', 1)
@@ -126,7 +128,6 @@ def check_scraped(name_dataset, term, year, num):
                 return(True)
 
     return(False)
-
 
 
 def html_gscholar_to_json(soup):
@@ -390,6 +391,36 @@ def meta_html(link):
     return(json_obj)
 
 
+
+def retrieve_html(url):
+    """
+
+    """
+
+    print('url = ')
+    print(url)
+
+    headers = {
+        'User-agent':
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+        }
+
+    proxies = {
+        'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
+        }
+
+    time_string = retrieve_datetime()
+    wait_time = random.random()*60 + 60
+    print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
+    time.sleep(wait_time)
+
+    html = requests.get(url, headers=headers, proxies=proxies).text
+    soup = BeautifulSoup(html, 'lxml')
+
+    return(soup)
+
+
+
 def search_meta():
     """
 
@@ -412,7 +443,6 @@ def search_meta():
         json_obj = json.dumps(json_obj, indent = 3)
         json_file.write(json_obj)
         json_file.close()
-
 
 
 def search_term():
