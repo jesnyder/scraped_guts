@@ -170,6 +170,9 @@ def crosssearch_crossref():
             w1 = works.doi(doi)
             data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
 
+            print('w1 = ')
+            print(w1)
+
             searched_list = list(obj_dst['searched'])
             searched_list.append('crossref')
             obj_dst['searched'] = searched_list
@@ -180,6 +183,7 @@ def crosssearch_crossref():
             obj_dst = json.dumps(obj_dst, indent = 3)
             json_file.write(obj_dst)
             json_file.close()
+
         except:
             print('hello')
 
