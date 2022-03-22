@@ -50,8 +50,9 @@ def acquire_pubs():
     task_name = 'search_web'
     if work_to_do(task_name):
         work_completed(task_name, 0)
+        shutil.rmtree(os.path.join(retrieve_path('pub_web_json')))
         search_web()
-        work_completed(task_name, 0)
+        work_completed(task_name, 1)
 
 
     wait_time = random.random()*60 + 60
