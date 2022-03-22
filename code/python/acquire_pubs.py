@@ -118,9 +118,10 @@ def link_to_filename(link):
     """
     return filename from link
     """
-    chars = ['https://', '/', '.']
+
     link = str(link)
 
+    chars = ['https://', '/', '.']
     for char in chars:
         link = link.replace(char, '')
 
@@ -173,6 +174,13 @@ def make_json_folder():
                     print(pub)
 
                     links.append(pub['title_link'])
+                    obj_json = pub
+
+                    file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
+                    json_file = open(file_dst, 'w')
+                    obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
+                    json_file.write(obj_json)
+                    json_file.close()
 
 
             elif 'crossref' in str(path):
@@ -188,17 +196,14 @@ def make_json_folder():
                 print('values = ')
                 print(values)
 
-
                 link = obj["link"][0]["URL"]
                 links = [link]
-
-
-            for link in links:
+                obj_json = obj
 
                 file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
                 json_file = open(file_dst, 'w')
-                obj = json.dumps(obj, indent = 4, ensure_ascii = False)
-                json_file.write(obj)
+                obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
+                json_file.write(obj_json)
                 json_file.close()
 
 
