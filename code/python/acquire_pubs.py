@@ -121,7 +121,7 @@ def link_to_filename(link):
 
     link = str(link)
 
-    chars = ['https://', '/', '.']
+    chars = ['https://', 'www', '/', '.']
     for char in chars:
         link = link.replace(char, '')
 
