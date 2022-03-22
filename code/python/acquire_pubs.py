@@ -161,8 +161,8 @@ def make_json_folder():
 
             for pub in obj:
 
-                print('pub = ')
-                print(pub)
+                #print('pub = ')
+                #print(pub)
 
                 if 'gscholar' in str(path):
                     link = pub['title_link']
@@ -190,7 +190,7 @@ def make_json_folder():
 
             df = pd.DataFrame()
             df['links'] = links
-            df = clean_dataframe()
+            df = clean_dataframe(df)
             df.to_csv(os.path.join(retrieve_path('pub_links')))
 
 def search():
