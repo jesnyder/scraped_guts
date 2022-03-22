@@ -163,6 +163,8 @@ def crosssearch_crossref():
 
         try:
             doi = obj_dst['web']['citation_doi']
+            print('doi = ')
+            print(doi)
 
             works = Works()
             w1 = works.doi(doi)
@@ -178,9 +180,8 @@ def crosssearch_crossref():
             obj_dst = json.dumps(obj_dst, indent = 3)
             json_file.write(obj_dst)
             json_file.close()
-
-
-
+        except:
+            print('hello')
 
 
 def html_gscholar_to_json(soup):
