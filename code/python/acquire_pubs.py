@@ -43,12 +43,12 @@ def acquire_pubs():
     make_json_folder()
 
     # retrieve metadata
+
     task_name = 'search_web'
     if work_to_do(task_name):
         work_completed(task_name, 0)
         #shutil.rmtree(os.path.join(retrieve_path('pub_web_json')))
         search_web()
-        web_to_json()
         work_completed(task_name, 1)
     web_to_json()
 
@@ -165,7 +165,8 @@ def crosssearch_crossref():
 
             works = Works()
             w1 = works.doi(doi)
-            data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
+            w1 = json.loads(w1)
+            #data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
 
             print('w1 = ')
             print(w1)
@@ -176,7 +177,7 @@ def crosssearch_crossref():
         searched_list = list(obj_dst['searched'])
         searched_list.append('crossref')
         obj_dst['searched'] = searched_list
-        obj_dst['crossref_doi'] = data_json
+        obj_dst['crossref_doi'] = w1
 
         json_file = open(os.path.join(json_src, file), 'w')
         #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
