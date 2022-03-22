@@ -176,18 +176,19 @@ def make_json_folder():
                 json_file.close()
 
 
-
-
 def search():
     """
     Make a folder named for search term
     Save json of each publication found
     Search CrossRef and GoogleScholar
     """
-    work_completed('search_pubs', 0)
-    search_crossref()
-    search_gscholar()
-    work_completed('search_pubs', 1)
+
+    task_name = 'search_pubs'
+    if work_to_do(task_name):
+        work_completed('search_pubs', 0)
+        search_crossref()
+        search_gscholar()
+        work_completed('search_pubs', 1)
 
 
 def search_crossref():
