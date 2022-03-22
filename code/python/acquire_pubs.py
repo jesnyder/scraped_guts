@@ -47,10 +47,10 @@ def acquire_pubs():
         work_completed(task_name, 1)
 
     # retrieve metadata
-    task_name = 'search_meta'
+    task_name = 'search_web'
     if work_to_do(task_name):
         work_completed(task_name, 0)
-        search_meta()
+        search_web()
         work_completed(task_name, 0)
 
 
@@ -131,70 +131,6 @@ def check_scraped(name_dataset, term, year, num):
 
 
 def html_gscholar_to_json(soup):
-    """
-
-    """
-
-    # Scrape just PDF links
-    for pdf_link in soup.select('.gs_or_ggsm a'):
-        pdf_file_link = pdf_link['href']
-        print(pdf_file_link)
-
-    # JSON data will be collected here
-    data = []
-
-    # Container where all needed data is located
-    for result in soup.select('.gs_ri'):
-        title = result.select_one('.gs_rt').text
-
-        try:
-            title_link = result.select_one('.gs_rt a')['href']
-        except:
-            title_link = ''
-
-        publication_info = result.select_one('.gs_a').text
-        snippet = result.select_one('.gs_rs').text
-        cited_by = result.select_one('#gs_res_ccl_mid .gs_nph+ a')['href']
-        related_articles = result.select_one('a:nth-child(4)')['href']
-
-        # get the year of publication of each paper
-        try:
-            txt_year = result.find("div", class_="gs_a").text
-            ref_year = re.findall('[0-9]{4}', txt_year)
-            ref_year = ref_year[0]
-        except:
-            ref_year = 0
-
-        # get number of citations for each paper
-        try:
-            txt_cite = result.find("div", class_="gs_fl").find_all("a")[2].string
-            citations = txt_cite.split(' ')
-            citations = (citations[-1])
-            citations = int(citations)
-        except:
-            citations = 0
-
-        try:
-            all_article_versions = result.select_one('a~ a+ .gs_nph')['href']
-        except:
-            all_article_versions = None
-
-        data.append({
-            'year': ref_year,
-            'title': title,
-            'title_link': title_link,
-            'publication_info': publication_info,
-            'snippet': snippet,
-            'citations': citations,
-            'cited_by': f'https://scholar.google.com{cited_by}',
-            'related_articles': f'https://scholar.google.com{related_articles}',
-            'all_article_versions': f'https://scholar.google.com{all_article_versions}',
-        })
-
-    return(data)
-
-
-def html_web_to_json(soup):
     """
 
     """
@@ -391,7 +327,6 @@ def meta_html(link):
     return(json_obj)
 
 
-
 def retrieve_html(url):
     """
 
@@ -420,8 +355,7 @@ def retrieve_html(url):
     return(soup)
 
 
-
-def search_meta():
+def search_web():
     """
 
     """
@@ -430,7 +364,7 @@ def search_meta():
 
         ref_list = list(retrieve_list('pub_links'))
         ref_index = ref_list.index(link)
-        print('% complete = ' + str(round((ref_index+1)/(len(ref_list)),2)))
+        print('% complete = ' + str(100*round((ref_index+1)/(len(ref_list)),2)))
 
         link_name = link_to_filename(link)
 
