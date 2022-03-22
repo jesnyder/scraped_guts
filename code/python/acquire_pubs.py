@@ -379,6 +379,39 @@ def search_web():
         json_file.close()
 
 
+        term = link
+        url = 'https://scholar.google.com/scholar?'
+        url = url + 'start=' + str(0)
+        url = url + '&q=' + term
+        #url = url + '&hl=en&as_sdt=0,5'
+        url = url + '&hl=en&as_sdt=0,5'
+        url = url + '&as_ylo=' + str(year)
+        url = url + '&as_yhi=' + str(year)
+
+        # check if recently scraped
+        if check_scraped('gscholar', term, year, num_str):
+            #print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + num_str)
+            continue
+
+        soup = retrieve_html(url)
+        if error_check(soup) == True: return('error')
+
+        data = html_to_json(soup)
+        if data == []: break
+        #if len(data) < 10 and year != int(date.strftime("%Y")):
+            #work_completed('begin_acquire_gscholar_json_' + str(year), 1)
+
+        data_json = json.dumps(data, indent = 2, ensure_ascii = False)
+        print(data_json)
+
+        name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+        json_file = os.path.join(retrieve_path(name_src), 'json', term + ' ' + str(year) + ' ' + str(num_str) + ' ' + str(retrieve_datetime())  + '.json' )
+        json_file = open(json_file, 'w')
+        json_file.write(data_json)
+        json_file.close()
+
+
+
 def search_term():
     """
     Make a folder named for search term
