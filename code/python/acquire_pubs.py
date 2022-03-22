@@ -35,7 +35,7 @@ def acquire_pubs():
     # search for pubs
     search()
 
-    # make json folder 
+    # make json folder
 
 
 
@@ -65,9 +65,10 @@ def search():
     Save json of each publication found
     Search CrossRef and GoogleScholar
     """
-
+    work_completed('search_pubs', 0)
     search_crossref()
     search_gscholar()
+    work_completed('search_pubs', 1)
 
 
 def search_crossref():
@@ -117,7 +118,7 @@ def search_gscholar():
     """
     for term in retrieve_list('search_terms'):
 
-        json_to_dataframe()
+        #json_to_dataframe()
         currentDateTime = datetime.datetime.now()
         date = currentDateTime.date()
 
