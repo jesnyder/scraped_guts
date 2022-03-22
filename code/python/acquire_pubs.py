@@ -132,7 +132,6 @@ def make_json_folder():
     """
 
     """
-    json_dst = os.path.join(retrieve_path(pub_json))
 
     # list directories with json
     json_src = []
@@ -158,10 +157,23 @@ def make_json_folder():
             print('obj = ')
             print(obj)
 
-            file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
-            json_file = open(json_path, 'w')
-            json_file.write(data_json)
-            json_file.close()
+            if 'gscholar' in str(path):
+
+                links = obj['title_link']
+
+
+            elif 'crossref' in str(path):
+
+                link = obj['link'][0]['URL']
+                links = [link]
+
+
+            for link in links:
+
+                file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
+                json_file = open(json_path, 'w')
+                json_file.write(data_json)
+                json_file.close()
 
 
 
