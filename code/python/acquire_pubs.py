@@ -33,7 +33,11 @@ def acquire_pubs():
     work_completed('acquire_pubs', 0)
 
     # search for pubs
-    search_term()
+    task_name = 'search_term'
+    if work_to_do(task_name):
+        work_completed(task_name, 0)
+        search_term()
+        work_completed(task_name, 0)
 
     # make json folder
     task_name = 'make_json_folder'
@@ -42,11 +46,12 @@ def acquire_pubs():
         make_json_folder()
         work_completed(task_name, 1)
 
-
     # retrieve metadata
-    search_meta()
-
-    # find metadata
+    task_name = 'search_meta'
+    if work_to_do(task_name):
+        work_completed(task_name, 0)
+        search_meta()
+        work_completed(task_name, 0)
 
 
 
@@ -143,9 +148,6 @@ def make_json_folder():
     """
 
     """
-
-
-
     shutil.rmtree(os.path.join(retrieve_path('pub_json')))
 
     # list directories with json
