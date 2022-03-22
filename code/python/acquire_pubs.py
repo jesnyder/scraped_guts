@@ -138,7 +138,7 @@ def make_json_folder():
     # list directories with json
     json_src = []
     json_src.append(os.path.join(retrieve_path('pub_crossref_json')))
-    json_src.append(os.path.join(retrieve_path('pub_gscholar_json'))
+    json_src.append(os.path.join(retrieve_path('pub_gscholar_json')))
 
     for path in json_src:
 
