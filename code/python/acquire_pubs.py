@@ -124,7 +124,7 @@ def link_to_filename(link):
     for char in chars:
         link = link.replace(char, '')
 
-    link_filename = str(link)
+    link_filename = str(link[:50])
     return(link_filename)
 
 
