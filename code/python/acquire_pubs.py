@@ -192,6 +192,7 @@ def make_json_folder():
             df['links'] = links
             df = clean_dataframe(df)
             df.to_csv(os.path.join(retrieve_path('pub_links')))
+            print('pubs founds: ' + str(len(links)))
 
 def search():
     """
