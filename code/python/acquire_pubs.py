@@ -133,11 +133,8 @@ def make_json_folder():
     """
 
     """
-    os.rmdir(os.path.join(retrieve_path('pub_json'))
+    os.rmdir(os.path.join(retrieve_path('pub_json')))
 
-    name_dataset = 'pubs'
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
-    src_path = retrieve_path(name_src)
     # list directories with json
     json_src = []
     json_src.append(os.path.join(retrieve_path('pub_crossref_json')))
