@@ -81,7 +81,7 @@ def search():
     """
 
     search_crossref()
-    search_gscholar()
+    #search_gscholar()
 
 
 def search_crossref():
