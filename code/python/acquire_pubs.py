@@ -273,7 +273,7 @@ def make_json_folder():
             print('pubs founds: ' + str(len(links)))
 
 
-def meta_html(link):
+def meta_html(url):
     """
 
     """
@@ -286,6 +286,8 @@ def meta_html(link):
         'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
         }
 
+    print('url = ')
+    print(url)
     try:
         #html = requests.get(url, headers=headers, proxies=proxies).text
         html = requests.get(url).text
