@@ -164,14 +164,6 @@ def make_json_folder():
                 print('obj = ')
                 print(obj)
 
-                keys = list(obj.keys())
-                print('keys = ')
-                print(keys)
-
-                values = list(obj.values())
-                print('values = ')
-                print(values)
-
                 links = []
                 for i in obj:
 
