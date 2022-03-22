@@ -169,11 +169,11 @@ def make_json_folder():
                 print('obj = ')
                 print(obj)
 
-                keys = list(w1.keys())
+                keys = list(obj.keys())
                 print('keys = ')
                 print(keys)
 
-                values = list(w1.values())
+                values = list(obj.values())
                 print('values = ')
                 print(values)
 
