@@ -50,7 +50,7 @@ def acquire_pubs():
     task_name = 'search_web'
     if work_to_do(task_name):
         work_completed(task_name, 0)
-        shutil.rmtree(os.path.join(retrieve_path('pub_web_json')))
+        #shutil.rmtree(os.path.join(retrieve_path('pub_web_json')))
         search_web()
         web_to_json()
         work_completed(task_name, 1)
@@ -235,6 +235,9 @@ def web_to_json():
             json_file.close()
             obj_src = json.loads(data)
 
+            searched_list = list(obj_dst['searched'])
+            searched_list.append('web')
+            obj_dst['searched'] = searched_list
             obj_dst['web'] = obj_src
 
             json_file = open(os.path.join(json_src, file), 'w')
@@ -242,7 +245,6 @@ def web_to_json():
             obj_dst = json.dumps(obj_dst, indent = 3)
             json_file.write(obj_dst)
             json_file.close()
-
 
 
 def make_json_folder():
@@ -417,8 +419,6 @@ def search_web():
         json_obj = json.dumps(json_obj, indent = 3)
         json_file.write(json_obj)
         json_file.close()
-
-
 
 
 def search_term():
