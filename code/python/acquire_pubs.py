@@ -411,14 +411,16 @@ def search_web():
         link_name = link_to_filename(link)
 
         for file in os.listdir(retrieve_path('pub_web_json')):
-            if link_name in str(file): continue
+            file_split = file.split('.')
+            file_name = file_split[0]
+            if link_name == file_name:
 
-        json_obj = meta_html(link)
-        json_file = os.path.join(retrieve_path('pub_web_json'),  link_name + '.json' )
-        json_file = open(json_file, 'w')
-        json_obj = json.dumps(json_obj, indent = 3)
-        json_file.write(json_obj)
-        json_file.close()
+                json_obj = meta_html(link)
+                json_file = os.path.join(retrieve_path('pub_web_json'),  link_name + '.json' )
+                json_file = open(json_file, 'w')
+                json_obj = json.dumps(json_obj, indent = 3)
+                json_file.write(json_obj)
+                json_file.close()
 
 
 def search_term():
