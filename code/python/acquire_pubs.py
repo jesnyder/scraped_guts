@@ -165,14 +165,14 @@ def make_json_folder():
                     link = pub['title_link']
 
                 elif 'crossref' in str(path):
-
+                    pub = obj
                     link = pub["link"][0]["URL"]
 
                 file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
                 json_file = open(file_dst, 'w')
                 #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
-                obj_json = json.dumps(obj_json)
-                json_file.write(obj_json)
+                pub = json.dumps(pub)
+                json_file.write(pub)
                 json_file.close()
 
 
