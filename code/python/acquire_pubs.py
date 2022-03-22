@@ -161,8 +161,12 @@ def make_json_folder():
 
             if 'gscholar' in str(path):
 
+                obj = list(obj)
+
                 print('obj = ')
                 print(obj)
+
+
 
                 links = []
                 for i in obj:
