@@ -184,6 +184,8 @@ def make_json_folder():
                 json_file.write(test_json)
                 json_file.close()
 
+                hello
+
 
 def search():
     """
