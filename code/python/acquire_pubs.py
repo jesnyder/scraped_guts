@@ -133,7 +133,7 @@ def make_json_folder():
     """
 
     """
-    os.rmdir(os.path.join(retrieve_path('pub_json')))
+    shutil.rmtree(os.path.join(retrieve_path('pub_json')))
 
     # list directories with json
     json_src = []
