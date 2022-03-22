@@ -36,6 +36,7 @@ def acquire_pubs():
     search()
 
     # make json folder
+    make_json_folder()
 
 
 
@@ -125,6 +126,44 @@ def link_to_filename(link):
 
     link_filename = str(link)
     return(link_filename)
+
+
+def make_json_folder():
+    """
+
+    """
+    json_dst = os.path.join(retrieve_path(pub_json))
+
+    # list directories with json
+    json_src = []
+    json_src.append(os.path.join(retrieve_path('pub_crossref_json')))
+    json_src.append(os.path.join(retrieve_path(name_src), 'json'))
+
+    for path in json_src:
+
+        for file in os.listdir(path)
+
+            if '.json' not in str(file): continue
+
+            file_src = os.path.join(path, file)
+
+            # read file and parse
+            json_file = open(file_src, 'r')
+            data = myfile.read()
+            json_file.close()
+
+            obj = json.loads(data)
+            obj = json.dumps(obj, indent = 4, ensure_ascii = False)
+
+            print('obj = ')
+            print(obj)
+
+            file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
+            json_file = open(json_path, 'w')
+            json_file.write(data_json)
+            json_file.close()
+
+
 
 
 def search():
