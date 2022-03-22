@@ -52,6 +52,7 @@ def acquire_pubs():
         work_completed(task_name, 0)
         shutil.rmtree(os.path.join(retrieve_path('pub_web_json')))
         search_web()
+        web_to_json()
         work_completed(task_name, 1)
 
 
@@ -208,6 +209,40 @@ def link_to_filename(link):
 
     link_filename = str(link[:50])
     return(link_filename)
+
+
+def web_to_json():
+    """
+
+    """
+    json_src = os.path.join(retrieve_path('pub_json'))
+    json_web = os.path.join(retrieve_path('pub_web_json'))
+
+
+    for file in json_src:
+
+        for web_file in json_web:
+
+            if file != web_file: continue
+
+            json_file = open(os.path.join(json_src, file), 'r')
+            data = json_file.read()
+            json_file.close()
+            obj_dst = json.loads(data)
+
+            json_file = open(os.path.join(json_web, file), 'r')
+            data = json_file.read()
+            json_file.close()
+            obj_src = json.loads(data)
+
+            obj_dst['web'] = obj_src
+
+            json_file = open(os.path.join(json_src, file), 'w')
+            #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
+            obj_dst = json.dumps(obj_dst, indent = 3)
+            json_file.write(obj_dst)
+            json_file.close()
+
 
 
 def make_json_folder():
