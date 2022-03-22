@@ -170,19 +170,21 @@ def crosssearch_crossref():
             print('w1 = ')
             print(w1)
 
-            searched_list = list(obj_dst['searched'])
-            searched_list.append('crossref')
-            obj_dst['searched'] = searched_list
-            obj_dst['crossref_doi'] = data_json
-
-            json_file = open(os.path.join(json_src, file), 'w')
-            #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
-            obj_dst = json.dumps(obj_dst, indent = 3)
-            json_file.write(obj_dst)
-            json_file.close()
-
         except:
-            print('hello')
+            continue
+
+        searched_list = list(obj_dst['searched'])
+        searched_list.append('crossref')
+        obj_dst['searched'] = searched_list
+        obj_dst['crossref_doi'] = data_json
+
+        json_file = open(os.path.join(json_src, file), 'w')
+        #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
+        obj_dst = json.dumps(obj_dst, indent = 3)
+        json_file.write(obj_dst)
+        json_file.close()
+
+
 
 
 def html_gscholar_to_json(soup):
