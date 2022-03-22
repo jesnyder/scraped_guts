@@ -407,21 +407,24 @@ def search_web():
 
         link_name = link_to_filename(link)
 
+        file_names = []
         for file in os.listdir(retrieve_path('pub_web_json')):
             file_split = file.split('.')
             file_name = file_split[0]
-            if link_name == file_name:
+            file_names.append(file_name)
 
-                ref_list = list(retrieve_list('pub_links'))
-                ref_index = ref_list.index(link)
-                print('% complete = ' + str(100*round((ref_index+1)/(len(ref_list)),2)))
+        if link_name in file_names: continue
 
-                json_obj = meta_html(link)
-                json_file = os.path.join(retrieve_path('pub_web_json'),  link_name + '.json' )
-                json_file = open(json_file, 'w')
-                json_obj = json.dumps(json_obj, indent = 3)
-                json_file.write(json_obj)
-                json_file.close()
+        ref_list = list(retrieve_list('pub_links'))
+        ref_index = ref_list.index(link)
+        print('% complete = ' + str(100*round((ref_index+1)/(len(ref_list)),2)))
+
+        json_obj = meta_html(link)
+        json_file = os.path.join(retrieve_path('pub_web_json'),  link_name + '.json' )
+        json_file = open(json_file, 'w')
+        json_obj = json.dumps(json_obj, indent = 3)
+        json_file.write(json_obj)
+        json_file.close()
 
 
 def search_term():
