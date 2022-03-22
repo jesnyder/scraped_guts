@@ -175,14 +175,20 @@ def crosssearch_crossref():
             continue
 
         searched_list = list(obj_dst['searched'])
+
+
         searched_list.append('crossref')
+        json_obj = {"searched": [searched_list],}
         obj_dst['searched'] = searched_list
-        obj_dst['crossref_doi'] = w1
+        json_obj['doi'] = doi
+        json_obj['crossref_doi'] = w1
+        for search in list(obj_dst['searched']):
+            json_obj[search] = obj_dst[search]
 
         json_file = open(os.path.join(json_src, file), 'w')
         #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
-        obj_dst = json.dumps(obj_dst, indent = 3)
-        json_file.write(obj_dst)
+        json_obj = json.dumps(json_obj, indent = 3)
+        json_file.write(json_obj)
         json_file.close()
 
 
