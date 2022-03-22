@@ -128,6 +128,135 @@ def check_scraped(name_dataset, term, year, num):
     return(False)
 
 
+
+def html_gscholar_to_json(soup):
+    """
+
+    """
+
+    # Scrape just PDF links
+    for pdf_link in soup.select('.gs_or_ggsm a'):
+        pdf_file_link = pdf_link['href']
+        print(pdf_file_link)
+
+    # JSON data will be collected here
+    data = []
+
+    # Container where all needed data is located
+    for result in soup.select('.gs_ri'):
+        title = result.select_one('.gs_rt').text
+
+        try:
+            title_link = result.select_one('.gs_rt a')['href']
+        except:
+            title_link = ''
+
+        publication_info = result.select_one('.gs_a').text
+        snippet = result.select_one('.gs_rs').text
+        cited_by = result.select_one('#gs_res_ccl_mid .gs_nph+ a')['href']
+        related_articles = result.select_one('a:nth-child(4)')['href']
+
+        # get the year of publication of each paper
+        try:
+            txt_year = result.find("div", class_="gs_a").text
+            ref_year = re.findall('[0-9]{4}', txt_year)
+            ref_year = ref_year[0]
+        except:
+            ref_year = 0
+
+        # get number of citations for each paper
+        try:
+            txt_cite = result.find("div", class_="gs_fl").find_all("a")[2].string
+            citations = txt_cite.split(' ')
+            citations = (citations[-1])
+            citations = int(citations)
+        except:
+            citations = 0
+
+        try:
+            all_article_versions = result.select_one('a~ a+ .gs_nph')['href']
+        except:
+            all_article_versions = None
+
+        data.append({
+            'year': ref_year,
+            'title': title,
+            'title_link': title_link,
+            'publication_info': publication_info,
+            'snippet': snippet,
+            'citations': citations,
+            'cited_by': f'https://scholar.google.com{cited_by}',
+            'related_articles': f'https://scholar.google.com{related_articles}',
+            'all_article_versions': f'https://scholar.google.com{all_article_versions}',
+        })
+
+    return(data)
+
+
+def html_web_to_json(soup):
+    """
+
+    """
+
+    # Scrape just PDF links
+    for pdf_link in soup.select('.gs_or_ggsm a'):
+        pdf_file_link = pdf_link['href']
+        print(pdf_file_link)
+
+    # JSON data will be collected here
+    data = []
+
+    # Container where all needed data is located
+    for result in soup.select('.gs_ri'):
+        title = result.select_one('.gs_rt').text
+
+        try:
+            title_link = result.select_one('.gs_rt a')['href']
+        except:
+            title_link = ''
+
+        publication_info = result.select_one('.gs_a').text
+        snippet = result.select_one('.gs_rs').text
+        cited_by = result.select_one('#gs_res_ccl_mid .gs_nph+ a')['href']
+        related_articles = result.select_one('a:nth-child(4)')['href']
+
+        # get the year of publication of each paper
+        try:
+            txt_year = result.find("div", class_="gs_a").text
+            ref_year = re.findall('[0-9]{4}', txt_year)
+            ref_year = ref_year[0]
+        except:
+            ref_year = 0
+
+        # get number of citations for each paper
+        try:
+            txt_cite = result.find("div", class_="gs_fl").find_all("a")[2].string
+            citations = txt_cite.split(' ')
+            citations = (citations[-1])
+            citations = int(citations)
+        except:
+            citations = 0
+
+        try:
+            all_article_versions = result.select_one('a~ a+ .gs_nph')['href']
+        except:
+            all_article_versions = None
+
+        data.append({
+            'year': ref_year,
+            'title': title,
+            'title_link': title_link,
+            'publication_info': publication_info,
+            'snippet': snippet,
+            'citations': citations,
+            'cited_by': f'https://scholar.google.com{cited_by}',
+            'related_articles': f'https://scholar.google.com{related_articles}',
+            'all_article_versions': f'https://scholar.google.com{all_article_versions}',
+        })
+
+    return(data)
+
+
 def link_to_filename(link):
     """
     return filename from link
@@ -207,6 +336,60 @@ def make_json_folder():
             print('pubs founds: ' + str(len(links)))
 
 
+def meta_html(link):
+    """
+
+    """
+    headers = {
+        'User-agent':
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.19582"
+        }
+
+    proxies = {
+        'http': os.getenv('HTTP_PROXY') # or just type proxy here without os.getenv()
+        }
+
+    try:
+        #html = requests.get(url, headers=headers, proxies=proxies).text
+        html = requests.get(url).text
+        soup = BeautifulSoup(html, 'html.parser')
+    except:
+        return(0)
+
+
+    json_obj = {"searched": ["web"],}
+
+    try:
+        content = soup.head.title.text
+        json_obj['title_head'] = content
+    except:
+        json_obj['title_head'] = None
+
+
+    for tag in retrieve_list('html_meta_tags'):
+
+        try:
+            content = soup.find('meta', {'name':tag}).get('content')
+            print(tag + ' = ')
+            print(content)
+            json_obj[str(tag)] = content
+        except:
+            json_obj[str(tag)] = None
+
+        try:
+            #content = soup.find_all('meta', {'name':tag})
+            res = []
+            for i in soup.find_all('meta', {'name':tag}):
+                res.append(i['content'])
+            #print(tag + ' = ')
+            #print(content)
+            json_obj[str(tag) + '-all'] = res
+        except:
+            json_obj[str(tag)] = None
+
+    return(json_obj)
+
+
 def search_meta():
     """
 
@@ -214,7 +397,22 @@ def search_meta():
 
     for link in retrieve_list('pub_links'):
 
-        print(link)
+        ref_list = list(retrieve_list('pub_links'))
+        ref_index = ref_list.index(link)
+        print('% complete = ' + str(round((ref_index+1)/(len(ref_list)),2)))
+
+        link_name = link_to_filename(link)
+
+        for file in os.listdir(retrieve_path('pub_web_json')):
+            if link_name in str(file): continue
+
+        json_obj = meta_html(link)
+        json_file = os.path.join(retrieve_path('pub_web_json'),  link_name + '.json' )
+        json_file = open(json_file, 'w')
+        json_obj = json.dumps(json_obj, indent = 3)
+        json_file.write(json_obj)
+        json_file.close()
+
 
 
 def search_term():
@@ -303,7 +501,7 @@ def search_gscholar():
                 soup = retrieve_html(url)
                 if error_check(soup) == True: return('error')
 
-                data = html_to_json(soup)
+                data = html_gscholar_to_json(soup)
                 if data == []: break
                 #if len(data) < 10 and year != int(date.strftime("%Y")):
                     #work_completed('begin_acquire_gscholar_json_' + str(year), 1)
