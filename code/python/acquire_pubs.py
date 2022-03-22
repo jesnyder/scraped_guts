@@ -178,7 +178,8 @@ def make_json_folder():
 
                     file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
                     json_file = open(file_dst, 'w')
-                    obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
+                    #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
+                    obj_json = json.dumps(obj_json)
                     json_file.write(obj_json)
                     json_file.close()
 
@@ -202,7 +203,8 @@ def make_json_folder():
 
                 file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
                 json_file = open(file_dst, 'w')
-                obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
+                #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
+                obj_json = json.dumps(obj_json)
                 json_file.write(obj_json)
                 json_file.close()
 
