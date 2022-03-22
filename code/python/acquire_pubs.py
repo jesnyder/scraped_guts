@@ -288,6 +288,7 @@ def meta_html(url):
 
     print('url = ')
     print(url)
+
     try:
         #html = requests.get(url, headers=headers, proxies=proxies).text
         html = requests.get(url).text
@@ -297,6 +298,7 @@ def meta_html(url):
 
 
     json_obj = {"searched": ["web"],}
+    json_obj['url'] = url
 
     try:
         content = soup.head.title.text
