@@ -150,7 +150,7 @@ def make_json_folder():
 
             # read file and parse
             json_file = open(file_src, 'r')
-            data = myfile.read()
+            data = json_file.read()
             json_file.close()
 
             obj = json.loads(data)
