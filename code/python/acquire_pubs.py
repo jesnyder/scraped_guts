@@ -139,7 +139,7 @@ def make_json_folder():
 
     """
     task_name = 'make_json_folder'
-    if work_to_do(task_name): continue
+    if work_to_do(task_name) == True: continue
     work_completed(task_name, 0)
 
     shutil.rmtree(os.path.join(retrieve_path('pub_json')))
