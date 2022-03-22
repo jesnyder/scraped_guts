@@ -156,49 +156,17 @@ def make_json_folder():
             obj = json.loads(data)
             #obj = json.dumps(obj, indent = 4, ensure_ascii = False)
 
-            print('obj = ')
-            print(obj)
+            for pub in obj:
 
-            if 'gscholar' in str(path):
+                print('pub = ')
+                print(pub)
 
-                #obj = list(obj)
+                if 'gscholar' in str(path):
+                    link = pub['title_link']
 
-                print('obj = ')
-                print(obj)
+                elif 'crossref' in str(path):
 
-                links = []
-                for pub in obj:
-
-                    print('obj[i] = ')
-                    print(pub)
-
-                    links.append(pub['title_link'])
-                    obj_json = pub
-
-                    file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
-                    json_file = open(file_dst, 'w')
-                    #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
-                    obj_json = json.dumps(obj_json)
-                    json_file.write(obj_json)
-                    json_file.close()
-
-
-            elif 'crossref' in str(path):
-
-                print('obj = ')
-                print(obj)
-
-                keys = list(obj.keys())
-                print('keys = ')
-                print(keys)
-
-                values = list(obj.values())
-                print('values = ')
-                print(values)
-
-                link = obj["link"][0]["URL"]
-                links = [link]
-                obj_json = obj
+                    link = pub["link"][0]["URL"]
 
                 file_dst = os.path.join(retrieve_path('pub_json'), str(link_to_filename(link)) + '.json')
                 json_file = open(file_dst, 'w')
