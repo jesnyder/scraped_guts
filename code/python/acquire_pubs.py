@@ -81,6 +81,7 @@ def search():
     """
 
     search_crossref()
+    search_gscholar()
 
 
 def search_crossref():
@@ -122,3 +123,59 @@ def search_crossref():
             json_file = open(json_path, 'w')
             json_file.write(data_json)
             json_file.close()
+
+
+def search_gscholar():
+    """
+    Retrieve json year by year
+    """
+    for term in retrieve_list('search_terms'):
+
+        json_to_dataframe()
+        currentDateTime = datetime.datetime.now()
+        date = currentDateTime.date()
+
+        search_year_min = int(retrieve_format('search_year_min'))-1
+        for year in range(int(date.strftime("%Y")), search_year_min, -1):
+
+            print('year = ' + str(year))
+
+            #work_completed('begin_acquire_gscholar_json_' + str(year), 0)
+            for num in np.arange(0, 100, 1, dtype=int):
+
+                num_str = str(num).zfill(3)
+                url = 'https://scholar.google.com/scholar?'
+                url = url + 'start=' + str(int(num*10))
+                url = url + '&q=' + term
+                #url = url + '&hl=en&as_sdt=0,5'
+                url = url + '&hl=en&as_sdt=0,5'
+                url = url + '&as_ylo=' + str(year)
+                url = url + '&as_yhi=' + str(year)
+
+                # check if recently scraped
+                if check_scraped('gscholar', term, year, num_str):
+                    #print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + num_str)
+                    continue
+
+                soup = retrieve_html(url)
+                if error_check(soup) == True: return('error')
+
+                data = html_to_json(soup)
+                if data == []: break
+                #if len(data) < 10 and year != int(date.strftime("%Y")):
+                    #work_completed('begin_acquire_gscholar_json_' + str(year), 1)
+
+                data_json = json.dumps(data, indent = 2, ensure_ascii = False)
+                print(data_json)
+
+                name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+                json_file = os.path.join(retrieve_path(name_src), 'json', term + ' ' + str(year) + ' ' + str(num_str) + ' ' + str(retrieve_datetime())  + '.json' )
+                json_file = open(json_file, 'w')
+                json_file.write(data_json)
+                json_file.close()
+
+                json_to_dataframe()
+
+
+if __name__ == "__main__":
+    main()
