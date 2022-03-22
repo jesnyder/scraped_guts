@@ -64,6 +64,15 @@ def acquire_pubs():
     work_completed('acquire_pubs', 1)
 
 
+def build_doi_url(doi):
+    """
+
+    """
+    doi_url = 'https://doi.org/'
+    doi_url = doi_url + str(doi)
+    return(doi_url)
+
+
 def check_scraped(name_dataset, term, year, num):
     """
 
@@ -224,7 +233,12 @@ def web_to_json():
         for web_file in json_web:
 
             if file != web_file: continue
+            print('file = ')
+            print(file)
 
+            print('os.path.join(json_src, file) = ')
+            print(os.path.join(json_src, file))
+            
             json_file = open(os.path.join(json_src, file), 'r')
             data = json_file.read()
             json_file.close()
