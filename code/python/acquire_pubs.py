@@ -163,8 +163,8 @@ def make_json_folder():
 
                 if 'gscholar' in str(path):
                     link = pub['title_link']
-                    if 'link' == ''
-                    link = pub['title']
+                    if 'link' == '':
+                        link = pub['title']
 
                 elif 'crossref' in str(path):
                     pub = obj
