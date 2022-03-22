@@ -188,9 +188,10 @@ def make_json_folder():
                 json_file.write(test_json)
                 json_file.close()
 
-                df = pd.DataFrame()
-                df['links'] = links
-                df.to_csv(os.path.join(retrieve_path('pub_links')))
+            df = pd.DataFrame()
+            df['links'] = links
+            df = clean_dataframe()
+            df.to_csv(os.path.join(retrieve_path('pub_links')))
 
 def search():
     """
