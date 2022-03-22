@@ -404,9 +404,6 @@ def search_web():
 
     for link in retrieve_list('pub_links'):
 
-        ref_list = list(retrieve_list('pub_links'))
-        ref_index = ref_list.index(link)
-        print('% complete = ' + str(100*round((ref_index+1)/(len(ref_list)),2)))
 
         link_name = link_to_filename(link)
 
@@ -414,6 +411,10 @@ def search_web():
             file_split = file.split('.')
             file_name = file_split[0]
             if link_name == file_name:
+
+                ref_list = list(retrieve_list('pub_links'))
+                ref_index = ref_list.index(link)
+                print('% complete = ' + str(100*round((ref_index+1)/(len(ref_list)),2)))
 
                 json_obj = meta_html(link)
                 json_file = os.path.join(retrieve_path('pub_web_json'),  link_name + '.json' )
