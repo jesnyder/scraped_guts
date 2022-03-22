@@ -162,6 +162,8 @@ def crosssearch_crossref():
         except:
             continue
 
+        if doi == None: continue
+
         works = Works()
         w1 = works.doi(doi)
         print('w1 = ')
@@ -171,7 +173,7 @@ def crosssearch_crossref():
         print('w1 = ')
         print(w1)
 
-    
+
         searched_list = list(obj_dst['searched'])
 
         searched_list.append('crossref')
