@@ -173,13 +173,13 @@ def crosssearch_crossref():
         #print('w1 = ')
         #print(w1)
 
-
         searched_list = list(obj_dst['searched'])
 
         searched_list.append('crossref')
         json_obj = {"searched": [searched_list],}
 
         json_obj['doi'] = doi
+        json_obj['doi_url'] = build_doi_url(doi)
 
         json_obj['crossref_doi'] = w1
 
