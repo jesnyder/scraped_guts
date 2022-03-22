@@ -37,7 +37,7 @@ def acquire_pubs():
     if work_to_do(task_name):
         work_completed(task_name, 0)
         search_term()
-        work_completed(task_name, 0)
+        work_completed(task_name, 1)
 
     # make json folder
     task_name = 'make_json_folder'
@@ -52,7 +52,6 @@ def acquire_pubs():
         work_completed(task_name, 0)
         search_meta()
         work_completed(task_name, 0)
-
 
 
     hello
