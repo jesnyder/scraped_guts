@@ -32,6 +32,7 @@ html_meta_tags,core_code admin html_meta_tags.csv
 
 #, publication
 pub_gscholar,program_generated pubs src gscholar
+pub_gscholar_json,program_generated pubs src gscholar json
 pub_web,program_generated pubs src web
 pub_crossref,program_generated pubs src crossref
 pub_crossref_json,program_generated pubs src crossref json
