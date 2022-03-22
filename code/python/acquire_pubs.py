@@ -161,7 +161,21 @@ def make_json_folder():
 
             if 'gscholar' in str(path):
 
-                links = obj['title_link']
+                print('obj = ')
+                print(obj)
+
+                keys = list(obj.keys())
+                print('keys = ')
+                print(keys)
+
+                values = list(obj.values())
+                print('values = ')
+                print(values)
+
+                links = []
+                for i in obj:
+
+                    links.append(obj[i]['title_link'])
 
 
             elif 'crossref' in str(path):
