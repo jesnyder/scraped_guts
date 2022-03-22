@@ -159,18 +159,19 @@ def crosssearch_crossref():
             doi = obj_dst['web']['citation_doi']
             print('doi = ')
             print(doi)
-
-            works = Works()
-            w1 = works.doi(doi)
-            w1 = json.loads(w1)
-            #data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
-
-            print('w1 = ')
-            print(w1)
-
         except:
             continue
 
+        works = Works()
+        w1 = works.doi(doi)
+        print('w1 = ')
+        print(w1)
+
+        w1 = json.loads(w1)
+        print('w1 = ')
+        print(w1)
+
+    
         searched_list = list(obj_dst['searched'])
 
         searched_list.append('crossref')
