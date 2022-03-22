@@ -224,13 +224,8 @@ def search_term():
     Save json of each publication found
     Search CrossRef and GoogleScholar
     """
-
-    task_name = 'search_pubs'
-    if work_to_do(task_name):
-        work_completed(task_name, 0)
-        search_crossref()
-        search_gscholar()
-        work_completed(task_name, 1)
+    search_crossref()
+    search_gscholar()
 
 
 def search_crossref():
