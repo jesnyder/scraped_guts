@@ -33,10 +33,13 @@ def acquire_pubs():
     work_completed('acquire_pubs', 0)
 
     # search for pubs
-    search()
+    search_term()
 
     # make json folder
     make_json_folder()
+
+    # retrieve metadata
+    search_meta()
 
     # find metadata
 
@@ -194,7 +197,18 @@ def make_json_folder():
             df.to_csv(os.path.join(retrieve_path('pub_links')))
             print('pubs founds: ' + str(len(links)))
 
-def search():
+
+def search_meta():
+    """
+
+    """
+
+    for link in retrieve_list('pub_links'):
+
+        print(link)
+
+
+def search_term():
     """
     Make a folder named for search term
     Save json of each publication found
