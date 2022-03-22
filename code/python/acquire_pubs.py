@@ -32,26 +32,12 @@ def acquire_pubs():
     # set acquire_pubs as a task
     work_completed('acquire_pubs', 0)
 
+    # search for pubs
     search()
 
-    #list_urls()
-
-    #metadata_json()
-
-    # make a folder of json data on pubs search term in crossref as json
+    # make json folder 
 
 
-    # search term in gscholar as json
-
-    # list all urls as dataframe
-
-    # metadata from url as json
-
-    # metadate from crossref as json
-
-    # aggregate in json
-
-    # aggregate in dataframe
 
     hello
 
@@ -81,7 +67,7 @@ def search():
     """
 
     search_crossref()
-    #search_gscholar()
+    search_gscholar()
 
 
 def search_crossref():
@@ -174,7 +160,7 @@ def search_gscholar():
                 json_file.write(data_json)
                 json_file.close()
 
-                json_to_dataframe()
+                #json_to_dataframe()
 
 
 if __name__ == "__main__":
