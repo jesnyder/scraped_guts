@@ -101,7 +101,7 @@ def search_crossref():
 
         df = pd.DataFrame()
         cr = Crossref()
-        x = cr.works(query = term, limit = 500)
+        x = cr.works(query = term, limit = 50)
         dois = [z['DOI'] for z in x['message']['items']]
 
         links = [z['URL'] for z in x['message']['items']]
