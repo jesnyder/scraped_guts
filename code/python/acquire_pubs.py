@@ -154,7 +154,7 @@ def make_json_folder():
             json_file.close()
 
             obj = json.loads(data)
-            obj = json.dumps(obj, indent = 4, ensure_ascii = False)
+            #obj = json.dumps(obj, indent = 4, ensure_ascii = False)
 
             print('obj = ')
             print(obj)
