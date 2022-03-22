@@ -167,6 +167,9 @@ def make_json_folder():
                 links = []
                 for i in obj:
 
+                    print('obj[i] = ')
+                    print(obj[i])
+
                     links.append(obj[i]['title_link'])
 
 
