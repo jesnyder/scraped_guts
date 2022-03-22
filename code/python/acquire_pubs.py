@@ -53,11 +53,8 @@ def acquire_pubs():
     web_to_json()
 
     # retrieve metadata
-    task_name = 'crosssearch_crossref'
-    if work_to_do(task_name):
-        work_completed(task_name, 0)
-        crosssearch_crossref()
-        work_completed(task_name, 1)
+    crosssearch_crossref()
+
 
 
     wait_time = random.random()*60 + 60
@@ -175,7 +172,6 @@ def crosssearch_crossref():
             continue
 
         searched_list = list(obj_dst['searched'])
-
 
         searched_list.append('crossref')
         json_obj = {"searched": [searched_list],}
