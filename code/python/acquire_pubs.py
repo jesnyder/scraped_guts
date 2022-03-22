@@ -55,6 +55,13 @@ def acquire_pubs():
         web_to_json()
         work_completed(task_name, 1)
 
+    # retrieve metadata
+    task_name = 'crosssearch_crossref'
+    if work_to_do(task_name):
+        work_completed(task_name, 0)
+        crosssearch_crossref()
+        work_completed(task_name, 1)
+
 
     wait_time = random.random()*60 + 60
     print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
@@ -141,6 +148,41 @@ def check_scraped(name_dataset, term, year, num):
     return(False)
 
 
+def crosssearch_crossref():
+    """
+
+    """
+    json_src = os.path.join(retrieve_path('pub_json'))
+
+    for file in os.listdir(json_src):
+
+        json_file = open(os.path.join(json_src, file), 'r')
+        data = json_file.read()
+        json_file.close()
+        obj_dst = json.loads(data)
+
+        try:
+            doi = obj_dst['web']['citation_doi']
+
+            works = Works()
+            w1 = works.doi(doi)
+            data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
+
+            searched_list = list(obj_dst['searched'])
+            searched_list.append('crossref')
+            obj_dst['searched'] = searched_list
+            obj_dst['crossref_doi'] = data_json
+
+            json_file = open(os.path.join(json_src, file), 'w')
+            #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
+            obj_dst = json.dumps(obj_dst, indent = 3)
+            json_file.write(obj_dst)
+            json_file.close()
+
+
+
+
+
 def html_gscholar_to_json(soup):
     """
 
@@ -218,48 +260,6 @@ def link_to_filename(link):
 
     link_filename = str(link[:50])
     return(link_filename)
-
-
-def web_to_json():
-    """
-
-    """
-    json_src = os.path.join(retrieve_path('pub_json'))
-    json_web = os.path.join(retrieve_path('pub_web_json'))
-
-
-    for file in os.listdir(json_src):
-
-        for web_file in os.listdir(json_web):
-
-            if file != web_file: continue
-
-            print('file = ')
-            print(file)
-
-            print('os.path.join(json_src, file) = ')
-            print(os.path.join(json_src, file))
-
-            json_file = open(os.path.join(json_src, file), 'r')
-            data = json_file.read()
-            json_file.close()
-            obj_dst = json.loads(data)
-
-            json_file = open(os.path.join(json_web, file), 'r')
-            data = json_file.read()
-            json_file.close()
-            obj_src = json.loads(data)
-
-            searched_list = list(obj_dst['searched'])
-            searched_list.append('web')
-            obj_dst['searched'] = searched_list
-            obj_dst['web'] = obj_src
-
-            json_file = open(os.path.join(json_src, file), 'w')
-            #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
-            obj_dst = json.dumps(obj_dst, indent = 3)
-            json_file.write(obj_dst)
-            json_file.close()
 
 
 def make_json_folder():
@@ -487,7 +487,7 @@ def search_crossref():
 
             data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
             doi_str = str(doi.replace('/', '_'))
-            json_path = os.path.join(retrieve_path('pub_crossref_json'), doi_str + '.json')
+            json_path = os.path.join(retrieve_path('pub_crossref_json'), link_filename + '.json')
             json_file = open(json_path, 'w')
             json_file.write(data_json)
             json_file.close()
@@ -543,6 +543,48 @@ def search_gscholar():
                 json_file.close()
 
                 #json_to_dataframe()
+
+
+def web_to_json():
+    """
+
+    """
+    json_src = os.path.join(retrieve_path('pub_json'))
+    json_web = os.path.join(retrieve_path('pub_web_json'))
+
+
+    for file in os.listdir(json_src):
+
+        for web_file in os.listdir(json_web):
+
+            if file != web_file: continue
+
+            print('file = ')
+            print(file)
+
+            print('os.path.join(json_src, file) = ')
+            print(os.path.join(json_src, file))
+
+            json_file = open(os.path.join(json_src, file), 'r')
+            data = json_file.read()
+            json_file.close()
+            obj_dst = json.loads(data)
+
+            json_file = open(os.path.join(json_web, file), 'r')
+            data = json_file.read()
+            json_file.close()
+            obj_src = json.loads(data)
+
+            searched_list = list(obj_dst['searched'])
+            searched_list.append('web')
+            obj_dst['searched'] = searched_list
+            obj_dst['web'] = obj_src
+
+            json_file = open(os.path.join(json_src, file), 'w')
+            #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
+            obj_dst = json.dumps(obj_dst, indent = 3)
+            json_file.write(obj_dst)
+            json_file.close()
 
 
 if __name__ == "__main__":
