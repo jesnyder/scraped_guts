@@ -166,7 +166,19 @@ def make_json_folder():
 
             elif 'crossref' in str(path):
 
-                link = obj['link'][0]['URL']
+                print('obj = ')
+                print(obj)
+
+                keys = list(w1.keys())
+                print('keys = ')
+                print(keys)
+
+                values = list(w1.values())
+                print('values = ')
+                print(values)
+
+
+                link = obj["link"][0]["URL"]
                 links = [link]
 
 
