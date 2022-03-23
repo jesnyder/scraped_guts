@@ -355,7 +355,7 @@ def link_to_filename(link):
 
     link = str(link)
 
-    chars = ['https://', 'http', ':',  'www', '/', '.']
+    chars = ['https://', 'http', ':',  'www', '/', '.', '%', '&', '@', '?', '!', '<', '>']
     for char in chars:
         link = link.replace(char, '')
 
@@ -371,7 +371,7 @@ def make_json_folder():
 
     # list directories with json
     json_src = []
-    json_src.append(os.path.join(retrieve_path('pub_crossref_json')))
+    #json_src.append(os.path.join(retrieve_path('pub_crossref_json')))
     json_src.append(os.path.join(retrieve_path('pub_gscholar_json')))
 
     links = []
