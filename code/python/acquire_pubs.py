@@ -170,6 +170,23 @@ def crosssearch_crossref():
 
         json_obj['doi'] = doi
         json_obj['doi_url'] = build_doi_url(doi)
+        json_obj['title'] = obj_dst['gscholar']['title']
+        json_obj['citations'] = obj_dst['gscholar']['citations']
+
+        pub_affiliations = []
+        authors = list(w1['author'])
+        for author in authors
+
+            index = authors.index(author)
+            affiliations = list(w1['author'][index]['affiliation'])
+
+            for affiliation in affiliations:
+
+                index2 = affiliations.index(affiliation)
+                pub_affiliation = w1['author'][index]['affiliation'][index2]['name']
+                pub_affiliations.append(pub_affiliation)
+
+        json_obj['affiliation'] = pub_affiliations
 
         json_obj['crossref_doi'] = w1
 
