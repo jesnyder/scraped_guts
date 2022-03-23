@@ -188,11 +188,18 @@ def crosssearch_crossref():
                 print('title_found = ')
                 print(title_found)
 
-                doi = item['DOI']
-                print('doi = ')
-                print(doi)
+                print('title = ')
+                print(title)
 
-                dois.append(doi)
+                if str(title_found) == str(title)
+
+                    doi = item['DOI']
+                    print('doi found = ')
+                    print(doi)
+                    break
+
+                else:
+                    doi = None
 
 
         works = Works()
