@@ -199,6 +199,23 @@ def check_scraped(name_dataset, term, year, num):
     return(False)
 
 
+def check_num(term, year, num):
+    """
+    True to not continue
+    False to continue
+    """
+
+    src_path = os.path.join(retrieve_path('pub_gscholar_json'))
+    df_file = os.path.join(src_path, term + '.csv')
+    df = pd.read_csv(df_file)
+    df = clean_dataframe(df)
+
+    df =  df[(df['year'] == year)]
+    count = len(list(df['year']))
+
+    if count < num*10: return(True)
+    else: return(False)
+
 def crosssearch_crossref():
     """
 
@@ -614,6 +631,8 @@ def search_gscholar():
 
             #work_completed('begin_acquire_gscholar_json_' + str(year), 0)
             for num in np.arange(0, 100, 1, dtype=int):
+
+                if check_num(term, year, num): continue
 
                 num_str = str(num).zfill(3)
                 url = 'https://scholar.google.com/scholar?'
