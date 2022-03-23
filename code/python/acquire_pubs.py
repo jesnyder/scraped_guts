@@ -216,6 +216,7 @@ def check_num(term, year, num):
     if count < num*10: return(True)
     else: return(False)
 
+
 def crosssearch_crossref():
     """
 
@@ -618,6 +619,7 @@ def search_gscholar():
     """
     Retrieve json year by year
     """
+    json_to_dataframe()
     for term in retrieve_list('search_terms'):
 
         #json_to_dataframe()
