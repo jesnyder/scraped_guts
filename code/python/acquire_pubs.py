@@ -504,6 +504,23 @@ def retrieve_html(url):
     return(soup)
 
 
+def save_crossref_json(w1):
+    """
+    save json from crossref searches
+    """
+
+    link = w1['link'][0]['URL']
+
+    print('link = ')
+    print(link)
+    link_filename = link_to_filename(link)
+    data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
+    json_path = os.path.join(retrieve_path('pub_crossref_json'), link_filename + '.json')
+    json_file = open(json_path, 'w')
+    json_file.write(data_json)
+    json_file.close()
+
+
 def search_term():
     """
     Make a folder named for search term
@@ -551,24 +568,7 @@ def search_crossref():
             works = Works()
             w1 = works.doi(doi)
             save_crossref_json(w1)
-
-def save_crossref_json(w1):
-    """
-
-    """
-
-    link = w1['link'][0]['URL']
-    print('link = ')
-    print(link)
-    link_filename = link_to_filename(link)
-
-    data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
-    doi_str = str(doi.replace('/', '_'))
-    json_path = os.path.join(retrieve_path('pub_crossref_json'), link_filename + '.json')
-    json_file = open(json_path, 'w')
-    json_file.write(data_json)
-    json_file.close()
-
+            
 
 def search_gscholar():
     """
