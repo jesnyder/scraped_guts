@@ -132,7 +132,7 @@ def check_scraped(name_dataset, term, year, num):
             #print('v = ' + str(v))
             v = int(v.days)
             #print('v = ' + str(v))
-            if v < 3:
+            if v < 10:
                 #print('date match: ' + str(v))
                 #print('too many days lapsed since last query.')
                 return(True)
