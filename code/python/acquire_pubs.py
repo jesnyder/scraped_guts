@@ -184,7 +184,9 @@ def crosssearch_crossref():
 
                 index2 = affiliations.index(affiliation)
                 pub_affiliation = w1['author'][index]['affiliation'][index2]['name']
-                pub_affiliations.append(pub_affiliation)
+
+                if pub_affiliation not in pub_affiliations:
+                    pub_affiliations.append(pub_affiliation)
 
         json_obj['affiliation'] = pub_affiliations
 
