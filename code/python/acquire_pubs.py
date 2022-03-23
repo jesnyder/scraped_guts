@@ -45,7 +45,7 @@ def acquire_pubs():
     crosssearch_crossref()
 
     # summarize
-    summarize()
+    highlight()
 
 
     wait_time = random.random()*60 + 60
