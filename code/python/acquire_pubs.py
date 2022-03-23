@@ -310,6 +310,42 @@ def html_gscholar_to_json(soup):
     return(data)
 
 
+def json_to_dataframe():
+    """
+
+    """
+
+    df_all = pd.DataFrame()
+    for term in retrieve_list('search_terms'):
+
+        df_term = pd.DataFrame()
+        src_path = os.path.join(retrieve_path('pub_gscholar_json'))
+        for file in os.listdir(src_path):
+
+            if not file.endswith('.json'): continue
+
+            json_src = os.path.join(src_path, file)
+            df = pd.read_json(json_src)
+
+            df_all = df_all.append(df)
+            df_all = df_all.drop_duplicates(subset = 'title_link')
+            df_all = clean_dataframe(df_all)
+
+            dst_path = os.path.join(retrieve_path('pub_gscholar_df'))
+            dst_file = os.path.join(dst_path, 'gscholar' + '.csv')
+            df_all.to_csv(dst_file)
+
+            if term not in str(file): continue
+
+
+            df_term = df_term.append(df)
+            df_term = df_term.drop_duplicates(subset = 'title_link')
+            df_term = clean_dataframe(df_term)
+
+            df_file = os.path.join(dst_path, term + '.csv')
+            df_term.to_csv(df_file)
+
+
 def link_to_filename(link):
     """
     return filename from link
@@ -575,7 +611,7 @@ def search_gscholar():
                 json_file.write(data_json)
                 json_file.close()
 
-                #json_to_dataframe()
+                json_to_dataframe()
 
 
 def search_web():

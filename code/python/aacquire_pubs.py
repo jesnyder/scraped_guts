@@ -366,17 +366,11 @@ def json_to_dataframe():
     """
     name_dataset = 'gscholar'
 
-    # retrieve archival json
-    name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
-    src_path = retrieve_path(name_src)
-    src_path = os.path.join(src_path, 'json')
-
     df_all = pd.DataFrame()
-
     for term in retrieve_list('search_terms'):
 
         df_term = pd.DataFrame()
-
+        src_path = os.path.join(retrieve_path('pub_gscholar_json'))
         for file in os.listdir(src_path):
 
             if not file.endswith('.json'): continue
