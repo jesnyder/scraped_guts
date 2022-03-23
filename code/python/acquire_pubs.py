@@ -194,6 +194,7 @@ def crosssearch_crossref():
                 title_found = title_found.lower()
                 title = title.lower()
 
+                print('number of items: ' + str(len(w1)))
                 print('title_found = ')
                 print(title_found)
 
