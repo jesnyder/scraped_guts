@@ -154,6 +154,7 @@ def crosssearch_crossref():
             doi = None
             w1 = []
 
+
         print('doi = ')
         print(doi)
 
@@ -570,7 +571,7 @@ def search_web():
 
         work_completed(task_name, 0)
 
-        shutil.rmtree(os.path.join(retrieve_path('pub_web_json')))
+        #shutil.rmtree(os.path.join(retrieve_path('pub_web_json')))
 
         for link in retrieve_list('pub_links'):
 
