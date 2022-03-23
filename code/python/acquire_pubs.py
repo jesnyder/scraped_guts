@@ -84,6 +84,8 @@ def check_scraped(name_dataset, term, year, num):
     paths_to_check.append(os.path.join(retrieve_path(name_src)))
     paths_to_check.append(os.path.join(retrieve_path('pub_gscholar')))
     paths_to_check.append(os.path.join(retrieve_path('pub_gscholar'), 'json'))
+    paths_to_check.append(os.path.join(retrieve_path('pub_gscholar_json')))
+    paths_to_check.append(os.path.join(retrieve_path('pub_crossref_json')))
     paths_to_check.append(os.path.join(retrieve_path('pub_web_json')))
     paths_to_check.append(os.path.join(retrieve_path('pub_crossref')))
 
