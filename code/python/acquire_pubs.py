@@ -106,7 +106,7 @@ def highlight():
 
         except:
             pub_affiliations = []
-            
+
         json_obj['affiliation'] = pub_affiliations
 
         for search in list(obj_dst['searched']):
@@ -250,6 +250,20 @@ def crosssearch_crossref():
         json_obj = json.dumps(json_obj, indent = 3)
         json_file.write(json_obj)
         json_file.close()
+
+
+def error_check(soup):
+    """
+    check if automated search is detected
+    """
+
+    #df = pd.read_csv(os.path.join(retrieve_list('gscholar_error')))
+    for error in retrieve_list('gscholar_error'):
+
+        if str(error) in str(soup):
+            return(True)
+
+    return(False)
 
 
 def html_gscholar_to_json(soup):
