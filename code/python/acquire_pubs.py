@@ -33,13 +33,7 @@ def acquire_pubs():
     work_completed('acquire_pubs', 0)
 
     # search for pubs
-    task_name = 'search_term'
-    if work_to_do(task_name):
-        work_completed(task_name, 0)
-        search_term()
-        json_to_dataframe()
-        work_completed(task_name, 1)
-    json_to_dataframe()
+    search_term()
 
     # make json folder
     make_json_folder()
@@ -519,8 +513,15 @@ def search_term():
     Save json of each publication found
     Search CrossRef and GoogleScholar
     """
-    search_crossref()
-    search_gscholar()
+    task_name = 'search_term'
+
+    json_to_dataframe()
+    if work_to_do(task_name):
+        work_completed(task_name, 0)
+        search_crossref()
+        #search_gscholar()
+        work_completed(task_name, 1)
+    json_to_dataframe()
 
 
 def search_crossref():
