@@ -45,7 +45,7 @@ def acquire_pubs():
         #shutil.rmtree(os.path.join(retrieve_path('pub_web_json')))
         search_web()
         web_to_json()
-        work_completed(task_name, 0)
+        work_completed(task_name, 1)
 
 
     # retrieve metadata
@@ -152,77 +152,25 @@ def crosssearch_crossref():
         json_file.close()
         obj_dst = json.loads(data)
 
-        print('os.path.join(json_src, file) = ')
-        print(os.path.join(json_src, file))
-
         try:
-            try:
-                doi = obj_dst['web']['citation_doi']
-            except:
-                doi = obj_dst['web']['citation_doi']
-            print('doi = ')
-            print(doi)
+            doi = obj_dst['web']['citation_doi']
+            works = Works()
+            w1 = works.doi(doi)
 
         except:
+            doi = None
+            w1 = []
 
-            title = obj_dst['gscholar']['title']
-            year = obj_dst['gscholar']['year']
+        print('doi = ')
+        print(doi)
 
-            print('title = ')
-            print(title)
-            title = title.lower()
-
-            works = Works()
-            w1 = works.query(bibliographic=title).filter(from_online_pub_date=year)
-
-            print('w1 = ')
-            print(w1)
-
-            dois = []
-
-            index = 0
-            for item in w1:
-
-
-                print('item = ')
-                print(item)
-
-                try:
-                    title_found = list(item['title'])[0]
-                except:
-                    title_found = list(item['short-container-title'])[0]
-
-                title_found = title_found.lower()
-                title = title.lower()
-
-                index = index + 1
-                print('index = ' + str(index))
-                print('title_found = ')
-                print(title_found)
-
-                print('title = ')
-                print(title)
-
-                if title_found == title:
-
-                    doi = item['DOI']
-                    print('doi found = ')
-                    print(doi)
-                    continue
-
-                else:
-                    doi = None
-
-
-        if doi == None: continue
-
-        works = Works()
-        w1 = works.doi(doi)
         print('w1 = ')
         print(w1)
 
-        searched_list = list(obj_dst['searched'])
+        #dois = [z['DOI'] for z in w1['message']['items']]
+        #assert len(dois) == 1
 
+        searched_list = list(obj_dst['searched'])
         searched_list.append('crossref')
         json_obj = {"searched": [searched_list],}
 
@@ -513,15 +461,17 @@ def search_term():
     Save json of each publication found
     Search CrossRef and GoogleScholar
     """
-    task_name = 'search_term'
+
 
     json_to_dataframe()
+
+    task_name = 'search_term'
     if work_to_do(task_name):
         work_completed(task_name, 0)
         search_crossref()
-        #search_gscholar()
+        search_gscholar()
+        json_to_dataframe()
         work_completed(task_name, 1)
-    json_to_dataframe()
 
 
 def search_crossref():
