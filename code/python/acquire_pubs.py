@@ -171,8 +171,15 @@ def crosssearch_crossref():
             works = Works()
 
             w1 = works.query(bibliographic=title)
+
+            print('w1 = ')
+            print(w1)
+
             dois = []
             for item in w1:
+
+                print('item = ')
+                print(item)
 
                 doi = item['doi']
                 print('doi = ')
