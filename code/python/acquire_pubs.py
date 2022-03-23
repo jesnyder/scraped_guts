@@ -154,6 +154,9 @@ def crosssearch_crossref():
         json_file.close()
         obj_dst = json.loads(data)
 
+        print('os.path.join(json_src, file) = ')
+        print(os.path.join(json_src, file))
+
         try:
             try:
                 doi = obj_dst['web']['citation_doi']
