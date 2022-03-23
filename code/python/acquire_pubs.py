@@ -75,11 +75,21 @@ def highlight():
 
         json_obj['doi'] = obj_dst['doi']
         json_obj['doi_url'] = obj_dst['doi_url']
-        json_obj['title'] = obj_dst['gscholar']['title']
-        json_obj['citations'] = obj_dst['gscholar']['citations']
+        try:
+            json_obj['title'] = obj_dst['gscholar']['title']
+        except:
+            json_obj['title'] = None
+
+        try:
+            json_obj['citations'] = obj_dst['gscholar']['citations']
+        except:
+            json_obj['citations'] = 0
+
 
         pub_affiliations = []
         authors = list(obj_dst['crossref_doi']['author'])
+        print('authors = ')
+        print(authos)
         for author in authors:
 
             index = authors.index(author)
@@ -104,7 +114,6 @@ def highlight():
         json_obj = json.dumps(json_obj, indent = 3)
         json_file.write(json_obj)
         json_file.close()
-
 
 
 def build_doi_url(doi):
@@ -346,7 +355,7 @@ def link_to_filename(link):
 
     link = str(link)
 
-    chars = ['https://', 'www', '/', '.']
+    chars = ['https://', 'http', ':',  'www', '/', '.']
     for char in chars:
         link = link.replace(char, '')
 
@@ -568,7 +577,7 @@ def search_crossref():
             works = Works()
             w1 = works.doi(doi)
             save_crossref_json(w1)
-            
+
 
 def search_gscholar():
     """
