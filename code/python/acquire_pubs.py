@@ -196,7 +196,7 @@ def crosssearch_crossref():
                     doi = item['DOI']
                     print('doi found = ')
                     print(doi)
-                    break
+                    continue
 
                 else:
                     doi = None
