@@ -191,7 +191,7 @@ def crosssearch_crossref():
                 print('title = ')
                 print(title)
 
-                if str(title_found) == str(title)
+                if str(title_found) == str(title):
 
                     doi = item['DOI']
                     print('doi found = ')
