@@ -36,7 +36,8 @@ def acquire_pubs():
     task_name = 'search_term'
     if work_to_do(task_name):
         work_completed(task_name, 0)
-        search_term()
+        #search_term()
+        json_to_dataframe()
         work_completed(task_name, 1)
 
     # make json folder
