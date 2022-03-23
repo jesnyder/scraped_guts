@@ -159,19 +159,32 @@ def crosssearch_crossref():
             doi = obj_dst['web']['citation_doi']
             print('doi = ')
             print(doi)
-        except:
-            continue
 
-        if doi == None: continue
+        except:
+
+            title = obj_dst['gscholar']['title']
+            print('title = ')
+            print(title)
+
+            works = Works()
+
+            w1 = works.query(bibliographic=title)
+            dois = []
+            for item in w1:
+                dois.append(item['doi'])
+                w2 = works.doi(doi)
+                print('w2 = ')
+                print(w2)
+
+        except:
+            print('hello')
+
+
 
         works = Works()
         w1 = works.doi(doi)
         print('w1 = ')
         print(w1)
-
-        #w1 = json.loads(w1)
-        #print('w1 = ')
-        #print(w1)
 
         searched_list = list(obj_dst['searched'])
 
