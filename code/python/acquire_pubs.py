@@ -183,9 +183,12 @@ def crosssearch_crossref():
                 print('item = ')
                 print(item)
 
-                title_found = list(item['title'])[0]
-                title_found = title_found.lower()
+                try:
+                    title_found = list(item['title'])[0]
+                except:
+                    title_found = list(item['short-container-title'])[0]
 
+                title_found = title_found.lower()
                 title = title.lower()
 
                 print('title_found = ')
