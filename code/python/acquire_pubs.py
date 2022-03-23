@@ -175,7 +175,7 @@ def crosssearch_crossref():
 
         pub_affiliations = []
         authors = list(w1['author'])
-        for author in authors
+        for author in authors:
 
             index = authors.index(author)
             affiliations = list(w1['author'][index]['affiliation'])
@@ -186,7 +186,7 @@ def crosssearch_crossref():
                 pub_affiliation = w1['author'][index]['affiliation'][index2]['name']
                 pub_affiliations.append(pub_affiliation)
 
-        json_obj['affiliation'] = pub_affiliations
+        json_obj['affiliation']['name'] = pub_affiliations
 
         json_obj['crossref_doi'] = w1
 
