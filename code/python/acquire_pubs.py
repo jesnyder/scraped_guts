@@ -87,22 +87,26 @@ def highlight():
 
 
         pub_affiliations = []
-        authors = list(obj_dst['crossref_doi']['author'])
-        print('authors = ')
-        print(authos)
-        for author in authors:
+        try:
+            authors = list(obj_dst['crossref_doi']['author'])
+            print('authors = ')
+            print(authos)
+            for author in authors:
 
-            index = authors.index(author)
-            affiliations = list(obj_dst['crossref_doi']['author'][index]['affiliation'])
+                index = authors.index(author)
+                affiliations = list(obj_dst['crossref_doi']['author'][index]['affiliation'])
 
-            for affiliation in affiliations:
+                for affiliation in affiliations:
 
-                index2 = affiliations.index(affiliation)
-                pub_affiliation = obj_dst['crossref_doi']['author'][index]['affiliation'][index2]['name']
+                    index2 = affiliations.index(affiliation)
+                    pub_affiliation = obj_dst['crossref_doi']['author'][index]['affiliation'][index2]['name']
 
-                if pub_affiliation not in pub_affiliations:
-                    pub_affiliations.append(pub_affiliation)
+                    if pub_affiliation not in pub_affiliations:
+                        pub_affiliations.append(pub_affiliation)
 
+        except:
+            pub_affiliations = []
+            
         json_obj['affiliation'] = pub_affiliations
 
         for search in list(obj_dst['searched']):
