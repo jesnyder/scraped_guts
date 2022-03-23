@@ -156,7 +156,10 @@ def crosssearch_crossref():
         obj_dst = json.loads(data)
 
         try:
-            doi = obj_dst['web']['citation_doi']
+            try:
+                doi = obj_dst['web']['citation_doi']
+            except:
+                doi = obj_dst['web']['citation_doi']
             print('doi = ')
             print(doi)
 
@@ -175,9 +178,6 @@ def crosssearch_crossref():
                 w2 = works.doi(doi)
                 print('w2 = ')
                 print(w2)
-
-        except:
-            print('hello')
 
 
 
