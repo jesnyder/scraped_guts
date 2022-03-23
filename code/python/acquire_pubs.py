@@ -73,11 +73,10 @@ def highlight():
         searched_list.append('summarize')
         json_obj = {"searched": [searched_list],}
 
-        json_obj['doi'] = doi
-        json_obj['doi_url'] = build_doi_url(doi)
+        json_obj['doi'] = obj_dst['doi']
+        json_obj['doi_url'] = obj_dst['doi_url']
         json_obj['title'] = obj_dst['gscholar']['title']
         json_obj['citations'] = obj_dst['gscholar']['citations']
-
 
         pub_affiliations = []
         authors = list(obj_dst['crossref_doi']['author'])
@@ -222,6 +221,9 @@ def crosssearch_crossref():
         searched_list = list(obj_dst['searched'])
         searched_list.append('crossref')
         json_obj = {"searched": [searched_list],}
+
+        json_obj['doi'] = doi
+        json_obj['doi_url'] = build_doi_url(doi)
 
         json_obj['crossref_doi'] = w1
 
