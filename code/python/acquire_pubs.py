@@ -203,6 +203,7 @@ def crosssearch_crossref():
             doi = obj_dst['web']['citation_doi']
             works = Works()
             w1 = works.doi(doi)
+            save_crossref_json(w1)
 
         except:
             doi = None
@@ -549,18 +550,24 @@ def search_crossref():
         for doi in dois:
             works = Works()
             w1 = works.doi(doi)
+            save_crossref_json(w1)
 
-            link = w1['link'][0]['URL']
-            print('link = ')
-            print(link)
-            link_filename = link_to_filename(link)
+def save_crossref_json(w1):
+    """
 
-            data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
-            doi_str = str(doi.replace('/', '_'))
-            json_path = os.path.join(retrieve_path('pub_crossref_json'), link_filename + '.json')
-            json_file = open(json_path, 'w')
-            json_file.write(data_json)
-            json_file.close()
+    """
+
+    link = w1['link'][0]['URL']
+    print('link = ')
+    print(link)
+    link_filename = link_to_filename(link)
+
+    data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
+    doi_str = str(doi.replace('/', '_'))
+    json_path = os.path.join(retrieve_path('pub_crossref_json'), link_filename + '.json')
+    json_file = open(json_path, 'w')
+    json_file.write(data_json)
+    json_file.close()
 
 
 def search_gscholar():
