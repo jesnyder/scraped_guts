@@ -44,6 +44,9 @@ def acquire_pubs():
     # retrieve metadata
     crosssearch_crossref()
 
+    # summarize
+    summarize()
+
 
     wait_time = random.random()*60 + 60
     print('Wait: ' + str(round(wait_time,2)) + ' from '  + str(time_string))
@@ -51,6 +54,58 @@ def acquire_pubs():
 
     # completed acquire_pubs
     work_completed('acquire_pubs', 0)
+
+
+def highlight():
+    """
+
+    """
+    json_src = os.path.join(retrieve_path('pub_json'))
+
+    for file in os.listdir(json_src):
+
+        json_file = open(os.path.join(json_src, file), 'r')
+        data = json_file.read()
+        json_file.close()
+        obj_dst = json.loads(data)
+
+        searched_list = list(obj_dst['searched'])
+        searched_list.append('summarize')
+        json_obj = {"searched": [searched_list],}
+
+        json_obj['doi'] = doi
+        json_obj['doi_url'] = build_doi_url(doi)
+        json_obj['title'] = obj_dst['gscholar']['title']
+        json_obj['citations'] = obj_dst['gscholar']['citations']
+
+
+        pub_affiliations = []
+        authors = list(obj_dst['crossref_doi']['author'])
+        for author in authors:
+
+            index = authors.index(author)
+            affiliations = list(obj_dst['crossref_doi']['author'][index]['affiliation'])
+
+            for affiliation in affiliations:
+
+                index2 = affiliations.index(affiliation)
+                pub_affiliation = obj_dst['crossref_doi']['author'][index]['affiliation'][index2]['name']
+
+                if pub_affiliation not in pub_affiliations:
+                    pub_affiliations.append(pub_affiliation)
+
+        json_obj['affiliation'] = pub_affiliations
+
+        for search in list(obj_dst['searched']):
+            json_obj[search] = obj_dst[search]
+
+        json_file = open(os.path.join(json_src, file), 'w')
+        #data_json = json.dumps(w1, indent = 4, ensure_ascii = False)
+        #obj_json = json.dumps(obj_json, indent = 3, ensure_ascii = False)
+        json_obj = json.dumps(json_obj, indent = 3)
+        json_file.write(json_obj)
+        json_file.close()
+
 
 
 def build_doi_url(doi):
@@ -167,11 +222,6 @@ def crosssearch_crossref():
         searched_list = list(obj_dst['searched'])
         searched_list.append('crossref')
         json_obj = {"searched": [searched_list],}
-
-        json_obj['doi'] = doi
-        json_obj['doi_url'] = build_doi_url(doi)
-        json_obj['title'] = obj_dst['gscholar']['title']
-        json_obj['citations'] = obj_dst['gscholar']['citations']
 
         json_obj['crossref_doi'] = w1
 
