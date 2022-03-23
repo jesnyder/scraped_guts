@@ -39,8 +39,7 @@ def acquire_pubs():
     make_json_folder()
 
     # retrieve metadata
-
-
+    search_web()
 
     # retrieve metadata
     crosssearch_crossref()
