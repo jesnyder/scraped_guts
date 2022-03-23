@@ -168,9 +168,9 @@ def crosssearch_crossref():
 
             print('title = ')
             print(title)
+            title = title.lower()
 
             works = Works()
-
             w1 = works.query(bibliographic=title)
 
             print('w1 = ')
