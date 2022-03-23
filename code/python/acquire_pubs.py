@@ -201,6 +201,7 @@ def crosssearch_crossref():
                 else:
                     doi = None
 
+        if doi == None: continue
 
         works = Works()
         w1 = works.doi(doi)
