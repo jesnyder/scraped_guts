@@ -168,13 +168,15 @@ def crosssearch_crossref():
         except:
 
             title = obj_dst['gscholar']['title']
+            year = obj_dst['gscholar']['year']
+
 
             print('title = ')
             print(title)
             title = title.lower()
 
             works = Works()
-            w1 = works.query(bibliographic=title)
+            w1 = works.query(bibliographic=title).filter(from_online_pub_date=year)
 
             print('w1 = ')
             print(w1)
