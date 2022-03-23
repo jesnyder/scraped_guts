@@ -183,7 +183,7 @@ def crosssearch_crossref():
                 print('item = ')
                 print(item)
 
-                title_found = item['title']
+                title_found = list(item['title'])[0]
 
                 print('title_found = ')
                 print(title_found)
@@ -200,6 +200,7 @@ def crosssearch_crossref():
 
                 else:
                     doi = None
+
 
         if doi == None: continue
 
