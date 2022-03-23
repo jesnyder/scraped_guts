@@ -165,6 +165,7 @@ def crosssearch_crossref():
         except:
 
             title = obj_dst['gscholar']['title']
+
             print('title = ')
             print(title)
 
@@ -176,12 +177,18 @@ def crosssearch_crossref():
             print(w1)
 
             dois = []
+
             for item in w1:
 
                 print('item = ')
                 print(item)
 
-                doi = item['doi']
+                title_found = item['title']
+
+                print('title_found = ')
+                print(title_found)
+
+                doi = item['DOI']
                 print('doi = ')
                 print(doi)
 
