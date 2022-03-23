@@ -181,7 +181,9 @@ def crosssearch_crossref():
 
             dois = []
 
+            index = 0
             for item in w1:
+
 
                 print('item = ')
                 print(item)
@@ -194,7 +196,8 @@ def crosssearch_crossref():
                 title_found = title_found.lower()
                 title = title.lower()
 
-                print('number of items: ' + str(len(w1)))
+                index = index + 1
+                print('index = ' + str(index))
                 print('title_found = ')
                 print(title_found)
 
