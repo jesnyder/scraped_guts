@@ -87,6 +87,9 @@ def check_scraped(name_dataset, term, year, num):
 
     for path in paths_to_check:
 
+        print('path =')
+        print(path)
+
         for file in os.listdir(path):
 
             # check specific gscholar search
