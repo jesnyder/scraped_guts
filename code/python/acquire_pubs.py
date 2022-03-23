@@ -85,7 +85,6 @@ def check_scraped(name_dataset, term, year, num):
     paths_to_check.append(os.path.join(retrieve_path('pub_gscholar_json')))
     paths_to_check.append(os.path.join(retrieve_path('pub_crossref_json')))
     paths_to_check.append(os.path.join(retrieve_path('pub_web_json')))
-    paths_to_check.append(os.path.join(retrieve_path('pub_crossref')))
 
     for path in paths_to_check:
 
@@ -174,11 +173,12 @@ def crosssearch_crossref():
             w1 = works.query(bibliographic=title)
             dois = []
             for item in w1:
-                dois.append(item['doi'])
-                w2 = works.doi(doi)
-                print('w2 = ')
-                print(w2)
 
+                doi = item['doi']
+                print('doi = ')
+                print(doi)
+
+                dois.append(doi)
 
 
         works = Works()
@@ -205,8 +205,6 @@ def crosssearch_crossref():
         json_obj = json.dumps(json_obj, indent = 3)
         json_file.write(json_obj)
         json_file.close()
-
-
 
 
 def html_gscholar_to_json(soup):
