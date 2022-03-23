@@ -39,13 +39,7 @@ def acquire_pubs():
     make_json_folder()
 
     # retrieve metadata
-    task_name = 'search_web'
-    if work_to_do(task_name):
-        work_completed(task_name, 0)
-        #shutil.rmtree(os.path.join(retrieve_path('pub_web_json')))
-        search_web()
-        web_to_json()
-        work_completed(task_name, 1)
+
 
 
     # retrieve metadata
@@ -572,29 +566,38 @@ def search_web():
 
     """
 
-    for link in retrieve_list('pub_links'):
+    task_name = 'search_web'
+    if work_to_do(task_name):
 
+        work_completed(task_name, 0)
 
-        link_name = link_to_filename(link)
+        shutil.rmtree(os.path.join(retrieve_path('pub_web_json')))
 
-        file_names = []
-        for file in os.listdir(retrieve_path('pub_web_json')):
-            file_split = file.split('.')
-            file_name = file_split[0]
-            file_names.append(file_name)
+        for link in retrieve_list('pub_links'):
 
-        if link_name in file_names: continue
+            link_name = link_to_filename(link)
 
-        ref_list = list(retrieve_list('pub_links'))
-        ref_index = ref_list.index(link)
-        print('% complete = ' + str(100*round((ref_index+1)/(len(ref_list)),2)))
+            file_names = []
+            for file in os.listdir(retrieve_path('pub_web_json')):
+                file_split = file.split('.')
+                file_name = file_split[0]
+                file_names.append(file_name)
 
-        json_obj = meta_html(link)
-        json_file = os.path.join(retrieve_path('pub_web_json'),  link_name + '.json' )
-        json_file = open(json_file, 'w')
-        json_obj = json.dumps(json_obj, indent = 3)
-        json_file.write(json_obj)
-        json_file.close()
+            if link_name in file_names: continue
+
+            ref_list = list(retrieve_list('pub_links'))
+            ref_index = ref_list.index(link)
+            print('% complete = ' + str(100*round((ref_index+1)/(len(ref_list)),2)))
+
+            json_obj = meta_html(link)
+            json_file = os.path.join(retrieve_path('pub_web_json'),  link_name + '.json' )
+            json_file = open(json_file, 'w')
+            json_obj = json.dumps(json_obj, indent = 3)
+            json_file.write(json_obj)
+            json_file.close()
+
+    work_completed(task_name, 1)
+    web_to_json()
 
 
 def web_to_json():
