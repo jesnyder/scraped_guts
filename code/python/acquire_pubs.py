@@ -84,7 +84,7 @@ def check_scraped(name_dataset, term, year, num):
     paths_to_check.append(os.path.join(retrieve_path(name_src)))
     paths_to_check.append(os.path.join(retrieve_path('pub_gscholar')))
     paths_to_check.append(os.path.join(retrieve_path('pub_gscholar'), 'json'))
-    paths_to_check.append(os.path.join(retrieve_path('pub_web')))
+    paths_to_check.append(os.path.join(retrieve_path('pub_web_json')))
     paths_to_check.append(os.path.join(retrieve_path('pub_crossref')))
 
     for path in paths_to_check:
@@ -547,7 +547,7 @@ def search_gscholar():
                 url = url + '&as_yhi=' + str(year)
 
                 # check if recently scraped
-                if check_scraped('gscholar', term, year, num_str):
+                if check_scraped('pubs', term, year, num_str):
                     #print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + num_str)
                     continue
 
