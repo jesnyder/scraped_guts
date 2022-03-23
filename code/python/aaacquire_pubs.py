@@ -37,23 +37,24 @@ def acquire_pubs():
     if work_to_do(task_name):
         work_completed(task_name, 0)
         search_term()
-        work_completed(task_name, 0)
+        work_completed(task_name, 1)
 
     # make json folder
     make_json_folder()
 
     # retrieve metadata
+
     task_name = 'search_web'
     if work_to_do(task_name):
         work_completed(task_name, 0)
         #shutil.rmtree(os.path.join(retrieve_path('pub_web_json')))
         search_web()
-        web_to_json()
-        work_completed(task_name, 0)
-
+        work_completed(task_name, 1)
+    web_to_json()
 
     # retrieve metadata
     crosssearch_crossref()
+
 
 
     wait_time = random.random()*60 + 60
@@ -61,7 +62,7 @@ def acquire_pubs():
     time.sleep(wait_time)
 
     # completed acquire_pubs
-    work_completed('acquire_pubs', 0)
+    work_completed('acquire_pubs', 1)
 
 
 def build_doi_url(doi):
@@ -472,6 +473,36 @@ def retrieve_html(url):
     return(soup)
 
 
+def search_web():
+    """
+
+    """
+
+    for link in retrieve_list('pub_links'):
+
+
+        link_name = link_to_filename(link)
+
+        file_names = []
+        for file in os.listdir(retrieve_path('pub_web_json')):
+            file_split = file.split('.')
+            file_name = file_split[0]
+            file_names.append(file_name)
+
+        if link_name in file_names: continue
+
+        ref_list = list(retrieve_list('pub_links'))
+        ref_index = ref_list.index(link)
+        print('% complete = ' + str(100*round((ref_index+1)/(len(ref_list)),2)))
+
+        json_obj = meta_html(link)
+        json_file = os.path.join(retrieve_path('pub_web_json'),  link_name + '.json' )
+        json_file = open(json_file, 'w')
+        json_obj = json.dumps(json_obj, indent = 3)
+        json_file.write(json_obj)
+        json_file.close()
+
+
 def search_term():
     """
     Make a folder named for search term
@@ -573,36 +604,6 @@ def search_gscholar():
                 json_file.close()
 
                 #json_to_dataframe()
-
-
-def search_web():
-    """
-
-    """
-
-    for link in retrieve_list('pub_links'):
-
-
-        link_name = link_to_filename(link)
-
-        file_names = []
-        for file in os.listdir(retrieve_path('pub_web_json')):
-            file_split = file.split('.')
-            file_name = file_split[0]
-            file_names.append(file_name)
-
-        if link_name in file_names: continue
-
-        ref_list = list(retrieve_list('pub_links'))
-        ref_index = ref_list.index(link)
-        print('% complete = ' + str(100*round((ref_index+1)/(len(ref_list)),2)))
-
-        json_obj = meta_html(link)
-        json_file = os.path.join(retrieve_path('pub_web_json'),  link_name + '.json' )
-        json_file = open(json_file, 'w')
-        json_obj = json.dumps(json_obj, indent = 3)
-        json_file.write(json_obj)
-        json_file.close()
 
 
 def web_to_json():
