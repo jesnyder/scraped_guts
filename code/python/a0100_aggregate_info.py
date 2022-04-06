@@ -18,6 +18,7 @@ from a0001_admin import retrieve_path
 from a0001_admin import write_paths
 from a0001_admin import work_completed
 from a0001_admin import work_to_do
+from find_lat_lon import findLatLong
 
 
 def aggregate_info(dataset):
@@ -40,6 +41,7 @@ def aggregate_info(dataset):
     # coregister
 
     # geolocate
+    df = geolocate(dataset)
 
     # summarize
     df = summarize(dataset)
@@ -167,6 +169,73 @@ def acquire_pub():
 
     df = pd.DataFrame()
     return(df)
+
+
+def geolocate(dataset):
+    """
+
+    """
+    try:
+        path_term = str(dataset + '_src_query')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_dst, dataset + '.csv')
+        df = pd.read_csv(file_dst)
+        df = clean_dataframe(df)
+
+    except:
+        df = pd.DataFrame()
+        return(df)
+
+    if 'nsf' in dataset: df = geolocate_nsf(dataset, df)
+    #elif 'nih' in dataset: df = geolocate_nih(dataset, df)
+    #elif 'clinical' in dataset: df = geolocate_clinical(dataset, df)
+    #elif 'patent' in dataset: df = geolocate_patent(dataset, df)
+    #elif 'pub' in dataset: df = geolocate_pub(dataset, df)
+    else: df = pd.DataFrame()
+
+    return(df)
+
+
+def geolocate_nsf(dataset, df):
+    """
+    look up lat and lon for nsf award address
+    """
+
+    for i in range(len(list(df['OrganizationStreet']))):
+
+        street = df.loc[i, 'OrganizationStreet']
+        city = df.loc[i, 'OrganizationCity']
+        state = df.loc[i, 'OrganizationState']
+        zip = df.loc[i, 'OrganizationZip']
+
+        addresses = []
+        addresses.append(street + ' , ' + city + ' , ' + state + ' , ' + zip)
+        addresses.append(street + ' , ' + city + ' , ' + state)
+        addresses.append(city + ' , ' + state)
+        addresses.append(zip)
+
+        address_found, lat_found, lon_found = [], [], []
+        for address in addresses:
+            lat, lon = findLatLong(address)
+            if lat != None:
+                list_addresses(address, lat, lon)
+                address_found.append(address)
+                lat_found.append(lat)
+                lon_found.append(lon)
+
+    df_geolocated = pd.DataFrame()
+    df_geolocated['addresses'] = address_found
+    df_geolocated['lat_found'] = lat_found
+    df_geolocated['lon_found'] = lon_found
+    return(df_geolocated)
+
+
+
+
+
+
+
+
 
 
 def list_unique(dataset):
