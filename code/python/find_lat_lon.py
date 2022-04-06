@@ -30,6 +30,8 @@ def findLatLong(addresses):
 
     for address in addresses:
 
+        print('address = ' + str(address))
+
         lat, lon = read_address(address)
         if lat != None and lon != None:
             return(address, lat, lon)
