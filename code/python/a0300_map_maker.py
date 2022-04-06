@@ -25,7 +25,6 @@ from a0001_admin import retrieve_list
 from a0001_admin import retrieve_path
 from a0001_admin import write_paths
 from find_color import find_color
-from gif_maker import build_gif
 
 
 def map_maker(dataset):
