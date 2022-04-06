@@ -25,8 +25,8 @@ def aggregate_info(dataset):
     write_paths()
 
     # acquire information
-    if 'nsf' in dataset: df = acquire_nsf()
-    elif 'nih' in dataset: df = acquire_nih()
+    if 'nsf' in dataset: df = acquire_nsf(dataset)
+    elif 'nih' in dataset: df = acquire_nih(dataset)
     elif 'clinical' in dataset: df = acquire_clinical()
     elif 'patent' in dataset: df = acquire_patent()
     elif 'pub' in dataset: df = acquire_pub()
@@ -79,7 +79,7 @@ def acquire_downloaded(dataset):
     return(df)
 
 
-def acquire_nsf():
+def acquire_nsf(dataset):
     """
     aggregate all files in user provided into a single csv
     """
@@ -88,12 +88,12 @@ def acquire_nsf():
     return(df)
 
 
-def acquire_nih():
+def acquire_nih(dataset):
     """
 
     """
 
-    df = pd.DataFrame()
+    df = acquire_downloaded(dataset)
     return(df)
 
 
