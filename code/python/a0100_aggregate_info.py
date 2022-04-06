@@ -297,6 +297,7 @@ def geolocate_nsf(dataset, df):
                 address_found.append(address)
                 lat_found.append(lat)
                 lon_found.append(lon)
+                continue
 
             lat, lon = findLatLong(address)
             if lat != None:
@@ -304,6 +305,7 @@ def geolocate_nsf(dataset, df):
                 address_found.append(address)
                 lat_found.append(lat)
                 lon_found.append(lon)
+                continue
 
     df['address_found'] = address_found
     df['lat_found'] = lat_found
