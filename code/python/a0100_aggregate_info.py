@@ -169,7 +169,7 @@ def acquire_pub():
 
     df = pd.DataFrame()
     return(df)
- 
+
 
 def geolocate(dataset):
     """
@@ -283,9 +283,12 @@ def geolocate_nsf(dataset, df):
         addresses = []
         addresses.append(name)
         addresses.append(street + ' , ' + city + ' , ' + state + ' , ' + str(zip))
-        #addresses.append(street + ' , ' + city + ' , ' + state)
-        #addresses.append(city + ' , ' + state)
-        #addresses.append(zip)
+        addresses.append(street + ' , ' + city + ' , ' + state)
+        addresses.append(city + ' , ' + state)
+        addresses.append(zip)
+
+        print('addresses = ')
+        print(addresses)
 
         address, lat, lon = findLatLong(addresses)
 
