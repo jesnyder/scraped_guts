@@ -269,7 +269,7 @@ def geolocate_nsf(dataset, df):
 
     for i in range(len(list(df['OrganizationStreet']))):
 
-        i = i-1
+        i = i
         print('i = ' + str(i))
 
         progress = round(i/len(list(df['OrganizationStreet']))*100,2)
