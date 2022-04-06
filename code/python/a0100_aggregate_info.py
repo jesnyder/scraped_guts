@@ -90,14 +90,12 @@ def acquire_downloaded(dataset):
                 break
 
         df = df.append(df_src)
+        df = df.drop_duplicates()
 
-    print('df = ')
-    print(df)
-
-    path_term = str(dataset + '_src_query')
-    path_dst = os.path.join(retrieve_path(path_term))
-    file_dst = os.path.join(path_term, dataset + '.csv')
-    df.to_csv(file_dst)
+        path_term = str(dataset + '_src_query')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_term, dataset + '.csv')
+        df.to_csv(file_dst)
 
     return(df)
 
