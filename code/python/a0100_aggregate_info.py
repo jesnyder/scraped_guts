@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import chardet
 from datetime import datetime
 import json
 import lxml
