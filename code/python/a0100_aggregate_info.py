@@ -36,7 +36,7 @@ def retrieve_nsf():
     df = pd.DataFrame()
 
     path_term = 'nsf_awards_downloaded'
-    path_src = os.path.join(retrieve_path(path_term)
+    path_src = os.path.join(retrieve_path(path_term))
     print('path_src = ' + path_src)
     for file in os.listdir(path_src):
         print('file = ' + file)
