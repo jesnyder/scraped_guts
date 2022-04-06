@@ -29,7 +29,7 @@ def aggregate_info(dataset):
     # acquire information
     if 'nsf' in dataset: df = acquire_nsf(dataset)
     elif 'nih' in dataset: df = acquire_nih(dataset)
-    elif 'clinical' in dataset: df = acquire_clinical()
+    elif 'clinical' in dataset: df = acquire_clinical(dataset)
     elif 'patent' in dataset: df = acquire_patent()
     elif 'pub' in dataset: df = acquire_pub()
 
@@ -42,7 +42,7 @@ def aggregate_info(dataset):
     # summarize
 
 
-def acquire_clinical():
+def acquire_clinical(dataset):
     """
     from downloaded clinical data, aggregate
     """
