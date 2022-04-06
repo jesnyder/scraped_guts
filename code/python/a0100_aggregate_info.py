@@ -193,6 +193,12 @@ def geolocate(dataset):
     #elif 'pub' in dataset: df = geolocate_pub(dataset, df)
     else: df = pd.DataFrame()
 
+    path_term = str(dataset + '_geolocated')
+    path_dst = os.path.join(retrieve_path(path_term))
+    file_dst = os.path.join(path_dst, dataset + '.csv')
+    df = pd.read_csv(file_dst)
+    df = clean_dataframe(df)
+
     return(df)
 
 
@@ -227,15 +233,15 @@ def geolocate_nsf(dataset, df):
     df_geolocated['lat_found'] = lat_found
     df_geolocated['lon_found'] = lon_found
 
-    return(df_geolocated)
+    path_dst = os.path.join(retrieve_path('list_address'))
+    file_dst = os.path.join(path_dst, dataset + '.csv')
+    df_geolocated = pd.read_csv(file_dst)
 
+    df['addresses'] = address_found
+    df['lat_found'] = lat_found
+    df['lon_found'] = lon_found
 
-
-
-
-
-
-
+    return(df)
 
 
 def list_unique(dataset):
