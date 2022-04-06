@@ -40,7 +40,7 @@ def retrieve_nsf():
 
     path_term = 'nsf_awards_user_provided'
     for file in os.listdir(os.path.join(retrieve_path(path_term))):
-        print('file = ' file)
+        print('file = ' + file)
 
 
 
