@@ -27,27 +27,10 @@ def aggregate_info(dataset):
         df = retrieve_clinical()
 
     elif 'patent' in dataset:
-        df = retrieve_nih()
+        df = retrieve_patent()
 
     elif 'pub' in dataset:
-        df = retrieve_nih()
-
-
-def retrieve_nih():
-    """
-
-    """
-
-    df = pd.DataFrame()
-    return(df)
-
-def retrieve_nih():
-    """
-
-    """
-
-    df = pd.DataFrame()
-    return(df)
+        df = retrieve_pub()
 
 
 def retrieve_nsf():
@@ -59,7 +42,34 @@ def retrieve_nsf():
     return(df)
 
 
+def retrieve_nih():
+    """
+
+    """
+
+    df = pd.DataFrame()
+    return(df)
+
+
 def retrieve_clinical():
+    """
+
+    """
+
+    df = pd.DataFrame()
+    return(df)
+
+
+def retrieve_patent():
+    """
+
+    """
+
+    df = pd.DataFrame()
+    return(df)
+
+
+def retrieve_pub():
     """
 
     """
