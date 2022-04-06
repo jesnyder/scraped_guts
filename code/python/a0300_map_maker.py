@@ -54,33 +54,33 @@ def build_gif(dataset):
     compare_terms = os.path.join(retrieve_path('term_compare'))
     for category in retrieve_categories():
 
-    png_list = []
-    for file in os.listdir(df_src):
+        png_list = []
+        for file in os.listdir(df_src):
 
-        if category not in str(file): continue
-            #df_src = os.path.join(retrieve_path(file_dst_name), file)
-            png_list.append(os.path.join(retrieve_path(file_dst_name), file))
+            if category not in str(file): continue
+                #df_src = os.path.join(retrieve_path(file_dst_name), file)
+                png_list.append(os.path.join(retrieve_path(file_dst_name), file))
 
-            frames = []
-            #png_file = os.path.join(path, "*.png")
-            gif_dst = str(dataset + '_map_gif')
-            save_file = os.path.join(retrieve_path(gif_dst) , category + '.gif')
-            print('save_file = ' + str(save_file))
+                frames = []
+                #png_file = os.path.join(path, "*.png")
+                gif_dst = str(dataset + '_map_gif')
+                save_file = os.path.join(retrieve_path(gif_dst) , category + '.gif')
+                print('save_file = ' + str(save_file))
 
-            #imgs = glob.glob(png_file)
-            for i in png_list:
+                #imgs = glob.glob(png_file)
+                for i in png_list:
 
-                per_complete = round(100*png_list.index(i)/len(png_list),2)
-                print(name_dataset + ' ' + category + ' % complete = ' + str(per_complete) )
+                    per_complete = round(100*png_list.index(i)/len(png_list),2)
+                    print(name_dataset + ' ' + category + ' % complete = ' + str(per_complete) )
 
-                new_frame = Image.open(i)
-                frames.append(new_frame)
+                    new_frame = Image.open(i)
+                    frames.append(new_frame)
 
-                # Save into a GIF file that loops forever
-                frames[0].save(save_file, format='GIF',
-                    append_images=frames[1:],
-                    save_all=True,
-                    duration=500, loop=0)
+                    # Save into a GIF file that loops forever
+                    frames[0].save(save_file, format='GIF',
+                        append_images=frames[1:],
+                        save_all=True,
+                        duration=500, loop=0)
 
 
 def scale_sizes(sizes):
