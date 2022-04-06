@@ -18,7 +18,7 @@ def main():
         aggregate_info(dataset)
         #
         # map articles
-        map_maker(dataset)
+        # map_maker(dataset)
 
         # plot timelines
 
