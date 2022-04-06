@@ -200,6 +200,13 @@ def geolocate(dataset):
             df = geolocate_nih(dataset, df)
             work_completed(name, 1)
 
+    if 'clinical' in dataset:
+        name = 'geolocate_clinical'
+        if work_to_do(name):
+            work_completed(name, 0)
+            df = geolocate_nih(dataset, df)
+            work_completed(name, 1)
+
 
     #elif 'clinical' in dataset: df = geolocate_clinical(dataset, df)
     #elif 'patent' in dataset: df = geolocate_patent(dataset, df)
@@ -308,11 +315,12 @@ def geolocate_nsf(dataset, df):
         print('Progress: ' + str(progress) + ' % '  + str(left) + ' left')
 
         name = str(df.loc[i, 'Organization'])
+        name = name.replace('.', '')
         street = str(df.loc[i, 'OrganizationStreet'])
         city = str(df.loc[i, 'OrganizationCity'])
         state = str(df.loc[i, 'OrganizationState'])
         zip = str(df.loc[i, 'OrganizationZip'])
-    
+
         print('name = ' + name)
         print('street = ' + street)
         print('city = ' + city)
