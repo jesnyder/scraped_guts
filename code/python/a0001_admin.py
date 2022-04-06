@@ -293,19 +293,19 @@ def write_paths():
             name.append(item)
 
             if '_src_query' in item:
-                item_path = str('program_generated ' + name_dataset + ' query')
+                item_path = str('program_generated ' + name_dataset + ' 01_acquired')
 
             elif '_dst_query' in item:
-                item_path = str('program_generated ' + name_dataset + ' agg')
+                item_path = str('program_generated ' + name_dataset + ' 02_aggregated')
 
             elif '_sum' in item:
-                item_path = str('program_generated ' + name_dataset + ' agg sum')
+                item_path = str('program_generated ' + name_dataset + ' 03_summarized')
 
             elif '_unique_df' in item:
                 item_path = str('program_generated ' + name_dataset + ' agg unique df')
 
             elif '_unique_plot' in item:
-                item_path = str('program_generated ' + name_dataset + ' agg unique plot')
+                item_path = str('program_generated ' + name_dataset + ' 04_time_plot')
 
             elif '_query_html' in item:
                 item_path = str('program_generated ' + name_dataset + ' query html')

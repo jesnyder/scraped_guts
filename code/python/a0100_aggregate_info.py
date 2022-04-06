@@ -27,15 +27,11 @@ def aggregate_info(dataset):
     write_paths()
 
     # acquire information
-    name = 'acquire'
-    if work_to_do(name):
-        work_completed(name, 0)
-        if 'nsf' in dataset: df = acquire_nsf(dataset)
-        elif 'nih' in dataset: df = acquire_nih(dataset)
-        elif 'clinical' in dataset: df = acquire_clinical()
-        elif 'patent' in dataset: df = acquire_patent()
-        elif 'pub' in dataset: df = acquire_pub()
-        #work_completed(name, 1)
+    if 'nsf' in dataset: df = acquire_nsf(dataset)
+    elif 'nih' in dataset: df = acquire_nih(dataset)
+    elif 'clinical' in dataset: df = acquire_clinical()
+    elif 'patent' in dataset: df = acquire_patent()
+    elif 'pub' in dataset: df = acquire_pub()
 
     # aggregate information
 
@@ -63,6 +59,8 @@ def acquire_clinical():
         file_dst = os.path.join(path_term, dataset + '.csv')
         df = pd.read_csv(file_dst)
 
+    print('Clinical df = ')
+    print(df)
     return(df)
 
 
@@ -121,7 +119,7 @@ def acquire_nsf(dataset):
         file_dst = os.path.join(path_term, dataset + '.csv')
         df = pd.read_csv(file_dst)
 
-    print('df = ')
+    print('NSF df = ')
     print(df)
     return(df)
 
@@ -143,6 +141,8 @@ def acquire_nih(dataset):
         file_dst = os.path.join(path_term, dataset + '.csv')
         df = pd.read_csv(file_dst)
 
+    print('NIH df = ')
+    print(df)
     return(df)
 
 
