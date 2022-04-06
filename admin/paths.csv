@@ -21,7 +21,7 @@ patent_user_provided,user_provided patents scraped
 $, geolocate address
 address_not_found,program_generated admin map address_not_found.csv
 lookup_address,user_provided admin lookup_address.csv
-list_address,program_generated map address.csv
+address_list,program_generated admin addresses.csv
 
 #, gscholar
 json_archival,user_provided gscholar json_archival
