@@ -217,7 +217,7 @@ def summarize(dataset):
 
     df_summary = pd.DataFrame()
 
-    df_summary['Item Count'] = len(list(df.loc[:,0]))
+    df_summary['Item Count'] = len(list(df.iloc[:,0]))
 
     for col_name in col_name:
 
@@ -247,7 +247,7 @@ def summarize(dataset):
             df_summary[col_name_new + '_median'] = [target]
         except:
             hello = 'hello'
-            
+
 
     df_summary = df_summary.T
     path_term = str(dataset + '_sum')
