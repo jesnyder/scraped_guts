@@ -226,6 +226,39 @@ def geolocate(dataset):
     return(df)
 
 
+def geolocate_clinical(dataset, df):
+    """
+    look up lat and lon for nsf award address
+    """
+
+
+    for i in range(len(list(df['SponsorCollaborators']))):
+
+        name = df.loc[i, 'SponsorCollaborators']
+        name = name.replace('"', '')
+        names = name.split('|')
+
+        location = df.loc[i, 'Locations']
+        location = name.replace('"', '')
+        locations = locations.split('|')
+
+        addresses = []
+        for name in names: addresses.append(name)
+        for location in locations: addresses.append(location)
+
+        address, lat, lon = findLatLong(addresses)
+
+        address_found.append(address)
+        lat_found.append(lat)
+        lon_found.append(lon)
+
+
+    df['address_found'] = address_found
+    df['lat_found'] = lat_found
+    df['lon_found'] = lon_found
+    return(df)
+
+
 def geolocate_nih(dataset, df):
     """
     look up lat and lon for nsf award address
@@ -279,6 +312,12 @@ def geolocate_nsf(dataset, df):
         city = df.loc[i, 'OrganizationCity']
         state = df.loc[i, 'OrganizationState']
         zip = df.loc[i, 'OrganizationZip']
+
+        print('name = ' + name)
+        print('street = ' + street)
+        print('city = ' + city)
+        print('state = ' + state)
+        print('zip = ' + zip)
 
         addresses = []
         addresses.append(name)
