@@ -38,6 +38,8 @@ def retrieve_nsf():
     path_term = 'nsf_awards_downloaded'
     path_src = os.path.join(retrieve_path(path_term))
     print('path_src = ' + path_src)
+    print('os.listdir(path_src) = ')
+    print(os.listdir(path_src))
     for file in os.listdir(path_src):
         print('file = ' + file)
 
