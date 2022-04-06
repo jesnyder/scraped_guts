@@ -20,19 +20,19 @@ def aggregate_info(dataset):
     """
 
     # retrieve information
-    if 'nsf_' in str(dataset):
+    if str(dataset).contains('nsf'):
         df = retrieve_nsf()
 
-    elif 'nih_' in str(dataset):
+    if str(dataset).contains('nih'):
         df = retrieve_nih()
 
-    elif 'clinical_' in str(dataset):
+    if str(dataset).contains('clinical'):
         df = retrieve_clinical()
 
-    elif 'patent' in str(dataset):
+    if str(dataset).contains('patent'):
         df = retrieve_patent()
 
-    elif 'pub' in str(dataset):
+    if str(dataset).contains('pub'):
         df = retrieve_pub()
 
 
