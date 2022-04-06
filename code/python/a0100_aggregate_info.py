@@ -267,10 +267,8 @@ def geolocate_nsf(dataset, df):
     look up lat and lon for nsf award address
     """
 
+    address_found, lat_found, lon_found = [], [], []
     for i in range(len(list(df['OrganizationStreet']))):
-
-        i = i
-        print('i = ' + str(i))
 
         progress = round(i/len(list(df['OrganizationStreet']))*100,2)
         left = len(list(df['OrganizationStreet'])) - i
@@ -289,7 +287,6 @@ def geolocate_nsf(dataset, df):
         #addresses.append(city + ' , ' + state)
         #addresses.append(zip)
 
-        address_found, lat_found, lon_found = [], [], []
         address, lat, lon = findLatLong(addresses)
 
         address_found.append(address)
@@ -300,7 +297,6 @@ def geolocate_nsf(dataset, df):
     df['address_found'] = address_found
     df['lat_found'] = lat_found
     df['lon_found'] = lon_found
-
     return(df)
 
 
