@@ -202,9 +202,9 @@ def geolocate(dataset):
     if 'address_found' not in df.columns: return(df)
 
     df_geolocated = pd.DataFrame()
-    df_geolocated['addresses'] = list(df['address_found']
-    df_geolocated['lat_found'] = list(df['lat_found']
-    df_geolocated['lon_found'] = list(df['lon_found']
+    df_geolocated['address_found'] = list(df['address_found'])
+    df_geolocated['lat_found'] = list(df['lat_found'])
+    df_geolocated['lon_found'] = list(df['lon_found'])
 
     path_dst = os.path.join(retrieve_path('list_address'))
     file_dst = os.path.join(path_dst, dataset + '.csv')
