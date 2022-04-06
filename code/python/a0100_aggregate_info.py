@@ -24,22 +24,31 @@ def aggregate_info(dataset):
     # write paths
     write_paths()
 
-    # retrieve information
+    # acquire information
     if 'nsf' in dataset: df = acquire_nsf()
     elif 'nih' in dataset: df = acquire_nih()
     elif 'clinical' in dataset: df = acquire_clinical()
     elif 'patent' in dataset: df = acquire_patent()
     elif 'pub' in dataset: df = acquire_pub()
 
+    # aggregate information
 
-def acquire_nsf():
+    # coregister
+
+    # geolocate
+
+    # summarize
+
+
+
+def acquire_downloaded(dataset):
     """
-    aggregate all files in user provided into a single csv
+    aggregate all files downloaded and saved in user provided
     """
 
     df = pd.DataFrame()
 
-    path_term = 'nsf_awards_downloaded'
+    path_term = dataset + '_downloaded'
     path_src = os.path.join(retrieve_path(path_term))
     for file in os.listdir(path_src):
         file_src = os.path.join(path_src, file)
@@ -59,7 +68,6 @@ def acquire_nsf():
 
         df = df.append(df_src)
 
-
     print('df = ')
     print(df)
 
@@ -68,6 +76,15 @@ def acquire_nsf():
     file_dst = os.path.join(path_term, dataset + '.csv')
     df.to_csv(file_dst)
 
+    return(df)
+
+
+def acquire_nsf():
+    """
+    aggregate all files in user provided into a single csv
+    """
+
+    df = acquire_downloaded(dataset)
     return(df)
 
 
