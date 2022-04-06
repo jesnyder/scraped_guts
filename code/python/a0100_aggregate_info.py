@@ -199,6 +199,15 @@ def geolocate(dataset):
     df = pd.read_csv(file_dst)
     df = clean_dataframe(df)
 
+    df_geolocated = pd.DataFrame()
+    df_geolocated['addresses'] = list(df['address_found']
+    df_geolocated['lat_found'] = list(df['lat_found']
+    df_geolocated['lon_found'] = list(df['lon_found']
+
+    path_dst = os.path.join(retrieve_path('list_address'))
+    file_dst = os.path.join(path_dst, dataset + '.csv')
+    df_geolocated = pd.read_csv(file_dst)
+
     return(df)
 
 
@@ -227,15 +236,6 @@ def geolocate_nsf(dataset, df):
                 address_found.append(address)
                 lat_found.append(lat)
                 lon_found.append(lon)
-
-    df_geolocated = pd.DataFrame()
-    df_geolocated['addresses'] = address_found
-    df_geolocated['lat_found'] = lat_found
-    df_geolocated['lon_found'] = lon_found
-
-    path_dst = os.path.join(retrieve_path('list_address'))
-    file_dst = os.path.join(path_dst, dataset + '.csv')
-    df_geolocated = pd.read_csv(file_dst)
 
     df['addresses'] = address_found
     df['lat_found'] = lat_found
