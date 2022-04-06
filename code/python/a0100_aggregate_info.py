@@ -309,11 +309,20 @@ def list_unique(dataset):
     """
 
     try:
-        path_term = str(dataset + '_src_query')
-        path_dst = os.path.join(retrieve_path(path_term))
-        file_dst = os.path.join(path_dst, dataset + '.csv')
-        df = pd.read_csv(file_dst)
-        df = clean_dataframe(df)
+        try:
+
+            path_term = str(dataset + '_geolocated')
+            path_dst = os.path.join(retrieve_path(path_term))
+            file_dst = os.path.join(path_dst, dataset + '.csv')
+            df = pd.read_csv(file_dst)
+            df = clean_dataframe(df)
+
+        except:
+            path_term = str(dataset + '_src_query')
+            path_dst = os.path.join(retrieve_path(path_term))
+            file_dst = os.path.join(path_dst, dataset + '.csv')
+            df = pd.read_csv(file_dst)
+            df = clean_dataframe(df)
 
     except:
         df = pd.DataFrame()
@@ -339,11 +348,20 @@ def summarize(dataset):
     save a summary as a .csv
     """
     try:
-        path_term = str(dataset + '_src_query')
-        path_dst = os.path.join(retrieve_path(path_term))
-        file_dst = os.path.join(path_dst, dataset + '.csv')
-        df = pd.read_csv(file_dst)
-        df = clean_dataframe(df)
+        try:
+
+            path_term = str(dataset + '_geolocated')
+            path_dst = os.path.join(retrieve_path(path_term))
+            file_dst = os.path.join(path_dst, dataset + '.csv')
+            df = pd.read_csv(file_dst)
+            df = clean_dataframe(df)
+
+        except:
+            path_term = str(dataset + '_src_query')
+            path_dst = os.path.join(retrieve_path(path_term))
+            file_dst = os.path.join(path_dst, dataset + '.csv')
+            df = pd.read_csv(file_dst)
+            df = clean_dataframe(df)
 
     except:
         df = pd.DataFrame()
