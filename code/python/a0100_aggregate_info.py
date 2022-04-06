@@ -253,7 +253,7 @@ def summarize(dataset):
     path_term = str(dataset + '_sum')
     path_dst = os.path.join(retrieve_path(path_term))
     file_dst = os.path.join(path_dst, dataset + '.csv')
-    df.to_csv(file_dst)
+    df_summary.to_csv(file_dst)
 
 
 if __name__ == "__main__":
