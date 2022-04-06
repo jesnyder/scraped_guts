@@ -311,7 +311,7 @@ def geolocate_nsf(dataset, df):
         street = str(df.loc[i, 'OrganizationStreet'])
         city = str(df.loc[i, 'OrganizationCity'])
         state = str(df.loc[i, 'OrganizationState'])
-        zip = str(df.loc[i, 'OrganizationZip'])
+        zip = str(int(df.loc[i, 'OrganizationZip']))
 
         print('name = ' + name)
         print('street = ' + street)
