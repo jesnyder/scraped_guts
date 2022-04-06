@@ -285,8 +285,8 @@ def geolocate_nsf(dataset, df):
         addresses = []
         addresses.append(name)
         addresses.append(street + ' , ' + city + ' , ' + state + ' , ' + zip)
-        addresses.append(street + ' , ' + city + ' , ' + state)
-        addresses.append(city + ' , ' + state)
+        #addresses.append(street + ' , ' + city + ' , ' + state)
+        #addresses.append(city + ' , ' + state)
         #addresses.append(zip)
 
         address_found, lat_found, lon_found = [], [], []
@@ -297,7 +297,6 @@ def geolocate_nsf(dataset, df):
                 address_found.append(address)
                 lat_found.append(lat)
                 lon_found.append(lon)
-                continue
 
             lat, lon = findLatLong(address)
             if lat != None:
@@ -305,7 +304,6 @@ def geolocate_nsf(dataset, df):
                 address_found.append(address)
                 lat_found.append(lat)
                 lon_found.append(lon)
-                continue
 
     df['address_found'] = address_found
     df['lat_found'] = lat_found
@@ -357,8 +355,6 @@ def read_address(address):
         df = clean_dataframe(df)
     except:
         return(0, 0)
-
-
 
     address_found = list(df['address'])
     if address in address_found:
