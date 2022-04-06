@@ -14,6 +14,8 @@ import time
 
 from a0001_admin import retrieve_path
 from a0001_admin import write_paths
+from a0001_admin import work_completed
+from a0001_admin import work_to_do
 
 
 def aggregate_info(dataset):
@@ -83,8 +85,21 @@ def acquire_nsf(dataset):
     """
     aggregate all files in user provided into a single csv
     """
+    name = 'acquire_nsf'
 
-    df = acquire_downloaded(dataset)
+    work_completed(name, 0)
+
+    if work_to_do(name):
+
+        df = acquire_downloaded(dataset)
+        work_completed(name, 1)
+
+    else:
+        path_term = str(name_dataset + '_src_query')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_term, dataset + '.csv')
+        df = pd.read_csv(file_dst)
+
     return(df)
 
 
