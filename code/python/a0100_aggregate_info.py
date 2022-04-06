@@ -17,16 +17,20 @@ def aggregate_info(dataset):
     """
 
     # retrieve information
-    if 'nih_' in dataset:
+    if 'nsf_' in dataset:
+        df = retrieve_nsf()
+
+    elif 'nih_' in dataset:
         df = retrieve_nih()
 
-    elif 'nsf_' in dataset:
-
     elif 'clinical_' in dataset:
+        df = retrieve_clinical()
 
     elif 'patent' in dataset:
+        df = retrieve_nih()
 
     elif 'pub' in dataset:
+        df = retrieve_nih()
 
 
 def retrieve_nih():
