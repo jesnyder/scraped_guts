@@ -394,16 +394,12 @@ def work_to_do(name):
     except:
         df = pd.DataFrame()
 
-    df = pd.read_csv(file)
-    df = clean_dataframe(df)
-
     if 'active' in df.columns:
         df =  df[(df['active'] != 0)]
         for task_name in list(df['name']):
 
             if name == task_name:
                 return(False)
-
     return(True)
 
 
