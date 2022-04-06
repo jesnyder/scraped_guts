@@ -292,6 +292,13 @@ def geolocate_nsf(dataset, df):
         address_found, lat_found, lon_found = [], [], []
         for address in addresses:
 
+            lat, lon = address_check(address)
+            if lat != None:
+                record_address(address, lat, lon)
+                address_found.append(address)
+                lat_found.append(lat)
+                lon_found.append(lon)
+
             lat, lon = findLatLong(address)
             if lat != None:
                 record_address(address, lat, lon)
@@ -335,6 +342,34 @@ def list_unique(dataset):
 
         file_dst = os.path.join(path_dst, col_name + '.csv')
         df_counts.to_csv(file_dst)
+
+
+
+def address_check(address):
+    """
+    cumulative list of all addresses found
+    """
+
+    try:
+        path_term = 'address_list'
+        file_dst = os.path.join(retrieve_path(path_term))
+        df = pd.read_csv(file_dst)
+        df = clean_dataframe(df)
+    except:
+        df = pd.DataFrame()
+
+    address_found = list(df['address'])
+    if address in address_found:
+        df_temp = df[(df['address'] == address)]
+        lat = list(df_temp['lat'])
+        lat = lat[0]
+        lon = list(df_temp['lon'])
+        lon = lon[0]
+
+    else:
+        lat, lon = 0, 0
+
+    return(lat, lon)
 
 
 def record_address(address, lat, lon):
