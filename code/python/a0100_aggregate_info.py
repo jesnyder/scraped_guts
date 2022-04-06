@@ -190,6 +190,10 @@ def list_unique(dataset):
 
         path_term = str(dataset + '_unique_df')
         path_dst = os.path.join(retrieve_path(path_term))
+
+        if '/' in col_name:
+            col_name = col_name.replace('/', '')
+
         file_dst = os.path.join(path_dst, col_name + '.csv')
         df_counts.to_csv(file_dst)
 
