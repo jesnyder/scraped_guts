@@ -356,7 +356,9 @@ def read_address(address):
         df = pd.read_csv(file_dst)
         df = clean_dataframe(df)
     except:
-        df = pd.DataFrame()
+        return(0, 0)
+
+
 
     address_found = list(df['address'])
     if address in address_found:
