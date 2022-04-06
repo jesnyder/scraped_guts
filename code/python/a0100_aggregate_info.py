@@ -12,6 +12,7 @@ import re
 import requests
 import time
 
+from a0001_admin import clean_dataframe
 from a0001_admin import retrieve_path
 from a0001_admin import write_paths
 from a0001_admin import work_completed
@@ -40,6 +41,9 @@ def aggregate_info(dataset):
     # geolocate
 
     # summarize
+
+    # list unique
+    df = list_unique(dataset)
 
 
 def acquire_clinical(dataset):
@@ -161,6 +165,33 @@ def acquire_pub():
 
     df = pd.DataFrame()
     return(df)
+
+
+def list_unique(dataset):
+    """
+    save csv of all unique values with counts
+    """
+
+    try:
+        path_term = str(dataset + '_src_query')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_dst, dataset + '.csv')
+        df = pd.read_csv(file_dst)
+        df = clean_dataframe(df)
+
+    except:
+        df = pd.DataFrame()
+        return(df)
+
+    for col_name in df.columns:
+
+        values =  list(df[col_name])
+        df_counts = pd.value_counts(np.array(values))
+
+        path_term = str(dataset + '_unique_df')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_dst, col_name + '.csv')
+        df_counts.to_csv(file_dst)
 
 
 

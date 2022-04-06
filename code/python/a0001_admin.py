@@ -302,7 +302,7 @@ def write_paths():
                 item_path = str('program_generated ' + name_dataset + ' 03_summarized')
 
             elif '_unique_df' in item:
-                item_path = str('program_generated ' + name_dataset + ' agg unique df')
+                item_path = str('program_generated ' + name_dataset + ' 04_unique')
 
             elif '_unique_plot' in item:
                 item_path = str('program_generated ' + name_dataset + ' 04_time_plot')
