@@ -282,7 +282,7 @@ def geolocate_nsf(dataset, df):
 
         addresses = []
         addresses.append(name)
-        addresses.append(street + ' , ' + city + ' , ' + state + ' , ' + zip)
+        addresses.append(street + ' , ' + city + ' , ' + state + ' , ' + str(zip))
         #addresses.append(street + ' , ' + city + ' , ' + state)
         #addresses.append(city + ' , ' + state)
         #addresses.append(zip)

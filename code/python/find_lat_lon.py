@@ -25,6 +25,9 @@ def findLatLong(addresses):
     check an internal list for address
     else look up on street maps
     """
+
+    print('geolocating.')
+    
     for address in addresses:
 
         lat, lon = read_address(address)
