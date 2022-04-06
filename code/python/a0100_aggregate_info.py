@@ -290,20 +290,12 @@ def geolocate_nsf(dataset, df):
         #addresses.append(zip)
 
         address_found, lat_found, lon_found = [], [], []
-        for address in addresses:
+        address, lat, lon = findLatLong(addresses)
 
-            lat, lon = read_address(address)
-            if lat != None:
-                address_found.append(address)
-                lat_found.append(lat)
-                lon_found.append(lon)
+        address_found.append(address)
+        lat_found.append(lat)
+        lon_found.append(lon)
 
-            lat, lon = findLatLong(address)
-            if lat != None:
-                record_address(address, lat, lon)
-                address_found.append(address)
-                lat_found.append(lat)
-                lon_found.append(lon)
 
     df['address_found'] = address_found
     df['lat_found'] = lat_found
@@ -341,56 +333,6 @@ def list_unique(dataset):
 
         file_dst = os.path.join(path_dst, col_name + '.csv')
         df_counts.to_csv(file_dst)
-
-
-def read_address(address):
-    """
-    cumulative list of all addresses found
-    """
-
-    try:
-        path_term = 'address_list'
-        file_dst = os.path.join(retrieve_path(path_term))
-        df = pd.read_csv(file_dst)
-        df = clean_dataframe(df)
-    except:
-        return(0, 0)
-
-    address_found = list(df['address'])
-    if address in address_found:
-        df_temp = df[(df['address'] == address)]
-        lat = list(df_temp['lat'])
-        lat = lat[0]
-        lon = list(df_temp['lon'])
-        lon = lon[0]
-
-    else:
-        lat, lon = 0, 0
-
-    return(lat, lon)
-
-
-def record_address(address, lat, lon):
-    """
-    cumulative list of all addresses found
-    """
-
-    try:
-        path_term = 'address_list'
-        file_dst = os.path.join(retrieve_path(path_term))
-        df = pd.read_csv(file_dst)
-        df = clean_dataframe(df)
-    except:
-        df = pd.DataFrame()
-
-    df_temp = pd.DataFrame()
-    df_temp['address'] = [address]
-    df_temp['lat'] = [lat]
-    df_temp['lon'] = [lon]
-
-    df = df.append(df_temp)
-    df = clean_dataframe(df)
-    df.to_csv(file_dst)
 
 
 def summarize(dataset):
