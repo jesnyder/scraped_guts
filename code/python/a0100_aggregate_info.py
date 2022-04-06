@@ -292,9 +292,8 @@ def geolocate_nsf(dataset, df):
         address_found, lat_found, lon_found = [], [], []
         for address in addresses:
 
-            lat, lon = address_check(address)
+            lat, lon = read_address(address)
             if lat != None:
-                record_address(address, lat, lon)
                 address_found.append(address)
                 lat_found.append(lat)
                 lon_found.append(lon)
@@ -344,8 +343,7 @@ def list_unique(dataset):
         df_counts.to_csv(file_dst)
 
 
-
-def address_check(address):
+def read_address(address):
     """
     cumulative list of all addresses found
     """
