@@ -219,7 +219,7 @@ def summarize(dataset):
 
     for col_name in df.columns:
 
-        df_summary['Item Count'] = len(list(df[col_name]))
+        df_summary['Item Count'] = [len(list(df[col_name]))]
 
         if '/' in col_name:
             col_name_new = col_name.replace('/', '')
