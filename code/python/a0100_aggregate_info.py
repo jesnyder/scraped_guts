@@ -46,7 +46,7 @@ def retrieve_nsf():
             df_src = pd.read_csv(file_src)
 
         except:
-            with open(df_src, 'rb') as file:
+            with open(file_src, 'rb') as file:
                 print(chardet.detect(file.read()))
             encodings = ['ISO-8859-1', 'unicode_escape', 'utf-8']
             for encoding in encodings:
