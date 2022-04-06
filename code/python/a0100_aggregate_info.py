@@ -345,7 +345,7 @@ def record_address(address, lat, lon):
         file_dst = os.path.join(retrieve_path(path_term))
         df = pd.read_csv(file_dst)
         df = clean_dataframe(df)
-    else:
+    except:
         df = pd.DataFrame()
 
     df_temp = pd.DataFrame()
