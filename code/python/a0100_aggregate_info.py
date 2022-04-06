@@ -41,9 +41,13 @@ def retrieve_nsf():
     aggregate all files in user provided into a single csv
     """
 
-    path_term = 'nsf_awards_user_provided'
+    df = pd.DataFrame()
+
+    path_term = 'nsf_awards_downloaded'
     for file in os.listdir(os.path.join(retrieve_path(path_term))):
         print('file = ' + file)
+
+
 
 
 
