@@ -8,6 +8,7 @@ import numpy as np
 import os
 import pandas as pd
 from serpapi import GoogleSearch
+import statistics
 import re
 import requests
 import time
@@ -218,14 +219,41 @@ def summarize(dataset):
 
     df_summary['Item Count'] = len(list(df.loc[:,0]))
 
+    for col_name in col_name:
+
+        if '/' in col_name:
+            col_name_new = col_name.replace('/', '')
+
+        try:
+            target = sum(list(df[col_name]))
+            df_summary[col_name_new + '_sum'] = [target]
+        except:
+            hello = 'hello'
+
+        try:
+            target = stastistics.mode(list(df[col_name]))
+            df_summary[col_name_new + '_mode'] = [target]
+        except:
+            hello = 'hello'
+
+        try:
+            target = stastistics.mean(list(df[col_name]))
+            df_summary[col_name_new + '_mean'] = [target]
+        except:
+            hello = 'hello'
+
+        try:
+            target = stastistics.mean(list(df[col_name]))
+            df_summary[col_name_new + '_median'] = [target]
+        except:
+            hello = 'hello'
+            
+
     df_summary = df_summary.T
     path_term = str(dataset + '_sum')
     path_dst = os.path.join(retrieve_path(path_term))
     file_dst = os.path.join(path_dst, dataset + '.csv')
     df.to_csv(file_dst)
-
-
-
 
 
 if __name__ == "__main__":
