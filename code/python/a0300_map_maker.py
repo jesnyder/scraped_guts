@@ -33,7 +33,7 @@ def map_maker(dataset):
     """
     print('began map_maker')
 
-    yearly_map(dataset)
+    #yearly_map(dataset)
     build_gif(dataset)
 
     print('completed map_maker')
