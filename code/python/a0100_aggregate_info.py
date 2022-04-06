@@ -94,7 +94,7 @@ def acquire_downloaded(dataset):
 
         path_term = str(dataset + '_src_query')
         path_dst = os.path.join(retrieve_path(path_term))
-        file_dst = os.path.join(path_term, dataset + '.csv')
+        file_dst = os.path.join(path_dst, dataset + '.csv')
         print('file_dst  = ' + file_dst )
         df.to_csv(file_dst)
 
