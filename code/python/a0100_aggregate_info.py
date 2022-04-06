@@ -186,8 +186,21 @@ def geolocate(dataset):
         df = pd.DataFrame()
         return(df)
 
-    if 'nsf' in dataset: df = geolocate_nsf(dataset, df)
-    #elif 'nih' in dataset: df = geolocate_nih(dataset, df)
+    if 'nsf' in dataset:
+        name = 'geolocate_nsf'
+        if work_to_do(name):
+            work_completed(name, 0)
+            df = geolocate_nsf(dataset, df)
+            work_completed(name, 1)
+
+    if 'nih' in dataset:
+        name = 'geolocate_nih'
+        if work_to_do(name):
+            work_completed(name, 0)
+            df = geolocate_nih(dataset, df)
+            work_completed(name, 1)
+
+
     #elif 'clinical' in dataset: df = geolocate_clinical(dataset, df)
     #elif 'patent' in dataset: df = geolocate_patent(dataset, df)
     #elif 'pub' in dataset: df = geolocate_pub(dataset, df)
@@ -209,6 +222,42 @@ def geolocate(dataset):
     path_dst = os.path.join(retrieve_path('list_address'))
     file_dst = os.path.join(path_dst, dataset + '.csv')
     df_geolocated = pd.read_csv(file_dst)
+
+    return(df)
+
+
+def geolocate_nih(dataset, df):
+    """
+    look up lat and lon for nsf award address
+    """
+
+    """
+    for i in range(len(list(df['Organization City']))):
+
+        name = df.loc[i, 'Organization Name']
+        name = name.replace('"', '')
+        city = df.loc[i, 'Organization City']
+        state = df.loc[i, 'Organization State']
+        country = df.loc[i, 'Organization Country']
+        zip = df.loc[i, 'Organization Zip']
+
+        addresses = []
+        addresses.append(name + ' , ' + city + ' , ' country)
+        addresses.append(name + ' , ' + city + ' , ' + state + ' , ' + zip)
+        addresses.append(city + ' , ' + state + ' , ' country)
+
+        address_found, lat_found, lon_found = [], [], []
+        for address in addresses:
+            lat, lon = findLatLong(address)
+            if lat != None:
+                address_found.append(address)
+                lat_found.append(lat)
+                lon_found.append(lon)
+    """
+
+    df['address_found'] = list(df['Organization Name'])
+    df['lat_found'] = list(df['Latitude'])
+    df['lon_found'] = list(df['Longitude'])
 
     return(df)
 
