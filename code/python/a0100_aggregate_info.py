@@ -169,7 +169,7 @@ def acquire_pub():
 
     df = pd.DataFrame()
     return(df)
-
+ 
 
 def geolocate(dataset):
     """

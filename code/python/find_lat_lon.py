@@ -27,7 +27,7 @@ def findLatLong(addresses):
     """
 
     print('geolocating.')
-    
+
     for address in addresses:
 
         lat, lon = read_address(address)
@@ -64,7 +64,7 @@ def read_address(address):
         df = pd.read_csv(file_dst)
         df = clean_dataframe(df)
     except:
-        return(0, 0)
+        return(None, None)
 
     address_found = list(df['address'])
     if address in address_found:
