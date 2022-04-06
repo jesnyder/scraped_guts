@@ -85,12 +85,10 @@ def acquire_nsf(dataset):
     """
     aggregate all files in user provided into a single csv
     """
+
     name = 'acquire_nsf'
-
-    work_completed(name, 0)
-
     if work_to_do(name):
-
+        work_completed(name, 0)
         df = acquire_downloaded(dataset)
         work_completed(name, 1)
 
@@ -107,12 +105,10 @@ def acquire_nih(dataset):
     """
     from downloaded nih data, aggregate
     """
+
     name = 'acquire_nih'
-
-    work_completed(name, 0)
-
     if work_to_do(name):
-
+        work_completed(name, 0)
         df = acquire_downloaded(dataset)
         work_completed(name, 1)
 
@@ -129,12 +125,10 @@ def acquire_clinical():
     """
     from downloaded clinical data, aggregate
     """
-    name = 'acquire_nih'
 
-    work_completed(name, 0)
-
+    name = 'acquire_clinical'
     if work_to_do(name):
-
+        work_completed(name, 0)
         df = acquire_downloaded(dataset)
         work_completed(name, 1)
 
