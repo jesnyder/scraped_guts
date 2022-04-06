@@ -203,6 +203,28 @@ def summarize(dataset):
     """
     save a summary as a .csv
     """
+    try:
+        path_term = str(dataset + '_src_query')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_dst, dataset + '.csv')
+        df = pd.read_csv(file_dst)
+        df = clean_dataframe(df)
+
+    except:
+        df = pd.DataFrame()
+        return(df)
+
+    df_summary = pd.DataFrame()
+
+    df_summary['Item Count'] = len(list(df.loc[:,0]))
+
+    df_summary = df_summary.T
+    path_term = str(dataset + '_sum')
+    path_dst = os.path.join(retrieve_path(path_term))
+    file_dst = os.path.join(path_dst, dataset + '.csv')
+    df.to_csv(file_dst)
+
+
 
 
 

@@ -382,9 +382,11 @@ def write_paths():
 
 def work_to_do(name):
     """
-
+    Return True is the work needs to be done
+    Return False if the work is complete
+    Determine by string matching the name of the task to the work plan
     """
-
+ 
     file = retrieve_path('work_plan')
     if os.path.exists(file) == False: return(True)
 
