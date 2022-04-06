@@ -199,6 +199,8 @@ def geolocate(dataset):
     df = pd.read_csv(file_dst)
     df = clean_dataframe(df)
 
+    if 'address_found' not in df.columns: return(df)
+
     df_geolocated = pd.DataFrame()
     df_geolocated['addresses'] = list(df['address_found']
     df_geolocated['lat_found'] = list(df['lat_found']
