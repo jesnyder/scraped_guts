@@ -35,7 +35,7 @@ def aggregate_info(dataset):
         elif 'clinical' in dataset: df = acquire_clinical()
         elif 'patent' in dataset: df = acquire_patent()
         elif 'pub' in dataset: df = acquire_pub()
-        work_completed(name, 1)
+        #work_completed(name, 1)
 
     # aggregate information
 
@@ -121,6 +121,8 @@ def acquire_nsf(dataset):
         file_dst = os.path.join(path_term, dataset + '.csv')
         df = pd.read_csv(file_dst)
 
+    print('df = ')
+    print(df)
     return(df)
 
 
