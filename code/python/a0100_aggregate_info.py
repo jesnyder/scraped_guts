@@ -27,11 +27,16 @@ def aggregate_info(dataset):
     write_paths()
 
     # acquire information
-    if 'nsf' in dataset: df = acquire_nsf(dataset)
-    elif 'nih' in dataset: df = acquire_nih(dataset)
-    elif 'clinical' in dataset: df = acquire_clinical()
-    elif 'patent' in dataset: df = acquire_patent()
-    elif 'pub' in dataset: df = acquire_pub()
+    name = 'acquire'
+    work_completed(name, 0)
+    if work_to_do(name):
+        work_completed(name, 0)
+        if 'nsf' in dataset: df = acquire_nsf(dataset)
+        elif 'nih' in dataset: df = acquire_nih(dataset)
+        elif 'clinical' in dataset: df = acquire_clinical()
+        elif 'patent' in dataset: df = acquire_patent()
+        elif 'pub' in dataset: df = acquire_pub()
+        work_completed(name, 1)
 
     # aggregate information
 

@@ -387,9 +387,13 @@ def work_to_do(name):
     """
 
     """
-    file = retrieve_path('work_plan')
-    df = pd.read_csv(file)
-    df = clean_dataframe(df)
+    try:
+        file = retrieve_path('work_plan')
+        df = pd.read_csv(file)
+        df = clean_dataframe(df)
+
+    except:
+        return(False)
 
     df =  df[(df['active'] != 0)]
     for task_name in list(df['name']):
