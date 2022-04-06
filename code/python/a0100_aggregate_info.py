@@ -217,7 +217,7 @@ def summarize(dataset):
 
     df_summary = pd.DataFrame()
 
-    for col_name in col_name:
+    for col_name in df.columns:
 
         df_summary['Item Count'] = len(list(df[col_name]))
 
