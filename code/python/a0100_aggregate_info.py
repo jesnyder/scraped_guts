@@ -13,6 +13,7 @@ import requests
 import time
 
 from a0001_admin import retrieve_path
+from a0001_admin import write_paths
 
 
 def aggregate_info(dataset):
@@ -20,20 +21,22 @@ def aggregate_info(dataset):
     Save a .csv
     """
 
+    # write paths
+    write_paths()
+
     # retrieve information
-    if 'nsf' in dataset: df = retrieve_nsf()
-    elif 'nih' in dataset: df = retrieve_nih()
-    elif 'clinical' in dataset: df = retrieve_clinical()
-    elif 'patent' in dataset: df = retrieve_patent()
-    elif 'pub' in dataset: df = retrieve_pub()
+    if 'nsf' in dataset: df = acquire_nsf()
+    elif 'nih' in dataset: df = acquire_nih()
+    elif 'clinical' in dataset: df = acquire_clinical()
+    elif 'patent' in dataset: df = acquire_patent()
+    elif 'pub' in dataset: df = acquire_pub()
 
 
-def retrieve_nsf():
+def acquire_nsf():
     """
     aggregate all files in user provided into a single csv
     """
 
-    print('retrieving nsf')
     df = pd.DataFrame()
 
     path_term = 'nsf_awards_downloaded'
@@ -59,10 +62,16 @@ def retrieve_nsf():
 
     print('df = ')
     print(df)
+
+    path_term = str(name_dataset + '_src_query')
+    path_dst = os.path.join(retrieve_path(path_term))
+    file_dst = os.path.join(path_term, dataset + '.csv')
+    df.to_csv(file_dst)
+
     return(df)
 
 
-def retrieve_nih():
+def acquire_nih():
     """
 
     """
@@ -71,7 +80,7 @@ def retrieve_nih():
     return(df)
 
 
-def retrieve_clinical():
+def acquire_clinical():
     """
 
     """
@@ -80,7 +89,7 @@ def retrieve_clinical():
     return(df)
 
 
-def retrieve_patent():
+def acquire_patent():
     """
 
     """
@@ -89,7 +98,7 @@ def retrieve_patent():
     return(df)
 
 
-def retrieve_pub():
+def acquire_pub():
     """
 
     """
