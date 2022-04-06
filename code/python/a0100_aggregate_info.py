@@ -41,6 +41,7 @@ def aggregate_info(dataset):
     # geolocate
 
     # summarize
+    df = summarize(dataset)
 
     # list unique
     df = list_unique(dataset)
@@ -196,6 +197,12 @@ def list_unique(dataset):
 
         file_dst = os.path.join(path_dst, col_name + '.csv')
         df_counts.to_csv(file_dst)
+
+
+def summarize(dataset):
+    """
+    save a summary as a .csv
+    """
 
 
 

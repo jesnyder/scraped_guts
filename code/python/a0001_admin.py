@@ -5,6 +5,7 @@ import lxml
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import os.path
 import pandas as pd
 from serpapi import GoogleSearch
 import re
@@ -370,10 +371,6 @@ def write_paths():
             elif '_compare_terms_plot_bar' in item:
                 item_path = str('program_generated ' + name_dataset + ' compare_terms bar_chart')
 
-
-
-
-
             path.append(item_path)
 
     df = pd.DataFrame()
@@ -387,14 +384,11 @@ def work_to_do(name):
     """
 
     """
-    try:
-        file = retrieve_path('work_plan')
-        df = pd.read_csv(file)
 
-    except:
-        return(True)
+    file = retrieve_path('work_plan')
+    if os.path.exists(file) == False: return(True)
 
-
+    df = pd.read_csv(file)
     df = clean_dataframe(df)
     df =  df[(df['active'] != 0)]
     for task_name in list(df['name']):
