@@ -20,9 +20,10 @@ def aggregate_info(dataset):
     """
 
     # retrieve information
-    if nsf in dataset:
+    if 'nsf' in dataset:
         df = retrieve_nsf()
 
+    """
     if str(dataset).contains('nih'):
         df = retrieve_nih()
 
@@ -34,6 +35,7 @@ def aggregate_info(dataset):
 
     if str(dataset).contains('pub'):
         df = retrieve_pub()
+    """
 
 
 def retrieve_nsf():
