@@ -26,7 +26,7 @@ def findLatLong(addresses):
     else look up on street maps
     """
 
-    print('geolocating.')
+    #print('geolocating.')
 
     for address in addresses:
 

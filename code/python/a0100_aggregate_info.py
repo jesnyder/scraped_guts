@@ -287,8 +287,8 @@ def geolocate_nsf(dataset, df):
         addresses.append(city + ' , ' + state)
         addresses.append(zip)
 
-        print('addresses = ')
-        print(addresses)
+        #print('addresses = ')
+        #print(addresses)
 
         address, lat, lon = findLatLong(addresses)
 
