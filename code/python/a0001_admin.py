@@ -390,11 +390,12 @@ def work_to_do(name):
     try:
         file = retrieve_path('work_plan')
         df = pd.read_csv(file)
-        df = clean_dataframe(df)
 
     except:
-        return(False)
+        return(True)
 
+
+    df = clean_dataframe(df)
     df =  df[(df['active'] != 0)]
     for task_name in list(df['name']):
 

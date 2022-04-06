@@ -28,7 +28,6 @@ def aggregate_info(dataset):
 
     # acquire information
     name = 'acquire'
-    work_completed(name, 0)
     if work_to_do(name):
         work_completed(name, 0)
         if 'nsf' in dataset: df = acquire_nsf(dataset)
