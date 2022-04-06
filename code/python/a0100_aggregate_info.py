@@ -56,7 +56,7 @@ def acquire_clinical():
     else:
         path_term = str(name_dataset + '_src_query')
         path_dst = os.path.join(retrieve_path(path_term))
-        file_dst = os.path.join(path_term, dataset + '.csv')
+        file_dst = os.path.join(path_dst, dataset + '.csv')
         df = pd.read_csv(file_dst)
 
     print('Clinical df = ')
@@ -115,7 +115,7 @@ def acquire_nsf(dataset):
     else:
         path_term = str(name_dataset + '_src_query')
         path_dst = os.path.join(retrieve_path(path_term))
-        file_dst = os.path.join(path_term, dataset + '.csv')
+        file_dst = os.path.join(path_dst, dataset + '.csv')
         df = pd.read_csv(file_dst)
 
     print('NSF df = ')
@@ -137,7 +137,7 @@ def acquire_nih(dataset):
     else:
         path_term = str(name_dataset + '_src_query')
         path_dst = os.path.join(retrieve_path(path_term))
-        file_dst = os.path.join(path_term, dataset + '.csv')
+        file_dst = os.path.join(path_dst, dataset + '.csv')
         df = pd.read_csv(file_dst)
 
     print('NIH df = ')
