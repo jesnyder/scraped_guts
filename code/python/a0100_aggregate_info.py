@@ -39,10 +39,22 @@ def retrieve_nsf():
     path_src = os.path.join(retrieve_path(path_term))
     for file in os.listdir(path_src):
         file_src = os.path.join(path_src, file)
+
         print('file_src = ' + str(file_src))
-        df_src = pd.read_csv(file_src)
+
+        try:
+            df_src = pd.read_csv(file_src)
+
+        except:
+            with open(df_src, 'rb') as file:
+                print(chardet.detect(file.read()))
+            encodings = ['ISO-8859-1', 'unicode_escape', 'utf-8']
+            for encoding in encodings:
+                df_src = pd.read_csv(file_src, encoding=encoding)
+                break
 
         df = df.append(df_src)
+
 
     print('df = ')
     print(df)
