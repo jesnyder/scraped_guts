@@ -276,16 +276,18 @@ def geolocate_nsf(dataset, df):
         left = len(list(df['OrganizationStreet'])) - i
         print('Progress: ' + str(progress) + ' % '  + str(left) + ' left')
 
+        name = df.loc[i, 'Organization']
         street = df.loc[i, 'OrganizationStreet']
         city = df.loc[i, 'OrganizationCity']
         state = df.loc[i, 'OrganizationState']
         zip = df.loc[i, 'OrganizationZip']
 
         addresses = []
+        address.append(name)
         addresses.append(street + ' , ' + city + ' , ' + state + ' , ' + zip)
         addresses.append(street + ' , ' + city + ' , ' + state)
         addresses.append(city + ' , ' + state)
-        addresses.append(zip)
+        #addresses.append(zip)
 
         address_found, lat_found, lon_found = [], [], []
         for address in addresses:
