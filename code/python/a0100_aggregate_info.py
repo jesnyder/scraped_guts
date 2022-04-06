@@ -239,7 +239,7 @@ def geolocate_nsf(dataset, df):
                 lat_found.append(lat)
                 lon_found.append(lon)
 
-    df['addresses'] = address_found
+    df['address_found'] = address_found
     df['lat_found'] = lat_found
     df['lon_found'] = lon_found
 
