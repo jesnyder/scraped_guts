@@ -105,20 +105,47 @@ def acquire_nsf(dataset):
 
 def acquire_nih(dataset):
     """
-
+    from downloaded nih data, aggregate
     """
+    name = 'acquire_nih'
 
-    df = acquire_downloaded(dataset)
+    work_completed(name, 0)
+
+    if work_to_do(name):
+
+        df = acquire_downloaded(dataset)
+        work_completed(name, 1)
+
+    else:
+        path_term = str(name_dataset + '_src_query')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_term, dataset + '.csv')
+        df = pd.read_csv(file_dst)
+
     return(df)
 
 
 def acquire_clinical():
     """
-
+    from downloaded clinical data, aggregate
     """
+    name = 'acquire_nih'
 
-    df = pd.DataFrame()
+    work_completed(name, 0)
+
+    if work_to_do(name):
+
+        df = acquire_downloaded(dataset)
+        work_completed(name, 1)
+
+    else:
+        path_term = str(name_dataset + '_src_query')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_term, dataset + '.csv')
+        df = pd.read_csv(file_dst)
+
     return(df)
+
 
 
 def acquire_patent():
