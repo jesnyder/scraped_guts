@@ -386,17 +386,23 @@ def work_to_do(name):
     Return False if the work is complete
     Determine by string matching the name of the task to the work plan
     """
- 
+
     file = retrieve_path('work_plan')
-    if os.path.exists(file) == False: return(True)
+    try:
+        df = pd.read_csv(file)
+        df = clean_dataframe(df)
+    except:
+        df = pd.DataFrame()
 
     df = pd.read_csv(file)
     df = clean_dataframe(df)
-    df =  df[(df['active'] != 0)]
-    for task_name in list(df['name']):
 
-        if name == task_name:
-            return(False)
+    if 'active' in df.columns:
+        df =  df[(df['active'] != 0)]
+        for task_name in list(df['name']):
+
+            if name == task_name:
+                return(False)
 
     return(True)
 
