@@ -56,6 +56,13 @@ def untargeted_word_count():
     print('completed untargeted_word_count')
 
 
+def count_untargeted_words(dataset, df):
+    """
+
+    """
+
+
+
 def clean_count():
     """
     remove stop words
