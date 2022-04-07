@@ -4,6 +4,7 @@ from a0001_admin import retrieve_list
 from a0001_admin import write_paths
 from a0100_aggregate_info import aggregate_info
 from a0300_targeted_count import targeted_word_count
+from a0400_untargeted_count import untargeted_word_count
 
 def main():
     """
@@ -23,7 +24,7 @@ def main():
         targeted_word_count(dataset)
 
         # untargeted count of categories
-        # untargeted_count()
+        untargeted_word_count()()
 
         # map articles
         # map_maker(dataset)

@@ -357,6 +357,9 @@ def count_targeted_words(dataset, df):
 
         for i in range(len(list(df['ref_year']))):
 
+            percent_complete = round(i/len(list(df['ref_year']))*100,2)
+            print('percent_complete = ' + str(percent_complete))
+
             str_all = ''
             for name in df.columns:
                 str_all = str_all + str(df.loc[i,name])
