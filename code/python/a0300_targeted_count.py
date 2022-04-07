@@ -27,7 +27,8 @@ from find_color import find_color
 
 def targeted_word_count(dataset):
     """
-
+    count if each article in each dataset includes a target term
+    make a plot
     """
 
     path_term = str(dataset + '_geolocated')
@@ -37,6 +38,8 @@ def targeted_word_count(dataset):
     file_dst = os.path.join(path_dst, dataset + '.csv')
     df = pd.read_csv(file_dst)
     df = clean_dataframe(df)
+
+    # count each terms set for each category
 
     if '_' in dataset:
         dataset_split = dataset.split('_')
@@ -50,8 +53,7 @@ def targeted_word_count(dataset):
         count_targeted_words(dataset, df)
         work_completed(name, 1)
 
-
-
+    # plot after counting
 
     if '_' in dataset:
         dataset_split = dataset.split('_')
