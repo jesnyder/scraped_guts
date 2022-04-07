@@ -355,7 +355,7 @@ def count_targeted_words(dataset, df):
 
             print('term = ' + term)
 
-            df[term] = [0] * len(list(df.iloc[:,0]))
+            df[term] = [0] * len(list(df['ref_year']))
 
             for i in range(len(list(df[compare_term]))):
 
