@@ -185,7 +185,8 @@ def coregister(dataset):
         df = pd.DataFrame()
         return(df)
 
-    if 'nsf' in dataset: name, years, values = coregister_nsf(dataset, df)
+    if 'nsf' in dataset:
+        name, years, values = coregister_nsf(dataset, df)
     else: return(df)
 
     df['ref_year'] = years
