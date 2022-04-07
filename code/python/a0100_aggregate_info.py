@@ -223,13 +223,12 @@ def coregister_nsf(dataset, df):
     return(name, years, values)
 
 
-
 def geolocate(dataset):
     """
 
     """
     try:
-        path_term = str(dataset + '_src_query')
+        path_term = str(dataset + '_coregistered')
         path_dst = os.path.join(retrieve_path(path_term))
         file_dst = os.path.join(path_dst, dataset + '.csv')
         df = pd.read_csv(file_dst)
