@@ -382,7 +382,7 @@ def count_targeted_words(dataset, df):
                     compare_term_list = [term]
 
                 if 'both' == term:
-                    print('term = ' + term)
+                    
                     if df.loc[i,category_terms[0]] == 1:
                         if df.loc[i,category_terms[1]] == 1:
                             df.loc[i,term] = 1
@@ -391,7 +391,7 @@ def count_targeted_words(dataset, df):
 
                 else:
                     for target_term in compare_term_list:
-                        print('term = ' + term)
+                        print('target_term = ' + target_term)
                         target_term = target_term.lower()
                         if str(target_term) in str(str_all):
                             df.loc[i,term] = 1
