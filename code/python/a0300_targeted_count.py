@@ -46,8 +46,13 @@ def targeted_word_count(dataset):
         name = 'targetted_' + dataset
 
     if work_to_do(name):
+
         work_completed(name, 0)
-        df = count_targeted_words(dataset, df)
+
+        count_targeted_words(dataset, df)
+        annual_count_targeted(dataset)
+        plot_annual_count(dataset)
+
         work_completed(name, 1)
 
     print('completed targeted_word_count')
@@ -57,31 +62,19 @@ def plot_annual_count(dataset):
     """
 
     """
-    # for each article type
-    for name_dataset in retrieve_list('type_article'):
+    for category in retrieve_categories():
 
-        #if name_dataset != 'nih_awards': continue
+        path_src = str(dataset + '_targeted_count')
+        file_src = os.path.join(retrieve_path(path_src), category + '_cdf'  + '.csv')
+        df = pd.read_csv(file_src)
+        df = clean_dataframe(df)
 
-        for file in os.listdir(retrieve_path('term_compare')):
-
-            path = os.path.join(retrieve_path('term_compare'), file)
-            term_list = retrieve_list(path)
-            print('term_list = ')
-            print(term_list)
-
-            # save dataframe with percent
-            file_src = str(name_dataset + '_compare_terms_annual_count_df')
-            compare_file_term = file.split('.')
-            compare_file_term = compare_file_term[0]
-            compare_file_term = str(compare_file_term + '_percent')
-            path_src = os.path.join(retrieve_path(file_src), compare_file_term  + '.csv')
-            df = clean_dataframe(pd.read_csv(path_src))
-
+        category_terms = retrieve_terms(category)
+        for term in category_terms:
 
             df =  df[(df['cdf_total'] > 0)]
             df = clean_dataframe(df)
-            #print('df = ')
-            #print(df)
+
 
             # begin figure
             plt.close('all')
@@ -171,178 +164,53 @@ def plot_annual_count(dataset):
             #plt.legend(bbox_to_anchor=(0.2, -0.2), loc='upper left')
             plt.legend(bbox_to_anchor=(0.2, 0), loc='upper left')
 
-            plot_count_annual = str(name_dataset + '_compare_terms_plot')
-            plot_dst = os.path.join(retrieve_path(plot_count_annual), compare_file_term + '.png')
-            plt.savefig(plot_dst, dpi = retrieve_format('plot_dpi'), edgecolor = 'w')
+            path_dst = str(dataset + '_targeted_count')
+            file_dst = os.path.join(retrieve_path(path_dst), category + '_cdf'  + '.csv')
+            plt.savefig(file_dst, dpi = retrieve_format('plot_dpi'), edgecolor = 'w')
             print('saved plot: ' + plot_dst)
             plt.close('all')
 
 
-def per_annual_count_targeted():
+def annual_count_targeted(dataset):
     """
 
     """
 
-    # for each article type
-    for name_dataset in retrieve_list('type_article'):
-        print('article = ' + str(name_dataset))
+    for category in retrieve_categories():
 
-        #if name_dataset != 'nih_awards': continue
+        file_dst = str(dataset + '_targeted_count')
+        path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
+        df = pd.read_csv(path_dst)
 
-        # all search terms together
-        # for each term to compare
-        for file in os.listdir(retrieve_path('term_compare')):
+        year_min = int((min(list(df['ref_year']))))
+        year_max = int((max(list(df['ref_year']))))
+        years = np.arange(year_min, year_max, 1)
 
-            path = os.path.join(retrieve_path('term_compare'), file)
-            term_list = retrieve_list(path)
-            #print('term_list = ')
-            #print(term_list)
+        df_yearly_count = pd.DataFrame()
+        df_yearly_count['years'] = years
 
-            # retrieve dataframe with counts
-            compare_file_term = file.split('.')
-            compare_file_term = compare_file_term[0]
-            file_src = str(name_dataset + '_compare_terms_annual_count_df')
-            path_src = os.path.join(retrieve_path(file_src), compare_file_term  + '.csv')
-            df = clean_dataframe(pd.read_csv(path_src))
+        category_terms = retrieve_terms(category)
+        for term in category_terms:
 
-            # add a total column
-            df['annual_total'] = [0]* len(list(df['years']))
-            for i in range(len(list(df['years']))):
+            counts, values = [], []
+            for year in years:
 
-                df_annual = df[(df['years'] == df.loc[i,'years'])]
+                df_annual = df[(df['ref_year'] == year)]
+                target_list = list(df_annual[compare_term])
+                count = sum(list(df_annual[compare_term]))
+                counts.append(count)
 
-
-                count_year = 0
-                for name in df_annual.columns:
-                    if name in term_list:
-                        count_year = count_year + list(df_annual[name])[0]
-                df.loc[i,'annual_total'] = count_year
-                #print('count_year = ' + str(count_year))
-
-
-            for term in term_list:
-
-                #if '|' in term: term = (term.split('|'))[0]
-                print('term = ' + term)
-
-                term_per = str(term + '_percent')
-                df[term_per] = [0]* len(list(df['years']))
-
-                for i in range(len(list(df['years']))):
-
-                    if df.loc[i,'annual_total'] == 0: continue
-
-                    percent = df.loc[i,term]
-                    total = df.loc[i,'annual_total']
-                    df.loc[i,term_per] = percent/total
-
-            # add a cdf column
-            df['cdf_total'] = [0]* len(list(df['years']))
-            for term in term_list:
-
-                #if '|' in term: term = (term.split('|'))[0]
-                print('term = ' + term)
-                term_cdf = str(term + '_cdf')
-                df[term_cdf] = [0]* len(list(df['years']))
-
-                for i in range(len(list(df['years']))):
-
-                    df_annual = df[(df['years'] <= df.loc[i,'years'])]
-                    df.loc[i,term_cdf] = sum(df_annual[term])
-                    df.loc[i,'cdf_total'] = df.loc[i,'cdf_total'] + df.loc[i,term_cdf]
-
-            #print('df = ')
-            #print(df)
-
-            # save dataframe with percent
-            file_src = str(name_dataset + '_compare_terms_annual_count_df')
-            compare_file_term = str(compare_file_term + '_percent')
-            path_src = os.path.join(retrieve_path(file_src), compare_file_term  + '.csv')
-            df.to_csv(path_src)
-
-
-def annual_count_targeted():
-    """
-
-    """
-
-    # list search terms
-    search_terms = retrieve_list('search_terms')
-
-    # list compare terms
-    compare_terms = os.path.join(retrieve_path('term_compare'))
-
-    for file in os.listdir(compare_terms):
-
-        path = os.path.join(retrieve_path('term_compare'), file)
-        term_list = retrieve_list(path)
-        print('term_list = ')
-        print(term_list)
-
-        for name_dataset in retrieve_list('type_article'):
-
-            print('article = ' + str(name_dataset))
-
-            #if name_dataset != 'nih_awards': continue
-
-            file_dst = str(name_dataset + '_compare_terms_df')
-            compare_file_term = file.split('.')
-            compare_file_term = str(compare_file_term[0])
-            path_dst = os.path.join(retrieve_path(file_dst), compare_file_term  + '.csv')
-            df = clean_dataframe(pd.read_csv(path_dst))
-
-            #print('df = ')
-            #print(df)
-
-            #print('df.columns = ')
-            #print(df.columns)
-
-            if 'ref_year' not in df.columns:
-                df = add_ref_year(df, name_dataset)
-
-            year_min = int((min(list(df['ref_year']))))
-            year_max = int((max(list(df['ref_year']))))
-            years = np.arange(year_min, year_max, 1)
-
-            df_yearly_count = pd.DataFrame()
-            df_yearly_count['years'] = years
-
-
-            #for term in search_terms:
-            for compare_term in term_list:
-
-                """
-                if '|' in compare_term:
-                    compare_term_list = compare_term.split('|')
-                    compare_term = compare_term_list[0]
-                """
-
-                #print('compare_term = ' + str(compare_term))
-                counts, values = [], []
-                for year in years:
-
-                    df_annual = df[(df['ref_year'] == year)]
-                    target_list = list(df_annual[compare_term])
-                    count = sum(list(df_annual[compare_term]))
-                    counts.append(count)
-
-                    df_annual_term = df_annual[(df_annual[compare_term] > 0)]
-                    ref_list = list(df_annual_term['ref_value'])
-                    value = sum(ref_list)
-                    values.append(value)
+                df_annual_term = df_annual[(df_annual[compare_term] > 0)]
+                ref_list = list(df_annual_term['ref_value'])
+                value = sum(ref_list)
+                values.append(value)
 
                 df_yearly_count[compare_term] = counts
                 df_yearly_count[str(compare_term + '_value')] = values
 
-
-            compare_file_term = file.split('.')
-            compare_file_term = compare_file_term[0]
-            file_dst = str(name_dataset + '_compare_terms_annual_count_df')
-            path_dst = retrieve_path(file_dst)
-            #print('path_dst = ' + str(path_dst))
-            path_dst = os.path.join(path_dst, compare_file_term  + '.csv')
-            #print('path_dst = ' + str(path_dst))
-            df_yearly_count.to_csv(path_dst)
+        file_dst = str(dataset + '_targeted_count')
+        path_dst = os.path.join(retrieve_path(file_dst), category + '_cdf'  + '.csv')
+        df_yearly_count.to_csv(path_dst)
 
 
 def count_targeted_words(dataset, df):
