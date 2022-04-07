@@ -288,7 +288,6 @@ def write_paths():
         name_list.append(str(name_dataset + '_coregistered'))
         name_list.append(str(name_dataset + '_geotagged'))
         name_list.append(str(name_dataset + '_dst_query'))
-        name_list.append(str(name_dataset + '_geotagged'))
         name_list.append(str(name_dataset + '_sum'))
         name_list.append(str(name_dataset + '_unique_df'))
         name_list.append(str(name_dataset + '_unique_plot'))
@@ -402,8 +401,6 @@ def write_paths():
             elif '_compare_terms_plot_bar' in item:
                 item_path = str('program_generated ' + name_dataset + ' compare_terms bar_chart')
 
-            elif '_geotagged' in item:
-                item_path = str('program_generated ' + name_dataset + ' 02_geotagged')
 
             path.append(item_path)
 
