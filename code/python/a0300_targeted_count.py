@@ -28,7 +28,9 @@ def targeted_word_count(dataset):
     """
 
     path_term = str(dataset + '_geolocated')
+    print('path_term = ' + path_term)
     path_dst = os.path.join(retrieve_path(path_term))
+    print('path_dst = ' + path_dst)
     file_dst = os.path.join(path_dst, dataset + '.csv')
     df = pd.read_csv(file_dst)
     df = clean_dataframe(df)
