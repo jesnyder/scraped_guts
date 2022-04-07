@@ -26,16 +26,13 @@ def targeted_word_count(dataset):
     """
 
     """
-    try:
-        path_term = str(dataset + '_geolocated')
-        path_dst = os.path.join(retrieve_path(path_term))
-        file_dst = os.path.join(path_dst, dataset + '.csv')
-        df = pd.read_csv(file_dst)
-        df = clean_dataframe(df)
 
-    except:
-        df = pd.DataFrame()
-        return(df)
+    path_term = str(dataset + '_geolocated')
+    path_dst = os.path.join(retrieve_path(path_term))
+    file_dst = os.path.join(path_dst, dataset + '.csv')
+    df = pd.read_csv(file_dst)
+    df = clean_dataframe(df)
+
 
     if 'nsf' in dataset:
         name = 'targetted_nsf'
