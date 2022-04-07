@@ -313,6 +313,7 @@ def write_paths():
         name_list.append(str(name_dataset + '_map_bar_png'))
         name_list.append(str(name_dataset + '_map__bar_gif'))
         name_list.append(str(name_dataset + '_js_data'))
+        name_list.append(str(name_dataset + '_targeted_count'))
 
         for item in name_list:
             name.append(item)
@@ -331,6 +332,9 @@ def write_paths():
 
             elif '_unique_df' in item:
                 item_path = str('program_generated ' + name_dataset + ' 05_unique')
+
+            elif '_targeted_count' in item:
+                item_path = str('program_generated ' + name_dataset + ' 06_targeted_count')
 
             elif '_unique_plot' in item:
                 item_path = str('program_generated ' + name_dataset + ' 06_time_plot')
