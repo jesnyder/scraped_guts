@@ -18,6 +18,8 @@ from a0001_admin import retrieve_format
 from a0001_admin import retrieve_list
 from a0001_admin import retrieve_path
 from a0001_admin import write_paths
+from a0001_admin import work_completed
+from a0001_admin import work_to_do
 from a0001_admin import retrieve_terms
 from find_color import find_color
 
