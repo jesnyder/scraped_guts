@@ -185,27 +185,21 @@ def coregister(dataset):
         df = pd.DataFrame()
         return(df)
 
-    print('df = ')
-    print(df)
-    
-    if 'nsf' in dataset:
-        name, years, values = coregister_nsf(dataset, df)
-    else:
-        return(df)
 
-    df['ref_year'] = years
-    df['ref_values'] = values
-    path_term = str(dataset + '_coregistered')
-    path_dst = os.path.join(retrieve_path(path_term))
-    file_dst = os.path.join(path_dst, dataset + '.csv')
-    df.to_csv(file_dst)
-    work_completed(name, 1)
+    if 'nsf' in dataset: df = coregister_nsf(dataset, df)
+    else: return(df)
+
+    return(df)
+
 
 
 def coregister_nsf(dataset, df):
     """
 
     """
+
+    print('df = ')
+    print(df)
 
     name = 'coregister_nsf'
     if work_to_do(name):
@@ -225,7 +219,15 @@ def coregister_nsf(dataset, df):
             item = float(item)
             values.append(item)
 
-        return(name, years, values)
+        df['ref_year'] = years
+        df['ref_values'] = values
+        path_term = str(dataset + '_coregistered')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_dst, dataset + '.csv')
+        df.to_csv(file_dst)
+        work_completed(name, 1)
+
+        return(df)
 
 
 def geolocate(dataset):
