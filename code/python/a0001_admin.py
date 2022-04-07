@@ -286,7 +286,7 @@ def write_paths():
         name_list = []
         name_list.append(str(name_dataset + '_src_query'))
         name_list.append(str(name_dataset + '_coregistered'))
-        name_list.append(str(name_dataset + '_geotagged'))
+        name_list.append(str(name_dataset + '_geolocated'))
         name_list.append(str(name_dataset + '_dst_query'))
         name_list.append(str(name_dataset + '_sum'))
         name_list.append(str(name_dataset + '_unique_df'))
@@ -323,8 +323,8 @@ def write_paths():
             elif '_coregistered' in item:
                 item_path = str('program_generated ' + name_dataset + ' 02_coregister')
 
-            elif '_geotagged' in item:
-                item_path = str('program_generated ' + name_dataset + ' 03_geotagged')
+            elif '_geolocated' in item:
+                item_path = str('program_generated ' + name_dataset + ' 03_geolocated')
 
             elif '_sum' in item:
                 item_path = str('program_generated ' + name_dataset + ' 04_summarized')
