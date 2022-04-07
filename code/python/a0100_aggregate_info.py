@@ -216,6 +216,7 @@ def coregister_nsf(dataset, df):
         for item in list(df['AwardedAmountToDate']):
             item = item.replace('$', '')
             item = item.replace('"', '')
+            item = item.replace(',', '')
             item = float(item)
             values.append(year)
 
@@ -273,7 +274,7 @@ def geolocate(dataset):
     print('file_dst = ' + str(file_dst))
     df = clean_dataframe(df)
     df.to_csv(file_dst)
-    
+
     return(df)
 
 
