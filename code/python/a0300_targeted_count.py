@@ -14,6 +14,7 @@ import time
 
 from a0001_admin import clean_dataframe
 from a0001_admin import name_paths
+from a0001_admin import retrieve_categories
 from a0001_admin import retrieve_format
 from a0001_admin import retrieve_list
 from a0001_admin import retrieve_path
