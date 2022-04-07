@@ -351,49 +351,47 @@ def count_targeted_words(dataset, df):
     count all words
     """
 
-    for category in retrieve_categories():
+    for i in range(len(list(df['ref_year']))):
 
-        print('category = ' + category)
+        percent_complete = round(i/len(list(df['ref_year']))*100,2)
+        print(dataset + ' category = ' + category + ' percent_complete = ' + str(percent_complete))
 
-        for i in range(len(list(df['ref_year']))):
+        str_all = ''
+        for name in df.columns:
+            str_all = str_all + str(df.loc[i,name])
+            str_all = str_all + ' '
+            str_all = str_all.lower()
 
-            percent_complete = round(i/len(list(df['ref_year']))*100,2)
-            print('percent_complete = ' + str(percent_complete))
+        category_terms = retrieve_terms(category)
+        for term in category_terms:
 
-            str_all = ''
-            for name in df.columns:
-                str_all = str_all + str(df.loc[i,name])
-                str_all = str_all + ' '
-                str_all = str_all.lower()
+            print(dataset + ' category = ' + category)
 
-            category_terms = retrieve_terms(category)
-            for term in category_terms:
+            #print('term = ' + term)
+            df[term] = [0] * len(list(df['ref_year']))
 
-                #print('term = ' + term)
-                df[term] = [0] * len(list(df['ref_year']))
+            if '|' in term:
+                compare_term_list = term.split('|')
+            else:
+                compare_term_list = [term]
 
-                if '|' in term:
-                    compare_term_list = term.split('|')
-                else:
-                    compare_term_list = [term]
+            if 'both' == term:
+                if df.loc[i,category_terms[0]] == 1:
+                    if df.loc[i,category_terms[1]] == 1:
+                        df.loc[i,term] = 1
+                        df.loc[i,category_terms[0]] = 0
+                        df.loc[i,category_terms[1]] = 0
 
-                if 'both' == term:
-                    if df.loc[i,category_terms[0]] == 1:
-                        if df.loc[i,category_terms[1]] == 1:
-                            df.loc[i,term] = 1
-                            df.loc[i,category_terms[0]] = 0
-                            df.loc[i,category_terms[1]] = 0
+            else:
+                for target_term in compare_term_list:
+                    target_term = target_term.lower()
+                    if str(target_term) in str(str_all):
+                        df.loc[i,term] = 1
+                        continue
 
-                else:
-                    for target_term in compare_term_list:
-                        target_term = target_term.lower()
-                        if str(target_term) in str(str_all):
-                            df.loc[i,term] = 1
-                            continue
-
-            file_dst = str(dataset + '_targeted_count')
-            path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
-            df.to_csv(path_dst)
+        file_dst = str(dataset + '_targeted_count')
+        path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
+        df.to_csv(path_dst)
 
 
 if __name__ == "__main__":

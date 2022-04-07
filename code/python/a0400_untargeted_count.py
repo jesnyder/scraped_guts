@@ -21,7 +21,7 @@ from a0001_admin import write_paths
 from find_color import find_color
 
 
-def untargeted_word_count():
+def untargeted_word_count(dataset):
     """
 
     """
@@ -43,13 +43,10 @@ def untargeted_word_count():
         name = 'untargeted_' + dataset_short
 
     if work_to_do(name):
+
         work_completed(name, 0)
 
         df_count = count_untargeted_words(dataset, df)
-
-        file_dst = str(dataset + '_untargeted_count')
-        path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
-        df_count.to_csv(path_dst)
 
         work_completed(name, 1)
 

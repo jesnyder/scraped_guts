@@ -24,7 +24,7 @@ def main():
         targeted_word_count(dataset)
 
         # untargeted count of categories
-        untargeted_word_count()()
+        untargeted_word_count(dataset)
 
         # map articles
         # map_maker(dataset)
