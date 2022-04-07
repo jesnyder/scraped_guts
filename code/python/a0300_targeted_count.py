@@ -365,25 +365,26 @@ def count_targeted_words(dataset, df):
                 print('term = ' + term)
                 df[term] = [0] * len(list(df['ref_year']))
 
-                    if '|' in term:
-                        compare_term_list = term.split('|')
-                    else:
-                        compare_term_list = [term]
 
-                    if 'both' == term:
-                        if df.loc[i,category_terms[0]] == 1:
-                            if df.loc[i,category_terms[1]] == 1:
-                                df.loc[i,term] = 1
-                                df.loc[i,category_terms[0]] = 0
-                                df.loc[i,category_terms[1]] = 0
+                if '|' in term:
+                    compare_term_list = term.split('|')
+                else:
+                    compare_term_list = [term]
 
-                    else:
-                        for target_term in compare_term_list:
-                            target_term = target_term.lower()
-                            if str(target_term) in str(str_all):
-                                df.loc[i,term] = 1
-                                continue
+                if 'both' == term:
+                    if df.loc[i,category_terms[0]] == 1:
+                        if df.loc[i,category_terms[1]] == 1:
+                            df.loc[i,term] = 1
+                            df.loc[i,category_terms[0]] = 0
+                            df.loc[i,category_terms[1]] = 0
 
+                else:
+                    for target_term in compare_term_list:
+                        target_term = target_term.lower()
+                        if str(target_term) in str(str_all):
+                            df.loc[i,term] = 1
+                            continue
+                            
             file_dst = str(name_dataset + '_targeted_count')
             path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
             df.to_csv(path_dst)
