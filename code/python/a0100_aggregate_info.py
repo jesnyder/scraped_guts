@@ -220,7 +220,7 @@ def coregister_nsf(dataset, df):
             item = float(item)
             values.append(item)
 
-    return(name, years, values)
+        return(name, years, values)
 
 
 def geolocate(dataset):
