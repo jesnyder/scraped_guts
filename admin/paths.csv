@@ -11,6 +11,7 @@ work_plan,work_plan.csv
 search_terms,user_provided search_terms search.csv
 filter_terms,user_provided search_terms filter.csv
 keyword_categories,user_provided keyword_categories
+term_compare,user_provided keyword_categories 
 
 #, acquire info
 nih_awards_downloaded,user_provided nih_awards

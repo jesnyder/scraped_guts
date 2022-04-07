@@ -36,9 +36,8 @@ def aggregate_info(dataset):
     elif 'patent' in dataset: df = acquire_patent()
     elif 'pub' in dataset: df = acquire_pub()
 
-    # aggregate information
-
-    # coregister
+    # format and co-register fields of datasets
+    df = coregister(dataset)
 
     # geolocate
     df = geolocate(dataset)
@@ -169,6 +168,59 @@ def acquire_pub():
 
     df = pd.DataFrame()
     return(df)
+
+
+def coregister(dataset):
+    """
+
+    """
+    try:
+        path_term = str(dataset + '_src_query')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_dst, dataset + '.csv')
+        df = pd.read_csv(file_dst)
+        df = clean_dataframe(df)
+
+    except:
+        df = pd.DataFrame()
+        return(df)
+
+    if 'nsf' in dataset: name, years, values = coregister_nsf(dataset, df)
+    else: return(df)
+
+    df['ref_year'] = years
+    df['ref_values'] = values
+    path_term = str(dataset + '_coregistered')
+    path_dst = os.path.join(retrieve_path(path_term))
+    file_dst = os.path.join(path_dst, dataset + '.csv')
+    df = pd.read_csv(file_dst)
+    work_completed(name, 1)
+
+
+def coregister_nsf(dataset, df):
+    """
+
+    """
+
+    name = 'coregister_nsf'
+    if work_to_do(name):
+        work_completed(name, 0)
+
+        years = []
+        for date in list(df['StartDate']):
+            date_split = date.split('/')
+            year = date_split[-1]
+            years.append(year)
+
+        values = []
+        for item in list(df['AwardedAmountToDate']):
+            item = item.replace('$', '')
+            item = item.replace('"', '')
+            item = float(item)
+            values.append(year)
+
+    return(name, years, values)
+
 
 
 def geolocate(dataset):
@@ -316,6 +368,8 @@ def geolocate_nsf(dataset, df):
 
         name = str(df.loc[i, 'Organization'])
         name = name.replace('.', '')
+        name = name.replace('"', '')
+        name = name.replace('/', '')
         street = str(df.loc[i, 'OrganizationStreet'])
         city = str(df.loc[i, 'OrganizationCity'])
         state = str(df.loc[i, 'OrganizationState'])

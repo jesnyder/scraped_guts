@@ -264,6 +264,8 @@ def write_paths():
 
         name_list = []
         name_list.append(str(name_dataset + '_src_query'))
+        name_list.append(str(name_dataset + '_coregistered'))
+        name_list.append(str(name_dataset + '_geotagged'))
         name_list.append(str(name_dataset + '_dst_query'))
         name_list.append(str(name_dataset + '_geotagged'))
         name_list.append(str(name_dataset + '_sum'))
@@ -297,17 +299,20 @@ def write_paths():
             if '_src_query' in item:
                 item_path = str('program_generated ' + name_dataset + ' 01_acquired')
 
-            elif '_dst_query' in item:
-                item_path = str('program_generated ' + name_dataset + ' 02_aggregated')
+            elif '_coregistered' in item:
+                item_path = str('program_generated ' + name_dataset + ' 02_coregister')
+
+            elif '_geotagged' in item:
+                item_path = str('program_generated ' + name_dataset + ' 03_geotagged')
 
             elif '_sum' in item:
-                item_path = str('program_generated ' + name_dataset + ' 03_summarized')
+                item_path = str('program_generated ' + name_dataset + ' 04_summarized')
 
             elif '_unique_df' in item:
-                item_path = str('program_generated ' + name_dataset + ' 04_unique')
+                item_path = str('program_generated ' + name_dataset + ' 05_unique')
 
             elif '_unique_plot' in item:
-                item_path = str('program_generated ' + name_dataset + ' 04_time_plot')
+                item_path = str('program_generated ' + name_dataset + ' 06_time_plot')
 
             elif '_query_html' in item:
                 item_path = str('program_generated ' + name_dataset + ' query html')
@@ -374,7 +379,7 @@ def write_paths():
 
             elif '_geotagged' in item:
                 item_path = str('program_generated ' + name_dataset + ' 02_geotagged')
- 
+
             path.append(item_path)
 
     df = pd.DataFrame()
