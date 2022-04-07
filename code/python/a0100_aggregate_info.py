@@ -218,7 +218,7 @@ def coregister_nsf(dataset, df):
             item = item.replace('"', '')
             item = item.replace(',', '')
             item = float(item)
-            values.append(year)
+            values.append(item)
 
     return(name, years, values)
 
