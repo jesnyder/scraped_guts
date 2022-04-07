@@ -384,7 +384,7 @@ def count_targeted_words(dataset, df):
                             df.loc[i,term] = 1
                             continue
 
-            file_dst = str(name_dataset + '_targeted_count')
+            file_dst = str(dataset + '_targeted_count')
             path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
             df.to_csv(path_dst)
 
