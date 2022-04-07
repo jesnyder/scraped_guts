@@ -351,17 +351,21 @@ def count_targeted_words(dataset, df):
     count all words
     """
 
-    for i in range(len(list(df['ref_year']))):
+    df_original = df
+    # categories of terms to compare
+    for category in retrieve_categories():
 
-        str_all = ''
-        for name in df.columns:
-            str_all = str_all + str(df.loc[i,name])
-            str_all = str_all + ' '
-            str_all = str_all.lower()
+        df = df_original
+        for i in range(len(list(df['ref_year']))):
 
-        for category in retrieve_category():
+            str_all = ''
+            for name in df.columns:
+                str_all = str_all + str(df.loc[i,name])
+                str_all = str_all + ' '
+                str_all = str_all.lower()
 
             category_terms = retrieve_terms(category)
+
             for term in category_terms:
 
                 percent_complete = round(i/len(list(df['ref_year']))*100,2)
