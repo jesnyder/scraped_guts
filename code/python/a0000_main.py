@@ -17,7 +17,7 @@ def main():
         aggregate_info(dataset)
 
         # targeted count of categories
-        targeted_count(dataset)
+        targeted_word_count(dataset)
 
         # untargeted count of categories
         # untargeted_count()
