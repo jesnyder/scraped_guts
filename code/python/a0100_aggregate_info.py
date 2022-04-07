@@ -265,23 +265,15 @@ def geolocate(dataset):
     #elif 'pub' in dataset: df = geolocate_pub(dataset, df)
     else: df = pd.DataFrame()
 
-    path_term = str(dataset + '_geolocated')
+    path_term = str(dataset + '_geotagged')
+    print('path_term = ' + str(path_term))
     path_dst = os.path.join(retrieve_path(path_term))
+    print('path_dst = ' + str(path_dst))
     file_dst = os.path.join(path_dst, dataset + '.csv')
-    df = pd.read_csv(file_dst)
+    print('file_dst = ' + str(file_dst))
     df = clean_dataframe(df)
-
-    if 'address_found' not in df.columns: return(df)
-
-    df_geolocated = pd.DataFrame()
-    df_geolocated['address_found'] = list(df['address_found'])
-    df_geolocated['lat_found'] = list(df['lat_found'])
-    df_geolocated['lon_found'] = list(df['lon_found'])
-
-    path_dst = os.path.join(retrieve_path('list_address'))
-    file_dst = os.path.join(path_dst, dataset + '.csv')
-    df_geolocated = pd.read_csv(file_dst)
-
+    df.to_csv(file_dst)
+    
     return(df)
 
 
