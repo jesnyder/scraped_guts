@@ -341,7 +341,7 @@ def geolocate(dataset):
     #elif 'pub' in dataset: df = geolocate_pub(dataset, df)
     else: df = pd.DataFrame()
 
-    path_term = str(dataset + '_geotagged')
+    path_term = str(dataset + '_geolocated')
     print('path_term = ' + str(path_term))
     path_dst = os.path.join(retrieve_path(path_term))
     print('path_dst = ' + str(path_dst))
