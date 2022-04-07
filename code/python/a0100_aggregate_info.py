@@ -193,7 +193,7 @@ def coregister(dataset):
     path_term = str(dataset + '_coregistered')
     path_dst = os.path.join(retrieve_path(path_term))
     file_dst = os.path.join(path_dst, dataset + '.csv')
-    df = pd.read_csv(file_dst)
+    df.to_csv(file_dst)
     work_completed(name, 1)
 
 
