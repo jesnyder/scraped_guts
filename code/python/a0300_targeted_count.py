@@ -365,7 +365,7 @@ def count_targeted_words(dataset, df):
                 print('term = ' + term)
                 df[term] = [0] * len(list(df['ref_year']))
 
-                    if '|' in compare_term:
+                    if '|' in term:
                         compare_term_list = term.split('|')
                     else:
                         compare_term_list = [term]
