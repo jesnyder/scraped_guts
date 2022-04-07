@@ -351,7 +351,7 @@ def count_targeted_words(dataset, df):
 
         print('category = ' + category)
 
-        for i in range(len(list(df[term]))):
+        for i in range(len(list(df['ref_year']))):
 
             str_all = ''
             for name in df.columns:
@@ -364,7 +364,6 @@ def count_targeted_words(dataset, df):
 
                 print('term = ' + term)
                 df[term] = [0] * len(list(df['ref_year']))
-
 
                 if '|' in term:
                     compare_term_list = term.split('|')
@@ -384,7 +383,7 @@ def count_targeted_words(dataset, df):
                         if str(target_term) in str(str_all):
                             df.loc[i,term] = 1
                             continue
-                            
+
             file_dst = str(name_dataset + '_targeted_count')
             path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
             df.to_csv(path_dst)
