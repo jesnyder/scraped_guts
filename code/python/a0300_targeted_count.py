@@ -38,13 +38,17 @@ def targeted_word_count(dataset):
     df = pd.read_csv(file_dst)
     df = clean_dataframe(df)
 
+    if '_' in dataset:
+        dataset_split = dataset.split('_')
+        dataset_short = dataset_split[0]
+        name = 'targetted_' + dataset_short
+    else:
+        name = 'targetted_' + dataset_short
 
-    if 'nsf' in dataset:
-        name = 'targetted_nsf'
-        if work_to_do(name):
-            work_completed(name, 0)
-            df = count_targeted_words(dataset, df)
-            work_completed(name, 1)
+    if work_to_do(name):
+        work_completed(name, 0)
+        df = count_targeted_words(dataset, df)
+        work_completed(name, 1)
 
     print('completed targeted_word_count')
 
@@ -362,7 +366,7 @@ def count_targeted_words(dataset, df):
             category_terms = retrieve_terms(category)
             for term in category_terms:
 
-                print('term = ' + term)
+                #print('term = ' + term)
                 df[term] = [0] * len(list(df['ref_year']))
 
                 if '|' in term:
