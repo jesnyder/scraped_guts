@@ -19,7 +19,6 @@ from a0001_admin import retrieve_list
 from a0001_admin import retrieve_path
 from a0001_admin import write_paths
 from a0001_admin import retrieve_terms
-from a0200_aggregate_info import add_ref_year
 from find_color import find_color
 
 
