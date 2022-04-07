@@ -58,9 +58,47 @@ def untargeted_word_count():
 
 def count_untargeted_words(dataset, df):
     """
-
+    count the words in each dataset
     """
 
+    str = ''
+    for col in df.columns():
+        for i in range(len(df['ref_year'])):
+            item = str(df.loc[i,col])
+            str = str + item + ' '
+
+    str = str.lower()
+    char_remove = ['.', ':', ';', '"', '/', '\'' , ',', '(', ')', '$', '?', '!', '<', '>']
+    for char in char_remove:
+        str = str.replace(char, '')
+
+    str = str.split(' ')
+
+    terms, counts, percents = [], [], []
+    df_count = pd.DataFrame()
+
+    for item in str:
+
+        if item not in term:
+
+            terms.append(item)
+            count = str.count(item)
+            counts.append(count)
+            percent = round(count/len(str)*100,3)
+            percents.append(percent)
+
+            df_count = pd.DataFrame()
+            df_count['terms'] = terms
+            df_count['counts'] = counts
+            df_count['percents'] = percents
+
+            df_count = df_count.sort_values(by = 'percents', ascending=False)
+
+            file_dst = str(dataset + '_untargeted_count')
+            path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
+            df_count.to_csv(path_dst)
+
+    return(df_count)
 
 
 def clean_count():
@@ -142,122 +180,6 @@ def clean_count():
 
         df_short.to_csv(path_dst)
 
-
-def count_all_words():
-    """
-    for all articles types
-    count all words
-    """
-
-    # list article_names
-    article_path = os.path.join(retrieve_path('type_article'))
-    df = pd.read_csv(article_path)
-    article_names = list(df['name'])
-
-    # list search terms
-    article_path = os.path.join(retrieve_path('search_terms'))
-    df = pd.read_csv(article_path)
-    search_terms = list(df['term'])
-
-    # list compare terms
-    compare_terms = os.path.join(retrieve_path('term_compare'))
-    for file in os.listdir(compare_terms):
-
-        compare_file_term = file.split('.')
-        compare_file_term = compare_file_term[0]
-        path = os.path.join(retrieve_path('term_compare'), file)
-        print('path = ' + str(path))
-        df_compare_terms = pd.read_csv(path)
-        compare_term_list = list(df_compare_terms['terms'])
-
-        for name_dataset in article_names:
-
-            print('article = ' + str(name_dataset))
-
-            for term in search_terms:
-                print('term = ' + str(term))
-
-                f = os.path.join(retrieve_path(name_dataset + '_aggregate_df'),  name_dataset + '.csv' )
-                print('f = ' + str(f))
-                df = clean_dataframe(pd.read_csv(f))
-
-
-                str_all = ''
-                for i in range(len(list(df.iloc[:,0]))):
-
-                    for name in df.columns:
-                        str_all = str_all + str(df.loc[i,name])
-                        str_all = str_all + ' '
-
-
-                str_all = str_all.lower()
-                str_all = str_all.replace('.', ' ')
-                str_all = str_all.replace('/', ' ')
-                str_all = str_all.replace(':', ' ')
-                str_all = str_all.replace(',', ' ')
-                str_all = str_all.replace(';', ' ')
-                str_all = str_all.replace('(', ' ')
-                str_all = str_all.replace(')', ' ')
-                str_all = str_all.replace('?', ' ')
-                str_all = str_all.replace('!', ' ')
-                str_all = str_all.replace('<', ' ')
-                str_all = str_all.replace('>', ' ')
-                str_all = str_all.replace('\"', ' ')
-                str_all = str_all.replace('\'', ' ')
-                str_list = str_all.split(' ')
-                str_list.sort(reverse=True)
-
-                words, counts, percents = [], [], []
-                for word in str_list:
-
-                    if word not in words:
-
-                        # do not save numbers
-                        try:
-                            if '$' in word: word = word.replace('$', '')
-                            if ',' in word: word = word.replace(',', '')
-                            word = float(word)
-                            continue
-                        except:
-                            hello = 'hello'
-
-                        try:
-                            if '$' in word: word = word.replace('$', '')
-                            if ',' in word: word = word.replace(',', '')
-                            word = int(word)
-                            continue
-                        except:
-                            hello = 'hello'
-
-                        words.append(word)
-                        count = str_list.count(word)
-                        counts.append(count)
-                        percent = count/len(str_list)
-                        percents.append(percent)
-
-                        df_counts = pd.DataFrame()
-                        df_counts['words'] = words
-                        df_counts['counts'] = counts
-                        df_counts['percents'] = percents
-
-                        df_counts = df_counts.sort_values('counts', ascending=False)
-                        file_dst = str(name_dataset + '_count_all_words_df')
-                        #print('file_dst = ' + str(file_dst))
-                        path_dst = os.path.join(retrieve_path(file_dst), 'all_word_count'  + '.csv')
-                        df_counts = clean_dataframe(df_counts)
-                        df_counts.to_csv(path_dst)
-
-                        #print('df_counts = ')
-                        #print(df_counts)
-                        print(name_dataset + ' words found = ' + str(len(words)) + '  % complete = ' + str(round(100*sum(counts)/len(str_list),5)))
-
-                        percent_found = 100*sum(counts)/len(str_list)
-                        if percent_found > int(retrieve_format('word_count_break_per')):
-                            file_dst = str(name_dataset + '_count_all_words_df')
-                            #print('file_dst = ' + str(file_dst))
-                            path_dst = os.path.join(retrieve_path(file_dst), 'all_word_count_' + str(retrieve_format('word_count_break_per'))  + '.csv')
-                            df_counts.to_csv(path_dst)
-                            break
 
 
 if __name__ == "__main__":
