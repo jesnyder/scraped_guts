@@ -41,18 +41,30 @@ def targeted_word_count(dataset):
     if '_' in dataset:
         dataset_split = dataset.split('_')
         dataset_short = dataset_split[0]
-        name = 'targetted_' + dataset_short
+        name = 'targeted_count_' + dataset_short
     else:
-        name = 'targetted_' + dataset
+        name = 'targeted_count_' + dataset
+
+    if work_to_do(name):
+        work_completed(name, 0)
+        count_targeted_words(dataset, df)
+        work_completed(name, 1)
+
+
+
+
+    if '_' in dataset:
+        dataset_split = dataset.split('_')
+        dataset_short = dataset_split[0]
+        name = 'targeted_plot_' + dataset_short
+    else:
+        name = 'targeted_plot_' + dataset
 
     if work_to_do(name):
 
         work_completed(name, 0)
-
-        count_targeted_words(dataset, df)
         annual_count_targeted(dataset)
         plot_annual_count(dataset)
-
         work_completed(name, 1)
 
     print('completed targeted_word_count')
