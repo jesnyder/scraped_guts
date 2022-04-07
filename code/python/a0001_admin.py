@@ -252,6 +252,27 @@ def retrieve_path(name):
     return(path)
 
 
+def retrieve_terms(category):
+    """
+    return list of terms associated with category
+    """
+
+    compare_terms = os.path.join(retrieve_path('term_compare'))
+
+    for file in os.listdir(compare_terms):
+
+        if category in str(file):
+
+            category_file = os.path.join(retrieve_path('term_compare'), file)
+
+            df = pd.read_csv(category_file)
+            df = clean_dataframe(df)
+
+            for col in df.columns:
+                target_list = list(df[col])
+                return(target_list)
+
+
 def write_paths():
     """
     write the paths for all the articles

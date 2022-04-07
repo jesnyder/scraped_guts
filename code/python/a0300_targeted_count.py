@@ -18,6 +18,7 @@ from a0001_admin import retrieve_format
 from a0001_admin import retrieve_list
 from a0001_admin import retrieve_path
 from a0001_admin import write_paths
+from a0001_admin import retrieve_terms
 from a0200_aggregate_info import add_ref_year
 from find_color import find_color
 
@@ -37,7 +38,6 @@ def targeted_word_count(dataset):
         df = pd.DataFrame()
         return(df)
 
-
     if 'nsf' in dataset:
         name = 'targetted_nsf'
         if work_to_do(name):
@@ -45,10 +45,7 @@ def targeted_word_count(dataset):
             df = count_targeted_words(dataset, df)
             work_completed(name, 1)
 
-
-
     print('completed targeted_word_count')
-
 
 
 def plot_annual_count(dataset):
@@ -351,41 +348,42 @@ def count_targeted_words(dataset, df):
 
     for category in retrieve_categories():
 
-        compare_folder = os.path.join(retrieve_path('term_compare'))
-        term_list = compare_folder 
-        for term in retrieve_list(category):
+        print('category = ' + category)
 
-        df[compare_term] = [0] * len(list(df.iloc[:,0]))
+        for term in retrieve_terms(category):
 
-        for i in range(len(list(df[compare_term]))):
+            print('term = ' + term)
 
-            str_all = ''
-            for name in df.columns:
-                str_all = str_all + str(df.loc[i,name])
-                str_all = str_all + ' '
-                str_all = str_all.lower()
+            df[term] = [0] * len(list(df.iloc[:,0]))
 
-            for compare_term in term_list:
+            for i in range(len(list(df[compare_term]))):
 
-                    if '|' in compare_term:
-                        compare_term_list = compare_term.split('|')
-                    else:
-                        compare_term_list = [compare_term]
+                str_all = ''
+                for name in df.columns:
+                    str_all = str_all + str(df.loc[i,name])
+                    str_all = str_all + ' '
+                    str_all = str_all.lower()
 
-                    if 'both' != compare_term_list[0]:
-                        for target_term in compare_term_list:
-                            target_term = target_term.lower()
-                            if str(target_term) in str(str_all):
-                                df.loc[i,compare_term] = 1
-                                continue
+                for compare_term in term_list:
 
-                                #print('found :' + compare_term)
-                    elif 'both' == compare_term_list[0]:
-                        if df.loc[i,term_list[0]] == 1:
-                            if df.loc[i,term_list[1]] == 1:
-                                df.loc[i,compare_term] = 1
-                                df.loc[i,term_list[0]] = 0
-                                df.loc[i,term_list[1]] = 0
+                        if '|' in compare_term:
+                            compare_term_list = compare_term.split('|')
+                        else:
+                            compare_term_list = [compare_term]
+
+                        if 'both' == compare_term_list[0]:
+                            if df.loc[i,term_list[0]] == 1:
+                                if df.loc[i,term_list[1]] == 1:
+                                    df.loc[i,compare_term] = 1
+                                    df.loc[i,term_list[0]] = 0
+                                    df.loc[i,term_list[1]] = 0
+
+                        else:
+                            for target_term in compare_term_list:
+                                target_term = target_term.lower()
+                                if str(target_term) in str(str_all):
+                                    df.loc[i,compare_term] = 1
+                                    continue
 
             compare_file_term = file.split('.')
             compare_file_term = str(compare_file_term[0])

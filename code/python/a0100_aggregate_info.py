@@ -172,7 +172,7 @@ def acquire_pub():
 
 def coregister(dataset):
     """
-
+    add reference value for year and value
     """
     try:
         path_term = str(dataset + '_src_query')
@@ -187,10 +187,79 @@ def coregister(dataset):
 
 
     if 'nsf' in dataset: df = coregister_nsf(dataset, df)
+    if 'nih' in dataset: df = coregister_nih(dataset, df)
+    if 'clinical' in dataset: df = coregister_clinical(dataset, df)
     else: return(df)
 
     return(df)
 
+
+def coregister_clinical(dataset, df):
+    """
+    add year and value as enrollment
+    """
+
+    print('df = ')
+    print(df)
+
+    name = 'coregister_clinical'
+    if work_to_do(name):
+        work_completed(name, 0)
+
+        years = []
+        for date in list(df['Start Date']):
+            date = date.replace('"', '')
+            date_split = date.split(' ')
+            year = date_split[-1]
+            years.append(year)
+
+        values = []
+        for item in list(df['Enrollment']):
+            item = float(item)
+            values.append(item)
+
+        df['ref_year'] = years
+        df['ref_values'] = values
+        path_term = str(dataset + '_coregistered')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_dst, dataset + '.csv')
+        df.to_csv(file_dst)
+        work_completed(name, 1)
+
+        return(df)
+
+
+def coregister_nih(dataset, df):
+    """
+
+    """
+
+    print('df = ')
+    print(df)
+
+    name = 'coregister_nih'
+    if work_to_do(name):
+        work_completed(name, 0)
+
+        years = []
+        for date in list(df['Fiscal Year']):
+            year = date
+            years.append(year)
+
+        values = []
+        for item in list(df['Direct Cost IC']):
+            item = float(item)
+            values.append(item)
+
+        df['ref_year'] = years
+        df['ref_values'] = values
+        path_term = str(dataset + '_coregistered')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_dst, dataset + '.csv')
+        df.to_csv(file_dst)
+        work_completed(name, 1)
+
+        return(df)
 
 
 def coregister_nsf(dataset, df):
