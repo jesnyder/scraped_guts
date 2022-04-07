@@ -27,12 +27,31 @@ def untargeted_word_count():
     """
     print('began untargeted_word_count')
 
-    # List task numbers to complete
-    tasks = [0]
-    write_paths()
-    if  0 in tasks: tasks = np.arange(1, 101, 1)
-    if  1 in tasks: count_all_words()
-    if  2 in tasks: clean_count()
+    path_term = str(dataset + '_geolocated')
+    print('path_term = ' + path_term)
+    path_dst = os.path.join(retrieve_path(path_term))
+    print('path_dst = ' + path_dst)
+    file_dst = os.path.join(path_dst, dataset + '.csv')
+    df = pd.read_csv(file_dst)
+    df = clean_dataframe(df)
+
+    if '_' in dataset:
+        dataset_split = dataset.split('_')
+        dataset_short = dataset_split[0]
+        name = 'untargeted_' + dataset_short
+    else:
+        name = 'untargeted_' + dataset_short
+
+    if work_to_do(name):
+        work_completed(name, 0)
+
+        df_count = count_untargeted_words(dataset, df)
+
+        file_dst = str(dataset + '_untargeted_count')
+        path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
+        df_count.to_csv(path_dst)
+
+        work_completed(name, 1)
 
     print('completed untargeted_word_count')
 
