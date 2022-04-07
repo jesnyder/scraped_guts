@@ -40,7 +40,7 @@ def untargeted_word_count(dataset):
         dataset_short = dataset_split[0]
         name = 'untargeted_' + dataset_short
     else:
-        name = 'untargeted_' + dataset_short
+        name = 'untargeted_' + dataset
 
     if work_to_do(name):
 

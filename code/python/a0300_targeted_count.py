@@ -43,7 +43,7 @@ def targeted_word_count(dataset):
         dataset_short = dataset_split[0]
         name = 'targetted_' + dataset_short
     else:
-        name = 'targetted_' + dataset_short
+        name = 'targetted_' + dataset
 
     if work_to_do(name):
         work_completed(name, 0)
@@ -382,7 +382,7 @@ def count_targeted_words(dataset, df):
                     compare_term_list = [term]
 
                 if 'both' == term:
-                    
+
                     if df.loc[i,category_terms[0]] == 1:
                         if df.loc[i,category_terms[1]] == 1:
                             df.loc[i,term] = 1
