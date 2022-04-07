@@ -365,11 +365,13 @@ def count_targeted_words(dataset, df):
                 str_all = str_all + ' '
                 str_all = str_all.lower()
 
+            percent_complete = round(i/len(list(df['ref_year']))*100,2)
+            print(dataset + ' category = ' + category + ' percent_complete = ' + str(percent_complete))
+
             category_terms = retrieve_terms(category)
             for term in category_terms:
 
-                percent_complete = round(i/len(list(df['ref_year']))*100,2)
-                print(dataset + ' category = ' + category + ' percent_complete = ' + str(percent_complete))
+                print('term = ' + term)
 
                 #print('term = ' + term)
                 df[term] = [0] * len(list(df['ref_year']))
@@ -380,6 +382,7 @@ def count_targeted_words(dataset, df):
                     compare_term_list = [term]
 
                 if 'both' == term:
+                    print('term = ' + term)
                     if df.loc[i,category_terms[0]] == 1:
                         if df.loc[i,category_terms[1]] == 1:
                             df.loc[i,term] = 1
@@ -388,6 +391,7 @@ def count_targeted_words(dataset, df):
 
                 else:
                     for target_term in compare_term_list:
+                        print('term = ' + term)
                         target_term = target_term.lower()
                         if str(target_term) in str(str_all):
                             df.loc[i,term] = 1
