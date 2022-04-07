@@ -355,7 +355,7 @@ def count_targeted_words(dataset, df):
 
             print('term = ' + term)
             print('df = ')
-            priint(df) 
+            print(df) 
 
             print('df.columns = ' + df.columns )
             df[term] = [0] * len(list(df['ref_year']))
