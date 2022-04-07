@@ -354,6 +354,8 @@ def count_targeted_words(dataset, df):
         for term in retrieve_terms(category):
 
             print('term = ' + term)
+            print('df = ')
+            priint(df) 
 
             print('df.columns = ' + df.columns )
             df[term] = [0] * len(list(df['ref_year']))
