@@ -53,6 +53,7 @@ def targeted_word_count(dataset):
         count_targeted_words(dataset, df)
         work_completed(name, 1)
 
+
     # plot after counting
 
     if '_' in dataset:
@@ -196,6 +197,9 @@ def annual_count_targeted(dataset):
         path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
         df = pd.read_csv(path_dst)
 
+        print('df.columns = ')
+        print(df.columns)
+
         year_min = int((min(list(df['ref_year']))))
         year_max = int((max(list(df['ref_year']))))
         years = np.arange(year_min, year_max, 1)
@@ -282,6 +286,7 @@ def count_targeted_words(dataset, df):
         file_dst = str(dataset + '_targeted_count')
         path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
         df.to_csv(path_dst)
+
 
 
 if __name__ == "__main__":
