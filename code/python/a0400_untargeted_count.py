@@ -51,6 +51,7 @@ def untargeted_word_count(dataset):
         work_completed(name, 0)
 
         df_count = count_untargeted_words(dataset, df)
+        clean_count(dataset, df_count)
 
         work_completed(name, 1)
 
@@ -152,7 +153,7 @@ def count_untargeted_words(dataset, df):
     return(df_count)
 
 
-def clean_count():
+def clean_count(dataset, df):
     """
     remove stop words
     remove numbers - ints and floats
@@ -160,77 +161,36 @@ def clean_count():
     save as a shortened df
     """
 
-    for name_dataset in retrieve_list('type_article'):
 
-        print('article = ' + str(name_dataset))
-        file_dst = str(name_dataset + '_count_all_words_df')
+    df = df[(df['counts'] > 2)]
 
-        # read in the saved dataframe, either complete or in progress
-        try:
-            try:
-                path_dst = os.path.join(retrieve_path(file_dst), 'all_word_count_' + str(retrieve_format('word_count_break_per'))  + '.csv')
-            except:
-                path_dst = os.path.join(retrieve_path(file_dst), 'all_word_count'  + '.csv')
-            df = clean_dataframe(pd.read_csv(path_dst))
-        except:
-            break
+    terms = list(df_count['terms'])
+    counts = list(df_count['counts'])
+    percents = list(df_count['percents'])
 
-        #print('path_dst = ' + str(path_dst))
-        #df = clean_dataframe(pd.read_csv(path_dst))
-        df_short = df[(df['counts'] > 2)]
+    terms_short = []
+    for term in terms:
+        if term in retrieve_list('stop_words'): continue
+        terms_short.append(term)
 
-        rows_to_drop = []
-        for stop_word in retrieve_list('stop_words'):
-            df_short = df_short[(df_short['words'] != stop_word)]
+    counts, percents = [], []
+    for term in terms_short:
 
-        df_short = df_short.drop(rows_to_drop)
-        for i in range(len(list(df_short['words']))):
+        df_temp = df[(df['terms'] == term)]
+        count = df.loc[0,'counts']
+        percent = df.loc[0,'percents']
+        counts.append(count)
+        percents.append(percent)
 
-            word = df.loc[i,'words']
+    df = pd.DataFrame()
+    df['terms'] = terms_short
+    df['counts'] = counts
+    df['percents'] = percents
 
-            if isinstance(word, int):
-                rows_to_drop.append(i)
-
-            if isinstance(word, float):
-                rows_to_drop.append(i)
-
-            try:
-                try:
-                    word = float(word)
-                    rows_to_drop.append(i)
-                except:
-                    word = int(word)
-                    rows_to_drop.append(i)
-            except:
-                hello = 'hello'
-
-            try:
-                try:
-                    word = word.remove('$')
-                    word = float(word)
-                    rows_to_drop.append(i)
-                except:
-                    word = word.remove('$')
-                    word = int(word)
-                    rows_to_drop.append(i)
-            except:
-                hello = 'hello'
-
-        print('rows_to_drop = ')
-        print(rows_to_drop)
-
-        df_short = df_short.drop(rows_to_drop)
-
-        df_short = clean_dataframe(df_short)
-        file_dst = str(name_dataset + '_count_all_words_df')
-        path_dst = os.path.join(retrieve_path(file_dst), 'short_word_count'  + '.csv')
-        print('path_dst = ' + str(path_dst))
-
-        print('before saving df_short = ')
-        print(df_short)
-
-        df_short.to_csv(path_dst)
-
+    file_dst = str(dataset + '_untargeted_count')
+    path_dst = os.path.join(retrieve_path(file_dst), dataset + '_short'  + '.csv')
+    df.to_csv(path_dst)
+    print('saved to: ' + str(path_dst))
 
 
 if __name__ == "__main__":
