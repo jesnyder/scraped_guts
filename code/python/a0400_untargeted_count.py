@@ -80,24 +80,24 @@ def count_untargeted_words(dataset, df):
 
     for item in str:
 
-        if item not in term:
+        if item in terms: continue
 
-            terms.append(item)
-            count = str.count(item)
-            counts.append(count)
-            percent = round(count/len(str)*100,3)
-            percents.append(percent)
+        terms.append(item)
+        count = str.count(item)
+        counts.append(count)
+        percent = round(count/len(str)*100,3)
+        percents.append(percent)
 
-            df_count = pd.DataFrame()
-            df_count['terms'] = terms
-            df_count['counts'] = counts
-            df_count['percents'] = percents
+        df_count = pd.DataFrame()
+        df_count['terms'] = terms
+        df_count['counts'] = counts
+        df_count['percents'] = percents
 
-            df_count = df_count.sort_values(by = 'percents', ascending=False)
+        df_count = df_count.sort_values(by = 'percents', ascending=False)
 
-            file_dst = str(dataset + '_untargeted_count')
-            path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
-            df_count.to_csv(path_dst)
+        file_dst = str(dataset + '_untargeted_count')
+        path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
+        df_count.to_csv(path_dst)
 
     return(df_count)
 
