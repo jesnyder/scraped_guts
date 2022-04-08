@@ -65,7 +65,7 @@ def count_untargeted_words(dataset, df):
     str = ''
     for col in df.columns:
         for i in range(len(df['ref_year'])):
-            item = str(df.loc[i,col])
+            item = str(list(df.loc[i,col])[0])
             str = str + item + ' '
 
     str = str.lower()
