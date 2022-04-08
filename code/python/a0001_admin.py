@@ -345,7 +345,7 @@ def write_paths():
 
 
             elif '_untargeted_count' in item:
-                item_path = str('program_generated ' + name_dataset + ' 07_targeted_count')
+                item_path = str('program_generated ' + name_dataset + ' 07_untargeted_count')
 
             elif '_unique_plot' in item:
                 item_path = str('program_generated ' + name_dataset + ' 06_time_plot')
