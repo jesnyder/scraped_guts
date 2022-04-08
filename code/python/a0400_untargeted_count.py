@@ -98,8 +98,6 @@ def count_untargeted_words(dataset, df):
         if name == 'StartDate': continue
         if name == 'State': continue
 
-
-
         for i in range(len(list(df['ref_year']))):
 
             #print('value = ')
