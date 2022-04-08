@@ -98,7 +98,7 @@ def count_untargeted_words(dataset, df):
         if item in terms: continue
 
         terms.append(item)
-        count = str.count(item)
+        count = str_all.count(item)
         counts.append(count)
         percent = round(count/len(str_all)*100,3)
         percents.append(percent)
