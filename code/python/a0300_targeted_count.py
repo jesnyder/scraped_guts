@@ -87,7 +87,7 @@ def plot_annual_count(dataset):
         category_terms = retrieve_terms(category)
         for term in category_terms:
 
-            df =  df[(df['cdf_total'] > 0)]
+            #df =  df[(df['cdf_total'] > 0)]
             df = clean_dataframe(df)
 
 
@@ -229,7 +229,7 @@ def annual_count_targeted(dataset):
             print('df_yearly_count = ')
             print(df_yearly_count)
 
-            df_yearly_count[term] = counts
+            df_yearly_count[term + '_counts'] = counts
             df_yearly_count[str(term + '_values')] = values
 
         file_dst = str(dataset + '_targeted_count')
@@ -265,7 +265,6 @@ def count_targeted_words(dataset, df):
 
                 #print('term = ' + term)
 
-                #print('term = ' + term)
                 df[term] = [0] * len(list(df['ref_year']))
 
                 if ' | ' in term:
