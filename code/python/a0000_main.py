@@ -15,13 +15,14 @@ def main():
 
     # for each dataset
     for dataset in retrieve_list('name_dataset'):
+
         print('dataset = ' + str(dataset))
 
         # aggregate articles
         aggregate_info(dataset)
 
         # targeted count of categories
-        targeted_word_count(dataset)
+        #targeted_word_count(dataset)
 
         # untargeted count of categories
         untargeted_word_count(dataset)
