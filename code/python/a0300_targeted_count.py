@@ -266,8 +266,12 @@ def count_targeted_words(dataset, df):
             for term in category_terms:
 
                 #print('term = ' + term)
-
                 df[term] = [0] * len(list(df['ref_year']))
+
+                file_dst = str(dataset + '_targeted_count')
+                path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
+                print('path_dst = ' + str(path_dst))
+                df.to_csv(path_dst)
 
                 if ' | ' in term:
                     compare_term_list = term.split(' | ')
@@ -286,9 +290,6 @@ def count_targeted_words(dataset, df):
                             print('df.loc[i,term] = ')
                             print(df.loc[i,term])
 
-                            file_dst = str(dataset + '_targeted_count')
-                            path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
-                            print('path_dst = ' + str(path_dst))
                             df.to_csv(path_dst)
 
                 else:
@@ -296,23 +297,19 @@ def count_targeted_words(dataset, df):
                         #print('target_term = ' + target_term)
                         target_term = target_term.lower()
                         if str(target_term) in str(str_all):
+
                             print(dataset + ' category = ' + category + ' percent_complete = ' + str(percent_complete))
                             print('found target_term : ' + target_term)
+
                             df.loc[i,term] = 1
                             print('df.loc[i,term] = ')
                             print(df.loc[i,term])
-                            
-                            file_dst = str(dataset + '_targeted_count')
-                            path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
-                            print('path_dst = ' + str(path_dst))
+
                             df.to_csv(path_dst)
 
                             continue
 
-        file_dst = str(dataset + '_targeted_count')
-        path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
-        print('path_dst = ' + str(path_dst))
-        df.to_csv(path_dst)
+
 
 
 
