@@ -71,6 +71,9 @@ def count_untargeted_words(dataset, df):
 
         print('name = ' + name)
 
+        if name == 'AwardNumber': continue
+        if name == 'NSFOrganization': continue
+
         for i in range(len(list(df['ref_year']))):
 
             #print('value = ')
