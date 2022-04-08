@@ -223,6 +223,12 @@ def annual_count_targeted(dataset):
                 value = sum(ref_list)
                 values.append(value)
 
+            print('counts = ')
+            print(counts)
+
+            print('df_yearly_count = ')
+            print(df_yearly_count)
+
             df_yearly_count[term] = counts
             df_yearly_count[str(compare_term + '_values')] = values
 
