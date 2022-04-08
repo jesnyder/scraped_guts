@@ -62,12 +62,13 @@ def count_untargeted_words(dataset, df):
     count the words in each dataset
     """
 
-    str = ''
-    for col in df.columns:
-        for i in range(len(df['ref_year'])):
-            item = str(list(df.iloc[i,col])[0])
-            str = str + item + ' '
+    for i in range(len(list(df['ref_year']))):
 
+        str_all = ''
+        for name in df.columns:
+            str_all = str_all + str(df.loc[i,name])
+            str_all = str_all + ' '
+    
     str = str.lower()
     char_remove = ['.', ':', ';', '"', '/', '\'' , ',', '(', ')', '$', '?', '!', '<', '>']
     for char in char_remove:
