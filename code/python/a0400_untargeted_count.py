@@ -142,8 +142,9 @@ def count_untargeted_words(dataset, df):
         file_dst = str(dataset + '_untargeted_count')
         path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
         df_count.to_csv(path_dst)
+        print('saved to: ' + str(path_dst))
 
-         str_all = str_all.remove(item)
+        str_all = str_all.remove(item)
 
 
     return(df_count)
