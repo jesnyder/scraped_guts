@@ -72,18 +72,14 @@ def count_untargeted_words(dataset, df):
             print('name = ' + name)
 
             value = df.loc[i,name]
+            value = value[0]
+            value = str(value)
+            print('value = ')
+            print(value)
 
-            try:
-                value = str(value)
-                print('value = ')
-                print(value)
-
-                str_all = str_all + value
-                str_all = str_all + ' '
-                str_all = str_all.lower()
-
-            except:
-                hello = 'hello'
+            str_all = str_all + value
+            str_all = str_all + ' '
+            str_all = str_all.lower()
 
     str = str_all.lower()
 
