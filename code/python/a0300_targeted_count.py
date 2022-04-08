@@ -294,6 +294,7 @@ def count_targeted_words(dataset, df):
 
         file_dst = str(dataset + '_targeted_count')
         path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
+        print('path_dst = ' + str(path_dst))
         df.to_csv(path_dst)
 
 
