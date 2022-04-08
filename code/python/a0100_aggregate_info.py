@@ -58,6 +58,20 @@ def acquire_clinical(dataset):
     if work_to_do(name):
         work_completed(name, 0)
         df = acquire_downloaded(dataset)
+
+        # remove out of status trials and resave over acquired file
+        status_drop = ['Withdrawn', 'Terminated', 'Suspended']
+        status_drop.append('Temporarily not available')
+        status_drop.append('Unknown status')
+        for status in status_drop:
+            df =  df[(df['Status'] != status)]
+
+        df = clean_dataframe(df)
+        path_term = str(dataset + '_src_query')
+        path_dst = os.path.join(retrieve_path(path_term))
+        file_dst = os.path.join(path_dst, dataset + '.csv')
+        df.to_csv(file_dst)
+
         work_completed(name, 1)
 
     else:

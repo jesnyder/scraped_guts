@@ -170,7 +170,10 @@ def retrieve_format(name):
 
             try:
                 if len(value) == 1:
-                    value = int(value[0])
+                    if '.' not in str(value[0]):
+                        value = int(value[0])
+                    else:
+                        value = float(value[0])
             except:
                 hello = 'hello'
 

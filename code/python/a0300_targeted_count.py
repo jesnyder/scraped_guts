@@ -272,7 +272,7 @@ def count_targeted_words(dataset, df):
             percent_complete = round(i/len(list(df['ref_year']))*100,2)
 
             for term in category_terms:
-        
+
                 if ' | ' in term:
                     compare_term_list = term.split(' | ')
                 else:
@@ -308,9 +308,6 @@ def count_targeted_words(dataset, df):
                             df.to_csv(path_dst)
 
                             continue
-
-
-
 
 
 if __name__ == "__main__":

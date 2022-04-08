@@ -23,7 +23,7 @@ from find_color import find_color
 
 def untargeted_word_count(dataset):
     """
-
+    count all the words appearing in the dataset
     """
     print('began untargeted_word_count')
 
