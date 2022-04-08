@@ -62,6 +62,9 @@ def count_untargeted_words(dataset, df):
     count the words in each dataset
     """
 
+    print('df = ')
+    print(df)
+
     for i in range(len(list(df['ref_year']))):
 
         str_all = ''
@@ -69,6 +72,7 @@ def count_untargeted_words(dataset, df):
             print('name = ' + name)
             str_all = str_all + str(df.loc[i,name])
             str_all = str_all + ' '
+            str_all = str_all.lower()
 
     str = str_all.lower()
 
