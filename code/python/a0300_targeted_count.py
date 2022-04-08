@@ -219,12 +219,12 @@ def annual_count_targeted(dataset):
                 counts.append(count)
 
                 df_annual_term = df_annual[(df_annual[term] > 0)]
-                ref_list = list(df_annual_term['ref_value'])
+                ref_list = list(df_annual_term['ref_values'])
                 value = sum(ref_list)
                 values.append(value)
 
                 df_yearly_count[term] = counts
-                df_yearly_count[str(compare_term + '_value')] = values
+                df_yearly_count[str(compare_term + '_values')] = values
 
         file_dst = str(dataset + '_targeted_count')
         path_dst = os.path.join(retrieve_path(file_dst), category + '_cdf'  + '.csv')
