@@ -251,6 +251,15 @@ def count_targeted_words(dataset, df):
 
         df = df_original
 
+        category_terms = retrieve_terms(category)
+        for term in category_terms:
+            df[term] = [0] * len(list(df['ref_year']))
+
+        file_dst = str(dataset + '_targeted_count')
+        path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
+        print('path_dst = ' + str(path_dst))
+        df.to_csv(path_dst)
+
         for i in range(len(list(df['ref_year']))):
 
             str_all = ''
@@ -262,17 +271,8 @@ def count_targeted_words(dataset, df):
 
             percent_complete = round(i/len(list(df['ref_year']))*100,2)
 
-            category_terms = retrieve_terms(category)
             for term in category_terms:
-
-                #print('term = ' + term)
-                df[term] = [0] * len(list(df['ref_year']))
-
-                file_dst = str(dataset + '_targeted_count')
-                path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
-                print('path_dst = ' + str(path_dst))
-                df.to_csv(path_dst)
-
+        
                 if ' | ' in term:
                     compare_term_list = term.split(' | ')
                 else:
