@@ -68,23 +68,23 @@ def count_untargeted_words(dataset, df):
 
     str_all = ''
     for name in df.columns:
+
         print('name = ' + name)
 
         for i in range(len(list(df['ref_year']))):
 
-            value = df.loc[i,name]
-            value = str(value)
             #print('value = ')
             #print(value)
 
-            str_all = str_all + value
+            str_all = str_all + str(df.loc[i,name])
             str_all = str_all + ' '
             str_all = str_all.lower()
 
+            char_remove = ['.', ':', ';', '"', '/', '\'' , ',', '(', ')', '$', '?', '!', '<', '>']
+            for char in char_remove:
+                str_all  = str_all .replace(char, '')
 
-    char_remove = ['.', ':', ';', '"', '/', '\'' , ',', '(', ')', '$', '?', '!', '<', '>']
-    for char in char_remove:
-        str_all  = str_all .replace(char, '')
+            str_all = str_all.lower()
 
     str_all  = str_all.split(' ')
 
