@@ -95,6 +95,8 @@ def count_untargeted_words(dataset, df):
         if name == 'StartDate': continue
         if name == 'State': continue
 
+
+
         for i in range(len(list(df['ref_year']))):
 
             #print('value = ')
@@ -131,6 +133,9 @@ def count_untargeted_words(dataset, df):
         df_count['terms'] = terms
         df_count['counts'] = counts
         df_count['percents'] = percents
+
+        print('term = ' + term + ' count = ' + str(count) + ' % = ' + str(percent))
+        print('percent found = ' + sum(percents))
 
         df_count = df_count.sort_values(by = 'percents', ascending=False)
 
