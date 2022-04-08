@@ -72,7 +72,28 @@ def count_untargeted_words(dataset, df):
         print('name = ' + name)
 
         if name == 'AwardNumber': continue
-        if name == 'NSFOrganization': continue
+        if name == 'address_found': continue
+        if name == 'ARRAAmount': continue
+        if name == 'AwardedAmountToDate': continue
+        if name == 'AwardInstrument': continue
+        if name == 'AwardNumber': continue
+        if name == 'AwardNumber': continue
+        if name == 'Co-PINames(s)': continue
+        if name == 'EndDate': continue
+        if name == 'LastAmendmentDate': continue
+        if name == 'lat_found': continue
+        if name == 'lon_found': continue
+        if name == 'NSFDirectorate': continue
+        if name == 'OrganizationPhone': continue
+        if name == 'OrganizationZip': continue
+        if name == 'PIEmailAddress': continue
+        if name == 'PrincipalInvestigator': continue
+        if name == 'Program(s)': continue
+        if name == 'ProgramElementCode(s)': continue
+        if name == 'ref_values': continue
+        if name == 'ref_years': continue
+        if name == 'StartDate': continue
+        if name == 'State': continue
 
         for i in range(len(list(df['ref_year']))):
 
