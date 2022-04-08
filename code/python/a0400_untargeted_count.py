@@ -66,10 +66,12 @@ def count_untargeted_words(dataset, df):
 
         str_all = ''
         for name in df.columns:
+            print('name = ' + name)
             str_all = str_all + str(df.loc[i,name])
             str_all = str_all + ' '
-    
-    str = str.lower()
+
+    str = str_all.lower()
+
     char_remove = ['.', ':', ';', '"', '/', '\'' , ',', '(', ')', '$', '?', '!', '<', '>']
     for char in char_remove:
         str = str.replace(char, '')
