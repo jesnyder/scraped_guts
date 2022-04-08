@@ -72,7 +72,6 @@ def count_untargeted_words(dataset, df):
             print('name = ' + name)
 
             value = df.loc[i,name]
-            value = value[0]
             value = str(value)
             print('value = ')
             print(value)
@@ -88,6 +87,8 @@ def count_untargeted_words(dataset, df):
         str = str.replace(char, '')
 
     str = str.split(' ')
+
+    assert len(str_all) > 0
 
     terms, counts, percents = [], [], []
     df_count = pd.DataFrame()
