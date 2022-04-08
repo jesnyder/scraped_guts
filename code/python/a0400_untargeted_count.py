@@ -70,13 +70,13 @@ def count_untargeted_words(dataset, df):
         str_all = ''
         for name in df.columns:
             print('name = ' + name)
-            print('df.loc[i,name] = ')
-            print(df.loc[i,name])
 
-            print('str(df.loc[i,name]) = ')
-            print(str(df.loc[i,name]))
+            value = df.loc[i,name]
+            value = str(value)
+            print('value = ')
+            print(value)
 
-            str_all = str_all + str(df.loc[i,name])
+            str_all = str_all + value
             str_all = str_all + ' '
             str_all = str_all.lower()
 
