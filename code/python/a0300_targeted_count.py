@@ -247,6 +247,8 @@ def count_targeted_words(dataset, df):
     # categories of terms to compare
     for category in retrieve_categories():
 
+        print('category = ' + category)
+
         df = df_original
 
         for i in range(len(list(df['ref_year']))):
