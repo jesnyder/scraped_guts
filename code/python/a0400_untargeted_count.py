@@ -80,27 +80,27 @@ def count_untargeted_words(dataset, df):
             str_all = str_all + ' '
             str_all = str_all.lower()
 
-    str = str_all.lower()
+    str_all  = str_all.lower()
 
     char_remove = ['.', ':', ';', '"', '/', '\'' , ',', '(', ')', '$', '?', '!', '<', '>']
     for char in char_remove:
-        str = str.replace(char, '')
+        str_all  = str_all .replace(char, '')
 
-    str = str.split(' ')
+    str_all  = str_all .split(' ')
 
     assert len(str_all) > 0
 
     terms, counts, percents = [], [], []
     df_count = pd.DataFrame()
 
-    for item in str:
+    for item in str_all :
 
         if item in terms: continue
 
         terms.append(item)
         count = str.count(item)
         counts.append(count)
-        percent = round(count/len(str)*100,3)
+        percent = round(count/len(str_all)*100,3)
         percents.append(percent)
 
         df_count = pd.DataFrame()
