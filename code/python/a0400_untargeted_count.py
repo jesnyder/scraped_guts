@@ -97,6 +97,7 @@ def count_untargeted_words(dataset, df):
         if name == 'Program(s)': continue
         if name == 'ProgramElementCode(s)': continue
         if name == 'ProgramManager': continue
+        if name == 'ProgramReferenceCode(s)': continue
         if name == 'ref_values': continue
         if name == 'ref_years': continue
         if name == 'StartDate': continue
