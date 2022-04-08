@@ -85,6 +85,7 @@ def count_untargeted_words(dataset, df):
         if name == 'lon_found': continue
         if name == 'NSFDirectorate': continue
         if name == 'NSFOrganization': continue
+        if name == 'Organization': continue
         if name == 'OrganizationPhone': continue
         if name == 'OrganizationZip': continue
         if name == 'PIEmailAddress': continue
