@@ -210,16 +210,16 @@ def annual_count_targeted(dataset):
             for year in years:
 
                 df_annual = df[(df['ref_year'] == year)]
-                target_list = list(df_annual[compare_term])
-                count = sum(list(df_annual[compare_term]))
+                target_list = list(df_annual[term])
+                count = sum(list(df_annual[term]))
                 counts.append(count)
 
-                df_annual_term = df_annual[(df_annual[compare_term] > 0)]
+                df_annual_term = df_annual[(df_annual[term] > 0)]
                 ref_list = list(df_annual_term['ref_value'])
                 value = sum(ref_list)
                 values.append(value)
 
-                df_yearly_count[compare_term] = counts
+                df_yearly_count[term] = counts
                 df_yearly_count[str(compare_term + '_value')] = values
 
         file_dst = str(dataset + '_targeted_count')
