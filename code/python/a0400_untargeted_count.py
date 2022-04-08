@@ -78,7 +78,7 @@ def count_untargeted_words(dataset, df):
         if name == 'AwardInstrument': continue
         if name == 'AwardNumber': continue
         if name == 'AwardNumber': continue
-        if name == 'Co-PINames(s)': continue
+        if name == 'Co-PIName(s)': continue
         if name == 'EndDate': continue
         if name == 'LastAmendmentDate': continue
         if name == 'lat_found': continue
