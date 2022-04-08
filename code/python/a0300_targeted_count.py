@@ -283,6 +283,8 @@ def count_targeted_words(dataset, df):
                             df.loc[i,term] = 1
                             df.loc[i,category_terms[0]] = 0
                             df.loc[i,category_terms[1]] = 0
+                            print('df.loc[i,term] = ')
+                            print(df.loc[i,term])
 
                 else:
                     for target_term in compare_term_list:
@@ -292,6 +294,8 @@ def count_targeted_words(dataset, df):
                             print(dataset + ' category = ' + category + ' percent_complete = ' + str(percent_complete))
                             print('found target_term : ' + target_term)
                             df.loc[i,term] = 1
+                            print('df.loc[i,term] = ')
+                            print(df.loc[i,term])
                             continue
 
         file_dst = str(dataset + '_targeted_count')
