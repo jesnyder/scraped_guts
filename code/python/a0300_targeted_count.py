@@ -286,6 +286,11 @@ def count_targeted_words(dataset, df):
                             print('df.loc[i,term] = ')
                             print(df.loc[i,term])
 
+                            file_dst = str(dataset + '_targeted_count')
+                            path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
+                            print('path_dst = ' + str(path_dst))
+                            df.to_csv(path_dst)
+
                 else:
                     for target_term in compare_term_list:
                         #print('target_term = ' + target_term)
@@ -296,6 +301,12 @@ def count_targeted_words(dataset, df):
                             df.loc[i,term] = 1
                             print('df.loc[i,term] = ')
                             print(df.loc[i,term])
+                            
+                            file_dst = str(dataset + '_targeted_count')
+                            path_dst = os.path.join(retrieve_path(file_dst), category  + '.csv')
+                            print('path_dst = ' + str(path_dst))
+                            df.to_csv(path_dst)
+
                             continue
 
         file_dst = str(dataset + '_targeted_count')
