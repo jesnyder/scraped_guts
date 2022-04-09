@@ -33,9 +33,9 @@ def aggregate_info(dataset):
     if 'nsf' in dataset: df = acquire_nsf(dataset)
     elif 'nih' in dataset: df = acquire_nih(dataset)
     elif 'clinical' in dataset: df = acquire_clinical(dataset)
-    elif 'patent' in dataset: df = acquire_patent()
-    elif 'pub' in dataset: df = acquire_pub()
-
+    elif 'patent' in dataset: df = acquire_patent(dataset)
+    elif 'pub' in dataset: df = acquire_pub(dataset)
+ 
     # format and co-register fields of datasets
     df = coregister(dataset)
 

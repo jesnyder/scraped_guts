@@ -127,6 +127,8 @@ def count_untargeted_words(dataset, df):
 
     for item in str_all :
 
+        print('item = ' + item)
+
         if item in terms: continue
 
         terms.append(item)
@@ -150,7 +152,7 @@ def count_untargeted_words(dataset, df):
         df_count.to_csv(path_dst)
         print('saved to: ' + str(path_dst))
 
-        str_all = str_all.remove(item)
+        #str_all = str_all.remove(item)
 
 
     return(df_count)
