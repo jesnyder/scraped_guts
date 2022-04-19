@@ -103,21 +103,21 @@ def word_count(dataset, df):
         all_len = len(str_all)
         for value in str_all:
 
-            if value not in terms:
+            if value in terms: continue
 
-                terms.append(value)
-                count = str_all.count(value)
-                counts.append(count)
-                percent = round(count/all_len*100,3)
-                percents.append(percent)
+            terms.append(value)
+            count = str_all.count(value)
+            counts.append(count)
+            percent = round(count/all_len*100,3)
+            percents.append(percent)
 
-                while value in str_all:
-                    str_all.remove(value)
+            while value in str_all:
+                str_all.remove(value)
 
-                percent_complete = round(sum(percents),1)
-                if percent_complete > percent_complete_threshold:
-                    print('name = ' + name + ' multiplier = ' + str(multiplier) + ' percent complete = ' + str(round(sum(percents),3)))
-                    percent_complete_threshold = percent_complete_threshold + 3
+            percent_complete = round(sum(percents),1)
+            if percent_complete > percent_complete_threshold:
+                print('name = ' + name + ' multiplier = ' + str(multiplier) + ' percent complete = ' + str(round(sum(percents),3)))
+                percent_complete_threshold = percent_complete_threshold + 3
 
         df_counts = pd.DataFrame()
         df_counts['term'] = terms
