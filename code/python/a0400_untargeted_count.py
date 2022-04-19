@@ -76,9 +76,10 @@ def word_count(dataset, df):
 
         for name in df.columns:
 
-            print('name = ' + name + ' multiplier = ' + str(multiplier))
             col_skip_list = retrieve_list('untargeted_columns_excluded')
             if name in col_skip_list: continue
+
+            print('name = ' + name + ' multiplier = ' + str(multiplier))
 
             range_multiplier = int(len(list(df['ref_year']))*multiplier)
             for i in range(range_multiplier):
@@ -96,7 +97,9 @@ def word_count(dataset, df):
 
         df_counts = pd.value_counts(np.array(str_all))
 
-        df_count = df_count.sort_values(by = '0', ascending=False)
+        print('df_counts.columns = ')
+        print(df_counts.columns)
+        #df_count = df_count.sort_values(by = '0', ascending=False)
         file_dst = str(dataset + '_untargeted_count')
         path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
         df_count.to_csv(path_dst)
