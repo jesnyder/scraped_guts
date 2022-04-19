@@ -118,18 +118,19 @@ def word_count(dataset, df):
                 percents.append(percent)
                 str_all.remove(value)
 
-        df_counts = pd.DataFrame()
-        df_counts['term'] = terms
-        df_counts['count'] = counts
-        df_counts['percent'] = percents
+                df_counts = pd.DataFrame()
+                df_counts['term'] = terms
+                df_counts['count'] = counts
+                df_counts['percent'] = percents
 
-        df_counts = df_counts.sort_values(by = 'count', ascending=False)
-        df_counts = clean_dataframe(df_counts)
-        file_dst = str(dataset + '_untargeted_count')
-        path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
-        df_counts.to_csv(path_dst)
-        print('saved to: ' + str(path_dst))
+                print('percent compliete = ' + str(sum(percents)))
 
+                df_counts = df_counts.sort_values(by = 'count', ascending=False)
+                df_counts = clean_dataframe(df_counts)
+                file_dst = str(dataset + '_untargeted_count')
+                path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
+                df_counts.to_csv(path_dst)
+                #print('saved to: ' + str(path_dst))
 
         clean_count(dataset, df_counts)      #
 
