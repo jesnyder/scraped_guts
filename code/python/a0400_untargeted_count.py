@@ -94,7 +94,7 @@ def word_count(dataset, df):
                 for char in char_remove:
                     cell_value  = cell_value.replace(char, '')
                 cell_value = cell_value.lower()
-        
+
                 cell_value = str(cell_value)
                 str_all = str_all + cell_value
 
@@ -118,7 +118,7 @@ def word_count(dataset, df):
                 df_counts['count'] = counts
                 df_counts['percent'] = percents
 
-                print('percent complete = ' + str(sum(percents)))
+                print('name = ' + name + ' multiplier = ' + str(multiplier) + ' percent complete = ' + str(sum(percents)))
 
                 df_counts = df_counts.sort_values(by = 'count', ascending=False)
                 df_counts = clean_dataframe(df_counts)
