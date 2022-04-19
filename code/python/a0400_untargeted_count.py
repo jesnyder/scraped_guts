@@ -91,9 +91,10 @@ def word_count(dataset, df):
                 for char in char_remove:
                     cell_value  = cell_value.replace(char, '')
                 cell_value = cell_value.lower()
-                
+
                 try:
                     cell_value = str(cell_value)
+                    str_all = str_all + cell_value
                 except:
                     print('cell_value = ')
                     print(cell_value)
