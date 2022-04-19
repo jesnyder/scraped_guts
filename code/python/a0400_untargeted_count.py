@@ -76,11 +76,12 @@ def word_count(dataset, df):
 
         str_all = ''
         terms, counts, percents = [], [], []
-
+        percent_complete_threshold = 1
         for name in df.columns:
 
             col_skip_list = retrieve_list('untargeted_columns_excluded')
             if name in col_skip_list: continue
+
 
             print('name = ' + name + ' multiplier = ' + str(multiplier))
 
@@ -118,7 +119,10 @@ def word_count(dataset, df):
                 df_counts['count'] = counts
                 df_counts['percent'] = percents
 
-                print('name = ' + name + ' multiplier = ' + str(multiplier) + ' percent complete = ' + str(round(sum(percents),3)))
+                percent_complete = round(sum(percents),3))
+                if percent_complete > percent_complete_threshold:
+                    print('name = ' + name + ' multiplier = ' + str(multiplier) + ' percent complete = ' + str(round(sum(percents),3)))
+                    percent_complete_threshold = percent_complete_threshold + 5
 
                 df_counts = df_counts.sort_values(by = 'count', ascending=False)
                 df_counts = clean_dataframe(df_counts)

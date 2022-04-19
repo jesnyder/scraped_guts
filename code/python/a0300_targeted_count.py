@@ -117,7 +117,6 @@ def plot_annual_count(dataset):
             plt.legend(bbox_to_anchor=(1, 0.8), loc='upper left')
 
 
-
             plot_num = plot_num +1
             plt.subplot(plot_row, plot_col, plot_num)
             for term in term_list:
