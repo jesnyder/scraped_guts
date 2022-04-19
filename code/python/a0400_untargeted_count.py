@@ -66,6 +66,7 @@ def count_untargeted_words(dataset, df):
     print('df = ')
     print(df)
 
+    df_count = pd.DataFrame()
 
     str_all = ''
     for name in df.columns:
@@ -105,54 +106,56 @@ def count_untargeted_words(dataset, df):
 
         for i in range(len(list(df['ref_year']))):
 
-            #print('value = ')
-            #print(value)
-
-            str_all = str_all + str(df.loc[i,name])
-            str_all = str_all + ' '
-            str_all = str_all.lower()
-
+            # list contents of a cell
+            str_all = str(df.loc[i,name])
             char_remove = ['.', ':', ';', '"', '/', '\'' , ',', '(', ')', '$', '?', '!', '<', '>']
             for char in char_remove:
                 str_all  = str_all .replace(char, '')
-
             str_all = str_all.lower()
+            str_all  = str_all.split(' ')
+            assert len(str_all) > 0
 
-    str_all  = str_all.split(' ')
+            for item in str_all :
 
-    assert len(str_all) > 0
+                df_count_temp = pd.DataFrame()
+                df_count_temp['terms'] = item
+                df_count_temp['counts'] = 1
 
-    terms, counts, percents = [], [], []
-    df_count = pd.DataFrame()
+            df_count = df_count.append(df_count_temp)
 
-    for item in str_all :
+            for term in list(df_count[terms]):
 
-        print('item = ' + item)
+                df_temp = df_count[(df_count['terms'] == term)]
 
-        if item in terms: continue
 
-        terms.append(item)
-        count = str_all.count(item)
-        counts.append(count)
-        percent = round(count/len(str_all)*100,3)
-        percents.append(percent)
 
-        df_count = pd.DataFrame()
-        df_count['terms'] = terms
-        df_count['counts'] = counts
-        df_count['percents'] = percents
 
-        print('term = ' + term + ' count = ' + str(count) + ' % = ' + str(percent))
-        print('percent found = ' + sum(percents))
+                print('item = ' + item)
 
-        df_count = df_count.sort_values(by = 'percents', ascending=False)
+                if item in terms: continue
 
-        file_dst = str(dataset + '_untargeted_count')
-        path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
-        df_count.to_csv(path_dst)
-        print('saved to: ' + str(path_dst))
+                terms.append(item)
+                count = str_all.count(item)
+                counts.append(count)
+                percent = round(count/len(str_all)*100,3)
+                percents.append(percent)
 
-        #str_all = str_all.remove(item)
+                df_count = pd.DataFrame()
+                df_count['terms'] = terms
+                df_count['counts'] = counts
+                df_count['percents'] = percents
+
+            print('term = ' + term + ' count = ' + str(count) + ' % = ' + str(percent))
+            print('percent found = ' + sum(percents))
+
+            df_count = df_count.sort_values(by = 'percents', ascending=False)
+
+            file_dst = str(dataset + '_untargeted_count')
+            path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
+            df_count.to_csv(path_dst)
+            print('saved to: ' + str(path_dst))
+
+
 
 
     return(df_count)
