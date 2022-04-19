@@ -75,7 +75,7 @@ def word_count(dataset, df):
     for multiplier in multipliers:
 
         str_all = ''
-        terms, counts, percents = [], []
+        terms, counts, percents = [], [], []
 
         for name in df.columns:
 
