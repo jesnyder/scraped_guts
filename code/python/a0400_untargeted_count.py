@@ -130,6 +130,8 @@ def word_count(dataset, df):
         path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
         df_counts.to_csv(path_dst)
         df_counts = pd.DataFrame()
+        str_all = ''
+        terms, counts, percents = [], [], []
         #print('saved to: ' + str(path_dst))
 
         clean_count(dataset, df_counts)      #
