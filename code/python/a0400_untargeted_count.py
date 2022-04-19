@@ -147,7 +147,7 @@ def clean_count(dataset, df):
     save as a shortened df
     """
 
-    df = df[(df['counts'] > 2)]
+    df = df[(df['count'] > 2)]
     df_temp = df
 
     for term in retrieve_list('stop_words'):
