@@ -71,9 +71,11 @@ def word_count(dataset, df):
 
     df_count = pd.DataFrame()
 
-    str_all = ''
+
     for multiplier in multipliers:
 
+        str_all = ''
+        terms, counts = [], []
         for name in df.columns:
 
             col_skip_list = retrieve_list('untargeted_columns_excluded')
@@ -103,17 +105,25 @@ def word_count(dataset, df):
 
         str_all  = str_all.split(' ')
 
-        df_counts = pd.value_counts(np.array(str_all))
+        for value in str_all:
 
-        print('df_counts = ')
-        print(df_counts)
-        #print('df_counts.columns = ')
-        #print(df_counts.columns)
-        #df_count = df_count.sort_values(by = '0', ascending=False)
-        file_dst = str(dataset + '_untargeted_count')
-        path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
-        df_count.to_csv(path_dst)
-        print('saved to: ' + str(path_dst))
+            if value not in terms:
+
+                terms.append(value)
+                count = terms.count(value)
+                counds.append(count)
+
+            df_counts = pd.DataFrame()
+            df_counts['term'] = terms
+            df_counts['count'] = counts
+            df_counts = clean_dataframe(df_counts)
+            df_count = df_count.sort_values(by = 'count', ascending=False)
+
+            file_dst = str(dataset + '_untargeted_count')
+            path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
+            df_counts.to_csv(path_dst)
+            print('saved to: ' + str(path_dst))        #
+
 
     return(df_count)
 
