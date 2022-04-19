@@ -97,8 +97,10 @@ def word_count(dataset, df):
 
         df_counts = pd.value_counts(np.array(str_all))
 
-        print('df_counts.columns = ')
-        print(df_counts.columns)
+        print('df_counts = ')
+        print(df_counts)
+        #print('df_counts.columns = ')
+        #print(df_counts.columns)
         #df_count = df_count.sort_values(by = '0', ascending=False)
         file_dst = str(dataset + '_untargeted_count')
         path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
