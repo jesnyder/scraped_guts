@@ -118,7 +118,7 @@ def word_count(dataset, df):
                 df_counts['count'] = counts
                 df_counts['percent'] = percents
 
-                print('name = ' + name + ' multiplier = ' + str(multiplier) + ' percent complete = ' + str(sum(percents)))
+                print('name = ' + name + ' multiplier = ' + str(multiplier) + ' percent complete = ' + str(round(sum(percents),3)))
 
                 df_counts = df_counts.sort_values(by = 'count', ascending=False)
                 df_counts = clean_dataframe(df_counts)
