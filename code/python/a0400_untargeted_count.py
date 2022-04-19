@@ -111,7 +111,8 @@ def word_count(dataset, df):
                 percent = round(count/all_len*100,3)
                 percents.append(percent)
 
-                str_all.remove(value)
+                while value in str_all:
+                    str_all.remove(value)
 
                 percent_complete = round(sum(percents),1)
                 if percent_complete > percent_complete_threshold:
