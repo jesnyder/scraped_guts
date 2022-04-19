@@ -144,35 +144,19 @@ def clean_count(dataset, df):
     save as a shortened df
     """
 
-
     df = df[(df['counts'] > 2)]
+    df_temp = df
 
-    terms = list(df_count['terms'])
-    counts = list(df_count['counts'])
-    percents = list(df_count['percents'])
+    for term in retrieve_list('stop_words'):
 
-    terms_short = []
-    for term in terms:
-        if term in retrieve_list('stop_words'): continue
-        terms_short.append(term)
+        df_temp =  df_temp[(df_temp['ref_lat'] != term)]
 
-    counts, percents = [], []
-    for term in terms_short:
-
-        df_temp = df[(df['terms'] == term)]
-        count = df.loc[0,'counts']
-        percent = df.loc[0,'percents']
-        counts.append(count)
-        percents.append(percent)
-
-    df = pd.DataFrame()
-    df['terms'] = terms_short
-    df['counts'] = counts
-    df['percents'] = percents
+    df_temp = df_temp.sort_values(by = 'count', ascending=False)
+    df_temp = clean_dataframe(df_temp)
 
     file_dst = str(dataset + '_untargeted_count')
     path_dst = os.path.join(retrieve_path(file_dst), dataset + '_short'  + '.csv')
-    df.to_csv(path_dst)
+    df_temp.to_csv(path_dst)
     print('saved to: ' + str(path_dst))
 
 
