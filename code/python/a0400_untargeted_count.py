@@ -128,8 +128,10 @@ def word_count(dataset, df):
                 file_dst = str(dataset + '_untargeted_count')
                 path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
                 df_counts.to_csv(path_dst)
-                print('saved to: ' + str(path_dst))        #
+                print('saved to: ' + str(path_dst))
 
+
+        clean_count(dataset, df_counts)      #
 
     return(df_count)
 
