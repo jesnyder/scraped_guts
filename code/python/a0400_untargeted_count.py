@@ -75,7 +75,8 @@ def word_count(dataset, df):
     for multiplier in multipliers:
 
         str_all = ''
-        terms, counts = [], []
+        terms, counts, percents = [], []
+
         for name in df.columns:
 
             col_skip_list = retrieve_list('untargeted_columns_excluded')
@@ -105,24 +106,29 @@ def word_count(dataset, df):
 
         str_all  = str_all.split(' ')
 
+        all_len = len(str_all)
         for value in str_all:
 
             if value not in terms:
 
                 terms.append(value)
-                count = terms.count(value)
+                count = str_all.count(value)
                 counts.append(count)
+                percent = round(count/all_len*100,3)
+                percents.append(percent)
+                str_all.remove(value)
 
-            df_counts = pd.DataFrame()
-            df_counts['term'] = terms
-            df_counts['count'] = counts
-            df_counts = clean_dataframe(df_counts)
-            df_count = df_count.sort_values(by = 'count', ascending=False)
+                df_counts = pd.DataFrame()
+                df_counts['term'] = terms
+                df_counts['count'] = counts
+                df_counts['percent'] = percents
+                df_counts = clean_dataframe(df_counts)
+                df_count = df_count.sort_values(by = 'count', ascending=False)
 
-            file_dst = str(dataset + '_untargeted_count')
-            path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
-            df_counts.to_csv(path_dst)
-            print('saved to: ' + str(path_dst))        #
+                file_dst = str(dataset + '_untargeted_count')
+                path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
+                df_counts.to_csv(path_dst)
+                print('saved to: ' + str(path_dst))        #
 
 
     return(df_count)
