@@ -80,7 +80,8 @@ def word_count(dataset, df):
             col_skip_list = retrieve_list('untargeted_columns_excluded')
             if name in col_skip_list: continue
 
-            for i in range(len(list(df['ref_year']))*multiplier):
+            range_multiplier = int(len(list(df['ref_year']))*multiplier)
+            for i in range(range_multiplier):
 
                 # list contents of a cell
                 cell_value = str(df.loc[i,name])
