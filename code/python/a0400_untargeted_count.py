@@ -110,17 +110,18 @@ def word_count(dataset, df):
                 counts.append(count)
                 percent = round(count/all_len*100,3)
                 percents.append(percent)
+                
                 str_all.remove(value)
-
-                df_counts = pd.DataFrame()
-                df_counts['term'] = terms
-                df_counts['count'] = counts
-                df_counts['percent'] = percents
 
                 percent_complete = round(sum(percents),1)
                 if percent_complete > percent_complete_threshold:
                     print('name = ' + name + ' multiplier = ' + str(multiplier) + ' percent complete = ' + str(round(sum(percents),3)))
                     percent_complete_threshold = percent_complete_threshold + 3
+
+        df_counts = pd.DataFrame()
+        df_counts['term'] = terms
+        df_counts['count'] = counts
+        df_counts['percent'] = percents
 
         df_counts = df_counts.sort_values(by = 'count', ascending=False)
         df_counts = clean_dataframe(df_counts)
