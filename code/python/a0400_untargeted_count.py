@@ -50,7 +50,7 @@ def untargeted_word_count(dataset):
 
         work_completed(name, 0)
 
-        df_count = count_untargeted_words(dataset, df)
+        df_count = word_count(dataset, df)
         clean_count(dataset, df_count)
 
         work_completed(name, 1)
@@ -58,10 +58,13 @@ def untargeted_word_count(dataset):
     print('completed untargeted_word_count')
 
 
-def count_untargeted_words(dataset, df):
+
+def word_count(dataset, df):
     """
     count the words in each dataset
     """
+
+    multipliers = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
     print('df = ')
     print(df)
@@ -69,94 +72,34 @@ def count_untargeted_words(dataset, df):
     df_count = pd.DataFrame()
 
     str_all = ''
-    for name in df.columns:
+    for multiplier in multipliers:
 
-        print('name = ' + name)
+        for name in df.columns:
 
-        if name == 'AwardNumber': continue
-        if name == 'address_found': continue
-        if name == 'ARRAAmount': continue
-        if name == 'AwardedAmountToDate': continue
-        if name == 'AwardInstrument': continue
-        if name == 'AwardNumber': continue
-        if name == 'AwardNumber': continue
-        if name == 'Co-PIName(s)': continue
-        if name == 'EndDate': continue
-        if name == 'LastAmendmentDate': continue
-        if name == 'lat_found': continue
-        if name == 'lon_found': continue
-        if name == 'NSFDirectorate': continue
-        if name == 'NSFOrganization': continue
-        if name == 'Organization': continue
-        if name == 'OrganizationCity': continue
-        if name == 'OrganizationPhone': continue
-        if name == 'OrganizationStreet': continue
-        if name == 'OrganizationState': continue
-        if name == 'OrganizationZip': continue
-        if name == 'PIEmailAddress': continue
-        if name == 'PrincipalInvestigator': continue
-        if name == 'Program(s)': continue
-        if name == 'ProgramElementCode(s)': continue
-        if name == 'ProgramManager': continue
-        if name == 'ProgramReferenceCode(s)': continue
-        if name == 'ref_values': continue
-        if name == 'ref_years': continue
-        if name == 'StartDate': continue
-        if name == 'State': continue
+            print('name = ' + name + ' multiplier = ' + str(multiplier))
+            col_skip_list = retrieve_list('untargeted_columns_excluded')
+            if name in col_skip_list: continue
 
-        for i in range(len(list(df['ref_year']))):
+            for i in range(len(list(df['ref_year']))*multiplier):
 
-            # list contents of a cell
-            str_all = str(df.loc[i,name])
-            char_remove = ['.', ':', ';', '"', '/', '\'' , ',', '(', ')', '$', '?', '!', '<', '>']
-            for char in char_remove:
-                str_all  = str_all .replace(char, '')
-            str_all = str_all.lower()
-            str_all  = str_all.split(' ')
-            assert len(str_all) > 0
+                # list contents of a cell
+                cell_value = str(df.loc[i,name])
 
-            for item in str_all :
+                char_remove = ['.', ':', ';', '"', '/', '\'' , ',', '(', ')', '$', '?', '!', '<', '>']
+                for char in char_remove:
+                    cell_value  = cell_value.replace(char, '')
+                cell_value = cell_value.lower()
+                str_all = str_all + cell_value
 
-                df_count_temp = pd.DataFrame()
-                df_count_temp['terms'] = item
-                df_count_temp['counts'] = 1
+        str_all  = str_all.split(' ')
 
-            df_count = df_count.append(df_count_temp)
+        df_counts = pd.value_counts(np.array(str_all))
 
-            for term in list(df_count[terms]):
-
-                df_temp = df_count[(df_count['terms'] == term)]
-
-
-
-
-                print('item = ' + item)
-
-                if item in terms: continue
-
-                terms.append(item)
-                count = str_all.count(item)
-                counts.append(count)
-                percent = round(count/len(str_all)*100,3)
-                percents.append(percent)
-
-                df_count = pd.DataFrame()
-                df_count['terms'] = terms
-                df_count['counts'] = counts
-                df_count['percents'] = percents
-
-            print('term = ' + term + ' count = ' + str(count) + ' % = ' + str(percent))
-            print('percent found = ' + sum(percents))
-
-            df_count = df_count.sort_values(by = 'percents', ascending=False)
-
-            file_dst = str(dataset + '_untargeted_count')
-            path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
-            df_count.to_csv(path_dst)
-            print('saved to: ' + str(path_dst))
-
-
-
+        df_count = df_count.sort_values(by = '0', ascending=False)
+        file_dst = str(dataset + '_untargeted_count')
+        path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
+        df_count.to_csv(path_dst)
+        print('saved to: ' + str(path_dst))
 
     return(df_count)
 

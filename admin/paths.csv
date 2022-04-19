@@ -11,7 +11,7 @@ work_plan,work_plan.csv
 search_terms,user_provided search_terms search.csv
 filter_terms,user_provided search_terms filter.csv
 keyword_categories,user_provided keyword_categories
-term_compare,user_provided keyword_categories 
+term_compare,user_provided keyword_categories
 
 #, acquire info
 nih_awards_downloaded,user_provided nih_awards
@@ -23,6 +23,9 @@ $, geolocate address
 address_not_found,program_generated admin map address_not_found.csv
 lookup_address,user_provided admin lookup_address.csv
 address_list,program_generated admin addresses.csv
+
+$, untargeted
+untargeted_columns_excluded,core_code admin untargeted_columns_excluded.csv
 
 #, gscholar
 json_archival,user_provided gscholar json_archival
