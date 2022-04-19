@@ -123,7 +123,7 @@ def word_count(dataset, df):
                 df_counts['count'] = counts
                 df_counts['percent'] = percents
                 df_counts = clean_dataframe(df_counts)
-                df_count = df_count.sort_values(by = 'count', ascending=False)
+                df_counts = df_counts.sort_values(by = 'count', ascending=False)
 
                 file_dst = str(dataset + '_untargeted_count')
                 path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
