@@ -111,7 +111,7 @@ def word_count(dataset, df):
 
                 terms.append(value)
                 count = terms.count(value)
-                counds.append(count)
+                counts.append(count)
 
             df_counts = pd.DataFrame()
             df_counts['term'] = terms
