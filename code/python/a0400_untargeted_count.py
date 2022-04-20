@@ -64,7 +64,7 @@ def word_count(dataset, df):
     count the words in each dataset
     """
 
-    multipliers = [0.05, 0.1, 0.2, 0.4, 1.0]
+    multipliers = [0.01, 0.05, 0.1, 0.2, 0.4, 1.0]
 
     print('df = ')
     print(df)
@@ -134,18 +134,22 @@ def word_count(dataset, df):
         terms, counts, percents = [], [], []
         #print('saved to: ' + str(path_dst))
 
-        clean_count(dataset, df_counts)      #
+        clean_count(dataset)      #
 
     return(df_count)
 
 
-def clean_count(dataset, df):
+def clean_count(dataset):
     """
     remove stop words
     remove numbers - ints and floats
     remove numbers with $
     save as a shortened df
     """
+
+    file_dst = str(dataset + '_untargeted_count')
+    path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
+    df = pd.read_csv(path_dst)
 
     print('df = ')
     print(df)
