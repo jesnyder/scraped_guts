@@ -294,8 +294,14 @@ def sort_df():
     for file in os.listdir(path_folder):
 
         path = os.path.join(path_folder, file)
+        print('path = ')
+        print(path)
+
         df = pd.read_csv(path)
         df = clean_dataframe(df)
+
+        print('df = ')
+        print(df)
 
         for col_name in df.columns:
 
