@@ -51,11 +51,11 @@ def findLatLong(addresses):
 
         print('address = ' + str(address))
 
-        lat, lon = read_address(location)
+        lat, lon = read_address(address)
         if lat != None and lon != None:
             return(address, lat, lon)
 
-        url = 'https://nominatim.openstreetmap.org/search/' + urllib.parse.quote(address) +'?format=json'
+        url = 'https://nominatim.openstreetmap.org/search/' + urllib.parse.quote(location) +'?format=json'
         response = requests.get(url).json()
         #print(response)
 
@@ -72,11 +72,6 @@ def findLatLong(addresses):
         if lat != None and lon != None:
             record_address(address, lat, lon)
             return(address, lat, lon)
-
-
-
-
-
 
 
 def read_address(address):
