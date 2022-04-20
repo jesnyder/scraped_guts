@@ -151,14 +151,12 @@ def clean_count(dataset):
     path_dst = os.path.join(retrieve_path(file_dst), dataset  + '.csv')
     df = pd.read_csv(path_dst)
 
-    print('df = ')
-    print(df)
     df = df[(df['count'] > 2)]
     df = clean_dataframe(df)
     df_temp = df
 
     for term in retrieve_list('stop_words'):
-
+        
         df_temp =  df_temp[(df_temp['term'] != term)]
 
     df_temp = df_temp.sort_values(by = 'count', ascending=False)

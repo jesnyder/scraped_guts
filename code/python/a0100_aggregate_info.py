@@ -32,10 +32,12 @@ def aggregate_info(dataset):
     # acquire information
     if 'nsf' in dataset: df = acquire_nsf(dataset)
     elif 'nih' in dataset: df = acquire_nih(dataset)
-    elif 'clinical' in dataset: df = acquire_clinical(dataset)
+    elif 'clinical' in dataset:
+        df = acquire_clinical(dataset)
+        list_clinical_trials(dataset)
     elif 'patent' in dataset: df = acquire_patent(dataset)
     elif 'pub' in dataset: df = acquire_pub(dataset)
- 
+
     # format and co-register fields of datasets
     df = coregister(dataset)
 
@@ -479,6 +481,23 @@ def geolocate_nsf(dataset, df):
     df['lat_found'] = lat_found
     df['lon_found'] = lon_found
     return(df)
+
+
+def list_clinical_trials(dataset):
+    """
+
+    """
+    path_term = str(dataset + '_src_query')
+    path_dst = os.path.join(retrieve_path(path_term))
+    file_dst = os.path.join(path_dst, dataset + '.csv')
+    df = pd.read_csv(file_dst)
+    df = clean_dataframe(df)
+
+    
+
+
+
+
 
 
 def list_unique(dataset):
