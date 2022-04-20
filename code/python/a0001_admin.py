@@ -281,6 +281,8 @@ def sort_df(name):
 
     """
 
+    #for file in os.listdir(compare_terms):
+
     path = retrieve_path(name)
     df = pd.read_csv(path)
     df = clean_dataframe(df)
@@ -291,7 +293,7 @@ def sort_df(name):
 
         df = df.sort_values(by = col_name)
         df = clean_dataframe(df)
-        
+
     df.to_csv(path)
 
 
