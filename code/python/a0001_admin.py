@@ -297,7 +297,12 @@ def sort_df():
         print('path = ')
         print(path)
 
-        df = pd.read_csv(path)
+        try:
+            df = pd.read_csv(path, sep='|')
+        except:
+            df = pd.read_csv(path)
+
+
         df = clean_dataframe(df)
 
         print('df = ')
