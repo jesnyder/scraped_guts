@@ -294,8 +294,6 @@ def sort_df():
     for file in os.listdir(path_folder):
 
         path = os.path.join(path_folder, file)
-
-        path = retrieve_path(name)
         df = pd.read_csv(path)
         df = clean_dataframe(df)
 
