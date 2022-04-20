@@ -154,11 +154,12 @@ def clean_count(dataset):
     print('df = ')
     print(df)
     df = df[(df['count'] > 2)]
+    df = clean_dataframe(df)
     df_temp = df
 
     for term in retrieve_list('stop_words'):
 
-        df_temp =  df_temp[(df_temp['ref_lat'] != term)]
+        df_temp =  df_temp[(df_temp['term'] != term)]
 
     df_temp = df_temp.sort_values(by = 'count', ascending=False)
     df_temp = clean_dataframe(df_temp)
