@@ -13,6 +13,15 @@ import requests
 import time
 
 
+def admin():
+    """
+
+    """
+
+    write_paths()
+    sort_df()
+
+
 def clean_dataframe(df):
 
 
@@ -276,25 +285,28 @@ def retrieve_terms(category):
                 return(target_list)
 
 
-def sort_df(name):
+def sort_df():
     """
 
     """
 
-    #for file in os.listdir(compare_terms):
+    path_folder = os.path.join('core_code', 'admin')
+    for file in os.listdir(path_folder):
 
-    path = retrieve_path(name)
-    df = pd.read_csv(path)
-    df = clean_dataframe(df)
+        path = os.path.join(path_folder, file)
 
-    for col_name in df.columns:
-
-        if col_name != list(df.columns)[0]: continue
-
-        df = df.sort_values(by = col_name)
+        path = retrieve_path(name)
+        df = pd.read_csv(path)
         df = clean_dataframe(df)
 
-    df.to_csv(path)
+        for col_name in df.columns:
+
+            if col_name != list(df.columns)[0]: continue
+
+            df = df.sort_values(by = col_name)
+            df = clean_dataframe(df)
+
+        df.to_csv(path)
 
 
 
