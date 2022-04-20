@@ -308,8 +308,8 @@ def sort_df():
 
         df = clean_dataframe(df)
 
-        print('df = ')
-        print(df)
+        #print('df = ')
+        #print(df)
 
         for col_name in df.columns:
 
