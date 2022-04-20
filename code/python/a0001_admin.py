@@ -17,7 +17,6 @@ def admin():
     """
 
     """
-
     write_paths()
     sort_df()
 
