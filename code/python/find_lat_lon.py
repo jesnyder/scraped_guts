@@ -44,10 +44,10 @@ def findLatLong(addresses):
             #print('location = ' + str(location))
             location = location[0]
             #print('location = ' + str(location))
-            address = location
+            #location = location
 
         except:
-            address = address
+            location = address
 
         print('address = ' + str(address))
 
@@ -70,7 +70,7 @@ def findLatLong(addresses):
         print('lat/lon = ' + str(lat) + ' / ' + str(lon))
 
         if lat != None and lon != None:
-            record_address(address, lat, lon)
+            record_address(location, lat, lon)
             return(address, lat, lon)
 
 
