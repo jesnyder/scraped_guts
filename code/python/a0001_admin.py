@@ -297,6 +297,8 @@ def sort_df():
         print('path = ')
         print(path)
 
+        if 'blank_map' in file: continue
+
         try:
             df = pd.read_csv(path, sep='|')
         except:
