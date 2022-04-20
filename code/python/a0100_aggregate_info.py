@@ -227,7 +227,7 @@ def coregister_clinical(dataset, df):
             print('date = ')
             print(date)
             try:
-                #date = date.replace('"', '')
+                date = date.replace('"', '')
                 date_split = date.split(' ')
                 year = date_split[-1]
             except:
