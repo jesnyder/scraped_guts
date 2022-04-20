@@ -30,9 +30,9 @@ def findLatLong(addresses):
     addresses_defined_file = retrieve_path('addresses_defined')
     df = pd.read_csv(addresses_defined_file, sep='|')
     #print('addresses_defined_file =  ' + str(addresses_defined_file))
-    #print('df = ')
-    #print(df)
     #df = clean_dataframe(df)
+    print('df = ')
+    print(df)
 
     for address in addresses:
 
