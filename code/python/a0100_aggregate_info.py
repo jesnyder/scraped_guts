@@ -373,7 +373,6 @@ def geolocate_clinical(dataset, df):
     look up lat and lon for nsf award address
     """
 
-
     for i in range(len(list(df['SponsorCollaborators']))):
 
         name = df.loc[i, 'SponsorCollaborators']
