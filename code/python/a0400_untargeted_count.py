@@ -147,6 +147,8 @@ def clean_count(dataset, df):
     save as a shortened df
     """
 
+    print('df = ')
+    print(df)
     df = df[(df['count'] > 2)]
     df_temp = df
 
