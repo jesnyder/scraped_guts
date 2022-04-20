@@ -224,6 +224,8 @@ def coregister_clinical(dataset, df):
 
         years = []
         for date in list(df['Start Date']):
+            print('date = ')
+            print(date)
             #date = date.replace('"', '')
             date_split = date.split(' ')
             year = date_split[-1]
