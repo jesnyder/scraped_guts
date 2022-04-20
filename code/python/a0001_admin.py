@@ -18,7 +18,7 @@ def admin():
 
     """
     write_paths()
-    sort_df()
+    #sort_df()
 
 
 def clean_dataframe(df):
