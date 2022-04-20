@@ -23,6 +23,7 @@ $, geolocate address
 address_not_found,program_generated admin map address_not_found.csv
 lookup_address,user_provided admin lookup_address.csv
 address_list,program_generated admin addresses.csv
+addresses_defined,core_code admin addresses_defined.csv
 
 $, untargeted
 untargeted_columns_excluded,core_code admin untargeted_columns_excluded.csv
