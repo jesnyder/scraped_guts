@@ -40,7 +40,9 @@ def findLatLong(addresses):
             df_temp = df[(df['name'] == address)]
             print('df_temp = ')
             print(df_temp)
-            location = list(df_temp['location'])[0]
+            location = list(df_temp['location'])
+            print('location = ' + str(location))
+            location = location[0]
             print('location = ' + str(location))
             address = location
 
