@@ -51,7 +51,7 @@ def findLatLong(addresses):
 
         print('address = ' + str(address))
 
-        lat, lon = read_address(address)
+        lat, lon = read_address(location)
         if lat != None and lon != None:
             return(address, lat, lon)
 
@@ -70,7 +70,7 @@ def findLatLong(addresses):
         print('lat/lon = ' + str(lat) + ' / ' + str(lon))
 
         if lat != None and lon != None:
-            record_address(location, lat, lon)
+            record_address(address, lat, lon)
             return(address, lat, lon)
 
 
