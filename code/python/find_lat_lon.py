@@ -41,7 +41,7 @@ def findLatLong(addresses):
             print('df_temp = ')
             print(df_temp)
             location = list(df_temp['location'])[0]
-            rint('location = ' + str(location))
+            print('location = ' + str(location))
             address = location
 
         except:
