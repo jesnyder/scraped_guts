@@ -374,7 +374,7 @@ def geolocate_clinical(dataset, df):
     """
 
     print('df.columns = ')
-    print(df.columns
+    print(df.columns)
 
     for i in range(len(list(df['SponsorCollaborators']))):
 
