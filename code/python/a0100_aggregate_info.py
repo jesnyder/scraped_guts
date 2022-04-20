@@ -376,9 +376,9 @@ def geolocate_clinical(dataset, df):
     print('df.columns = ')
     print(df.columns)
 
-    for i in range(len(list(df['SponsorCollaborators']))):
+    for i in range(len(list(df['Sponsor/Collaborators']))):
 
-        name = df.loc[i, 'SponsorCollaborators']
+        name = df.loc[i, 'Sponsor/Collaborators']
         name = name.replace('"', '')
         names = name.split('|')
 
