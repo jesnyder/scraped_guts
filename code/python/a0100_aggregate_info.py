@@ -349,7 +349,7 @@ def geolocate(dataset):
         name = 'geolocate_clinical'
         if work_to_do(name):
             work_completed(name, 0)
-            df = geolocate_nih(dataset, df)
+            df = geolocate_clinical(dataset, df)
             work_completed(name, 1)
 
     else:
