@@ -380,7 +380,7 @@ def geolocate_clinical(dataset, df):
     for i in range(len(list(df['Sponsor/Collaborators']))):
 
         percent_complete = round(i/len(list(df['Sponsor/Collaborators']))*100,2)
-        print('percent_complete = ' + str(percent_complete))
+        print('percent_complete = ' + str(percent_complete) + ' i = ' + str(i))
 
         name = df.loc[i, 'Sponsor/Collaborators']
         name = name.replace('"', '')
