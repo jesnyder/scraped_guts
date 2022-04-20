@@ -394,6 +394,9 @@ def geolocate_clinical(dataset, df):
         for name in names: addresses.append(name)
         for location in locations: addresses.append(location)
 
+        print('addresses = ')
+        print(addresses)
+        
         address, lat, lon = findLatLong(addresses)
 
         address_found.append(address)
