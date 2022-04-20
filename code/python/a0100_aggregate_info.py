@@ -376,6 +376,7 @@ def geolocate_clinical(dataset, df):
     print('df.columns = ')
     print(df.columns)
 
+    address_found, lat_found, lon_found = [], [], []
     for i in range(len(list(df['Sponsor/Collaborators']))):
 
         name = df.loc[i, 'Sponsor/Collaborators']
