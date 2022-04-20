@@ -29,21 +29,21 @@ def findLatLong(addresses):
     #print('geolocating.')
     addresses_defined_file = retrieve_path('addresses_defined')
     df = pd.read_csv(addresses_defined_file, sep='|')
-    print('addresses_defined_file =  ' + str(addresses_defined_file))
-    print('df = ')
-    print(df)
+    #print('addresses_defined_file =  ' + str(addresses_defined_file))
+    #print('df = ')
+    #print(df)
     #df = clean_dataframe(df)
 
     for address in addresses:
 
         try:
             df_temp = df[(df['name'] == address)]
-            print('df_temp = ')
-            print(df_temp)
+            #print('df_temp = ')
+            #print(df_temp)
             location = list(df_temp['location'])
-            print('location = ' + str(location))
+            #print('location = ' + str(location))
             location = location[0]
-            print('location = ' + str(location))
+            #print('location = ' + str(location))
             address = location
 
         except:
