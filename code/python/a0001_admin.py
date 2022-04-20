@@ -285,8 +285,16 @@ def sort_df(name):
     df = pd.read_csv(path)
     df = clean_dataframe(df)
 
-    for colname in df.columns:
+    for col_name in df.columns:
+
+        if col_name != list(df.columns)[0]: continue
+
+        df = df.sort_values(by = col_name)
+        df = clean_dataframe(df)
         
+    df.to_csv(path)
+
+
 
 
 def write_paths():
