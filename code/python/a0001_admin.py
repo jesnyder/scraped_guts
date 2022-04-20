@@ -298,7 +298,7 @@ def sort_df():
         print(path)
 
         if 'blank_map' in file: continue
-        if 'name_dataset' in file: continue
+        if 'paths.csv' in file: continue
 
         try:
             df = pd.read_csv(path, sep='|')
