@@ -385,9 +385,9 @@ def geolocate_clinical(dataset, df):
         location = df.loc[i, 'Locations']
         location = name.replace('"', '')
         if '|' in locations:
-            locations = locations.split('|')
+            locations = location.split('|')
         else:
-            locations = [locations]
+            locations = [location]
 
         addresses = []
         for name in names: addresses.append(name)
