@@ -28,7 +28,7 @@ def findLatLong(addresses):
 
     #print('geolocating.')
     addresses_defined_file = retrieve_path('addresses_defined')
-    df = pd.read_csv(addresses_defined_file)
+    df = pd.read_csv(addresses_defined_file, sep='|')
     print('addresses_defined_file =  ' + str(addresses_defined_file))
     print('df = ')
     print(df)
