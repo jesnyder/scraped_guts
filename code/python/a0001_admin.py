@@ -276,6 +276,19 @@ def retrieve_terms(category):
                 return(target_list)
 
 
+def sort_df(name):
+    """
+
+    """
+
+    path = retrieve_path(name)
+    df = pd.read_csv(path)
+    df = clean_dataframe(df)
+
+    for colname in df.columns:
+        
+
+
 def write_paths():
     """
     write the paths for all the articles
