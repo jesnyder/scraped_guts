@@ -224,7 +224,7 @@ def coregister_clinical(dataset, df):
 
         years = []
         for date in list(df['Start Date']):
-            date = date.replace('"', '')
+            #date = date.replace('"', '')
             date_split = date.split(' ')
             year = date_split[-1]
             years.append(year)
@@ -493,7 +493,7 @@ def list_clinical_trials(dataset):
     df = pd.read_csv(file_dst)
     df = clean_dataframe(df)
 
-    
+
 
 
 
