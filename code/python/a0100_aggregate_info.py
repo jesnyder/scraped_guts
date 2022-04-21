@@ -515,7 +515,7 @@ def list_clinical_trials(dataset):
     print(df.columns)
 
     organizations = []
-    target_col_names = ['Sponsor/Collaborator', 'Locations']
+    target_col_names = ['Sponsor/Collaborators', 'Locations']
     for col_name in target_col_names:
         for i in range(len(df[col_name])):
             organization = df.loc[i, col_name]
