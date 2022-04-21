@@ -536,6 +536,8 @@ def list_clinical_trials(dataset):
 
     df = pd.DataFrame()
     df['organizations'] = organizations
+    df = df.sort_values('organizations', ascending=True)
+    df = clean_dataframe(df)
     df.to_csv(retrieve_path('clinical_orgs'))
 
 
