@@ -511,11 +511,24 @@ def list_clinical_trials(dataset):
     df = pd.read_csv(file_dst)
     df = clean_dataframe(df)
 
+    organizations = []
+    target_col_names = ['Sponsor/Collaborator', 'Locations']
+    for col_name in target_col_names:
+        for i in range(len(df[col_name])):
+            organization = df.loc[i, col_name]
 
+            if '|' in organiation:
+                organization = organization.split('|')
+            else:
+                organization = [organization]
 
+            for org in organization:
+                if org not in organzations:
+                    organizations.append(org)
 
-
-
+    df = pd.DataFrame()
+    df['organizations'] = organizations
+    df.to_csv(retrieve_path('clinical_orgs'))
 
 
 def list_unique(dataset):

@@ -28,6 +28,9 @@ addresses_defined,core_code admin addresses_defined.csv
 $, untargeted
 untargeted_columns_excluded,core_code admin untargeted_columns_excluded.csv
 
+$, clinical
+clinical_orgs,program_generated clinical_trials 04_summarized unique_orgs.csv
+
 #, gscholar
 json_archival,user_provided gscholar json_archival
 article_url_scraped,user_provided gscholar article scraped_url.csv
