@@ -569,7 +569,7 @@ def list_clinical_trials(dataset):
         #assert len(str_org_urls) > 0
 
         extra_commas = 20 - len(org_urls)
-        for i in range(len(extra_commas)):
+        for i in range(extra_commas):
             str_org_urls.append(' , ')
 
         urls.append(str_org_urls)
