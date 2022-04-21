@@ -568,7 +568,7 @@ def list_clinical_trials(dataset):
         #print('org = ' + str(org))
         #assert len(str_org_urls) > 0
 
-        extra_commas = 20 - len(org_urls):
+        extra_commas = 20 - len(org_urls)
         for i in range(len(extra_commas)):
             str_org_urls.append(' , ')
 
