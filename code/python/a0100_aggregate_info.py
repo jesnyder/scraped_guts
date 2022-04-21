@@ -523,7 +523,7 @@ def list_clinical_trials(dataset):
 
             if '"' in org: org = org.replace('"', '')
 
-            print('org = ' + str(org))
+            #print('org = ' + str(org))
 
             if '|' in org:
                 orgs = org.split('|')
@@ -542,6 +542,7 @@ def list_clinical_trials(dataset):
 
             for item in list(df[col_name]):
 
+                print('org = ' + org)
                 if org not in item: continue
 
                 df_temp =  df[(df[col_name] == org)]
