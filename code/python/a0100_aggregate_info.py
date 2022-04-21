@@ -546,7 +546,7 @@ def list_clinical_trials(dataset):
 
                 try:
                     item = float(item)
-                    print('item = ' + str(item))
+                    #print('item = ' + str(item))
                     continue
                 except:
                     print('item = ' + str(item))
@@ -558,6 +558,8 @@ def list_clinical_trials(dataset):
 
                 for url in url_temps:
                     if url not in org_urls:
+                        print('url = ')
+                        print(url)
                         org_urls.append(url)
 
         str_org_urls=" ".join(str(elem) for elem in org_urls)
