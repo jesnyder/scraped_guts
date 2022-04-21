@@ -583,7 +583,7 @@ def list_clinical_trials(dataset):
     url_name = 'urls'
     for i in range(50):
         url_name = url_name + ' , '
-    df['url_name'] = url_name
+    df['url_name'] = urls
 
     df = df.sort_values('counts', ascending=False)
     df = clean_dataframe(df)
