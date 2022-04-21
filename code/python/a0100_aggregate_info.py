@@ -539,10 +539,11 @@ def list_clinical_trials(dataset):
 
         org_urls = []
         for col_name in target_col_names:
-            
+
             for item in list(df[col_name]):
 
-                print('item = ' + item)
+                print('item = ' )
+                print(item)
                 if org not in item: continue
 
                 df_temp =  df[(df[col_name] == org)]
