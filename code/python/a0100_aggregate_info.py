@@ -518,15 +518,15 @@ def list_clinical_trials(dataset):
     target_col_names = ['Sponsor/Collaborators', 'Locations']
     for col_name in target_col_names:
         for i in range(len(df[col_name])):
-            organization = df.loc[i, col_name]
+            org = df.loc[i, col_name]
 
-            if '|' in organiation:
-                organization = organization.split('|')
+            if '|' in org:
+                orgs = orgs.split('|')
             else:
-                organization = [organization]
+                orgs = [org]
 
-            for org in organization:
-                if org not in organzations:
+            for org in orgs:
+                if org not in organizations:
                     organizations.append(org)
 
     df = pd.DataFrame()
