@@ -520,6 +520,9 @@ def list_clinical_trials(dataset):
         for i in range(len(df[col_name])):
             org = df.loc[i, col_name]
             org = str(org)
+
+            if '"' in org: org = org.replace('"', '')
+
             print('org = ' + str(org))
 
             if '|' in org:
