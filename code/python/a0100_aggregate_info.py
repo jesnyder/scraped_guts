@@ -542,15 +542,12 @@ def list_clinical_trials(dataset):
 
             for item in list(df[col_name]):
 
-                """
                 try:
                     item = float(item)
-                    print('item = ' )
-                    print(item)
+                    print('item = ' + str(item))
                     continue
                 except:
-                """
-                print('item = ' + str(item))
+                    print('item = ' + str(item))
 
                 if org not in item: continue
 
