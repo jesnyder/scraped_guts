@@ -542,14 +542,14 @@ def list_clinical_trials(dataset):
 
             for item in list(df[col_name]):
 
-                if org in item:
+                if org not in item: continue
 
-                    df_temp =  df[(df[col_name] == org)]
-                    url_temps = list(df_temp['URL'])
+                df_temp =  df[(df[col_name] == org)]
+                url_temps = list(df_temp['URL'])
 
-                    for url in url_temps:
-                        if url not in org_urls:
-                            org_urls.append(url)
+                for url in url_temps:
+                    if url not in org_urls:
+                        org_urls.append(url)
 
         str_org_urls=" ".join(str(elem) for elem in org_urls)
         urls.append(str_org_urls)
