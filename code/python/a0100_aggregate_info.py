@@ -559,8 +559,8 @@ def list_clinical_trials(dataset):
 
                 for url in url_temps:
                     if url not in org_urls:
-                        print('url = ')
-                        print(url)
+                        #print('url = ')
+                        #print(url)
                         org_urls.append(url)
 
 
