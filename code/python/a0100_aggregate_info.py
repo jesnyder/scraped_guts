@@ -534,8 +534,31 @@ def list_clinical_trials(dataset):
                 if org not in organizations:
                     organizations.append(org)
 
+    urls = []
+    for org in organizations:
+
+        org_urls = []
+        for col_name in target_col_names:
+
+            for item in list(df[col_name]):
+
+                if org in item:
+
+                    df_temp =  df[(df[col_name] == org)]
+                    url_temp = list(df_temp['URL'])
+
+                    for url in url_temps:
+                        if url not in org_urls:
+                            org_urls.append(url)
+
+        str_org_urls=" ".join(str(elem) for elem in org_urls)
+        urls.append(str_org_urls)
+
+
+
     df = pd.DataFrame()
     df['organizations'] = organizations
+    df['url'] = urls
     df = df.sort_values('organizations', ascending=True)
     df = clean_dataframe(df)
     df.to_csv(retrieve_path('clinical_orgs'))
