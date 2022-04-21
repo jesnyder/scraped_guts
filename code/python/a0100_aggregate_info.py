@@ -544,6 +544,13 @@ def list_clinical_trials(dataset):
 
                 print('item = ' )
                 print(item)
+                try:
+                    item = float(item)
+                    continue
+                except:
+                    print('item = ' )
+                    print(item)
+
                 if org not in item: continue
 
                 df_temp =  df[(df[col_name] == org)]
