@@ -569,7 +569,7 @@ def list_clinical_trials(dataset):
         #print('org = ' + str(org))
         #assert len(str_org_urls) > 0
 
-        extra_commas = 20 - len(org_urls)
+        extra_commas = 50 - len(org_urls)
         for i in range(extra_commas):
             str_org_urls = str_org_urls + ' , '
 
@@ -579,7 +579,12 @@ def list_clinical_trials(dataset):
     df = pd.DataFrame()
     df['counts'] = counts
     df['organizations'] = organizations
-    df['url'] = urls
+
+    url_name = 'urls'
+    for i in range(50):
+        url_name = url_name + ' , '
+    df['url_name'] = url_name
+
     df = df.sort_values('counts', ascending=False)
     df = clean_dataframe(df)
     df.to_csv(retrieve_path('clinical_orgs'))
