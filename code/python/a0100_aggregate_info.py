@@ -536,6 +536,7 @@ def list_clinical_trials(dataset):
                 if org not in organizations:
                     organizations.append(org)
 
+    counts = []
     urls = []
     for org in organizations:
 
@@ -563,7 +564,7 @@ def list_clinical_trials(dataset):
                         #print(url)
                         org_urls.append(url)
 
-
+        counts.append(len(org_urls))
         str_org_urls=" , ".join(str(elem) for elem in org_urls)
         #print('org = ' + str(org))
         #assert len(str_org_urls) > 0
@@ -576,9 +577,10 @@ def list_clinical_trials(dataset):
 
 
     df = pd.DataFrame()
+    df['counts'] = counts
     df['organizations'] = organizations
     df['url'] = urls
-    df = df.sort_values('organizations', ascending=True)
+    df = df.sort_values('counts', ascending=False)
     df = clean_dataframe(df)
     df.to_csv(retrieve_path('clinical_orgs'))
 
