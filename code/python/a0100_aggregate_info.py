@@ -554,7 +554,7 @@ def list_clinical_trials(dataset):
 
                 if str(org) not in str(item): continue
 
-                df_temp =  df[(df[col_name] == org)]
+                df_temp =  df[(df[col_name] == item)]
                 url_temps = list(df_temp['URL'])
 
                 for url in url_temps:
