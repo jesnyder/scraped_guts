@@ -563,7 +563,9 @@ def list_clinical_trials(dataset):
                         print(url)
                         org_urls.append(url)
 
+
         str_org_urls=" ".join(str(elem) for elem in org_urls)
+        assert len(str_org_urls) > 0
         urls.append(str_org_urls)
 
 
