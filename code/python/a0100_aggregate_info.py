@@ -549,7 +549,8 @@ def list_clinical_trials(dataset):
                     #print('item = ' + str(item))
                     continue
                 except:
-                    print('item = ' + str(item))
+                    item = item
+                    #print('item = ' + str(item))
 
                 if str(org) not in str(item): continue
 
