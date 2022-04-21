@@ -516,7 +516,9 @@ def list_clinical_trials(dataset):
 
     organizations = []
     target_col_names = ['Sponsor/Collaborators', 'Locations']
+
     for col_name in target_col_names:
+
         for i in range(len(df[col_name])):
             org = df.loc[i, col_name]
             org = str(org)
@@ -549,7 +551,7 @@ def list_clinical_trials(dataset):
                 except:
                     print('item = ' + str(item))
 
-                if org not in item: continue
+                if str(org) not in str(item): continue
 
                 df_temp =  df[(df[col_name] == org)]
                 url_temps = list(df_temp['URL'])
@@ -560,7 +562,6 @@ def list_clinical_trials(dataset):
 
         str_org_urls=" ".join(str(elem) for elem in org_urls)
         urls.append(str_org_urls)
-
 
 
     df = pd.DataFrame()
