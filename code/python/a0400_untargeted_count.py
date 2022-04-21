@@ -51,7 +51,7 @@ def untargeted_word_count(dataset):
         work_completed(name, 0)
 
         df_count = word_count(dataset, df)
-        clean_count(dataset, df_count)
+        clean_count(dataset)
 
         work_completed(name, 1)
 
@@ -156,7 +156,7 @@ def clean_count(dataset):
     df_temp = df
 
     for term in retrieve_list('stop_words'):
-        
+
         df_temp =  df_temp[(df_temp['term'] != term)]
 
     df_temp = df_temp.sort_values(by = 'count', ascending=False)
