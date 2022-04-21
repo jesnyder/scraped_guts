@@ -523,7 +523,7 @@ def list_clinical_trials(dataset):
             print('org = ' + str(org))
 
             if '|' in org:
-                orgs = orgs.split('|')
+                orgs = org.split('|')
             else:
                 orgs = [org]
 
