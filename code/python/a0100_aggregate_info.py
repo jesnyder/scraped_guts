@@ -511,6 +511,9 @@ def list_clinical_trials(dataset):
     df = pd.read_csv(file_dst)
     df = clean_dataframe(df)
 
+    print('df.columns = ')
+    print(df.columns)
+
     organizations = []
     target_col_names = ['Sponsor/Collaborator', 'Locations']
     for col_name in target_col_names:
