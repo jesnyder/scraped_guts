@@ -631,6 +631,10 @@ def webscrape_clinical(url):
             else:
                 counter = 0
 
+        print('df = ')
+        print(df)
+        print('term = ' + term)
+        print('counter = ' + str(counter))
         df[term] = [counter]
 
     return(df)
