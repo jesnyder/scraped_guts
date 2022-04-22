@@ -618,6 +618,7 @@ def webscrape_clinical(url):
     df = pd.DataFrame()
     for term in terms:
 
+        term_name = term
         if '|' in term:
             term = term.split('|')
         else:
@@ -633,9 +634,9 @@ def webscrape_clinical(url):
 
         print('df = ')
         print(df)
-        print('term = ' + term)
+        print('term = ' + term_name)
         print('counter = ' + str(counter))
-        df[term] = [counter]
+        df[term_name] = [counter]
 
     return(df)
 
