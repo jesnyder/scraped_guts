@@ -629,6 +629,8 @@ def webscrape_clinical(url):
     df = pd.DataFrame()
     for term in terms:
 
+        counter = 0
+
         term_name = term
         if '|' in term:
             term = term.split('|')
@@ -640,9 +642,7 @@ def webscrape_clinical(url):
             if item in str(soup):
                 counter = 1
                 continue
-            else:
-                counter = 0
-
+        
         df[term_name] = [counter]
 
     return(df)
