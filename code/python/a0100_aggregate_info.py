@@ -542,7 +542,7 @@ def list_clinical_trials(dataset):
     for org in organizations:
 
         org_urls = []
-        df_count_single = pd.DataFrame()
+        df_count = pd.DataFrame()
         for col_name in target_col_names:
 
             for item in list(df[col_name]):
