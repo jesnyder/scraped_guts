@@ -584,23 +584,24 @@ def list_clinical_trials(dataset):
         urls.append(str_org_urls)
 
 
-    df = pd.DataFrame()
-    df['counts'] = counts
-    df['organizations'] = organizations
+    df_result = pd.DataFrame()
+    df_result ['counts'] = counts
+    df_result ['organizations'] = organizations
 
     print('df_found_all = ')
     print(df_found_all)
+
     for col in df_found_all.columns:
-        df[col] = list(df_found_all[col])
+        df_result [col] = list(df_found_all[col])
 
     url_name = 'urls'
     for i in range(50):
         url_name = url_name + ' , '
-    df[url_name] = urls
+    df_result [url_name] = urls
 
-    df = df.sort_values('counts', ascending=False)
-    df = clean_dataframe(df)
-    df.to_csv(retrieve_path('clinical_orgs'))
+    df_result  = df.sort_values('counts', ascending=False)
+    df_result  = clean_dataframe(df_result )
+    df_result .to_csv(retrieve_path('clinical_orgs'))
 
 
 def webscrape_clinical(url):
