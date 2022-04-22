@@ -567,12 +567,12 @@ def list_clinical_trials(dataset):
 
                         df_count = webscrape_clinical(url)
 
-        print('df_count = ')
-        print(df_count)
-
         df_found = pd.DataFrame()
         for col in df_count.columns:
             df_found[col] = [sum(list(df_count[col]))]
+
+        print('df_found = ')
+        print(df_found)
 
         df_found_all = df_found_all.append(df_found)
 
@@ -619,7 +619,7 @@ def webscrape_clinical(url):
     soup = BeautifulSoup(html, 'html.parser')
 
     terms = []
-    terms.append('MSC')
+    terms.append('MSC|mesenchymal stromal cell|mesenchymal stem cell')
     terms.append('genetic engineering')
     terms.append('exosomes|exosome|extracellular vesicle|extracellular vesicles')
 
