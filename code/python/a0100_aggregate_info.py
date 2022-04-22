@@ -599,8 +599,10 @@ def list_clinical_trials(dataset):
     df_result ['counts'] = counts
     df_result ['organizations'] = organizations
 
+    print('df_result =')
+    print(df_result)
     for col in df_found_all.columns:
-        df_result [col] = list(df_found_all[col])
+        df_result[col] = list(df_found_all[col])
 
     url_name = 'urls'
     for i in range(50):
