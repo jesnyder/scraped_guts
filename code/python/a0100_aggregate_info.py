@@ -621,7 +621,7 @@ def webscrape_clinical(url):
     soup = BeautifulSoup(html, 'html.parser')
 
     terms = []
-    terms.append('MSC|mesenchymal stromal cell|mesenchymal stem cell')
+    terms.append('MSC|mesenchymal stromal|mesenchymal stem')
     terms.append('genetic engineering|gene edit|genetically engineered')
     terms.append('exosomes|exosome|extracellular vesicle|extracellular vesicles')
 
