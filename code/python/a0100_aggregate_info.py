@@ -573,7 +573,8 @@ def list_clinical_trials(dataset):
         for col in df_count.columns:
             df_found[col] = [sum(list(df_count[col]))]
 
-        assert df_found != pd.DataFrame()
+        df_blank = pd.DataFrame()
+        assert df_found != df_blank
         df_found_all = df_found_all.append(df_found)
         df_found_all = clean_dataframe(df_found_all)
         print('df_found_all = ')
