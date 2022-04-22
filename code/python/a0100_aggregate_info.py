@@ -565,10 +565,10 @@ def list_clinical_trials(dataset):
                         #print(url)
                         org_urls.append(url)
 
-                        df = webscrape_clinical(url)
+                        df_count = webscrape_clinical(url)
 
         df_found = pd.DataFrame()
-        for col in df.columns: df_found[col] = sum(list(df[col]))
+        for col in df.columns: df_found[col] = sum(list(df_count[col]))
         df_found_all = df_found_all.append(df_found)
 
         counts.append(len(org_urls))
