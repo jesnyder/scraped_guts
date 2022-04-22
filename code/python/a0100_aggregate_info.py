@@ -575,8 +575,8 @@ def list_clinical_trials(dataset):
 
         df_found_all = df_found_all.append(df_found)
         df_found_all = clean_dataframe(df_found_all)
-        print('df_found = ')
-        print(df_found)
+        print('df_found_all = ')
+        print(df_found_all)
 
         counts.append(len(org_urls))
         str_org_urls=" , ".join(str(elem) for elem in org_urls)
