@@ -622,7 +622,7 @@ def webscrape_clinical(url):
 
     terms = []
     terms.append('MSC|mesenchymal stromal cell|mesenchymal stem cell')
-    terms.append('genetic engineering')
+    terms.append('genetic engineering|gene edit|genetically engineered')
     terms.append('exosomes|exosome|extracellular vesicle|extracellular vesicles')
 
     df = pd.DataFrame()
