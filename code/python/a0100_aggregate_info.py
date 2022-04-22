@@ -538,6 +538,7 @@ def list_clinical_trials(dataset):
 
     counts = []
     urls = []
+    df_found_all = pd.DataFrame()
     for org in organizations:
 
         org_urls = []
@@ -564,6 +565,12 @@ def list_clinical_trials(dataset):
                         #print(url)
                         org_urls.append(url)
 
+                        df = webscrape_clinical(url)
+
+        df_found = pd.DataFrame()
+        for col in df.columns: df_found[col] = sum(list(df[col]))
+        df_found_all = df_found_all.append(df_found)
+
         counts.append(len(org_urls))
         str_org_urls=" , ".join(str(elem) for elem in org_urls)
         #print('org = ' + str(org))
@@ -580,6 +587,9 @@ def list_clinical_trials(dataset):
     df['counts'] = counts
     df['organizations'] = organizations
 
+    for col in df_found_all.columns:
+        df[col] = list(df_found_all[col])
+
     url_name = 'urls'
     for i in range(50):
         url_name = url_name + ' , '
@@ -588,6 +598,44 @@ def list_clinical_trials(dataset):
     df = df.sort_values('counts', ascending=False)
     df = clean_dataframe(df)
     df.to_csv(retrieve_path('clinical_orgs'))
+
+
+def webscrape_clinical(url):
+    """
+    from the NIH ClinicalTrials.gov url
+    scrape the page contents
+    return if target words are found
+    """
+
+    html = requests.get(url).text
+    soup = BeautifulSoup(html, 'html.parser')
+
+    terms = []
+    terms.append('MSC')
+    terms.append('genetic engineering')
+    terms.append('exosomes|exosome|extracellular vesicle|extracellular vesicles')
+
+    df = pd.DataFrame()
+    for term in terms:
+
+        if '|' in term:
+            term = term.split('|')
+        else:
+            term = [term]
+
+        for item in term:
+
+            if item in str(soup):
+                counter = 1
+                continue
+            else:
+                counter = 0
+
+        df[term] = [counter]
+
+    return(df)
+
+
 
 
 def list_unique(dataset):
