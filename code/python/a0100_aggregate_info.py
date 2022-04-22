@@ -571,7 +571,7 @@ def list_clinical_trials(dataset):
         print(df_count)
 
         df_found = pd.DataFrame()
-        for col in df.columns:
+        for col in df_count.columns:
             df_found[col] = [sum(list(df_count[col]))]
 
         df_found_all = df_found_all.append(df_found)
