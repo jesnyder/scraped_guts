@@ -594,9 +594,6 @@ def list_clinical_trials(dataset):
     df_result ['counts'] = counts
     df_result ['organizations'] = organizations
 
-    print('df_found_all = ')
-    print(df_found_all)
-
     for col in df_found_all.columns:
         df_result [col] = list(df_found_all[col])
 
@@ -642,7 +639,7 @@ def webscrape_clinical(url):
             if item in str(soup):
                 counter = 1
                 continue
-        
+
         df[term_name] = [counter]
 
     return(df)
