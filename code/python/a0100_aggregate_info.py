@@ -542,6 +542,7 @@ def list_clinical_trials(dataset):
     for org in organizations:
 
         org_urls = []
+        df_count_single = pd.DataFrame()
         for col_name in target_col_names:
 
             for item in list(df[col_name]):
@@ -565,7 +566,8 @@ def list_clinical_trials(dataset):
                         #print(url)
                         org_urls.append(url)
 
-                        df_count = webscrape_clinical(url)
+                        df_count_single = webscrape_clinical(url)
+                        df_count = df_count_single.append(df_count)
 
         df_found = pd.DataFrame()
         for col in df_count.columns:
