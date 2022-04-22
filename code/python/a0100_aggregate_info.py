@@ -619,11 +619,12 @@ def webscrape_clinical(url):
 
     html = requests.get(url).text
     soup = BeautifulSoup(html, 'html.parser')
+    soup = str(soup)
 
     terms = []
     terms.append('MSC|mesenchymal stromal|mesenchymal stem')
     terms.append('genetic engineering|gene edit|genetically engineered')
-    terms.append('exosomes|exosome|extracellular vesicle|extracellular vesicles')
+    terms.append('EV|EVs|exosomes|exosome|extracellular vesicle|extracellular vesicles')
 
     df = pd.DataFrame()
     for term in terms:
