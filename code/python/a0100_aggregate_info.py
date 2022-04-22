@@ -573,10 +573,10 @@ def list_clinical_trials(dataset):
         for col in df_count.columns:
             df_found[col] = [sum(list(df_count[col]))]
 
+        df_found_all = df_found_all.append(df_found)
+        df_found_all = clean_dataframe(df_found_all)
         print('df_found = ')
         print(df_found)
-
-        df_found_all = df_found_all.append(df_found)
 
         counts.append(len(org_urls))
         str_org_urls=" , ".join(str(elem) for elem in org_urls)
