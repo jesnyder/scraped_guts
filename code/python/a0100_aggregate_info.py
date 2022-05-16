@@ -18,6 +18,7 @@ from a0001_admin import retrieve_path
 from a0001_admin import write_paths
 from a0001_admin import work_completed
 from a0001_admin import work_to_do
+from query_pubs import query_pubs
 from find_lat_lon import findLatLong
 
 
@@ -183,6 +184,8 @@ def acquire_pub():
     """
 
     df = pd.DataFrame()
+
+    query_pubs()
     return(df)
 
 
