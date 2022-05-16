@@ -37,8 +37,8 @@ def query_pubs():
     #json_to_dataframe()
     #aggregate_json()
 
-    search_articles()
-    aggregate_df()
+    #search_articles()
+    #aggregate_df()
 
     """
 
@@ -324,6 +324,7 @@ def aggregate_json():
     """
 
 
+
 def search_articles():
     """
 
@@ -417,11 +418,6 @@ def search_articles():
         df.to_csv(df_dst)
         #print('df_dst = ' + str(df_dst))
 
-
-def aggregate_df():
-    """
-
-    """
 
 
 def scrape_gscholar_article():
