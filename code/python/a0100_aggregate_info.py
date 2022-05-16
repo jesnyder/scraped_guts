@@ -184,8 +184,7 @@ def acquire_pub(dataset):
     """
 
     df = pd.DataFrame()
-
-    query_pubs()
+    query_pubs(dataset)
     return(df)
 
 

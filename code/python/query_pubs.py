@@ -26,14 +26,14 @@ from a0001_admin import work_to_do
 Reference: https://python.plainenglish.io/scrape-google-scholar-with-python-fc6898419305
 """
 
-def query_pubs():
+def query_pubs(dataset):
     """
     Maximum information
     Minimal scrapes
     Check for redundency
     """
 
-    search_gscholar()
+    search_gscholar(dataset)
     #json_to_dataframe()
     #aggregate_json()
 
@@ -266,7 +266,7 @@ def json_to_dataframe():
             df_term.to_csv(df_file)
 
 
-def search_gscholar():
+def search_gscholar(dataset):
     """
     Retrieve json year by year
     """
@@ -295,11 +295,9 @@ def search_gscholar():
                 url = url + '&as_yhi=' + str(year)
 
                 # check if recently scraped
-                """
-                if check_scraped('gscholar', term, year, num_str):
-                    print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + num_str)
+                if check_scraped(dataset, term, year, num_str):
+                    print('found: ' + dataset + ' ' + term +  ' ' + str(year) + ' ' + num_str)
                     continue
-                """
 
                 soup = retrieve_html(url)
                 if error_check(soup) == True: return('error')
