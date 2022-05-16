@@ -300,7 +300,7 @@ def search_gscholar():
                     print('found: ' + 'gscholar' + ' ' + term +  ' ' + str(year) + ' ' + num_str)
                     continue
                 """
-                
+
                 soup = retrieve_html(url)
                 if error_check(soup) == True: return('error')
 
@@ -312,7 +312,7 @@ def search_gscholar():
                 data_json = json.dumps(data, indent = 2, ensure_ascii = False)
                 print(data_json)
 
-                name_src, name_dst, name_summary, name_unique, plot_unique = name_paths('gscholar')
+                name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(dataset)
                 json_file = os.path.join(retrieve_path(name_src), 'json', term + ' ' + str(year) + ' ' + str(num_str) + ' ' + str(retrieve_datetime())  + '.json' )
                 json_file = open(json_file, 'w')
                 json_file.write(data_json)
