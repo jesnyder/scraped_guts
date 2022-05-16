@@ -258,8 +258,8 @@ def json_to_dataframe():
 
             if term not in str(file): continue
 
-            df_path = os.path.join(retrieve_path(name_src), 'df')
-            df_file = os.path.join(df_path, term + '.csv')
+            df_dst = os.path.join(retrieve_path(name_src), 'df')
+            df_file = os.path.join(df_dst, term + '.csv')
             df_term = df_term.append(df)
             df_term = df_term.drop_duplicates(subset = 'title_link')
             df_term = clean_dataframe(df_term)
