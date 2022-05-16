@@ -34,7 +34,7 @@ def query_pubs():
     """
 
     search_gscholar()
-    json_to_dataframe()
+    #json_to_dataframe()
     #aggregate_json()
 
     search_articles()
@@ -271,6 +271,8 @@ def search_gscholar():
     Retrieve json year by year
     """
     for term in retrieve_list('search_terms'):
+
+        print('searching gscholar for term = ' + term)
 
         json_to_dataframe()
         currentDateTime = datetime.datetime.now()
