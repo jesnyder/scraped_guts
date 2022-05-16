@@ -178,7 +178,7 @@ def acquire_patent():
     return(df)
 
 
-def acquire_pub():
+def acquire_pub(dataset):
     """
 
     """
