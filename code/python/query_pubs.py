@@ -226,7 +226,7 @@ def json_to_dataframe():
     """
 
     """
-    name_dataset = 'gscholar'
+    name_dataset = 'pubs'
 
     # retrieve archival json
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
