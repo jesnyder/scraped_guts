@@ -285,6 +285,9 @@ def search_gscholar(dataset):
             #work_completed('begin_acquire_gscholar_json_' + str(year), 0)
             for num in np.arange(0, 100, 1, dtype=int):
 
+                print('year = ' + str(year))
+                print('start num = ' + str(num*10))
+
                 num_str = str(num).zfill(3)
                 url = 'https://scholar.google.com/scholar?'
                 url = url + 'start=' + str(int(num*10))
