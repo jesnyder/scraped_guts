@@ -231,7 +231,7 @@ def json_to_dataframe():
     # retrieve archival json
     name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(name_dataset)
     src_path = retrieve_path(name_src)
-    src_path = os.path.join(src_path, 'json')
+    #src_path = os.path.join(src_path, 'json')
 
     df_all = pd.DataFrame()
 
