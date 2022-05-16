@@ -314,7 +314,7 @@ def search_gscholar(dataset):
                 print(data_json)
 
                 name_src, name_dst, name_summary, name_unique, plot_unique = name_paths(dataset)
-                json_file = os.path.join(retrieve_path(name_src), 'json', term + ' ' + str(year) + ' ' + str(num_str) + ' ' + str(retrieve_datetime())  + '.json' )
+                json_file = os.path.join(retrieve_path(name_src), term + ' ' + str(year) + ' ' + str(num_str) + ' ' + str(retrieve_datetime())  + '.json' )
                 json_file = open(json_file, 'w')
                 json_file.write(data_json)
                 json_file.close()
