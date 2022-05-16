@@ -274,7 +274,7 @@ def search_gscholar():
 
         print('searching gscholar for term = ' + term)
 
-        json_to_dataframe()
+        #json_to_dataframe()
         currentDateTime = datetime.datetime.now()
         date = currentDateTime.date()
 
