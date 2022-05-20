@@ -280,7 +280,7 @@ def search_gscholar(dataset):
 
         if '-/-/-' in term:
             term_split = term.split('-/-/-')
-            year = [term_split[0]]
+            year_range = [term_split[0]]
             term = term_split[1]
 
         else:
