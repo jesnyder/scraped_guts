@@ -278,11 +278,17 @@ def search_gscholar(dataset):
         currentDateTime = datetime.datetime.now()
         date = currentDateTime.date()
 
-        search_year_min = int(retrieve_format('search_year_min'))-1
-        print('search_year_min = ' + str(search_year_min))
-        for year in range(int(date.strftime("%Y")), search_year_min, -1):
+        if '-/-/-' in term:
+            term_split = term.split('-/-/-')
+            year = [term_split[0]]
+            term = term_split[1]
 
-            if year > 2015: continue
+        else:
+            search_year_min = int(retrieve_format('search_year_min'))-1
+            print('search_year_min = ' + str(search_year_min))
+            year_range = range(int(date.strftime("%Y")), search_year_min, -1)
+
+        for year in year_range:
 
             #work_completed('begin_acquire_gscholar_json_' + str(year), 0)
             for num in np.arange(0, 100, 1, dtype=int):
