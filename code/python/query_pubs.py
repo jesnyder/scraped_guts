@@ -317,6 +317,8 @@ def search_gscholar(dataset):
                 if error_check(soup) == True: return('error')
 
                 data = html_to_json(soup)
+                print('data = ')
+                print(data)
                 if data == []: break
                 #if len(data) < 10 and year != int(date.strftime("%Y")):
                     #work_completed('begin_acquire_gscholar_json_' + str(year), 1)
