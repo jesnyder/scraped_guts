@@ -282,13 +282,13 @@ def search_gscholar(dataset):
         print('search_year_min = ' + str(search_year_min))
         for year in range(int(date.strftime("%Y")), search_year_min, -1):
 
+            if year > 2015: continue
+
             #work_completed('begin_acquire_gscholar_json_' + str(year), 0)
             for num in np.arange(0, 100, 1, dtype=int):
 
                 print('year = ' + str(year))
                 print('start num = ' + str(num*10))
-
-                if num > 2015: continue
 
                 num_str = str(num).zfill(3)
                 url = 'https://scholar.google.com/scholar?'
