@@ -288,6 +288,8 @@ def search_gscholar(dataset):
                 print('year = ' + str(year))
                 print('start num = ' + str(num*10))
 
+                if num > 2015: continue
+
                 num_str = str(num).zfill(3)
                 url = 'https://scholar.google.com/scholar?'
                 url = url + 'start=' + str(int(num*10))
