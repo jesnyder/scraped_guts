@@ -314,6 +314,9 @@ def search_gscholar(dataset):
                     continue
 
                 soup = retrieve_html(url)
+                print('soup = ')
+                print(soup)
+                
                 if error_check(soup) == True: return('error')
 
                 data = html_to_json(soup)
